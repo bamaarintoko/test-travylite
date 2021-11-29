@@ -61,7 +61,7 @@ export default function Home() {
 						<div className={styles.scrolls}>
 							{
 								menuArr.map((x, y) => {
-									return <div className={styles.home_menu_card}>
+									return <div key={y} className={styles.home_menu_card}>
 										<div className={styles.child_menu_card}>
 											<div className={styles.icon_menu_card}>
 
@@ -98,7 +98,7 @@ export default function Home() {
 				<Grid container spacing={0} style={{ padding: 16, flexDirection: 'column' }}>
 					{
 						menuArr.map((x, y) => {
-							return <div className={styles.div_card_service}>
+							return <div key={y} className={styles.div_card_service}>
 								<div className={styles.component_location_parent}>
 									<div className={styles.component_location}>
 										<span className={styles.txt_location}>YGY</span>
