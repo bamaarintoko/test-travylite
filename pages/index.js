@@ -35,8 +35,6 @@ export default function Home() {
 							alt="Picture of the author"
 							width={151.8}
 							height={45}
-							// blurDataURL="data:..." automatically provided
-							placeholder="blur" // Optional blur-up while loading
 						/>
 					</div>
 					<div className={styles.center_header_home}>
@@ -85,8 +83,6 @@ export default function Home() {
 								alt="Picture of the author"
 								width={52}
 								height={52}
-								// blurDataURL="data:..." automatically provided
-								placeholder="blur" // Optional blur-up while loading
 							/>
 						</div>
 						<div className={styles.div_riwayat_layanan_right}>
@@ -112,8 +108,6 @@ export default function Home() {
 											alt="Picture of the author"
 											width={40}
 											height={40}
-											// blurDataURL="data:..." automatically provided
-											placeholder="blur" // Optional blur-up while loading
 										/>
 										<div className={styles.separator_line}></div>
 									</div>
@@ -125,11 +119,10 @@ export default function Home() {
 								<div className={styles.side_component_desc_parent}>
 									<div className={styles.side_component_desc} style={{ justifyContent: 'flex-start' }}>
 										<Image
+										alt="Picture of the author"
 											src={bagasi}
 											width={40}
 											height={10}
-											// blurDataURL="data:..." automatically provided
-											placeholder="blur" // Optional blur-up while loading
 										/>
 										<div style={{ width: 8 }} />
 										<span className={styles.text_layanan_desc}>Pengiriman Airport Bagasi</span>
