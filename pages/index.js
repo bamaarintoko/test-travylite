@@ -33,7 +33,7 @@ export default function Home() {
 						/>
 					</div>
 					<div className={styles.center_header_home}>
-						<p className={styles.text_posisi_paket}>Cek posisi paketmu!</p>
+						<span className={styles.text_posisi_paket}>Cek posisi paketmu!</span>
 					</div>
 					<Grid item md={12} xs={12} style={{ paddingLeft: 16, paddingRight: 16 }}>
 						<div className={styles.nomor_awb}>
@@ -113,12 +113,14 @@ export default function Home() {
 								</div>
 								<div className={styles.side_component_desc_parent}>
 									<div className={styles.side_component_desc} style={{ justifyContent: 'flex-start' }}>
-										<Image
-										alt="Picture of the author"
-											src={bagasi}
-											width={40}
-											height={10}
-										/>
+										<div>
+											<Image
+												alt="Picture of the author"
+												src={bagasi}
+												width={29.3}
+												height={24}
+											/>
+										</div>
 										<div style={{ width: 8 }} />
 										<span className={styles.text_layanan_desc}>Pengiriman Airport Bagasi</span>
 									</div>
