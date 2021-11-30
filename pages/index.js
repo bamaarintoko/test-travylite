@@ -9,13 +9,16 @@ import plane from "../public/plane.png"
 import bagasi from "../public/bagasi.png"
 const menuArr = [
 	{
-		text: "Pengiriman Airport Bagasi"
+		text: "Pengiriman Airport Bagasi",
+		image: bagasi
 	},
 	{
-		text: "Pengiriman Dokumen"
+		text: "Pengiriman Dokumen",
+		image: bagasi
 	},
 	{
-		text: 'Pengambilan dan Go Oleh-Oleh'
+		text: 'Pengambilan dan Go Oleh-Oleh',
+		image: bagasi
 	}
 ]
 export default function Home() {
@@ -57,7 +60,14 @@ export default function Home() {
 									return <div key={y} className={styles.home_menu_card}>
 										<div className={styles.child_menu_card}>
 											<div className={styles.icon_menu_card}>
-
+												<div>
+													<Image
+														src={x.image}
+														alt="Picture of the author"
+														width={40}
+														height={40}
+													/>
+												</div>
 											</div>
 											<div className={styles.parent_text_menu_card}>
 												<span className={styles.text_menu_card}>{x.text}</span>
@@ -89,6 +99,53 @@ export default function Home() {
 				<Grid container spacing={0} style={{ padding: 16, flexDirection: 'column' }}>
 					{
 						menuArr.map((x, y) => {
+							return <div className={styles.parent_list_history}>
+								<div className={styles.child_list_history}>
+									<span className={styles.txt_location}>YGY</span>
+									<span className={styles.txt_location_date}>12 OKT 2021</span>
+									<div className={styles.left_list}>
+										<div>
+											<Image
+												alt="Picture of the author"
+												src={bagasi}
+												width={29.3}
+												height={24}
+											/>
+										</div>
+										<span className={styles.text_layanan_desc}>Pengiriman Airport Bagasi</span>
+									</div>
+								</div>
+								<div className={styles.child_list_plane}>
+									<div className={styles.separator_container}>
+
+										<div className={styles.separator_line}></div>
+										<Image
+											src={plane}
+											alt="Picture of the author"
+											width={40}
+											height={40}
+										/>
+										<div className={styles.separator_line}></div>
+									</div>
+									<div style={{ height: 50 }}>
+
+										<span className={styles.text_detail_desc}>Detail</span>
+									</div>
+								</div>
+								<div className={styles.child_list_history}>
+									<span className={styles.txt_location}>JKT</span>
+									<span className={styles.txt_location_date}>15 OKT 2021</span>
+									<div className={styles.left_list}>
+										<span className={styles.text_price_desc}>Rp 35,000</span>
+									</div>
+								</div>
+							</div>
+						})
+					}
+
+
+					{/* {
+						menuArr.map((x, y) => {
 							return <div key={y} className={styles.div_card_service}>
 								<div className={styles.component_location_parent}>
 									<div className={styles.component_location}>
@@ -114,6 +171,7 @@ export default function Home() {
 								<div className={styles.side_component_desc_parent}>
 									<div className={styles.side_component_desc} style={{ justifyContent: 'flex-start' }}>
 										<div>
+
 											<Image
 												alt="Picture of the author"
 												src={bagasi}
@@ -133,7 +191,7 @@ export default function Home() {
 								</div>
 							</div>
 						})
-					}
+					} */}
 
 				</Grid>
 			</Grid>
