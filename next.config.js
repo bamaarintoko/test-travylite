@@ -6,7 +6,7 @@ module.exports = withPWA({
     register: true,
     skipWaiting: true,
     publicExcludes: [
-      '!robots.txt',
+      '!middleware-manifest.json',
       '!sitemap.xml.gz',
     ],
   },
