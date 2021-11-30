@@ -99,7 +99,7 @@ export default function Home() {
 				<Grid container spacing={0} style={{ padding: 16, flexDirection: 'column' }}>
 					{
 						menuArr.map((x, y) => {
-							return <div className={styles.parent_list_history}>
+							return <div key={y} className={styles.parent_list_history}>
 								<div className={styles.child_list_history}>
 									<span className={styles.txt_location}>YGY</span>
 									<span className={styles.txt_location_date}>12 OKT 2021</span>
@@ -142,56 +142,6 @@ export default function Home() {
 							</div>
 						})
 					}
-
-
-					{/* {
-						menuArr.map((x, y) => {
-							return <div key={y} className={styles.div_card_service}>
-								<div className={styles.component_location_parent}>
-									<div className={styles.component_location}>
-										<span className={styles.txt_location}>YGY</span>
-										<span className={styles.txt_location_date}>12 OKT 2021</span>
-									</div>
-									<div className={styles.separator_container}>
-
-										<div className={styles.separator_line}></div>
-										<Image
-											src={plane}
-											alt="Picture of the author"
-											width={40}
-											height={40}
-										/>
-										<div className={styles.separator_line}></div>
-									</div>
-									<div className={styles.component_location}>
-										<span className={styles.txt_location}>JKT</span>
-										<span className={styles.txt_location_date}>15 OKT 2021</span>
-									</div>
-								</div>
-								<div className={styles.side_component_desc_parent}>
-									<div className={styles.side_component_desc} style={{ justifyContent: 'flex-start' }}>
-										<div>
-
-											<Image
-												alt="Picture of the author"
-												src={bagasi}
-												width={29.3}
-												height={24}
-											/>
-										</div>
-										<div style={{ width: 8 }} />
-										<span className={styles.text_layanan_desc}>Pengiriman Airport Bagasi</span>
-									</div>
-									<div className={styles.side_component_detail} style={{ justifyContent: 'center' }}>
-										<span className={styles.text_detail_desc}>Detail</span>
-									</div>
-									<div className={styles.side_component_desc} style={{ justifyContent: 'flex-end' }}>
-										<span className={styles.text_price_desc}>Rp 35,000</span>
-									</div>
-								</div>
-							</div>
-						})
-					} */}
 
 				</Grid>
 			</Grid>
