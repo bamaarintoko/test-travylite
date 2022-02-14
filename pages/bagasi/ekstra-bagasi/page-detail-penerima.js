@@ -6,13 +6,14 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import styles from '../../../styles/PageEkstraBagasi.module.css';
 import useInputSelect from '../../../component/useInputSelect';
 import useInput from '../../../component/useInput';
-import { AppBar, Divider, Label } from './page-detail-pengirim';
+import { Divider, Label } from './page-detail-pengirim';
 import Contain from '../../../component/Container';
 import Header from '../../../component/Header';
 import Footer from '../../../component/Footer';
 import Content from '../../../component/Content';
 import useTextArea from '../../../component/useTextArea';
 import Link from 'next/link'
+import { AppBar } from '../../../component/AppBar';
 const arr = [
     {
         value: "mr",
