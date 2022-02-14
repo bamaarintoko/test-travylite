@@ -10,6 +10,7 @@ import Footer from "../../component/Footer";
 import Header from "../../component/Header";
 import styles from "../../styles/General.module.css"
 export default function PagePilihSmartBox() {
+    // const [] = useInputSelect()
     return (
         <Contain>
             <Header>
@@ -23,20 +24,7 @@ export default function PagePilihSmartBox() {
                     </Stack>
                     <Stack style={{ marginTop: 24 }} spacing={1}>
                         <span className={styles.text_normal_black}>Lokasi Smart Box</span>
-                        <Select
-                            labelId="demo-simple-select-standard-label"
-                            id="demo-simple-select-standard"
-                            value={age}
-                            onChange={handleChange}
-                            label="Age"
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
+
                     </Stack>
                 </Grid>
             </Content>
