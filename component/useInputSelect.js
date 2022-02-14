@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
-export default function () {
+export default function useInputSelect () {
     const [value, setValue] = useState("")
     const [data, setData] = useState([])
     const select = <TextField

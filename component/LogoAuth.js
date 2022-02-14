@@ -10,7 +10,7 @@ let view_width = 192;
 let view_height = 50;
 
 let new_image_height = image_height * view_width / image_width;
-export default function () {
+export default function LogoAuth () {
     return (
         <Grid item xs={12} md={12}>
             <div style={{ height: 190 - new_image_height, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -2,7 +2,7 @@ import { IconButton, InputAdornment, OutlinedInput, TextField } from "@mui/mater
 import React, { useState } from "react";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-export default function (label = "label") {
+export default function useInputPassword (label = "label") {
     const [value, setValue] = useState("")
     const [show_password, set_show_password] = useState(false)
     const input = <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -1,5 +1,5 @@
 import React from 'react'
-export default function () {
+export default function LineSeparator () {
     return (
         <div style={{ display: 'flex', flexDirection: 'row', height: 30, marginTop: 24, marginBottom: 24 }}>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', }}>

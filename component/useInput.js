@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 
-export default function () {
+export default function useInput () {
     const [value, setValue] = useState("")
     const input = <TextField onChange={(e) => setValue("==>", e.target.value)} fullWidth id="standard-basic" variant="standard" />
 
