@@ -6,7 +6,7 @@ import Contain from "../../../component/Container";
 import Content from "../../../component/Content";
 import Footer from "../../../component/Footer";
 import Header from "../../../component/Header";
-import styles from "../../../styles/General.module.css"
+import styles from "../../../styles/styles.module.css"
 import Link from "next/link"
 export default function PageDropOff() {
 

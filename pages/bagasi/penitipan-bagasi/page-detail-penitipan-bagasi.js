@@ -7,7 +7,7 @@ import Footer from "../../../component/Footer";
 import Header from "../../../component/Header";
 import useInputNumber from "../../../component/useInputNumber";
 import useTextArea from "../../../component/useTextArea";
-import styles from "../../../styles/General.module.css"
+import styles from "../../../styles/styles.module.css"
 import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
 import Link from "next/link"
 export default function PageDetailPenitipanBagasi() {

@@ -4,7 +4,7 @@ import Contain from '../../../component/Container'
 import Content from '../../../component/Content'
 import Header from '../../../component/Header'
 import styles from '../../../styles/PenitipanBagasi.module.css'
-import general_styles from "../../../styles/General.module.css"
+import general_styles from "../../../styles/styles.module.css"
 import Link from 'next/link'
 export default function PagesKetentuan() {
     return (
