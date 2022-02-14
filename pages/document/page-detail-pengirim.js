@@ -10,6 +10,7 @@ export default function PagePilihSmartBox() {
         <Contain>
             <Header>
                 <AppBar title={"Detail Pengirim"} />
+                <AppBar title={"Detail Pengirim"} />
             </Header>
             <Content>
 
