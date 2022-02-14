@@ -7,6 +7,7 @@ import Content from "../../../component/Content";
 import Header from "../../../component/Header";
 import styles from "../../../styles/PenitipanBagasi.module.css"
 import { Ketentuan } from "../ekstra-bagasi/page-ketentuan";
+import Link from 'next/link'
 
 export default function PagePenitipanBagasi() {
     return (
@@ -35,7 +36,10 @@ export default function PagePenitipanBagasi() {
                         </div>
                         <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginBottom: 24 }} />
                         <div>
+                            <Link href={"page-detail-pengirim"}>
+
                             <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
+                            </Link>
                         </div>
                     </Grid>
                 </Grid>

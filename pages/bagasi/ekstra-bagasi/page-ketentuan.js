@@ -4,7 +4,7 @@ import Contain from '../../../component/Container'
 import Content from '../../../component/Content'
 import Header from '../../../component/Header'
 import styles from '../../../styles/PenitipanBagasi.module.css'
-
+import Link from 'next/link'
 export default function PagesKetentuan() {
     return (
         <Contain>
@@ -31,7 +31,10 @@ export default function PagesKetentuan() {
                         </div>
                         <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginBottom: 24 }} />
                         <div>
-                            <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
+                            <Link href={"page-detail-pengirim"}>
+
+                                <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
+                            </Link>
                         </div>
                     </Grid>
                 </Grid>
