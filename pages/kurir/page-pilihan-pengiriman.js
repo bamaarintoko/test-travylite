@@ -42,7 +42,7 @@ let kurirArr = [
     }
 ]
 
-export default function () {
+export default function PagePilihanPengiriman () {
     const [selectedValue, setSelectedValue] = React.useState('a');
 
     const handleChange = (event) => {
