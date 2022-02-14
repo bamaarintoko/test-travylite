@@ -47,11 +47,11 @@ color: #323232;
     background-color: #FEFEFE;
 }
 
+
 .flex_wrap{
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     flex: 1;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
 }
