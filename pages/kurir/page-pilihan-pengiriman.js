@@ -56,10 +56,10 @@ export default function () {
             <Content>
                 <Grid item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column', padding: 16 }}>
                     {
-                        kurirArr.map((x) => {
+                        kurirArr.map((x, y) => {
                             return (
                                 <>
-                                    <div className={styles.parent_kurir_name}>
+                                    <div key={y} className={styles.parent_kurir_name}>
                                         <div className={styles.left_child_kurir_name}>
                                             <span className={styles.text_kurir_name}>{x.label}</span>
                                         </div>
@@ -68,9 +68,9 @@ export default function () {
                                         </div>
                                     </div>
                                     {
-                                        x.data.map((i) => {
+                                        x.data.map((i, j) => {
                                             return (
-                                                <div style={{ display: 'flex', flexDirection: 'row', marginTop: 8, marginBottom: 8 }}>
+                                                <div key={j} style={{ display: 'flex', flexDirection: 'row', marginTop: 8, marginBottom: 8 }}>
                                                     <div className={styles.left_services}>
                                                         <Radio
                                                             checked={selectedValue === i.label}

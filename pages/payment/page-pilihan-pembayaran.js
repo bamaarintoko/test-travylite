@@ -17,16 +17,16 @@ export default function PagePilihanPembayaran() {
             </Header>
             <Content style={{ padding: 16 }}>
                 {
-                    paymentArr.map((x) => {
+                    paymentArr.map((x, y) => {
                         return (
                             <>
-                                <div style={{ height: 50, alignItems: 'center', display: 'flex' }}>
+                                <div key={y} style={{ height: 50, alignItems: 'center', display: 'flex' }}>
                                     <span className={styles.text_label_detail_pesanan}>{x.label}</span>
                                 </div>
                                 {
-                                    x.data.map((i) => {
+                                    x.data.map((i, j) => {
                                         return (
-                                            <div style={{ display: 'flex', flexDirection: 'row', height: 76, alignItems: 'center', borderBottomWidth: 0.5, borderBottomStyle: 'solid', borderBottomColor: "#E0E0E0" }}>
+                                            <div key={j} style={{ display: 'flex', flexDirection: 'row', height: 76, alignItems: 'center', borderBottomWidth: 0.5, borderBottomStyle: 'solid', borderBottomColor: "#E0E0E0" }}>
                                                 <div style={{ width: 40, height: 40 }}>
 
                                                 </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Stack } from "@mui/material";
 import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 import { AppBar } from "../../component/AppBar";
 import Contain from "../../component/Container";
@@ -22,7 +23,20 @@ export default function PagePilihSmartBox() {
                     </Stack>
                     <Stack style={{ marginTop: 24 }} spacing={1}>
                         <span className={styles.text_normal_black}>Lokasi Smart Box</span>
-                        <span className={styles.text_body}>Smart Box adalah Box pintar penitipan dokumen atau paket lainnya dengan tiga pilihan ukuran Small, Medium dan Large</span>
+                        <Select
+                            labelId="demo-simple-select-standard-label"
+                            id="demo-simple-select-standard"
+                            value={age}
+                            onChange={handleChange}
+                            label="Age"
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
                     </Stack>
                 </Grid>
             </Content>
