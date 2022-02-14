@@ -1,11 +1,11 @@
 .container {
     min-height: 100vh;
-    display: flex !important;
-    flex-direction: column;
+    display: flex ;
+    flex-direction: column !important;
   }
 
   .content{
-      display: flex !important;
+      display: flex ;
       flex: 1;
       flex-direction: column !important;
       overflow-y: scroll;
