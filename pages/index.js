@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Container, Grid, Input } from '@mui/material'
 import Image from 'next/image'
+import Link from 'next/link'
 import logo from '../public/logo.png'
 import riwayat from '../public/riwayat.png'
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,15 +11,18 @@ import bagasi from "../public/bagasi.png"
 const menuArr = [
 	{
 		text: "Pengiriman Airport Bagasi",
-		image: bagasi
+		image: bagasi,
+		url: 'bagasi/page-bagasi'
 	},
 	{
 		text: "Pengiriman Dokumen",
-		image: bagasi
+		image: bagasi,
+		url: 'document/page-pengiriman-dokumen'
 	},
 	{
 		text: 'Pengambilan dan Go Oleh-Oleh',
-		image: bagasi
+		image: bagasi,
+		url: 'bagasi/page-bagasi'
 	}
 ]
 export default function Home() {
@@ -58,21 +62,23 @@ export default function Home() {
 							{
 								menuArr.map((x, y) => {
 									return <div key={y} className={styles.home_menu_card}>
-										<div className={styles.child_menu_card}>
-											<div className={styles.icon_menu_card}>
-												<div>
-													<Image
-														src={x.image}
-														alt="Picture of the author"
-														width={40}
-														height={40}
-													/>
+										<Link href={x.url}>
+											<div className={styles.child_menu_card}>
+												<div className={styles.icon_menu_card}>
+													<div>
+														<Image
+															src={x.image}
+															alt="Picture of the author"
+															width={40}
+															height={40}
+														/>
+													</div>
+												</div>
+												<div className={styles.parent_text_menu_card}>
+													<span className={styles.text_menu_card}>{x.text}</span>
 												</div>
 											</div>
-											<div className={styles.parent_text_menu_card}>
-												<span className={styles.text_menu_card}>{x.text}</span>
-											</div>
-										</div>
+										</Link>
 									</div>
 								})
 							}

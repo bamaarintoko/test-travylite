@@ -1,0 +1,319 @@
+.parent{
+    height:100vh;
+  }
+
+  .app_bar{
+    display: flex;
+    height: 56px;
+    flex: 1;
+    background-color: #fefefe;
+
+  }
+
+  .left_bar{
+    width: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .middle_bar{
+    display: flex;
+    flex: 3;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .right_bar{
+    width: 52px;
+  }
+
+  .text_bar_title{
+    font-family: Roboto;
+  font-size: 17.5px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: normal;
+  text-align: center;
+  color: #323232;
+  }
+
+  .text_label{
+    font-family: Roboto;
+  font-size: 11.2px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #20aee0;
+  }
+
+  .grid_content{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .div_full_name_parent{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .div_gelar{
+    width: 40px;
+  }
+
+  .div_full_name{
+    flex: 1;
+    margin-left: 16px;
+  }
+
+  .text_label_detail_bagasi{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 24px;
+  }
+
+  .radio_parent{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .radio_left{
+    width: 50px;
+  }
+
+  .radio_right{
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  .text_label_radio{
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px;
+letter-spacing: 0em;
+color: rgba(0, 0, 0, 0.5);
+
+  }
+
+  .dimension_parent{
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
+  }
+
+  .dimension_child{
+    flex: 1;
+  }
+
+  /* <page-pilihan-pengiriman> */
+  .wrapper_kurir{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 16px;
+  }
+  .parent_kurir_name{
+    display: flex;
+    flex-direction: row;
+    height: 46px;
+    align-items: center;
+    border-bottom-width: 0.1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
+  .left_child_kurir_name{
+    display: flex;
+    flex: 1;
+  }
+  .right_child_kurir_name{
+    display: flex;
+  }
+.text_kurir_name{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+}
+.text_kurir_service{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+}
+.text_kurir_service_desc{
+  font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 11.2px;
+line-height: 140%;
+}
+
+.text_kurir_price{
+  font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+
+}
+
+.wraper_services{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+}
+.left_services{
+  display: flex;
+  width: 50px;
+}
+.mid_services{
+  display: flex;
+  flex: 2.5;
+  flex-direction: column;
+}
+.right_services{
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+  /* </page-pilihan-pengiriman> */
+
+  /* <page-detail-pesanan> */
+  .wrapper_detail_pesanan{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    height: 86vh;
+    background-color:rgb(241, 243, 241);
+  }
+
+  .parent_time_line{
+    display: flex;
+    flex-direction: row;
+    
+  }
+  .left_time_line{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+  }
+
+  .right_time_line{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 40px;
+    margin-left: 29px;
+  }
+  .line{
+    display: flex;
+    /* min-height: 10px; */
+    flex: 1;
+    width: 1px;
+    border: 1px dashed rgba(0, 0, 0, 0.2);
+  }
+
+  .text_label_detail_pesanan{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+  }
+
+  .text_desc{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140%;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .wrapper_footer{
+    display: flex;
+    position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  }
+
+  .left_footer{
+    display: flex;
+    flex: 1;
+    padding: 16px;
+    flex-direction: column;
+  }
+
+  .text_total_harga{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11.2px;
+    line-height: 13px;
+    color: #323232;    
+  }
+
+  .text_nominal{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17.5px;
+    line-height: 160%;    
+    color: #0065AF;
+  }
+  /* </page-detail-pesanan> */
+
+  /* <page-detail-pembayaran> */
+  .wrapper_pembayaran{
+    /* display: flex; */
+    flex: 1;
+    flex-direction: column;
+    padding: 16px;
+    /* background-color:rgb(241, 243, 241); */
+  }
+  /* </page-detail-pembayaran> */
+
+  /* <page-ringkasan-pembayaran> */
+  .box_shadow_ringkasan{
+    box-shadow: 0px 16px 24px #F2F2F2;
+    border-radius: 16px;
+  }
+  /* </page-ringkasan-pembayaran> */
+
+  /* <page-detail-invoice> */
+  .awb{
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(135deg, #20AEE0 0%, #0065AF 100%);
+    border-radius: 16px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  .box_detail_invoice_shadow{
+    background: #FEFEFE;
+    box-shadow: 0px 16px 24px #F2F2F2;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 21px;
+    padding-right: 21px;
+  }
+  /* </page-detail-invoice> */
+
