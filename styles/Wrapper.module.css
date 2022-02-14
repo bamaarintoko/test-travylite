@@ -5,9 +5,9 @@
   }
 
   .content{
-      display: flex ;
+      display: flex !important;
       flex: 1;
-      flex-direction: column !important;
+      flex-direction: column ;
       overflow-y: scroll;
       margin-top: 56px;
   }
