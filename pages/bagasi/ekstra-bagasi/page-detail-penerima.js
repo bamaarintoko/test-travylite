@@ -12,7 +12,7 @@ import Header from '../../../component/Header';
 import Footer from '../../../component/Footer';
 import Content from '../../../component/Content';
 import useTextArea from '../../../component/useTextArea';
-
+import Link from 'next/link'
 const arr = [
     {
         value: "mr",
@@ -65,16 +65,15 @@ export default function PageDetailPenerima() {
                 <Divider />
             </Content>
             <Footer style={{ padding: 16 }}>
-                <LoadingButton
-                    fullWidth
-                    onClick={() => {
-                        alert('clicked')
-                    }}
-                    loadingPosition="start"
-                    variant="contained"
-                >
-                    KONFIRMASI
-                </LoadingButton>
+                <Link href={'page-detail-pengirim'}>
+                    <LoadingButton
+                        fullWidth
+                        loadingPosition="start"
+                        variant="contained"
+                    >
+                        KONFIRMASI
+                    </LoadingButton>
+                </Link>
             </Footer>
         </Contain>
     )

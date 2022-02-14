@@ -1,17 +1,23 @@
 import { Grid, Input, Radio, TextField } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton';
 import Contain from '../../../component/Container'
-import { AppBar } from './page-detail-pengirim'
 import styles from '../../../styles/PageEkstraBagasi.module.css';
 import useInputNumber from '../../../component/useInputNumber';
 import useTextArea from '../../../component/useTextArea';
+import { AppBar } from '../../../component/AppBar';
+import Header from '../../../component/Header';
+import Content from '../../../component/Content';
+import Footer from '../../../component/Footer';
+import Link from 'next/link'
 export default function PageDetailBagasi() {
     const [panjang_value, number_input] = useInputNumber()
     const [deskripsi_value, deskripsi_input] = useTextArea()
     return (
-        <Contain maxWidth="md">
-            <AppBar title={"Detail Bagasi"} />
-            <Grid className={styles.grid_content} container spacing={0}>
+        <Contain>
+            <Header>
+                <AppBar title={"Detail Bagasi"} />
+            </Header>
+            <Content style={{ padding: 16 }}>
                 <span className={styles.text_label_detail_bagasi}>Apakah Anda membutuhkan FREE Warapping?</span>
                 <div className={styles.radio_parent}>
                     <div className={styles.radio_left}>
@@ -70,16 +76,18 @@ export default function PageDetailBagasi() {
                 <span className={styles.text_label_detail_bagasi}>Deskripsi Bagasi / Boxs</span>
                 {deskripsi_input}
                 <div style={{ height: 24 }} />
-                <LoadingButton
-                    onClick={() => {
-                        alert('clicked')
-                    }}
-                    loadingPosition="start"
-                    variant="contained"
-                >
-                    Tambahkan
-                </LoadingButton>
-            </Grid>
+            </Content>
+            <Footer style={{ padding: 16 }}>
+                <Link href={"/kurir/page-pilihan-pengiriman"}>
+                    <LoadingButton
+                        fullWidth
+                        loadingPosition="start"
+                        variant="contained"
+                    >
+                        Tambahkan
+                    </LoadingButton>
+                </Link>
+            </Footer>
         </Contain>
     )
 }

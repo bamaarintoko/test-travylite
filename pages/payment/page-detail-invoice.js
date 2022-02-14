@@ -4,11 +4,12 @@ import Contain from "../../component/Container";
 import Content from "../../component/Content";
 import Footer from "../../component/Footer";
 import Header from "../../component/Header";
-import { AppBar } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
 import styles from '../../styles/PageEkstraBagasi.module.css';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import GppGoodTwoToneIcon from '@mui/icons-material/GppGoodTwoTone';
 import BusinessCenterTwoToneIcon from '@mui/icons-material/BusinessCenterTwoTone';
+import { AppBar } from "../../component/AppBar";
+import Link from "next/link"
 export default function PageDetailInvoice() {
     return (
         <Contain>
@@ -87,11 +88,16 @@ export default function PageDetailInvoice() {
                         </div>
                     </div>
                 </Grid>
+                <div style={{ height: 100 }}>
+
+                </div>
             </Content>
             <Footer>
                 <div style={{ padding: 16, flex: 1 }}>
+                    <Link href={"/"}>
 
-                    <Button color="error" fullWidth variant="contained">Batalkan Pesanan</Button>
+                        <Button color="error" fullWidth variant="contained">Batalkan Pesanan</Button>
+                    </Link>
                 </div>
 
             </Footer>

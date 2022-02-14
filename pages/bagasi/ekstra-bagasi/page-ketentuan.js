@@ -4,6 +4,7 @@ import Contain from '../../../component/Container'
 import Content from '../../../component/Content'
 import Header from '../../../component/Header'
 import styles from '../../../styles/PenitipanBagasi.module.css'
+import general_styles from "../../../styles/General.module.css"
 import Link from 'next/link'
 export default function PagesKetentuan() {
     return (
@@ -13,7 +14,7 @@ export default function PagesKetentuan() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <Grid item xs={12} md={12} style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <Grid item xs={12} md={12} className={general_styles.flex_wrap}>
                         <span style={style.label}>Bagasi /</span>
                         <span style={style.label}>Ekstra Bagasi</span>
                         <span style={style.small_label}>Port to Port & Port to Door</span>

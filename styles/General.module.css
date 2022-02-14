@@ -46,3 +46,11 @@ color: #323232;
 .bg_plain_white{
     background-color: #FEFEFE;
 }
+
+.flex_wrap{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}

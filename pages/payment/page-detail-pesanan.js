@@ -3,7 +3,6 @@ import React from "react";
 import { Container, Grid } from "@mui/material";
 import Contain from "../../component/Container";
 import styles from '../../styles/PageEkstraBagasi.module.css';
-import { AppBar } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import BusinessCenterTwoToneIcon from '@mui/icons-material/BusinessCenterTwoTone';
 import Button from '@mui/material/Button';
@@ -11,14 +10,15 @@ import Content from "../../component/Content";
 import { Box } from "@mui/system";
 import Footer from "../../component/Footer";
 import Header from "../../component/Header";
-
+import { AppBar } from "../../component/AppBar";
+import Link from "next/link"
 export default function PageDetailPesanan() {
     return (
         <Contain>
             <Header>
                 <AppBar title={"Detail Pesanan"} />
             </Header>
-            <Content style={{padding:16}}>
+            <Content style={{ padding: 16 }}>
                 <div className={styles.parent_time_line}>
                     <div className={styles.left_time_line}>
                         <LocationOnIcon sx={{ color: "#0065AF" }} />
@@ -66,7 +66,9 @@ export default function PageDetailPesanan() {
                     <span className={styles.text_nominal}>Rp 15.000</span>
                 </div>
                 <div className={styles.left_footer}>
-                    <Button fullWidth variant="contained">Bayar</Button>
+                    <Link href={"page-pilihan-pembayaran"}>
+                        <Button fullWidth variant="contained">Bayar</Button>
+                    </Link>
                 </div>
             </Footer>
         </Contain>

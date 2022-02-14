@@ -6,6 +6,7 @@ import Contain from "../../../component/Container";
 import Content from "../../../component/Content";
 import Header from "../../../component/Header";
 import styles from "../../../styles/PenitipanBagasi.module.css"
+import general_styles from "../../../styles/General.module.css"
 import { Ketentuan } from "../ekstra-bagasi/page-ketentuan";
 import Link from 'next/link'
 
@@ -17,7 +18,7 @@ export default function PagePenitipanBagasi() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <Grid item xs={12} md={12} style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <Grid item xs={12} md={12} className={general_styles.flex_wrap}>
                         <span style={style.label}>Penitipan</span>
                         <span style={style.label}>Bagasi</span>
                         <span style={style.small_label}>Door to Port</span>
@@ -38,7 +39,7 @@ export default function PagePenitipanBagasi() {
                         <div>
                             <Link href={"page-detail-pengirim"}>
 
-                            <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
+                                <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
                             </Link>
                         </div>
                     </Grid>

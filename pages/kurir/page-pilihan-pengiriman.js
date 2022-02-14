@@ -1,7 +1,7 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 // import Contain from "../../component/Container";
-import { AppBar } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
+// import { AppBar } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
 import styles from '../../styles/PageEkstraBagasi.module.css';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import Radio from '@mui/material/Radio';
@@ -9,6 +9,9 @@ import { style } from "@mui/system";
 import Contain from "../../component/Container";
 import Header from "../../component/Header";
 import Content from "../../component/Content";
+import { AppBar } from "../../component/AppBar";
+import Link from "next/link"
+import Footer from "../../component/Footer";
 let kurirArr = [
     {
         label: "Kurir 1",
@@ -42,7 +45,7 @@ let kurirArr = [
     }
 ]
 
-export default function PagePilihanPengiriman () {
+export default function PagePilihanPengiriman() {
     const [selectedValue, setSelectedValue] = React.useState('a');
 
     const handleChange = (event) => {
@@ -97,7 +100,11 @@ export default function PagePilihanPengiriman () {
                     }
                 </Grid>
             </Content>
-            {/* <span></span> */}
+            <Footer style={{ padding: 16 }}>
+                <Link href={"/payment/page-detail-pesanan"}>
+                    <Button fullWidth variant="contained">Tambahkan</Button>
+                </Link>
+            </Footer>
         </Contain>
     )
 }

@@ -7,6 +7,7 @@ import Content from "../../../component/Content";
 import Footer from "../../../component/Footer";
 import Header from "../../../component/Header";
 import styles from "../../../styles/General.module.css"
+import Link from "next/link"
 export default function PageDropOff() {
 
     const [value, setValue] = useState(0)
@@ -42,7 +43,9 @@ export default function PageDropOff() {
                 </Grid>
             </Content>
             <Footer style={{ padding: 16 }}>
-                <Button fullWidth variant="contained">Konfirmasi</Button>
+                <Link href={"page-detail-penitipan-bagasi"}>
+                    <Button fullWidth variant="contained">Konfirmasi</Button>
+                </Link>
             </Footer>
         </Contain>
     )

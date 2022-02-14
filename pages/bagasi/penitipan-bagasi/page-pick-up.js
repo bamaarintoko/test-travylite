@@ -8,7 +8,7 @@ import Header from "../../../component/Header";
 import useInput from "../../../component/useInput";
 import useTextArea from "../../../component/useTextArea";
 import { Divider, Label } from "../ekstra-bagasi/page-detail-pengirim";
-
+import Link from "next/link"
 export default function PagePickUp() {
     const [alamat_value, alamat_input] = useTextArea();
     const [detail_lokasi_value, detail_lokasi_input] = useInput()
@@ -40,7 +40,10 @@ export default function PagePickUp() {
                 </Grid>
             </Content>
             <Footer style={{ padding: 16 }}>
-                <Button fullWidth variant="contained">Konfirmasi</Button>
+                <Link href={"page-drop-off"}>
+
+                    <Button fullWidth variant="contained">Konfirmasi</Button>
+                </Link>
             </Footer>
         </Contain>
     )

@@ -6,6 +6,7 @@ import Contain from "../../component/Container";
 import Content from "../../component/Content";
 import Header from "../../component/Header";
 import styles from "../../styles/PenitipanBagasi.module.css"
+import general_styles from "../../styles/General.module.css"
 import { Ketentuan } from "../bagasi/ekstra-bagasi/page-ketentuan";
 import Link from 'next/link'
 
@@ -19,7 +20,7 @@ export default function PagePengirimanDokumen() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <Grid item xs={12} md={12} style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column',backgroundColor:'red' }}>
+                    <Grid item xs={12} md={12} className={general_styles.flex_wrap}>
                         <span style={style.label}>Pengiriman</span>
                         <span style={style.label}>Dokumentasi</span>
                         <span style={style.small_label}>Port to Port, Door to Port</span>

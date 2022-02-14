@@ -10,6 +10,7 @@ import useTextArea from "../../../component/useTextArea";
 import { Divider, Label } from "../ekstra-bagasi/page-detail-pengirim";
 import styles from '../../../styles/PageEkstraBagasi.module.css';
 import { LoadingButton } from "@mui/lab";
+import Link from "next/link";
 const arr = [
     {
         value: "mr",
@@ -62,16 +63,16 @@ export default function PageDetailPengirim() {
                 <Divider />
             </Content>
             <Footer style={{ padding: 16 }}>
-                <LoadingButton
-                    fullWidth
-                    onClick={() => {
-                        alert('clicked')
-                    }}
-                    loadingPosition="start"
-                    variant="contained"
-                >
-                    KONFIRMASI
-                </LoadingButton>
+                <Link href={"page-pick-up"}>
+
+                    <LoadingButton
+                        fullWidth
+                        loadingPosition="start"
+                        variant="contained"
+                    >
+                        KONFIRMASI
+                    </LoadingButton>
+                </Link>
             </Footer>
         </Contain>
     )

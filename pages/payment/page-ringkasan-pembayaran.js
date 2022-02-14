@@ -1,12 +1,13 @@
 
 import { Button } from "@mui/material";
 import React from "react";
+import { AppBar } from "../../component/AppBar";
 import Contain from "../../component/Container";
 import Content from "../../component/Content";
 import Footer from "../../component/Footer";
 import Header from "../../component/Header";
-import { AppBar } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
 import styles from '../../styles/PageEkstraBagasi.module.css';
+import Link from "next/link"
 export default function PageRingkasanPembayaran() {
     return (
         <Contain>
@@ -45,8 +46,9 @@ export default function PageRingkasanPembayaran() {
             </Content>
             <Footer>
                 <div style={{ padding: 16, display: 'flex', flex: 1 }}>
-
+                    <Link href={"page-detail-invoice"}>
                     <Button fullWidth variant="contained">Bayar</Button>
+                    </Link>
                 </div>
 
             </Footer>

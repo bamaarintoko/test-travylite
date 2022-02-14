@@ -9,6 +9,7 @@ import useInputNumber from "../../../component/useInputNumber";
 import useTextArea from "../../../component/useTextArea";
 import styles from "../../../styles/General.module.css"
 import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
+import Link from "next/link"
 export default function PageDetailPenitipanBagasi() {
     const [berat_value, berat_input] = useInputNumber()
     const [jumlah_value, jumlah_input] = useInputNumber()
@@ -48,7 +49,9 @@ export default function PageDetailPenitipanBagasi() {
                 </Grid>
             </Content>
             <Footer style={{ padding: 16 }}>
+                <Link href={"/kurir/page-pilihan-pengiriman"}>
                 <Button fullWidth variant="contained">Konfirmasi</Button>
+                </Link>
             </Footer>
         </Contain>
     )

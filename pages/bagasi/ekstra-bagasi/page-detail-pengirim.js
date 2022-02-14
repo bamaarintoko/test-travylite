@@ -1,7 +1,7 @@
 import { Container, Grid, Input } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoadingButton from '@mui/lab/LoadingButton';
-
+import Link from 'next/link'
 import styles from '../../../styles/PageEkstraBagasi.module.css';
 import useInputSelect from '../../../component/useInputSelect';
 import useInput from '../../../component/useInput';
@@ -11,6 +11,7 @@ import Contain from '../../../component/Container';
 import Header from '../../../component/Header';
 import Content from '../../../component/Content';
 import Footer from '../../../component/Footer';
+import { AppBar } from '../../../component/AppBar';
 const arr = [
     {
         value: "mr",
@@ -64,16 +65,15 @@ export default function PageDetailPengirim() {
 
             </Content>
             <Footer style={{ padding: 16 }}>
-                <LoadingButton
-                    fullWidth
-                    onClick={() => {
-                        alert('clicked')
-                    }}
-                    loadingPosition="start"
-                    variant="contained"
-                >
-                    KONFIRMASI
-                </LoadingButton>
+                <Link href={'page-detail-bagasi'}>
+                    <LoadingButton
+                        fullWidth
+                        loadingPosition="start"
+                        variant="contained"
+                    >
+                        KONFIRMASI
+                    </LoadingButton>
+                </Link>
             </Footer>
             {/* <Grid className={styles.grid_content} container spacing={0}>
 
@@ -82,21 +82,21 @@ export default function PageDetailPengirim() {
     )
 }
 
-export const AppBar = ({ title = "" }) => {
-    return (
-        <div className={styles.app_bar}>
-            <div className={styles.left_bar}>
-                <ArrowBackIcon />
-            </div>
-            <div className={styles.middle_bar}>
-                <span className={styles.text_bar_title}>{title}</span>
-            </div>
-            <div className={styles.right_bar}>
+// export const AppBar = ({ title = "" }) => {
+//     return (
+//         <div className={styles.app_bar}>
+//             <div className={styles.left_bar}>
+//                 <ArrowBackIcon />
+//             </div>
+//             <div className={styles.middle_bar}>
+//                 <span className={styles.text_bar_title}>{title}</span>
+//             </div>
+//             <div className={styles.right_bar}>
 
-            </div>
-        </div>
-    )
-}
+//             </div>
+//         </div>
+//     )
+// }
 
 export function Label({ title = "" }) {
     return (
