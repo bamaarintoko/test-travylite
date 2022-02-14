@@ -19,7 +19,7 @@ export default function PagePengirimanDokumen() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <Grid item xs={12} md={12} style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <Grid item xs={12} md={12} style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column',backgroundColor:'red' }}>
                         <span style={style.label}>Pengiriman</span>
                         <span style={style.label}>Dokumentasi</span>
                         <span style={style.small_label}>Port to Port, Door to Port</span>
