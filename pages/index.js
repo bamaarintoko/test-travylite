@@ -50,9 +50,9 @@ export default function Home() {
 	return (
 		<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
 			<Grid container spacing={0}>
-				<Grid item md={12} xs={12} style={{ height: 304, background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
+				<Box style={{ display: 'flex', flex: 1, height: 304, background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
 					{/* <Item>xs=6 md=8</Item> */}
-					<Stack spacing={3} sx={{ display: 'flex', padding: '16px' }}>
+					<Stack spacing={3} sx={{ display: 'flex', padding: '16px',flex:1 }}>
 						<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '43px' }}>
 
 							<div style={{ width: view_width, height: new_image_height }}>
@@ -80,8 +80,8 @@ export default function Home() {
 							</Box>
 						</Box>
 					</Stack>
-				</Grid>
-				<Grid container sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
+				</Box>
+				<Box sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
 					<Stack spacing={2} sx={{ display: 'flex', flex: 1 }}>
 						<Box sx={{ marginTop: '24px' }}>
 
@@ -118,7 +118,7 @@ export default function Home() {
 							}
 						</Stack>
 					</Stack>
-				</Grid>
+				</Box>
 				<Grid container spacing={0} sx={{ padding: '16px' }}>
 					<Box sx={{ background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)", borderRadius: "16px", display: 'flex', flex: 1 }}>
 						<Stack direction="row" spacing={0} sx={{ display: 'flex', flex: 1, paddingTop: '30px', paddingBottom: '30px', paddingLeft: '24px' }}>
