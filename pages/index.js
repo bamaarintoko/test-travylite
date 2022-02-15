@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { Container, Grid, Input } from '@mui/material'
+import { Container, Grid, Input, Stack, TextField } from '@mui/material'
+import InputUnstyled from '@mui/base/InputUnstyled';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import InputBase from '@mui/material/InputBase';
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from '../public/logo.png'
@@ -8,6 +11,7 @@ import riwayat from '../public/riwayat.png'
 import SearchIcon from '@mui/icons-material/Search';
 import plane from "../public/plane.png"
 import bagasi from "../public/bagasi.png"
+import { Box } from '@mui/system';
 const menuArr = [
 	{
 		text: "Pengiriman Airport Bagasi",
@@ -25,33 +29,48 @@ const menuArr = [
 		url: 'bagasi/page-bagasi'
 	}
 ]
+
+let image_width = 456;
+let image_height = 135;
+
+let view_width = 192;
+let view_height = 50;
+
+let new_image_height = image_height * view_width / image_width;
 export default function Home() {
 	return (
 		<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
 			<Grid container spacing={0}>
-				<Grid item md={12} xs={12} className={styles.header_home}>
+				<Grid item md={12} xs={12} style={{ height: 304, background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
 					{/* <Item>xs=6 md=8</Item> */}
-					<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 43, marginBottom: 54 }}>
-						<Image
-							src={logo}
-							alt="Picture of the author"
-							width={151.8}
-							height={45}
-						/>
-					</div>
-					<div className={styles.center_header_home}>
-						<span className={styles.text_posisi_paket}>Cek posisi paketmu!</span>
-					</div>
-					<Grid item md={12} xs={12} style={{ paddingLeft: 16, paddingRight: 16 }}>
-						<div className={styles.nomor_awb}>
-							<div className={styles.left_nomor_awb}>
-								<Input className={styles.input_nomor_awb} placeholder="Masukkan nomer AWB kamu" fullWidth />
+					<Stack spacing={3} sx={{ display: 'flex', padding: '16px' }}>
+						<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '43px' }}>
+
+							<div style={{ width: view_width, height: new_image_height }}>
+								<Image
+									src={logo}
+									alt="Picture of the author"
+								/>
 							</div>
-							<div className={styles.right_nomor_awb}>
-								<SearchIcon sx={{ color: "#FFF" }} />
-							</div>
+						</Box>
+
+						<div className={styles.center_header_home}>
+							<span className={styles.text_posisi_paket}>Cek posisi paketmu!</span>
 						</div>
-					</Grid>
+						<Box sx={{ display: "flex", height: 48, backgroundColor: "#FFF", borderRadius: '16px' }}>
+							<InputBase size="small"
+								fullWidth
+								placeholder="Masukkan nomer AWB kamu"
+								sx={{ borderRadius: '16px', height: 48, paddingLeft: '16px' }}
+								id="input-with-sx" />
+							<Box onClick={() => alert("a")} sx={{ display: 'flex', height: 48, width: 48, borderTopRightRadius: 16, borderBottomRightRadius: 16 }}>
+								<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'red', width: 48, height: 48, borderWidth: 3, borderStyle: 'solid', borderColor: "#FFF", borderTopRightRadius: 16, borderBottomRightRadius: 16, backgroundColor: "#0065af" }}>
+
+									<SearchIcon sx={{ color: "#FFF", mr: 0, my: 0 }} />
+								</Box>
+							</Box>
+						</Box>
+					</Stack>
 				</Grid>
 				<Grid container spacing={0}>
 					<div className={styles.parent_scroll}>
