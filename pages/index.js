@@ -91,7 +91,7 @@ export default function Home() {
 							{
 								menuArr.map((x, y) => {
 									return (
-										<Box onClick={() => route.push(x.url)} sx={{ display: 'flex', flex: 1, height: 146, boxShadow: "0px 16px 24px #F2F2F2", borderRadius: "16px", backgroundColor: "#FFF" }}>
+										<Box key={y} onClick={() => route.push(x.url)} sx={{ display: 'flex', flex: 1, height: 146, boxShadow: "0px 16px 24px #F2F2F2", borderRadius: "16px", backgroundColor: "#FFF" }}>
 											<Stack sx={{ display: 'flex', flex: 1 }}>
 												<Box sx={{ display: 'flex', height: 90, justifyContent: 'center', alignItems: 'center' }}>
 
