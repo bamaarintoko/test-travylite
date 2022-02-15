@@ -20,12 +20,12 @@ export default function PagePengirimanDokumen() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <Grid item xs={12} md={12} className={general_styles.flex_wrap}>
+                    <div style={{ backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <span style={style.label}>Pengiriman</span>
                         <span style={style.label}>Dokumentasi</span>
                         <span style={style.small_label}>Port to Port, Door to Port</span>
-                    </Grid>
-                    <Grid item xs={12} md={12} style={style.bottom_box}>
+                    </div>
+                    <div style={style.bottom_box}>
                         <div style={style.bottom_label_wrapper}>
                             <span style={style.bottom_label}>Pengiriman dokumen atau berkas ke bandara tujuan atau langsung ke alamat tujuanmu </span>
                         </div>
@@ -43,7 +43,7 @@ export default function PagePengirimanDokumen() {
                                 <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
                             </Link>
                         </div>
-                    </Grid>
+                    </div>
                 </Grid>
             </Content>
         </Contain>

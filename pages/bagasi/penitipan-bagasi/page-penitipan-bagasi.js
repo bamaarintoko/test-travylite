@@ -18,12 +18,12 @@ export default function PagePenitipanBagasi() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <Grid item xs={12} md={12} className={general_styles.flex_wrap}>
+                    <div style={{ backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <span style={style.label}>Penitipan</span>
                         <span style={style.label}>Bagasi</span>
                         <span style={style.small_label}>Door to Port</span>
-                    </Grid>
-                    <Grid item xs={12} md={12} style={style.bottom_box}>
+                    </div>
+                    <div style={style.bottom_box}>
                         <div style={style.bottom_label_wrapper}>
                             <span style={style.bottom_label}>Penitipan dan pengiriman bagasi ke Bandara lokasi </span>
                             <span style={style.bottom_label}>Booth Travylite CGK dan KNO</span>
@@ -42,7 +42,7 @@ export default function PagePenitipanBagasi() {
                                 <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
                             </Link>
                         </div>
-                    </Grid>
+                    </div>
                 </Grid>
             </Content>
         </Contain>
