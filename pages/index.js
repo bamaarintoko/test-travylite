@@ -50,143 +50,145 @@ export default function Home() {
 	return (
 		<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
 			<Grid container spacing={0}>
-				<Box style={{ display: 'flex', flex: 1, height: 304, background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
-					{/* <Item>xs=6 md=8</Item> */}
-					<Stack spacing={3} sx={{ display: 'flex', padding: '16px',flex:1 }}>
-						<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '43px' }}>
+				<Stack sx={{ display: 'flex', flex: 1 }}>
+					<Box style={{ display: 'flex', height: 304, background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
+						{/* <Item>xs=6 md=8</Item> */}
+						<Stack spacing={3} sx={{ display: 'flex', padding: '16px', flex: 1 }}>
+							<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '43px' }}>
 
-							<div style={{ width: view_width, height: new_image_height }}>
-								<Image
-									src={logo}
-									alt="Picture of the author"
-								/>
-							</div>
-						</Box>
-						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-							<span className={styles.text_posisi_paket}>Cek posisi paketmu!</span>
+								<div style={{ width: view_width, height: new_image_height }}>
+									<Image
+										src={logo}
+										alt="Picture of the author"
+									/>
+								</div>
+							</Box>
+							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+								<span className={styles.text_posisi_paket}>Cek posisi paketmu!</span>
 
-						</Box>
-						<Box sx={{ display: "flex", height: 48, backgroundColor: "#FFF", borderRadius: '16px' }}>
-							<InputBase size="small"
-								fullWidth
-								placeholder="Masukkan nomer AWB kamu"
-								sx={{ borderRadius: '16px', height: 48, paddingLeft: '16px' }}
-								id="input-with-sx" />
-							<Box onClick={() => alert("a")} sx={{ display: 'flex', height: 48, width: 48, borderTopRightRadius: 16, borderBottomRightRadius: 16 }}>
-								<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'red', width: 48, height: 48, borderWidth: 3, borderStyle: 'solid', borderColor: "#FFF", borderTopRightRadius: 16, borderBottomRightRadius: 16, backgroundColor: "#0065af" }}>
+							</Box>
+							<Box sx={{ display: "flex", height: 48, backgroundColor: "#FFF", borderRadius: '16px' }}>
+								<InputBase size="small"
+									fullWidth
+									placeholder="Masukkan nomer AWB kamu"
+									sx={{ borderRadius: '16px', height: 48, paddingLeft: '16px' }}
+									id="input-with-sx" />
+								<Box onClick={() => alert("a")} sx={{ display: 'flex', height: 48, width: 48, borderTopRightRadius: 16, borderBottomRightRadius: 16 }}>
+									<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'red', width: 48, height: 48, borderWidth: 3, borderStyle: 'solid', borderColor: "#FFF", borderTopRightRadius: 16, borderBottomRightRadius: 16, backgroundColor: "#0065af" }}>
 
-									<SearchIcon sx={{ color: "#FFF", mr: 0, my: 0 }} />
+										<SearchIcon sx={{ color: "#FFF", mr: 0, my: 0 }} />
+									</Box>
 								</Box>
-							</Box>
-						</Box>
-					</Stack>
-				</Box>
-				<Box sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
-					<Stack spacing={2} sx={{ display: 'flex', flex: 1 }}>
-						<Box sx={{ marginTop: '24px' }}>
-
-							<span style={general_style.title_dark_bold}>Apa yang ingin kamu kirim?</span>
-						</Box>
-						<Stack direction="row" spacing={2} sx={{ display: 'flex', }}>
-							{
-								menuArr.map((x, y) => {
-									return (
-										<Box key={y} onClick={() => route.push(x.url)} sx={{ display: 'flex', flex: 1, height: 146, boxShadow: "0px 16px 24px #F2F2F2", borderRadius: "16px", backgroundColor: "#FFF" }}>
-											<Stack sx={{ display: 'flex', flex: 1 }}>
-												<Box sx={{ display: 'flex', height: 90, justifyContent: 'center', alignItems: 'center' }}>
-
-													<Box sx={{ display: 'flex', borderRadius: 100, justifyContent: 'center', alignItems: 'center', height: 60, width: 60, background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)" }}>
-
-														{x.image}
-													</Box>
-												</Box>
-												<Box sx={{ flex: 1, display: 'flex', alignItems: 'center', paddingLeft: '11px', paddingRight: '11px', justifyContent: 'center' }}>
-													<span style={{
-														fontFamily: 'Roboto',
-														fontStyle: 'normal',
-														fontWeight: 'normal',
-														fontSize: 11.2,
-														lineHeight: '160%',
-														color: "#323232",
-														textAlign: 'center'
-													}}>{x.text}</span>
-												</Box>
-											</Stack>
-										</Box>
-									)
-								})
-							}
-						</Stack>
-					</Stack>
-				</Box>
-				<Grid container spacing={0} sx={{ padding: '16px' }}>
-					<Box sx={{ background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)", borderRadius: "16px", display: 'flex', flex: 1 }}>
-						<Stack direction="row" spacing={0} sx={{ display: 'flex', flex: 1, paddingTop: '30px', paddingBottom: '30px', paddingLeft: '24px' }}>
-							<Box sx={{ width: '52px', height: '52px' }}>
-								<Image
-									src={riwayat}
-									alt="Picture of the author"
-									width={52}
-									height={52}
-								/>
-							</Box>
-							<Box sx={{ marginLeft: '24px' }}>
-								<Stack>
-									<span style={general_style.heading_white_bold}>Riwayat Layananmu</span>
-									<span style={general_style.body_white}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-								</Stack>
 							</Box>
 						</Stack>
 					</Box>
-				</Grid>
-				<Grid container spacing={0} style={{ padding: 16, flexDirection: 'column' }}>
-					{
-						menuArr.map((x, y) => {
-							return <div key={y} className={styles.parent_list_history}>
-								<div className={styles.child_list_history}>
-									<span className={styles.txt_location}>YGY</span>
-									<span className={styles.txt_location_date}>12 OKT 2021</span>
-									<div className={styles.left_list}>
-										<div>
-											<Image
-												alt="Picture of the author"
-												src={bagasi}
-												width={29.3}
-												height={24}
-											/>
+					<Box sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
+						<Stack spacing={2} sx={{ display: 'flex', flex: 1 }}>
+							<Box sx={{ marginTop: '24px' }}>
+
+								<span style={general_style.title_dark_bold}>Apa yang ingin kamu kirim?</span>
+							</Box>
+							<Stack direction="row" spacing={2} sx={{ display: 'flex', }}>
+								{
+									menuArr.map((x, y) => {
+										return (
+											<Box key={y} onClick={() => route.push(x.url)} sx={{ display: 'flex', flex: 1, height: 146, boxShadow: "0px 16px 24px #F2F2F2", borderRadius: "16px", backgroundColor: "#FFF" }}>
+												<Stack sx={{ display: 'flex', flex: 1 }}>
+													<Box sx={{ display: 'flex', height: 90, justifyContent: 'center', alignItems: 'center' }}>
+
+														<Box sx={{ display: 'flex', borderRadius: 100, justifyContent: 'center', alignItems: 'center', height: 60, width: 60, background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)" }}>
+
+															{x.image}
+														</Box>
+													</Box>
+													<Box sx={{ flex: 1, display: 'flex', alignItems: 'center', paddingLeft: '11px', paddingRight: '11px', justifyContent: 'center' }}>
+														<span style={{
+															fontFamily: 'Roboto',
+															fontStyle: 'normal',
+															fontWeight: 'normal',
+															fontSize: 11.2,
+															lineHeight: '160%',
+															color: "#323232",
+															textAlign: 'center'
+														}}>{x.text}</span>
+													</Box>
+												</Stack>
+											</Box>
+										)
+									})
+								}
+							</Stack>
+						</Stack>
+					</Box>
+					<Box container spacing={0} sx={{ padding: '16px' }}>
+						<Box sx={{ background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)", borderRadius: "16px", display: 'flex', flex: 1 }}>
+							<Stack direction="row" spacing={0} sx={{ display: 'flex', flex: 1, paddingTop: '30px', paddingBottom: '30px', paddingLeft: '24px' }}>
+								<Box sx={{ width: '52px', height: '52px' }}>
+									<Image
+										src={riwayat}
+										alt="Picture of the author"
+										width={52}
+										height={52}
+									/>
+								</Box>
+								<Box sx={{ marginLeft: '24px' }}>
+									<Stack>
+										<span style={general_style.heading_white_bold}>Riwayat Layananmu</span>
+										<span style={general_style.body_white}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+									</Stack>
+								</Box>
+							</Stack>
+						</Box>
+					</Box>
+					<Box container spacing={0} style={{ padding: 16, flexDirection: 'column' }}>
+						{
+							menuArr.map((x, y) => {
+								return <div key={y} className={styles.parent_list_history}>
+									<div className={styles.child_list_history}>
+										<span className={styles.txt_location}>YGY</span>
+										<span className={styles.txt_location_date}>12 OKT 2021</span>
+										<div className={styles.left_list}>
+											<div>
+												<Image
+													alt="Picture of the author"
+													src={bagasi}
+													width={29.3}
+													height={24}
+												/>
+											</div>
+											<span className={styles.text_layanan_desc}>Pengiriman Airport Bagasi</span>
 										</div>
-										<span className={styles.text_layanan_desc}>Pengiriman Airport Bagasi</span>
+									</div>
+									<div className={styles.child_list_plane}>
+										<div className={styles.separator_container}>
+
+											<div className={styles.separator_line}></div>
+											<Image
+												src={plane}
+												alt="Picture of the author"
+												width={40}
+												height={40}
+											/>
+											<div className={styles.separator_line}></div>
+										</div>
+										<div style={{ height: 50 }}>
+
+											<span className={styles.text_detail_desc}>Detail</span>
+										</div>
+									</div>
+									<div className={styles.child_list_history}>
+										<span className={styles.txt_location}>JKT</span>
+										<span className={styles.txt_location_date}>15 OKT 2021</span>
+										<div className={styles.left_list}>
+											<span className={styles.text_price_desc}>Rp 35,000</span>
+										</div>
 									</div>
 								</div>
-								<div className={styles.child_list_plane}>
-									<div className={styles.separator_container}>
+							})
+						}
 
-										<div className={styles.separator_line}></div>
-										<Image
-											src={plane}
-											alt="Picture of the author"
-											width={40}
-											height={40}
-										/>
-										<div className={styles.separator_line}></div>
-									</div>
-									<div style={{ height: 50 }}>
-
-										<span className={styles.text_detail_desc}>Detail</span>
-									</div>
-								</div>
-								<div className={styles.child_list_history}>
-									<span className={styles.txt_location}>JKT</span>
-									<span className={styles.txt_location_date}>15 OKT 2021</span>
-									<div className={styles.left_list}>
-										<span className={styles.text_price_desc}>Rp 35,000</span>
-									</div>
-								</div>
-							</div>
-						})
-					}
-
-				</Grid>
+					</Box>
+				</Stack>
 			</Grid>
 		</Container>
 	)
