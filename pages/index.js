@@ -63,7 +63,7 @@ export default function Home() {
 									/>
 								</div>
 							</Box>
-							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+							<Box sx={{ display: 'flex', justifyContent: 'center',backgroundColor:'red' }}>
 								<span className={styles.text_posisi_paket}>Cek posisi paketmu!</span>
 
 							</Box>
