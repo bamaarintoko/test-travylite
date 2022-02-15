@@ -14,12 +14,12 @@ export default function PagesKetentuan() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <Grid item xs={12} md={12} className={general_styles.flex_wrap}>
+                    <div style={{ backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column',justifyContent:'center',alignItems:'center' }}>
                         <span style={style.label}>Bagasi /</span>
                         <span style={style.label}>Ekstra Bagasi</span>
                         <span style={style.small_label}>Port to Port & Port to Door</span>
-                    </Grid>
-                    <Grid item xs={12} md={12} style={style.bottom_box}>
+                    </div>
+                    <div style={style.bottom_box}>
                         <div style={style.bottom_label_wrapper}>
                             <span style={style.bottom_label}>Pengiriman bagasi atau kelebihan bagasi ke bandara tujuan atau kirim langsung ke alamat tujuanmu</span>
                         </div>
@@ -37,7 +37,31 @@ export default function PagesKetentuan() {
                                 <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
                             </Link>
                         </div>
+                    </div>
+                    {/* <Grid item xs={12} md={12} style={{ backgroundColor: 'red', display: 'flex', flex: 1,flexDirection:'column' }}>
+                        <span style={style.label}>Bagasi /</span>
+                        <span style={style.label}>Ekstra Bagasi</span>
+                        <span style={style.small_label}>Port to Port & Port to Door</span>
                     </Grid>
+                    <Grid item xs={12} md={12}>
+                        <div style={style.bottom_label_wrapper}>
+                            <span style={style.bottom_label}>Pengiriman bagasi atau kelebihan bagasi ke bandara tujuan atau kirim langsung ke alamat tujuanmu</span>
+                        </div>
+                        <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginTop: 24, marginBottom: 24 }} />
+                        <div style={style.content_wrapper}>
+                            <Ketentuan number={1} />
+                            <Ketentuan number={2} text={"Pilih tempat Pick-Up dan Drop-Off"} />
+                            <Ketentuan number={3} text={"Isi detail bagasi"} />
+                            <Ketentuan number={4} text={"Pilih durasi pengiriman"} />
+                        </div>
+                        <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginBottom: 24 }} />
+                        <div>
+                            <Link href={"page-detail-pengirim"}>
+
+                                <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
+                            </Link>
+                        </div>
+                    </Grid> */}
                 </Grid>
             </Content>
         </Contain>

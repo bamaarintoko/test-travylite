@@ -39,7 +39,7 @@ export default function PageDetailPengirim() {
                 <AppBar title={"Detail Pengirim"} />
             </Header>
             <Content style={{ padding: 16 }}>
-                <Stack spacing={0}>
+                <Stack style={{display:'flex',flex:1}} spacing={0}>
                     <Label title={"Gelar & Nama Lengkap Pengirim"} />
                     <div className={styles.div_full_name_parent}>
                         <div className={styles.div_gelar}>
