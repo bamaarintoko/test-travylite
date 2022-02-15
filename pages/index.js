@@ -12,20 +12,28 @@ import SearchIcon from '@mui/icons-material/Search';
 import plane from "../public/plane.png"
 import bagasi from "../public/bagasi.png"
 import { Box } from '@mui/system';
+import BusinessCenterTwoToneIcon from '@mui/icons-material/BusinessCenterTwoTone';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import SummarizeTwoToneIcon from '@mui/icons-material/SummarizeTwoTone';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+import { general_style } from '../component/general_style';
+import { useRouter } from 'next/router';
 const menuArr = [
 	{
 		text: "Pengiriman Airport Bagasi",
-		image: bagasi,
+		image: <BusinessCenterIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
 		url: 'bagasi/page-bagasi'
 	},
 	{
 		text: "Pengiriman Dokumen",
-		image: bagasi,
+		image: <SummarizeIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
 		url: 'document/page-pengiriman-dokumen'
 	},
 	{
 		text: 'Pengambilan dan Go Oleh-Oleh',
-		image: bagasi,
+		image: <Inventory2Icon fontSize="large" sx={{ color: "#FCCF2F" }} />,
 		url: 'bagasi/page-bagasi'
 	}
 ]
@@ -38,6 +46,7 @@ let view_height = 50;
 
 let new_image_height = image_height * view_width / image_width;
 export default function Home() {
+	const route = useRouter()
 	return (
 		<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
 			<Grid container spacing={0}>
@@ -72,54 +81,63 @@ export default function Home() {
 						</Box>
 					</Stack>
 				</Grid>
-				<Grid container spacing={0}>
-					<div className={styles.parent_scroll}>
-						<div className={styles.div_title}>
-							<span className={styles.apa_yang_ingin_kamu_kirim}>Apa yang ingin kamu kirim?</span>
-						</div>
-						<div className={styles.scrolls}>
+				<Grid container sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
+					<Stack spacing={2} sx={{ display: 'flex', flex: 1 }}>
+						<Box sx={{ marginTop: '24px' }}>
+
+							<span style={general_style.title_dark_bold}>Apa yang ingin kamu kirim?</span>
+						</Box>
+						<Stack direction="row" spacing={2} sx={{ display: 'flex', }}>
 							{
 								menuArr.map((x, y) => {
-									return <div key={y} className={styles.home_menu_card}>
-										<Link href={x.url}>
-											<div className={styles.child_menu_card}>
-												<div className={styles.icon_menu_card}>
-													<div>
-														<Image
-															src={x.image}
-															alt="Picture of the author"
-															width={40}
-															height={40}
-														/>
-													</div>
-												</div>
-												<div className={styles.parent_text_menu_card}>
-													<span className={styles.text_menu_card}>{x.text}</span>
-												</div>
-											</div>
-										</Link>
-									</div>
+									return (
+										<Box onClick={() => route.push(x.url)} sx={{ display: 'flex', flex: 1, height: 146, boxShadow: "0px 16px 24px #F2F2F2", borderRadius: "16px", backgroundColor: "#FFF" }}>
+											<Stack sx={{ display: 'flex', flex: 1 }}>
+												<Box sx={{ display: 'flex', height: 90, justifyContent: 'center', alignItems: 'center' }}>
+
+													<Box sx={{ display: 'flex', borderRadius: 100, justifyContent: 'center', alignItems: 'center', height: 60, width: 60, background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)" }}>
+
+														{x.image}
+													</Box>
+												</Box>
+												<Box sx={{ flex: 1, display: 'flex', alignItems: 'center', paddingLeft: '11px', paddingRight: '11px', justifyContent: 'center' }}>
+													<span style={{
+														fontFamily: 'Roboto',
+														fontStyle: 'normal',
+														fontWeight: 'normal',
+														fontSize: 11.2,
+														lineHeight: '160%',
+														color: "#323232",
+														textAlign: 'center'
+													}}>{x.text}</span>
+												</Box>
+											</Stack>
+										</Box>
+									)
 								})
 							}
-
-						</div>
-					</div>
+						</Stack>
+					</Stack>
 				</Grid>
-				<Grid container spacing={0}>
-					<div className={styles.div_riwayat_layanan}>
-						<div className={styles.div_riwayat_layanan_left}>
-							<Image
-								src={riwayat}
-								alt="Picture of the author"
-								width={52}
-								height={52}
-							/>
-						</div>
-						<div className={styles.div_riwayat_layanan_right}>
-							<span className={styles.text_riwayat_layananmu}>Riwayat Layananmu</span>
-							<span className={styles.text_desc_riwayat_layananmu}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-						</div>
-					</div>
+				<Grid container spacing={0} sx={{ padding: '16px' }}>
+					<Box sx={{ background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)", borderRadius: "16px", display: 'flex', flex: 1 }}>
+						<Stack direction="row" spacing={0} sx={{ display: 'flex', flex: 1, paddingTop: '30px', paddingBottom: '30px', paddingLeft: '24px' }}>
+							<Box sx={{ width: '52px', height: '52px'}}>
+								<Image
+									src={riwayat}
+									alt="Picture of the author"
+									width={52}
+									height={52}
+								/>
+							</Box>
+							<Box sx={{ marginLeft: '24px' }}>
+								<Stack>
+									<span style={general_style.heading_white_bold}>Riwayat Layananmu</span>
+									<span style={general_style.body_white}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+								</Stack>
+							</Box>
+						</Stack>
+					</Box>
 				</Grid>
 				<Grid container spacing={0} style={{ padding: 16, flexDirection: 'column' }}>
 					{
