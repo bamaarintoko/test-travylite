@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Grid, Input } from '@mui/material'
+import { Container, Grid, Input, Stack } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoadingButton from '@mui/lab/LoadingButton';
 
@@ -41,29 +41,21 @@ export default function PageDetailPenerima() {
                 <AppBar title={"Detail Penerima"} />
             </Header>
             <Content style={{ padding: 16 }}>
-                <Label title={"Gelar & Nama Lengkap Pengirim"} />
-                <div className={styles.div_full_name_parent}>
-                    <div className={styles.div_gelar}>
-
+                <Stack spacing={0}>
+                    <Label title={"Gelar & Nama Lengkap Pengirim"} />
+                    <Stack direction="row" spacing={1}>
                         {gelar_select}
-                    </div>
-                    <div className={styles.div_full_name}>
                         {full_name_input}
-                    </div>
-                </div>
-                <Divider />
-                <Label title={"Email Pengirim"} />
-                {email_input}
-                <Divider />
-                <Label title={"Konfirmasi Email Pengirim"} />
-                {email_konfirmasi_input}
-                <Divider />
-                <Label title={"Alamat Lengkap Penerima"} />
-                {alamat_input}
-                <Divider />
-                <Label title={"Kelurahan"} />
-                {kelurahan_select}
-                <Divider />
+                    </Stack>
+                    <Divider />
+                    <Label title={"Alamat Lengkap Penerima"} />
+                    {alamat_input}
+                    <Divider />
+                    <Label title={"Kelurahan"} />
+                    {kelurahan_select}
+                    <Divider />
+                </Stack>
+
             </Content>
             <Footer style={{ padding: 16 }}>
                 <Link href={'page-detail-pengirim'}>

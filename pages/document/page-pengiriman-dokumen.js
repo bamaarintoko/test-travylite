@@ -7,7 +7,7 @@ import Content from "../../component/Content";
 import Header from "../../component/Header";
 import styles from "../../styles/PenitipanBagasi.module.css"
 import general_styles from "../../styles/General.module.css"
-import { Ketentuan } from "../bagasi/ekstra-bagasi/page-ketentuan";
+import { Ketentuan, style } from "../bagasi/ekstra-bagasi/page-ketentuan";
 import Link from 'next/link'
 
 // import { Ketentuan } from "../ekstra-bagasi/page-ketentuan";
@@ -20,7 +20,7 @@ export default function PagePengirimanDokumen() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <div style={{ backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={style.top_box}>
                         <span style={style.label}>Pengiriman</span>
                         <span style={style.label}>Dokumentasi</span>
                         <span style={style.small_label}>Port to Port, Door to Port</span>
@@ -50,30 +50,33 @@ export default function PagePengirimanDokumen() {
     )
 }
 
-const style = {
-    label: {
-        fontFamily: 'Roboto',
-        fontWeight: 500,
-        fontSize: 27,
-        color: "#FEFEFE",
-    },
-    small_label: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 14,
-        color: "#FEFEFE",
-        marginTop: 16
-    },
-    bottom_box: {
-        display: 'flex', backgroundColor: '#FFF', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 16, flexDirection: 'column'
-    },
-    bottom_label: {
-        fontFamily: 'Roboto', fontWeight: 500, fontSize: 14, textAlign: 'center'
-    },
-    bottom_label_wrapper: {
-        display: 'flex', alignItems: 'center', flexDirection: 'column'
-    },
-    content_wrapper: {
-        display: 'flex', flex: 1, flexDirection: 'column',
-    }
-}
+// export const style = {
+//     label: {
+//         fontFamily: 'Roboto',
+//         fontWeight: 500,
+//         fontSize: 27,
+//         color: "#FEFEFE",
+//     },
+//     small_label: {
+//         fontFamily: 'Roboto',
+//         fontWeight: 'normal',
+//         fontSize: 14,
+//         color: "#FEFEFE",
+//         marginTop: 16
+//     },
+//     top_box: {
+//         backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'
+//     },
+//     bottom_box: {
+//         display: 'flex', backgroundColor: '#FFF', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 16, flexDirection: 'column'
+//     },
+//     bottom_label: {
+//         fontFamily: 'Roboto', fontWeight: 500, fontSize: 14, textAlign: 'center'
+//     },
+//     bottom_label_wrapper: {
+//         display: 'flex', alignItems: 'center', flexDirection: 'column'
+//     },
+//     content_wrapper: {
+//         display: 'flex', flex: 1, flexDirection: 'column',
+//     }
+// }

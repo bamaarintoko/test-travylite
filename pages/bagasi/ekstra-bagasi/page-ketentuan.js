@@ -14,7 +14,7 @@ export default function PagesKetentuan() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <div style={{ backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={style.top_box}>
                         <span style={style.label}>Bagasi /</span>
                         <span style={style.label}>Ekstra Bagasi</span>
                         <span style={style.small_label}>Port to Port & Port to Door</span>
@@ -32,7 +32,7 @@ export default function PagesKetentuan() {
                         </div>
                         <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginBottom: 24 }} />
                         <div>
-                            <Link href={"page-detail-pengirim"}>
+                            <Link href={"page-detail-penerima"}>
 
                                 <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
                             </Link>
@@ -82,7 +82,7 @@ export const Ketentuan = ({ number = "1", text = "Isi data pengirim" }) => {
     )
 }
 
-const style = {
+export const style = {
     list_ketentuan: {
         display: "flex",
         flexDirection: "row",
@@ -121,6 +121,9 @@ const style = {
         fontSize: 14,
         color: "#FEFEFE",
         marginTop: 16
+    },
+    top_box: {
+        display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'
     },
     bottom_box: {
         display: 'flex', backgroundColor: '#FFF', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 16, flexDirection: 'column'

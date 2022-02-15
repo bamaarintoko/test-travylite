@@ -7,7 +7,7 @@ import Content from "../../../component/Content";
 import Header from "../../../component/Header";
 import styles from "../../../styles/PenitipanBagasi.module.css"
 import general_styles from "../../../styles/General.module.css"
-import { Ketentuan } from "../ekstra-bagasi/page-ketentuan";
+import { Ketentuan, style } from "../ekstra-bagasi/page-ketentuan";
 import Link from 'next/link'
 
 export default function PagePenitipanBagasi() {
@@ -18,7 +18,7 @@ export default function PagePenitipanBagasi() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <div style={{ backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={style.top_box}>
                         <span style={style.label}>Penitipan</span>
                         <span style={style.label}>Bagasi</span>
                         <span style={style.small_label}>Door to Port</span>
@@ -49,30 +49,30 @@ export default function PagePenitipanBagasi() {
     )
 }
 
-const style = {
-    label: {
-        fontFamily: 'Roboto',
-        fontWeight: 500,
-        fontSize: 27,
-        color: "#FEFEFE",
-    },
-    small_label: {
-        fontFamily: 'Roboto',
-        fontWeight: 'normal',
-        fontSize: 14,
-        color: "#FEFEFE",
-        marginTop: 16
-    },
-    bottom_box: {
-        display: 'flex', backgroundColor: '#FFF', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 16, flexDirection: 'column'
-    },
-    bottom_label: {
-        fontFamily: 'Roboto', fontWeight: 500, fontSize: 14
-    },
-    bottom_label_wrapper: {
-        display: 'flex', alignItems: 'center', flexDirection: 'column'
-    },
-    content_wrapper: {
-        display: 'flex', flex: 1, flexDirection: 'column',
-    }
-}
+// const style = {
+//     label: {
+//         fontFamily: 'Roboto',
+//         fontWeight: 500,
+//         fontSize: 27,
+//         color: "#FEFEFE",
+//     },
+//     small_label: {
+//         fontFamily: 'Roboto',
+//         fontWeight: 'normal',
+//         fontSize: 14,
+//         color: "#FEFEFE",
+//         marginTop: 16
+//     },
+//     bottom_box: {
+//         display: 'flex', backgroundColor: '#FFF', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 16, flexDirection: 'column'
+//     },
+//     bottom_label: {
+//         fontFamily: 'Roboto', fontWeight: 500, fontSize: 14
+//     },
+//     bottom_label_wrapper: {
+//         display: 'flex', alignItems: 'center', flexDirection: 'column'
+//     },
+//     content_wrapper: {
+//         display: 'flex', flex: 1, flexDirection: 'column',
+//     }
+// }

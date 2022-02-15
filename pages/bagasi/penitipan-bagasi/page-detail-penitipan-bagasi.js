@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Stack } from "@mui/material";
 import React from "react";
 import { AppBar } from "../../../component/AppBar";
 import Contain from "../../../component/Container";
@@ -10,6 +10,7 @@ import useTextArea from "../../../component/useTextArea";
 import styles from "../../../styles/General.module.css"
 import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
 import Link from "next/link"
+import { general_style } from "../../../component/general_style";
 export default function PageDetailPenitipanBagasi() {
     const [berat_value, berat_input] = useInputNumber()
     const [jumlah_value, jumlah_input] = useInputNumber()
@@ -21,17 +22,20 @@ export default function PageDetailPenitipanBagasi() {
             </Header>
             <Content style={{ padding: 16 }}>
                 <Grid item xs={12} md={12}>
-                    <div style={{ display: 'flex', flexDirection: 'row' }}>
-                        <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                            <span className={styles.text_normal_black}>Berat</span>
-                            {berat_input}
-                        </div>
-                        <div style={{ width: 16 }} />
-                        <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                            <span className={styles.text_normal_black}>Jumlah</span>
-                            {jumlah_input}
-                        </div>
-                    </div>
+                    <Stack spacing={2}>
+                        <Stack direction="row" spacing={2}>
+                            <Stack>
+                                <span style={general_style.heading_dark_bold}>Berat</span>
+                                {berat_input}
+                            </Stack>
+                            <Stack>
+                                <span style={general_style.heading_dark_bold}>Jumlah</span>
+                                {jumlah_input}
+                            </Stack>
+                        </Stack>
+                        <span style={general_style.heading_dark_bold}>Deskripsi Bagasi</span>
+                        {deskripsi_input}
+                    </Stack>
                 </Grid>
                 <div style={{ height: 16 }} />
                 <Grid item xs={12} md={12}>
@@ -50,7 +54,7 @@ export default function PageDetailPenitipanBagasi() {
             </Content>
             <Footer style={{ padding: 16 }}>
                 <Link href={"/kurir/page-pilihan-pengiriman"}>
-                <Button fullWidth variant="contained">Konfirmasi</Button>
+                    <Button fullWidth variant="contained">Konfirmasi</Button>
                 </Link>
             </Footer>
         </Contain>

@@ -39,17 +39,12 @@ export default function PageDetailPengirim() {
                 <AppBar title={"Detail Pengirim"} />
             </Header>
             <Content style={{ padding: 16 }}>
-                <Stack style={{display:'flex',flex:1}} spacing={0}>
+                <Stack spacing={0}>
                     <Label title={"Gelar & Nama Lengkap Pengirim"} />
-                    <div className={styles.div_full_name_parent}>
-                        <div className={styles.div_gelar}>
-
-                            {gelar_select}
-                        </div>
-                        <div className={styles.div_full_name}>
-                            {full_name_input}
-                        </div>
-                    </div>
+                    <Stack direction="row" spacing={1}>
+                        {gelar_select}
+                        {full_name_input}
+                    </Stack>                    
                     <Divider />
                     <Label title={"Email Pengirim"} />
                     {email_input}
