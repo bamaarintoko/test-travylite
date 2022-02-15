@@ -1,3 +1,5 @@
 .box_gradient{
     background: linear-gradient(135deg, #20AEE0 0%, #0065AF 100%);
+    flex-direction: column;
+    display: flex;
 }
