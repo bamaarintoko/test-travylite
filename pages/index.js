@@ -62,10 +62,10 @@ export default function Home() {
 								/>
 							</div>
 						</Box>
-
-						<div className={styles.center_header_home}>
+						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 							<span className={styles.text_posisi_paket}>Cek posisi paketmu!</span>
-						</div>
+
+						</Box>
 						<Box sx={{ display: "flex", height: 48, backgroundColor: "#FFF", borderRadius: '16px' }}>
 							<InputBase size="small"
 								fullWidth
@@ -122,7 +122,7 @@ export default function Home() {
 				<Grid container spacing={0} sx={{ padding: '16px' }}>
 					<Box sx={{ background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)", borderRadius: "16px", display: 'flex', flex: 1 }}>
 						<Stack direction="row" spacing={0} sx={{ display: 'flex', flex: 1, paddingTop: '30px', paddingBottom: '30px', paddingLeft: '24px' }}>
-							<Box sx={{ width: '52px', height: '52px'}}>
+							<Box sx={{ width: '52px', height: '52px' }}>
 								<Image
 									src={riwayat}
 									alt="Picture of the author"
