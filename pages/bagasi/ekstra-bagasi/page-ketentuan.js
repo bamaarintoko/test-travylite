@@ -14,7 +14,7 @@ export default function PagesKetentuan() {
             </Header>
             <Content>
                 <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <div style={{ backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column',justifyContent:'center',alignItems:'center' }}>
+                    <div style={{ backgroundColor: 'red', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <span style={style.label}>Bagasi /</span>
                         <span style={style.label}>Ekstra Bagasi</span>
                         <span style={style.small_label}>Port to Port & Port to Door</span>
