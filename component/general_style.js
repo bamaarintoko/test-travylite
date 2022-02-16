@@ -9,6 +9,14 @@ export const general_style = {
         lineHeight: '160%',
         color: "#323232"
     },
+    title_white_bold: {
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: 17.5,
+        lineHeight: '160%',
+        color: "#FEFEFE"
+    },
     heading_dark_bold: {
         fontFamily: 'Roboto',
         fontStyle: 'normal',

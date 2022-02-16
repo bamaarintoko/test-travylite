@@ -18,6 +18,8 @@ import SummarizeTwoToneIcon from '@mui/icons-material/SummarizeTwoTone';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import HelpIcon from '@mui/icons-material/Help';
 import { general_style } from '../component/general_style';
 import { useRouter } from 'next/router';
 const menuArr = [
@@ -63,9 +65,8 @@ export default function Home() {
 									/>
 								</div>
 							</Box>
-							<Box sx={{ display: 'flex', justifyContent: 'center',backgroundColor:'red' }}>
-								<span className={styles.text_posisi_paket}>Cek posisi paketmu!</span>
-
+							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+								<span style={general_style.title_white_bold}>Cek posisi paketmu!</span>
 							</Box>
 							<Box sx={{ display: "flex", height: 48, backgroundColor: "#FFF", borderRadius: '16px' }}>
 								<InputBase size="small"
@@ -140,8 +141,69 @@ export default function Home() {
 							</Stack>
 						</Box>
 					</Box>
-					<Box container spacing={0} style={{ padding: 16, flexDirection: 'column' }}>
+					<Box sx={{ paddingLeft: '16px', paddingRight: '16px', flexDirection: 'column' }}>
 						{
+							menuArr.map((x, y) => {
+								return (
+									<Stack sx={{paddingBottom:'16px'}}>
+										<Stack direction={"row"}>
+											<Box sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
+												<Stack sx={{ display: 'flex', alignItems: 'center' }}>
+													<span style={general_style.heading_dark_bold}>YGY</span>
+													<span style={general_style.body_light}>12 OKT 2021</span>
+												</Stack>
+											</Box>
+											<Box sx={{ display: 'flex', flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+												<Stack direction={"row"} sx={{ display: 'flex', flex: 1 }}>
+													<Box sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+														<Box sx={{ height: '1px', display: 'flex', flex: 1, borderTopWidth: 1, borderTopStyle: 'dashed', borderTopColor: 'rgba(0, 0, 0, 0.2)' }} />
+													</Box>
+													<Box sx={{ paddingLeft: '8px', paddingRight: '8px' }}>
+														<FlightTakeoffIcon fontSize="large" sx={{ color: "#0065AF" }} />
+													</Box>
+													<Box sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+														<Box sx={{ height: '1px', display: 'flex', flex: 1, borderTopWidth: 1, borderTopStyle: 'dashed', borderTopColor: 'rgba(0, 0, 0, 0.2)' }} />
+													</Box>
+												</Stack>
+											</Box>
+											<Box sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
+												<Stack sx={{ display: 'flex', alignItems: 'center' }}>
+													<span style={general_style.heading_dark_bold}>JKT</span>
+													<span style={general_style.body_light}>15 OKT 2021</span>
+												</Stack>
+											</Box>
+										</Stack>
+										<Stack direction={"row"}>
+											<Box sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
+												<Stack direction="row" sx={{ alignItems: 'center' }}>
+													<Box sx={{ height: '24px', width: '24px' }}>
+														<BusinessCenterIcon fontSize="small" sx={{ color: "#FF9901" }} />
+													</Box>
+													<span style={general_style.body_light}>Pengiriman Airport Bagasi</span>
+												</Stack>
+											</Box>
+											<Box sx={{ display: 'flex', flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+												<HelpIcon sx={{ color: "rgba(0, 0, 0, 0.4)", fontSize: 13 }} />
+												<span style={general_style.body_light}>Detail</span>
+											</Box>
+											<Box sx={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+												<span style={{
+													fontFamily: 'Roboto',
+													fontStyle: 'normal',
+													fontWeight: 500,
+													fontSize: 14,
+													lineHeight: '160%',
+													color: "#0065AF"
+												}}>Rp 35,000</span>
+											</Box>
+										</Stack>
+									</Stack>
+								)
+							})
+						}
+
+
+						{/* {
 							menuArr.map((x, y) => {
 								return <div key={y} className={styles.parent_list_history}>
 									<div className={styles.child_list_history}>
@@ -185,7 +247,7 @@ export default function Home() {
 									</div>
 								</div>
 							})
-						}
+						} */}
 
 					</Box>
 				</Stack>
