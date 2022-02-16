@@ -145,7 +145,7 @@ export default function Home() {
 						{
 							menuArr.map((x, y) => {
 								return (
-									<Stack sx={{paddingBottom:'16px'}}>
+									<Stack sx={{paddingBottom:'16px'}} key={y}>
 										<Stack direction={"row"}>
 											<Box sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
 												<Stack sx={{ display: 'flex', alignItems: 'center' }}>
