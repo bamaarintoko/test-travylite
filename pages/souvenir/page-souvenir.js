@@ -1,5 +1,6 @@
 import { Button, Stack } from "@mui/material";
 import { Box } from "@mui/system";
+import { useRouter } from "next/router";
 import React from "react";
 import { AppBar } from "../../component/AppBar";
 import Contain from "../../component/Container";
@@ -10,6 +11,7 @@ import Header from "../../component/Header";
 import Ketentuan from "../../component/Ketentuan";
 
 export default function PageSouvenir() {
+    const route = useRouter()
     return (
         <Contain>
             <Header>
@@ -78,7 +80,7 @@ export default function PageSouvenir() {
                                     marginBottom: '24px'
                                 }} />
                                 <Box sx={{ paddingBottom: '16px' }}>
-                                    <Button sx={{
+                                    <Button onClick={() => route.push("page-pick-up")} sx={{
                                         backgroundColor: '#0065AF',
                                         borderRadius: '16px'
                                     }} fullWidth variant="contained">Lanjutkan</Button>
