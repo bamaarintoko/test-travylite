@@ -33,6 +33,14 @@ export const general_style = {
         lineHeight: '160%',
         color: "rgba(0, 0, 0, 0.5)"
     },
+    heading_white_bold: {
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        fontSize: 14,
+        // lineHeight: '160%',
+        color: "#FEFEFE"
+    },
     heading_dark: {
         fontFamily: 'Roboto',
         fontStyle: 'normal',

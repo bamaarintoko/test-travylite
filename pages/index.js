@@ -36,7 +36,7 @@ const menuArr = [
 	{
 		text: 'Pengambilan dan Go Oleh-Oleh',
 		image: <Inventory2Icon fontSize="large" sx={{ color: "#FCCF2F" }} />,
-		url: 'bagasi/page-bagasi'
+		url: 'souvenir/page-souvenir'
 	}
 ]
 

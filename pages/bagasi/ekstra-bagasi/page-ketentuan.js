@@ -1,86 +1,112 @@
-import { Button, Container, Grid, Input } from '@mui/material'
+import { Button, Container, Grid, Input, Stack } from '@mui/material'
 import { AppBar } from '../../../component/AppBar'
 import Contain from '../../../component/Container'
 import Content from '../../../component/Content'
 import Header from '../../../component/Header'
 import styles from '../../../styles/PenitipanBagasi.module.css'
-import general_styles from "../../../styles/General.module.css"
+// import general_styles from "../../../styles/General.module.css"
 import Link from 'next/link'
+import Ketentuan from '../../../component/Ketentuan'
+import { general_style } from '../../../component/general_style'
+import { Box } from '@mui/system'
+import { useRouter } from 'next/router'
 export default function PagesKetentuan() {
+    const route = useRouter()
     return (
         <Contain>
             <Header>
                 <AppBar title={"Ketentuan"} />
             </Header>
             <Content>
-                <Grid className={styles.box_gradient} item xs={12} md={12} style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-                    <div style={style.top_box}>
-                        <span style={style.label}>Bagasi /</span>
-                        <span style={style.label}>Ekstra Bagasi</span>
-                        <span style={style.small_label}>Port to Port & Port to Door</span>
-                    </div>
-                    <div style={style.bottom_box}>
-                        <div style={style.bottom_label_wrapper}>
-                            <span style={style.bottom_label}>Pengiriman bagasi atau kelebihan bagasi ke bandara tujuan atau kirim langsung ke alamat tujuanmu</span>
-                        </div>
-                        <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginTop: 24, marginBottom: 24 }} />
-                        <div style={style.content_wrapper}>
-                            <Ketentuan number={1} />
-                            <Ketentuan number={2} text={"Pilih tempat Pick-Up dan Drop-Off"} />
-                            <Ketentuan number={3} text={"Isi detail bagasi"} />
-                            <Ketentuan number={4} text={"Pilih durasi pengiriman"} />
-                        </div>
-                        <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginBottom: 24 }} />
-                        <div>
-                            <Link href={"page-detail-penerima"}>
+                <Box style={{ display: 'flex', flex: 1, background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)" }}>
+                    <Stack sx={{
+                        display: 'flex',
+                        flex: 1
+                    }}>
+                        <Box style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Stack sx={{
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}>
+                                <span style={{
+                                    fontFamily: 'Roboto',
+                                    fontStyle: 'normal',
+                                    fontWeight: 500,
+                                    fontSize: 27,
+                                    // lineHeight: '160%',
+                                    color: "#FEFEFE"
+                                }}>Bagasi /</span>
+                                <span style={{
+                                    fontFamily: 'Roboto',
+                                    fontStyle: 'normal',
+                                    fontWeight: 500,
+                                    fontSize: 27,
+                                    // lineHeight: '160%',
+                                    color: "#FEFEFE"
+                                }}>Ekstra Bagasi</span>
+                                <Box sx={{ height: '16px' }} />
+                                <span style={general_style.body_white}>Port to Port & Port to Door</span>
+                            </Stack>
+                        </Box>
+                        <Box sx={{ backgroundColor: '#FFF', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', paddingLeft: '16px', paddingRight: '16px', paddingTop: '32px' }}>
+                            <Stack>
+                                <span style={{
+                                    fontFamily: 'Roboto',
+                                    fontStyle: 'normal',
+                                    fontWeight: 500,
+                                    fontSize: 14,
+                                    lineHeight: '160%',
+                                    color: "#323232",
+                                    textAlign: 'center'
+                                }}>Pengiriman bagasi atau kelebihan bagasi ke bandara tujuan atau kirim langsung ke alamat tujuanmu</span>
+                                <Box sx={{
+                                    height: '1px',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                                    marginTop: '24px',
+                                    marginBottom: '24px'
+                                }} />
+                                <Stack spacing={2}>
+                                    <Ketentuan number={1} label={"Isi data pengirim"} />
+                                    <Ketentuan number={2} label={"Isi data penerima"} />
+                                    <Ketentuan number={3} label={"Isi detail bagasi"} />
+                                    <Ketentuan number={4} label={"Pilih durasi pengiriman"} />
 
-                                <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
-                            </Link>
-                        </div>
-                    </div>
-                    {/* <Grid item xs={12} md={12} style={{ backgroundColor: 'red', display: 'flex', flex: 1,flexDirection:'column' }}>
-                        <span style={style.label}>Bagasi /</span>
-                        <span style={style.label}>Ekstra Bagasi</span>
-                        <span style={style.small_label}>Port to Port & Port to Door</span>
-                    </Grid>
-                    <Grid item xs={12} md={12}>
-                        <div style={style.bottom_label_wrapper}>
-                            <span style={style.bottom_label}>Pengiriman bagasi atau kelebihan bagasi ke bandara tujuan atau kirim langsung ke alamat tujuanmu</span>
-                        </div>
-                        <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginTop: 24, marginBottom: 24 }} />
-                        <div style={style.content_wrapper}>
-                            <Ketentuan number={1} />
-                            <Ketentuan number={2} text={"Pilih tempat Pick-Up dan Drop-Off"} />
-                            <Ketentuan number={3} text={"Isi detail bagasi"} />
-                            <Ketentuan number={4} text={"Pilih durasi pengiriman"} />
-                        </div>
-                        <div style={{ height: 1, backgroundColor: "rgba(0, 0, 0, 0.1)", marginBottom: 24 }} />
-                        <div>
-                            <Link href={"page-detail-pengirim"}>
+                                </Stack>
+                                <Box sx={{
+                                    height: '1px',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                                    marginTop: '24px',
+                                    marginBottom: '24px'
+                                }} />
+                                <Box sx={{ paddingBottom: '16px' }}>
+                                    <Button onClick={() => route.push('page-detail-penerima')} sx={{
+                                        backgroundColor: '#0065AF',
+                                        borderRadius: '16px'
+                                    }} fullWidth variant="contained">Lanjutkan</Button>
 
-                                <Button sx={{ borderRadius: 50 }} fullWidth variant="contained">Lanjutkan</Button>
-                            </Link>
-                        </div>
-                    </Grid> */}
-                </Grid>
+                                </Box>
+                            </Stack>
+                        </Box>
+                    </Stack>
+                </Box>
             </Content>
         </Contain>
     )
 }
 
-export const Ketentuan = ({ number = "1", text = "Isi data pengirim" }) => {
-    return (
-        <div style={style.list_ketentuan}>
-            <div style={style.list_parent_number}>
+// export const Ketentuan = ({ number = "1", text = "Isi data pengirim" }) => {
+//     return (
+//         <div style={style.list_ketentuan}>
+//             <div style={style.list_parent_number}>
 
-                <span style={style.text_number}>{number}</span>
-            </div>
-            <div style={{ paddingLeft: 24, display: 'flex', alignItems: 'center' }}>
-                <span style={style.text_ketentuan}>{text}</span>
-            </div>
-        </div>
-    )
-}
+//                 <span style={style.text_number}>{number}</span>
+//             </div>
+//             <div style={{ paddingLeft: 24, display: 'flex', alignItems: 'center' }}>
+//                 <span style={style.text_ketentuan}>{text}</span>
+//             </div>
+//         </div>
+//     )
+// }
 
 export const style = {
     list_ketentuan: {

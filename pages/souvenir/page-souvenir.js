@@ -1,20 +1,15 @@
-import { Button, Grid, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 import { AppBar } from "../../component/AppBar";
 import Contain from "../../component/Container";
 import Content from "../../component/Content";
-import Header from "../../component/Header";
-// import { Ketentuan } from "../bagasi/ekstra-bagasi/page-ketentuan";
-import Link from 'next/link'
-import { Box } from "@mui/system";
+import Footer from "../../component/Footer";
 import { general_style } from "../../component/general_style";
+import Header from "../../component/Header";
 import Ketentuan from "../../component/Ketentuan";
-import { useRouter } from "next/router";
 
-// import { Ketentuan } from "../ekstra-bagasi/page-ketentuan";
-
-export default function PagePengirimanDokumen() {
-    const route = useRouter()
+export default function PageSouvenir() {
     return (
         <Contain>
             <Header>
@@ -38,7 +33,7 @@ export default function PagePengirimanDokumen() {
                                     fontSize: 27,
                                     // lineHeight: '160%',
                                     color: "#FEFEFE"
-                                }}>Pengiriman</span>
+                                }}>Pick-Up & Go:</span>
                                 <span style={{
                                     fontFamily: 'Roboto',
                                     fontStyle: 'normal',
@@ -46,9 +41,9 @@ export default function PagePengirimanDokumen() {
                                     fontSize: 27,
                                     // lineHeight: '160%',
                                     color: "#FEFEFE"
-                                }}>Dokumen</span>
+                                }}>Oleh-oleh</span>
                                 <Box sx={{ height: '16px' }} />
-                                <span style={general_style.body_white}>Port to Port, Door to Port</span>
+                                <span style={general_style.body_white}>Merchant to Port, Merchant to Door</span>
                             </Stack>
                         </Box>
                         <Box sx={{ backgroundColor: '#FFF', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', paddingLeft: '16px', paddingRight: '16px', paddingTop: '32px' }}>
@@ -61,7 +56,7 @@ export default function PagePengirimanDokumen() {
                                     lineHeight: '160%',
                                     color: "#323232",
                                     textAlign: 'center'
-                                }}>Pengiriman dokumen atau berkas ke bandara tujuan atau langsung ke alamat tujuanmu</span>
+                                }}>Pesan Oleh-olehmu tanpa harus antri, bebas ribet dan diantar langsung ke bandara tujuan atau langsung ke alamat tujuanmu</span>
                                 <Box sx={{
                                     height: '1px',
                                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -69,11 +64,12 @@ export default function PagePengirimanDokumen() {
                                     marginBottom: '24px'
                                 }} />
                                 <Stack spacing={2}>
-                                    <Ketentuan number={1} label={"Pesan dan pilih ukuran Smart Box Anda"} />
-                                    <Ketentuan number={2} label={"Isi detail dokumen"} />
-                                    <Ketentuan number={3} label={"Isi data penerima"} />
-                                    <Ketentuan number={4} label={"Isi data pengirim"} />
-                                    <Ketentuan number={5} label={"Pilih durasi pengiriman"} />
+                                    <Ketentuan number={1} label={"Pesan dan pilih Oleh-olehmu"} />
+                                    <Ketentuan number={2} label={"Pilih waktu dan lokasi Pick-Up"} />
+                                    <Ketentuan number={3} label={"Pilih waktu dan lokasi Drop-Off"} />
+                                    <Ketentuan number={4} label={"Isi detail pengirim"} />
+                                    <Ketentuan number={5} label={"Isi detail oleh-oleh"} />
+                                    <Ketentuan number={6} label={"Pilih durasi pengiriman"} />
                                 </Stack>
                                 <Box sx={{
                                     height: '1px',
@@ -82,7 +78,7 @@ export default function PagePengirimanDokumen() {
                                     marginBottom: '24px'
                                 }} />
                                 <Box sx={{ paddingBottom: '16px' }}>
-                                    <Button onClick={() => route.push("page-pilih-smart-box")} sx={{
+                                    <Button sx={{
                                         backgroundColor: '#0065AF',
                                         borderRadius: '16px'
                                     }} fullWidth variant="contained">Lanjutkan</Button>
@@ -93,6 +89,9 @@ export default function PagePengirimanDokumen() {
                     </Stack>
                 </Box>
             </Content>
+            <Footer>
+
+            </Footer>
         </Contain>
     )
 }
