@@ -1,17 +1,20 @@
+// import { AppBar } from "@mui/material";
 import { Button, Stack } from "@mui/material";
+import { Box } from "@mui/system";
 import { useRouter } from "next/router";
 import React from "react";
-import { AppBar } from "../../component/AppBar";
-import Contain from "../../component/Container";
-import Content from "../../component/Content";
-import Footer from "../../component/Footer";
-import Header from "../../component/Header";
-import useInput from "../../component/useInput";
-import useInputSelect from "../../component/useInputSelect";
-import useTextArea from "../../component/useTextArea";
-import { Divider, Label } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
+import { AppBar } from "../../../component/AppBar";
+import Contain from "../../../component/Container";
+import Content from "../../../component/Content";
+import Footer from "../../../component/Footer";
+import { general_style } from "../../../component/general_style";
+import Header from "../../../component/Header";
+import useInput from "../../../component/useInput";
+import useInputSelect from "../../../component/useInputSelect";
+import useTextArea from "../../../component/useTextArea";
+import { Divider, Label } from "../../bagasi/ekstra-bagasi/page-detail-pengirim";
 
-export default function PagePilihSmartBox() {
+export default function PageDetailPengirim() {
     const route = useRouter()
     const [gelar_value, gelar_select, setDataGelar] = useInputSelect()
     const [kelurahan_value, kelurahan_select] = useInputSelect()
@@ -24,8 +27,13 @@ export default function PagePilihSmartBox() {
             <Header>
                 <AppBar title={"Detail Pengirim"} />
             </Header>
-            <Content style={{ padding: 16 }}>
-                <Stack spacing={0}>
+            <Content>
+                <Stack>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', height: 40, backgroundColor: '#e0e0e0', alignItems: 'center' }}>
+                        <span style={general_style.heading_dark_bold}>Merchant to Door</span>
+                    </Box>
+                </Stack>
+                <Stack spacing={0} sx={{ padding: '16px' }}>
                     <Label title={"Gelar & Nama Lengkap Pengirim"} />
                     <Stack direction="row" spacing={1}>
                         {gelar_select}
@@ -47,7 +55,7 @@ export default function PagePilihSmartBox() {
                 </Stack>
             </Content>
             <Footer style={{ padding: 16, backgroundColor: "#FFF" }}>
-                <Button onClick={()=>route.push("page-konfirmasi-pesanan")} fullWidth variant="contained">Konfirmasi</Button>
+                <Button sx={{ backgroundColor: '#0065AF', borderRadius: '16px' }} onClick={() => route.push("page-detail-penerima")} fullWidth variant="contained">Konfirmasi</Button>
             </Footer>
         </Contain>
     )

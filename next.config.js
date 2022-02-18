@@ -6,13 +6,14 @@ module.exports = withPWA({
     buildExcludes: [/middleware-manifest.json$/]
     ,
   },
-  //   pwa: {
-  //     dest: 'public',
-  //     publicExcludes: [
-  //         '!robots.txt',
-  //         '!sitemap.xml.gz',
-  //     ],
-  // },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    })
+    return config
+  }
 });
 
 
