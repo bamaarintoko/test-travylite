@@ -50,7 +50,7 @@ export default function Home() {
 	useEffect(() => {
 		console.log("state", state)
 		dispatch({
-			type:"TEST"
+			type: "TEST"
 		})
 	}, [])
 	return (
@@ -125,8 +125,8 @@ export default function Home() {
 							</Stack>
 						</Stack>
 					</Box>
-					<Box container spacing={0} sx={{ padding: '16px' }}>
-						<Box sx={{ background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)", borderRadius: "16px", display: 'flex', flex: 1 }}>
+					<Box sx={{ padding: '16px' }}>
+						<Box onClick={() => route.push("/riwayat/page-riwayat-pesanan")} sx={{ background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)", borderRadius: "16px", display: 'flex', flex: 1 }}>
 							<Stack direction="row" spacing={0} sx={{ display: 'flex', flex: 1, paddingTop: '30px', paddingBottom: '30px', paddingLeft: '24px' }}>
 								<Box sx={{ width: '52px', height: '52px' }}>
 									<Image
