@@ -48,7 +48,7 @@ export default function PageDetailPenerima() {
                 </Stack>
             </Content>
             <Footer style={{ padding: 16, backgroundColor: "#FFF" }}>
-                <Button onClick={() => route.push("page-detail-oleh-oleh")} sx={{ backgroundColor: '#0065AF', borderRadius: '16px' }} onClick={() => route.push("page-detail-oleh-oleh")} fullWidth variant="contained">Konfirmasi</Button>
+                <Button onClick={() => route.push("page-detail-oleh-oleh")} sx={{ backgroundColor: '#0065AF', borderRadius: '16px' }} fullWidth variant="contained">Konfirmasi</Button>
             </Footer>
         </Contain>
     )
