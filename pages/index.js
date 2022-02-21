@@ -1,22 +1,18 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Container, Grid, Input, Stack, TextField } from '@mui/material'
-import InputUnstyled from '@mui/base/InputUnstyled';
-import AccountCircle from "@mui/icons-material/AccountCircle";
+
 import InputBase from '@mui/material/InputBase';
 import Image from 'next/image'
-import Link from 'next/link'
 import logo from '../public/logo.png'
 import riwayat from '../public/riwayat.png'
 import SearchIcon from '@mui/icons-material/Search';
-import plane from "../public/plane.png"
-import bagasi from "../public/bagasi.png"
 import { Box } from '@mui/system';
-import BusinessCenterTwoToneIcon from '@mui/icons-material/BusinessCenterTwoTone';
+
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import SummarizeTwoToneIcon from '@mui/icons-material/SummarizeTwoTone';
+
 import SummarizeIcon from '@mui/icons-material/Summarize';
-import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
+
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import HelpIcon from '@mui/icons-material/Help';
@@ -49,6 +45,14 @@ let view_height = 50;
 let new_image_height = image_height * view_width / image_width;
 export default function Home() {
 	const route = useRouter()
+	const state = useSelector((state) => state)
+	const dispatch = useDispatch()
+	useEffect(() => {
+		console.log("state", state)
+		dispatch({
+			type:"TEST"
+		})
+	}, [])
 	return (
 		<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
 			<Grid container spacing={0}>
@@ -145,7 +149,7 @@ export default function Home() {
 						{
 							menuArr.map((x, y) => {
 								return (
-									<Stack sx={{paddingBottom:'16px'}} key={y}>
+									<Stack sx={{ paddingBottom: '16px' }} key={y}>
 										<Stack direction={"row"}>
 											<Box sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
 												<Stack sx={{ display: 'flex', alignItems: 'center' }}>
