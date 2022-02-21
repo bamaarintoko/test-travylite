@@ -11,7 +11,7 @@ import useTextArea from "../../../component/useTextArea";
 import { general_style } from "../../../component/general_style";
 import { useRouter } from "next/router";
 import { Box } from "@mui/system";
-export default function () {
+export default function PageDetailOlehOleh () {
 
     const [berat_value, berat_input] = useInputNumber()
     const [jumlah_value, jumlah_input] = useInputNumber()
