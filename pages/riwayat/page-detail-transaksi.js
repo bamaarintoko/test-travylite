@@ -222,10 +222,70 @@ export default function PageDetailTransaksi() {
                     {/* </Detail Barang Section> */}
 
                     {/* <Lacak Barang Section> */}
-                    <Box sx={{ boxShadow: "0px 16px 24px #F2F2F2", borderRadius: '8px' }}>
+                    <Box sx={{ boxShadow: "0px 16px 24px #F2F2F2", borderRadius: '16px', padding: '16px', marginTop: '40px' }}>
+                        <Stack>
+                            <span style={general_style.heading_dark_bold}>Lacak</span>
+                            <Stack direction={"row"} sx={{ display: 'flex', flex: 1 }}>
+                                <Box sx={{ paddingBottom: '40px', display: 'flex', justifyContent: 'center' }}>
+                                    <Stack sx={{ display: 'flex', alignItems: 'center', }}>
+                                        <span style={general_style.heading_light}>15 Okt</span>
+                                        <span style={general_style.heading_light}>13:30 PM</span>
+                                    </Stack>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', margin: '0 30px 0 30px' }}>
+                                    <Stack sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+                                        <Box sx={{ height: '10px', width: '10px', backgroundColor: '#0065AF', borderRadius: 100 }} />
+                                        <Box sx={{ width: '1px', backgroundColor: "#0065AF", flex: 1, }} />
 
+                                    </Stack>
+                                </Box>
+                                <Box style={{ display: 'flex', flex: 2 }}>
+                                    <span style={general_style.heading_dark_bold}>Bagasi telah diterima dilokasi Drop-Off</span>
+                                </Box>
+
+                            </Stack>
+                            <Stack direction={"row"} sx={{ display: 'flex', flex: 1 }}>
+                                <Box sx={{ paddingBottom: '40px', display: 'flex', justifyContent: 'center' }}>
+                                    <Stack sx={{ display: 'flex', alignItems: 'center', }}>
+                                        <span style={general_style.heading_light}>15 Okt</span>
+                                        <span style={general_style.heading_light}>13:30 PM</span>
+                                    </Stack>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', margin: '0 30px 0 30px' }}>
+                                    <Stack sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+                                        <Box sx={{ height: '10px', width: '10px', backgroundColor: '#0065AF', borderRadius: 100 }} />
+                                        <Box sx={{ width: '1px', backgroundColor: "#0065AF", flex: 1, }} />
+
+                                    </Stack>
+                                </Box>
+                                <Box style={{ display: 'flex', flex: 2 }}>
+                                    <span style={general_style.heading_dark_bold}>Perjalan lanjutan menuju lokasi</span>
+                                </Box>
+
+                            </Stack>
+                            <Stack direction={"row"} sx={{ display: 'flex', flex: 1 }}>
+                                <Box sx={{ paddingBottom: '40px', display: 'flex', justifyContent: 'center' }}>
+                                    <Stack sx={{ display: 'flex', alignItems: 'center', }}>
+                                        <span style={general_style.heading_light}>15 Okt</span>
+                                        <span style={general_style.heading_light}>13:30 PM</span>
+                                    </Stack>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', margin: '0 30px 0 30px' }}>
+                                    <Stack sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+                                        <Box sx={{ height: '10px', width: '10px', backgroundColor: '#0065AF', borderRadius: 100 }} />
+                                        <Box sx={{ width: '1px', backgroundColor: "#0065AF", flex: 1, }} />
+
+                                    </Stack>
+                                </Box>
+                                <Box style={{ display: 'flex', flex: 2 }}>
+                                    <span style={general_style.heading_dark_bold}>Bagasi sedang dalam perjalanan menuju lokasi Drop-Off</span>
+                                </Box>
+
+                            </Stack>
+                        </Stack>
                     </Box>
                     {/* </Lacak Barang Section> */}
+                    <Box sx={{ height: '40px' }} />
 
                 </Stack>
             </Content>
