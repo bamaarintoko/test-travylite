@@ -11,6 +11,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 export default function PageDetailTransaksi() {
     return (
         <Contain>
@@ -103,7 +104,7 @@ export default function PageDetailTransaksi() {
                             </Stack>
                         </Stack>
                     </Box>
-
+                    {/* <Payment Section> */}
                     <Box sx={{ boxShadow: '0px 16px 24px #F2F2F2', marginTop: '40px', borderRadius: '16px' }}>
                         <Stack>
                             <Stack direction={"row"} sx={{ padding: '11px 16px 11px 16px' }}>
@@ -117,7 +118,7 @@ export default function PageDetailTransaksi() {
                                 </Box>
                             </Stack>
                             <Box sx={{ height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', display: 'flex' }} />
-                            <Stack spacing={1} sx={{padding:'16px'}}>
+                            <Stack spacing={1} sx={{ padding: '16px' }}>
                                 <Stack direction={'row'}>
                                     <Box sx={{ display: 'flex', flex: 3 }}>
                                         <span style={general_style.heading_light}>Pengiriman Same-Day</span>
@@ -154,6 +155,77 @@ export default function PageDetailTransaksi() {
                             </Stack>
                         </Stack>
                     </Box>
+                    {/* </Payment Section> */}
+
+                    {/* <Detail Barang Section> */}
+                    <Box sx={{ boxShadow: '0px 16px 24px #F2F2F2', borderRadius: '16px', marginTop: '40px', padding: '16px', backgroundColor: "#FEFEFE" }}>
+                        <Stack direction={"row"}>
+                            <Box>
+                                <BusinessCenterIcon />
+                            </Box>
+                            <Box sx={{ paddingLeft: '16px', display: 'flex', flex: 1 }}>
+                                <Stack sx={{ display: 'flex', flex: 1 }}>
+                                    <Box sx={{ height: '28px', background: "linear-gradient(135deg, #C5D609 0%, #63B338 100%)", paddingLeft: '16px', paddingRight: '16px', display: 'flex', alignItems: 'center', borderRadius: '8px' }}>
+                                        <span style={general_style.heading_white_bold}>Barang telah diterima</span>
+                                    </Box>
+                                    <span style={general_style.heading_light}>Jumat 15 Okt 2021</span>
+                                    <span style={general_style.heading_light}>Pengiriman Same Day - Anteraja</span>
+                                    <Box sx={{ height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.1)', display: 'flex', margin: '16px 0 16px 0' }} />
+                                    <Stack direction={'row'}>
+                                        <Box sx={{ display: 'flex', flex: 1 }}>
+                                            <span style={general_style.heading_light}>Item</span>
+                                        </Box>
+                                        <Box>
+                                            <span style={general_style.heading_light}>: </span>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', flex: 2 }}>
+                                            <span style={general_style.heading_light}>&nbsp; 1 Bagasi</span>
+                                        </Box>
+                                    </Stack>
+                                    <Stack direction={'row'}>
+                                        <Box sx={{ display: 'flex', flex: 1 }}>
+                                            <span style={general_style.heading_light}>Berat</span>
+                                        </Box>
+                                        <Box>
+                                            <span style={general_style.heading_light}>: </span>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', flex: 2 }}>
+                                            <span style={general_style.heading_light}>&nbsp; 1 Kg</span>
+                                        </Box>
+                                    </Stack>
+                                    <Stack direction={'row'}>
+                                        <Box sx={{ display: 'flex', flex: 1 }}>
+                                            <span style={general_style.heading_light}>Deskripsi</span>
+                                        </Box>
+                                        <Box>
+                                            <span style={general_style.heading_light}>: </span>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', flex: 2 }}>
+                                            <span style={general_style.heading_light}>&nbsp; Koper warna hitam</span>
+                                        </Box>
+                                    </Stack>
+                                    <Stack direction={'row'}>
+                                        <Box sx={{ display: 'flex', flex: 1 }}>
+                                            <span style={general_style.heading_light}>Pengiriman</span>
+                                        </Box>
+                                        <Box>
+                                            <span style={general_style.heading_light}>: </span>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', flex: 2 }}>
+                                            <span style={general_style.heading_light}>&nbsp; Same Day</span>
+                                        </Box>
+                                    </Stack>
+                                </Stack>
+                            </Box>
+                        </Stack>
+                    </Box>
+                    {/* </Detail Barang Section> */}
+
+                    {/* <Lacak Barang Section> */}
+                    <Box sx={{ boxShadow: "0px 16px 24px #F2F2F2", borderRadius: '8px' }}>
+
+                    </Box>
+                    {/* </Lacak Barang Section> */}
 
                 </Stack>
             </Content>
