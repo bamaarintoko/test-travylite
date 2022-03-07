@@ -1,16 +1,21 @@
-import { IconButton, InputAdornment, OutlinedInput, TextField } from "@mui/material";
+import { IconButton, InputAdornment, OutlinedInput, Stack, TextField } from "@mui/material";
 import React, { useState } from "react";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-export default function useInputPassword (label = "label") {
+import { Box } from "@mui/system";
+export default function useInputPassword(label = "label") {
     const [value, setValue] = useState("")
     const [show_password, set_show_password] = useState(false)
-    const input = <div style={{ display: 'flex', flexDirection: 'column' }}>
+    const [isError, setError] = useState(false)
+    const input = <Stack style={{ display: 'flex', flexDirection: 'column' }}>
         <span style={{ fontFamily: 'Roboto', fontSize: 14, color: "rgba(0, 0, 0, 0.4)", marginBottom: 10 }}>{label}</span>
-        <div>
+        <Box>
             <OutlinedInput size="small"
+                error={isError}
+                onChange={(e) => setValue(e.target.value)}
                 type={show_password ? 'text' : 'password'}
-                fullWidth id="outlined-basic" variant="outlined"
+                fullWidth id="outlined-basic" 
+                variant="outlined"
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
@@ -22,7 +27,7 @@ export default function useInputPassword (label = "label") {
                         </IconButton>
                     </InputAdornment>
                 } />
-        </div>
-    </div>
-    return [input, value]
+        </Box>
+    </Stack>
+    return [input, value, setError]
 }

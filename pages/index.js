@@ -16,6 +16,7 @@ import SummarizeIcon from '@mui/icons-material/Summarize';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import HelpIcon from '@mui/icons-material/Help';
+import LoginIcon from '@mui/icons-material/Login';
 import { general_style } from '../component/general_style';
 import { useRouter } from 'next/router';
 const menuArr = [
@@ -59,6 +60,10 @@ export default function Home() {
 				<Stack sx={{ display: 'flex', flex: 1 }}>
 					<Box style={{ display: 'flex', height: 304, background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
 						{/* <Item>xs=6 md=8</Item> */}
+						<Box onClick={() => route.push("/auth/page-login")} sx={{ position: 'absolute', right: 0, padding: '10px' }}>
+
+							<LoginIcon fontSize="large" sx={{ color: '#FFF' }} />
+						</Box>
 						<Stack spacing={3} sx={{ display: 'flex', padding: '16px', flex: 1 }}>
 							<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '43px' }}>
 

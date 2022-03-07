@@ -14,8 +14,19 @@ import LogoAuth from "../../component/LogoAuth";
 import Link from 'next/link'
 
 export default function PageLogin() {
-    const [email_input] = useInputAuth("Email")
-    const [pass_input] = useInputPassword("Password")
+    const [email_input, email_value] = useInputAuth("Email")
+    const [pass_input, password_value] = useInputPassword("Password")
+
+    function do_login() {
+        return () => {
+            let par = {
+                identity: email_value,
+                password: password_value
+            }
+
+            console.log("par", par)
+        }
+    }
     return (
         <Contain>
             <Header>
@@ -28,7 +39,7 @@ export default function PageLogin() {
                     <div style={{ height: 16 }} />
                     {pass_input}
                     <div style={{ height: 34 }} />
-                    <ButtonGradient title={"Masuk"} />
+                    <ButtonGradient onClick={do_login()} title={"Masuk"} />
                     <LineSeparator />
                     <ButtonLoginGoogle title={"Masuk Dengan Google"} />
                     <div style={{ display: "flex", justifyContent: 'center', marginTop: 24 }}>

@@ -1,5 +1,8 @@
 
-import React from "react";
+import React, { useState } from "react";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import { AppBar } from "../../component/AppBar";
 import ButtonGradient from "../../component/Auth/ButtonGradient";
 import ButtonLoginGoogle from "../../component/Auth/ButtonLoginGoogle";
@@ -16,10 +19,50 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 export default function PageRegister() {
     const router = useRouter()
-    const [nama_input, nama_value] = useInputAuth("Masukkan Nama")
-    const [email_input, email_value] = useInputAuth("Masukkan Email")
-    const [password_input, password_value] = useInputPassword("Masukkan Kata Sandi")
-    const [confirmation_password_input, confirmation_password_value] = useInputPassword("Konfirmasi Kata Sandi")
+    const [open, setOpen] = useState(true);
+    const [nama_input, nama_value, set_nama_error] = useInputAuth("Masukkan Nama")
+    const [email_input, email_value, set_email_error] = useInputAuth("Masukkan Email")
+    const [password_input, password_value, set_password_error] = useInputPassword("Masukkan Kata Sandi")
+    const [confirmation_password_input, confirmation_password_value, set_confirmation_password_error] = useInputPassword("Konfirmasi Kata Sandi")
+
+    function do_register() {
+        return () => {
+
+            if (nama_value === '') {
+                set_nama_error(true)
+            }
+
+            if (email_value === '') {
+                set_email_error(true)
+            }
+
+            if (password_value === '') {
+                set_password_error(true)
+            }
+
+            if (confirmation_password_value === '') {
+                set_confirmation_password_error(true)
+            }
+
+            if (confirmation_password_value === password_value) {
+                if (nama_value !== '' && email_value !== '' && password_value !== '' && confirmation_password_value != '') {
+                    let par = {
+                        name: nama_value,
+                        email: email_value,
+                        password: confirmation_password_value
+                    }
+
+                    console.log("par", par)
+                }
+                set_password_error(false)
+                set_confirmation_password_error(false)
+            } else {
+                set_password_error(true)
+                set_confirmation_password_error(true)
+
+            }
+        }
+    }
     return (
         <Contain>
             <Header>
@@ -36,7 +79,7 @@ export default function PageRegister() {
                     <div style={{ height: 16 }} />
                     {confirmation_password_input}
                     <div style={{ height: 16 }} />
-                    <ButtonGradient title={"Daftar Sekarang"} />
+                    <ButtonGradient onClick={do_register()} title={"Daftar Sekarang"} />
                     <LineSeparator />
                     <ButtonLoginGoogle title={"Daftar Dengan Google"} />
                     <div style={{ display: "flex", justifyContent: 'center', marginTop: 24 }}>
@@ -47,6 +90,13 @@ export default function PageRegister() {
             <Footer>
 
             </Footer>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+                // onClick={handleClose}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
         </Contain>
     )
 }
