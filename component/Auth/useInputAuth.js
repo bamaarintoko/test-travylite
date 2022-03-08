@@ -8,7 +8,11 @@ export default function useInputAuth(label = "label", email = false, secure = fa
     const input = <Stack>
         <span style={{ fontFamily: 'Roboto', fontSize: 14, color: "rgba(0, 0, 0, 0.4)", marginBottom: 10 }}>{label}</span>
         <Box>
-            <TextField error={isError} onChange={(e) => setValue(e.target.value)} size="small"
+            <TextField error={isError} onBlur={() => {
+                if (value !== "") {
+                    setError(false)
+                }
+            }} onChange={(e) => setValue(e.target.value)} size="small"
                 fullWidth id="outlined-basic" variant="outlined" />
         </Box>
     </Stack>

@@ -11,10 +11,15 @@ export default function useInputPassword(label = "label") {
         <span style={{ fontFamily: 'Roboto', fontSize: 14, color: "rgba(0, 0, 0, 0.4)", marginBottom: 10 }}>{label}</span>
         <Box>
             <OutlinedInput size="small"
+                onBlur={() => {
+                    if (value !== '') {
+                        setError(false)
+                    }
+                }}
                 error={isError}
                 onChange={(e) => setValue(e.target.value)}
                 type={show_password ? 'text' : 'password'}
-                fullWidth id="outlined-basic" 
+                fullWidth id="outlined-basic"
                 variant="outlined"
                 endAdornment={
                     <InputAdornment position="end">

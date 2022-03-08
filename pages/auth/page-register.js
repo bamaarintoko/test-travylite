@@ -1,8 +1,9 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import { AppBar } from "../../component/AppBar";
 import ButtonGradient from "../../component/Auth/ButtonGradient";
 import ButtonLoginGoogle from "../../component/Auth/ButtonLoginGoogle";
@@ -17,17 +18,35 @@ import Header from "../../component/Header";
 import LogoAuth from "../../component/LogoAuth";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { usePost } from "../../helper/request";
 export default function PageRegister() {
+
+    const [func_register, reg_success_res, reg_error_res, reg_loading, reg_success, reg_failed, set_reg_failed] = usePost()
+
     const router = useRouter()
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [nama_input, nama_value, set_nama_error] = useInputAuth("Masukkan Nama")
     const [email_input, email_value, set_email_error] = useInputAuth("Masukkan Email")
     const [password_input, password_value, set_password_error] = useInputPassword("Masukkan Kata Sandi")
     const [confirmation_password_input, confirmation_password_value, set_confirmation_password_error] = useInputPassword("Konfirmasi Kata Sandi")
 
+    useEffect(() => {
+        console.log("reg_error_res", reg_error_res)
+    }, [reg_error_res])
+
+    useEffect(() => {
+        console.log("open", open)
+    }, [open])
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
     function do_register() {
         return () => {
-
             if (nama_value === '') {
                 set_nama_error(true)
             }
@@ -44,23 +63,29 @@ export default function PageRegister() {
                 set_confirmation_password_error(true)
             }
 
-            if (confirmation_password_value === password_value) {
-                if (nama_value !== '' && email_value !== '' && password_value !== '' && confirmation_password_value != '') {
+            if (nama_value !== '' && email_value !== '' && password_value !== '' && confirmation_password_value != '') {
+
+                if (confirmation_password_value === password_value) {
                     let par = {
                         name: nama_value,
                         email: email_value,
-                        password: confirmation_password_value
+                        password: password_value,
+                        password_confirmation: confirmation_password_value
                     }
-
+                    func_register(par, "register")
                     console.log("par", par)
+                    set_password_error(false)
+                    set_confirmation_password_error(false)
+                } else {
+                    set_password_error(true)
+                    set_confirmation_password_error(true)
+
                 }
-                set_password_error(false)
-                set_confirmation_password_error(false)
-            } else {
-                set_password_error(true)
-                set_confirmation_password_error(true)
+
 
             }
+
+
         }
     }
     return (
@@ -81,7 +106,7 @@ export default function PageRegister() {
                     <div style={{ height: 16 }} />
                     <ButtonGradient onClick={do_register()} title={"Daftar Sekarang"} />
                     <LineSeparator />
-                    <ButtonLoginGoogle title={"Daftar Dengan Google"} />
+                    <ButtonLoginGoogle onClick={() => setOpen(true)} title={"Daftar Dengan Google"} />
                     <div style={{ display: "flex", justifyContent: 'center', marginTop: 24 }}>
                         <span style={{ fontFamily: 'Roboto', fontSize: 14, color: "rgba(0, 0, 0, 0.4)" }}>Sudah memiliki akun? <span onClick={() => router.back()} style={{ color: "#0065AF", fontWeight: 500 }}>Masuk</span></span>
                     </div>
@@ -90,10 +115,19 @@ export default function PageRegister() {
             <Footer>
 
             </Footer>
+            <Snackbar
+                open={reg_failed}
+                autoHideDuration={3000}
+                onClose={() => set_reg_failed(false)}
+                message="Note archived"
+            >
+                <Alert onClose={() => set_reg_failed(false)} severity="error" sx={{ width: '100%' }}>
+                    This is a success message!
+                </Alert>
+            </Snackbar>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open}
-                // onClick={handleClose}
+                open={reg_loading}
             >
                 <CircularProgress color="inherit" />
             </Backdrop>

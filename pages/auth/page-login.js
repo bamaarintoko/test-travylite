@@ -12,10 +12,16 @@ import Footer from "../../component/Footer";
 import Header from "../../component/Header";
 import LogoAuth from "../../component/LogoAuth";
 import Link from 'next/link'
+import { usePost } from "../../helper/request";
+import useSWR from "swr";
+import { fetcher } from "../../helper/meta";
+import { Alert, Backdrop, CircularProgress, Snackbar } from "@mui/material";
 
 export default function PageLogin() {
+    const [req_login, login_success_res, login_error_res, login_loading, login_success, login_failed, set_login_failed] = usePost()
     const [email_input, email_value] = useInputAuth("Email")
     const [pass_input, password_value] = useInputPassword("Password")
+
 
     function do_login() {
         return () => {
@@ -23,8 +29,7 @@ export default function PageLogin() {
                 identity: email_value,
                 password: password_value
             }
-
-            console.log("par", par)
+            req_login(par, "login")
         }
     }
     return (
@@ -53,6 +58,22 @@ export default function PageLogin() {
             <Footer>
 
             </Footer>
+            <Snackbar
+                open={login_failed}
+                autoHideDuration={3000}
+                onClose={() => set_login_failed(false)}
+                message="Note archived"
+            >
+                <Alert onClose={() => set_login_failed(false)} severity="error" sx={{ width: '100%' }}>
+                    This is a success message!
+                </Alert>
+            </Snackbar>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={login_loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
         </Contain>
     )
 }
