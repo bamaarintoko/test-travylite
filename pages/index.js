@@ -17,6 +17,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from '@mui/icons-material/Login';
+import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import { general_style } from '../component/general_style';
 import { useRouter } from 'next/router';
 const menuArr = [
@@ -46,10 +47,10 @@ let view_height = 50;
 let new_image_height = image_height * view_width / image_width;
 export default function Home() {
 	const route = useRouter()
-	const state = useSelector((state) => state)
+	const { authReducer } = useSelector((state) => state)
 	const dispatch = useDispatch()
 	useEffect(() => {
-		console.log("state", state)
+		console.log("authReducer", authReducer)
 		dispatch({
 			type: "TEST"
 		})
@@ -60,11 +61,21 @@ export default function Home() {
 				<Stack sx={{ display: 'flex', flex: 1 }}>
 					<Box style={{ display: 'flex', height: 304, background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
 						{/* <Item>xs=6 md=8</Item> */}
-						<Box onClick={() => route.push("/auth/page-login")} sx={{ position: 'absolute', right: 0, padding: '10px' }}>
-
-							<LoginIcon fontSize="large" sx={{ color: '#FFF' }} />
-						</Box>
 						<Stack spacing={3} sx={{ display: 'flex', padding: '16px', flex: 1 }}>
+							<Box sx={{ position: 'relative', top: 0 }}>
+								{
+									authReducer.access_token != null
+										?
+										<Box sx={{ position: 'absolute', right: 0 }}>
+											<AccountCircleTwoToneIcon onClick={()=>route.push("/user/page-user")} fontSize="large" sx={{ color: '#FFF' }} />
+										</Box>
+										:
+										<Box onClick={() => route.push("/auth/page-login")} sx={{ position: 'absolute', right: 0 }}>
+
+											<LoginIcon fontSize="large" sx={{ color: '#FFF' }} />
+										</Box>
+								}
+							</Box>
 							<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '43px' }}>
 
 								<div style={{ width: view_width, height: new_image_height }}>

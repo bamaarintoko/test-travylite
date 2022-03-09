@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AppBar } from "../../component/AppBar";
 import ButtonGradient from "../../component/Auth/ButtonGradient";
 import ButtonLoginGoogle from "../../component/Auth/ButtonLoginGoogle";
@@ -16,8 +16,14 @@ import { usePost } from "../../helper/request";
 import useSWR from "swr";
 import { fetcher } from "../../helper/meta";
 import { Alert, Backdrop, CircularProgress, Snackbar } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { UPDATE_ACCESS_TOKEN } from "../../reducer/authReducer";
+import { UPDATE_USER } from "../../reducer/userReducer";
+import { useRouter } from "next/router";
 
 export default function PageLogin() {
+    const dispatch = useDispatch()
+    const router = useRouter()
     const [req_login, login_success_res, login_error_res, login_loading, login_success, login_failed, set_login_failed] = usePost()
     const [email_input, email_value] = useInputAuth("Email")
     const [pass_input, password_value] = useInputPassword("Password")
@@ -32,6 +38,24 @@ export default function PageLogin() {
             req_login(par, "login")
         }
     }
+
+    useEffect(() => {
+        if (login_success) {
+            console.log("login_success_res", login_success_res.data.data)
+            dispatch({
+                type: UPDATE_ACCESS_TOKEN,
+                access_token: login_success_res.data.data.access_token,
+                token_type: login_success_res.data.data.token_type
+            })
+
+            dispatch({
+                type: UPDATE_USER,
+                user: login_success_res.data.data.user
+            })
+
+            router.back()
+        }
+    }, [login_success])
     return (
         <Contain>
             <Header>
