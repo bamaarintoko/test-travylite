@@ -12,7 +12,7 @@ import Content from "../../component/Content";
 import { AppBar } from "../../component/AppBar";
 import Link from "next/link"
 import Footer from "../../component/Footer";
-import withAuth from "../component/withAuth"
+import withAuth from "../../component/withAuth"
 let kurirArr = [
     {
         label: "Kurir 1",

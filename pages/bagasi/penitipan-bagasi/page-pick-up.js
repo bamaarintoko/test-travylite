@@ -8,7 +8,7 @@ import Header from "../../../component/Header";
 import useInput from "../../../component/useInput";
 import useTextArea from "../../../component/useTextArea";
 import { Divider, Label } from "../ekstra-bagasi/page-detail-pengirim";
-import withAuth from "../../component/withAuth"
+import withAuth from "../../../component/withAuth";
 
 import Link from "next/link"
 function PagePickUp() {
