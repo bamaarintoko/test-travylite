@@ -14,22 +14,22 @@ const withAuth = WrappedComponent => props => {
         //     route.push('/auth/page-login')
         // }
     }, [])
-    if (access_token !== null) {
-        return <Box>
-            <WrappedComponent {...props} />
-            <span>Access Granted</span>
-        </Box>
-        // return <Contain sx={{ display: 'flex', flex: 1 }}>
-        //     <Stack sx={{ display: 'flex', background: 'linear-gradient(to bottom, #20aee0 10%, #0065af)', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        //         <LockIcon sx={{ fontSize: 100, color: '#FFF' }} />
-        //         <span style={general_style.title_white_bold}>Access</span>
-        //         <span style={general_style.title_white_bold}>Forbidden</span>
-        //         <span style={general_style.title_white_bold}>Error Code 403</span>
-        //     </Stack>
-        // </Contain>
+    if (access_token === null) {
+        // return <Box>
+        //     <WrappedComponent {...props} />
+        //     <span>Access Granted</span>
+        // </Box>
+        return <Contain sx={{ display: 'flex', flex: 1 }}>
+            <Stack sx={{ display: 'flex', background: 'linear-gradient(to bottom, #20aee0 10%, #0065af)', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <LockIcon sx={{ fontSize: 100, color: '#FFF' }} />
+                <span style={general_style.title_white_bold}>Access</span>
+                <span style={general_style.title_white_bold}>Forbidden</span>
+                <span style={general_style.title_white_bold}>Error Code 403</span>
+            </Stack>
+        </Contain>
     } else {
         return <Box>
-            <span>Access Granted</span>
+            {/* <span>Access Granted</span> */}
             <WrappedComponent {...props} />
         </Box>
     }
