@@ -10,7 +10,8 @@ import GppGoodTwoToneIcon from '@mui/icons-material/GppGoodTwoTone';
 import BusinessCenterTwoToneIcon from '@mui/icons-material/BusinessCenterTwoTone';
 import { AppBar } from "../../component/AppBar";
 import Link from "next/link"
-export default function PageDetailInvoice() {
+import withAuth from "../../component/withAuth";
+function PageDetailInvoice() {
     return (
         <Contain>
             <Header>
@@ -123,3 +124,5 @@ const style = {
         color: 'rgba(0, 0, 0, 0.5)'
     }
 }
+
+export default withAuth(PageDetailInvoice)

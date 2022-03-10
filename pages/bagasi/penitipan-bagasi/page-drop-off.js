@@ -8,7 +8,8 @@ import Footer from "../../../component/Footer";
 import Header from "../../../component/Header";
 import styles from "../../../styles/General.module.css"
 import Link from "next/link"
-export default function PageDropOff() {
+import withAuth from "../../../component/withAuth";
+function PageDropOff() {
 
     const [value, setValue] = useState(0)
 
@@ -50,3 +51,5 @@ export default function PageDropOff() {
         </Contain>
     )
 }
+
+export default withAuth(PageDropOff)

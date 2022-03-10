@@ -2,7 +2,8 @@ import React from "react";
 import Contain from "../../component/Container";
 import Content from "../../component/Content";
 import CheckCircleTwoToneIcon from '@mui/icons-material/CheckCircleTwoTone';
-export default function PagePembayaranBerhasil() {
+import withAuth from "../../component/withAuth";
+function PagePembayaranBerhasil() {
     return (
         <Contain>
             <Content>
@@ -18,3 +19,5 @@ export default function PagePembayaranBerhasil() {
         </Contain>
     )
 }
+
+export default withAuth(PagePembayaranBerhasil)

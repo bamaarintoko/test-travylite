@@ -10,10 +10,11 @@ import { Box } from "@mui/system";
 import { general_style } from "../../component/general_style";
 import Ketentuan from "../../component/Ketentuan";
 import { useRouter } from "next/router";
+import withAuth from "../../component/withAuth";
 
 // import { Ketentuan } from "../ekstra-bagasi/page-ketentuan";
 
-export default function PagePengirimanDokumen() {
+function PagePengirimanDokumen() {
     const route = useRouter()
     return (
         <Contain>
@@ -96,3 +97,5 @@ export default function PagePengirimanDokumen() {
         </Contain>
     )
 }
+
+export default withAuth(PagePengirimanDokumen)

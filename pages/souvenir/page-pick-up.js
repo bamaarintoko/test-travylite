@@ -15,8 +15,9 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import { useRouter } from 'next/router'
+import withAuth from "../../component/withAuth";
 
-export default function PagePickUp() {
+function PagePickUp() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -104,3 +105,5 @@ export default function PagePickUp() {
         </Contain>
     )
 }
+
+export default withAuth(PagePickUp)

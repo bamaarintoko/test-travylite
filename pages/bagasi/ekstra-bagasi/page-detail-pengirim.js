@@ -12,6 +12,7 @@ import Header from '../../../component/Header';
 import Content from '../../../component/Content';
 import Footer from '../../../component/Footer';
 import { AppBar } from '../../../component/AppBar';
+import withAuth from '../../../component/withAuth';
 const arr = [
     {
         value: "mr",
@@ -22,7 +23,7 @@ const arr = [
         label: "Mrs"
     }
 ]
-export default function PageDetailPengirim() {
+function PageDetailPengirim() {
     const [gelar_value, gelar_select, setDataGelar] = useInputSelect()
     const [kelurahan_value, kelurahan_select] = useInputSelect()
     const [full_name_value, full_name_input] = useInput()
@@ -79,22 +80,6 @@ export default function PageDetailPengirim() {
     )
 }
 
-// export const AppBar = ({ title = "" }) => {
-//     return (
-//         <div className={styles.app_bar}>
-//             <div className={styles.left_bar}>
-//                 <ArrowBackIcon />
-//             </div>
-//             <div className={styles.middle_bar}>
-//                 <span className={styles.text_bar_title}>{title}</span>
-//             </div>
-//             <div className={styles.right_bar}>
-
-//             </div>
-//         </div>
-//     )
-// }
-
 export function Label({ title = "" }) {
     return (
         <span className={styles.text_label}>{title} <span style={{ color: "#e84a25" }}>*</span></span>
@@ -104,3 +89,5 @@ export function Label({ title = "" }) {
 export const Divider = () => {
     return <div style={{ height: 24 }} />
 }
+
+export default withAuth(PageDetailPengirim)

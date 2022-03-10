@@ -10,7 +10,9 @@ import Ketentuan from '../../../component/Ketentuan'
 import { general_style } from '../../../component/general_style'
 import { Box } from '@mui/system'
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
 export default function PagesKetentuan() {
+    const { authReducer: { access_token } } = useSelector((state) => state)
     const route = useRouter()
     return (
         <Contain>
@@ -79,7 +81,9 @@ export default function PagesKetentuan() {
                                     marginBottom: '24px'
                                 }} />
                                 <Box sx={{ paddingBottom: '16px' }}>
-                                    <Button onClick={() => route.push('page-detail-penerima')} sx={{
+                                    <Button onClick={() => {
+                                        route.push('page-detail-penerima')
+                                    }} sx={{
                                         backgroundColor: '#0065AF',
                                         borderRadius: '16px'
                                     }} fullWidth variant="contained">Lanjutkan</Button>

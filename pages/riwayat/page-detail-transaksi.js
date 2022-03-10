@@ -12,7 +12,8 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-export default function PageDetailTransaksi() {
+import withAuth from "../../component/withAuth";
+function PageDetailTransaksi() {
     return (
         <Contain>
             <Header>
@@ -295,3 +296,5 @@ export default function PageDetailTransaksi() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailTransaksi)

@@ -12,6 +12,7 @@ import Content from "../../component/Content";
 import { AppBar } from "../../component/AppBar";
 import Link from "next/link"
 import Footer from "../../component/Footer";
+import withAuth from "../component/withAuth"
 let kurirArr = [
     {
         label: "Kurir 1",
@@ -45,7 +46,7 @@ let kurirArr = [
     }
 ]
 
-export default function PagePilihanPengiriman() {
+function PagePilihanPengiriman() {
     const [selectedValue, setSelectedValue] = React.useState('a');
 
     const handleChange = (event) => {
@@ -108,3 +109,5 @@ export default function PagePilihanPengiriman() {
         </Contain>
     )
 }
+
+export default withAuth(PagePilihanPengiriman)

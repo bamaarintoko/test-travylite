@@ -8,8 +8,10 @@ import Header from "../../../component/Header";
 import useInput from "../../../component/useInput";
 import useTextArea from "../../../component/useTextArea";
 import { Divider, Label } from "../ekstra-bagasi/page-detail-pengirim";
+import withAuth from "../../component/withAuth"
+
 import Link from "next/link"
-export default function PagePickUp() {
+function PagePickUp() {
     const [alamat_value, alamat_input] = useTextArea();
     const [detail_lokasi_value, detail_lokasi_input] = useInput()
     const [pengirim_value, pengirim_input] = useInput()
@@ -48,3 +50,5 @@ export default function PagePickUp() {
         </Contain>
     )
 }
+
+export default withAuth(PagePickUp)

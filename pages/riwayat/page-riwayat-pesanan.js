@@ -9,8 +9,9 @@ import { Stack, Tab, Tabs } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
 import CardRiwayatPesanan from "../../component/CardRiwayatPesanan";
 import { useRouter } from "next/router";
+import withAuth from "../../component/withAuth";
 
-export default function PageRiwayatPesanan() {
+function PageRiwayatPesanan() {
     const [value, setValue] = React.useState(0);
     const route = useRouter()
     const handleChange = (event, newValue) => {
@@ -58,3 +59,5 @@ export default function PageRiwayatPesanan() {
         </Contain>
     )
 }
+
+export default withAuth(PageRiwayatPesanan)

@@ -8,7 +8,8 @@ import Footer from "../../component/Footer";
 import Header from "../../component/Header";
 import styles from '../../styles/PageEkstraBagasi.module.css';
 import Link from "next/link"
-export default function PageRingkasanPembayaran() {
+import withAuth from "../../component/withAuth";
+function PageRingkasanPembayaran() {
     return (
         <Contain>
             <Header>
@@ -77,3 +78,5 @@ const style = {
         fontFamily: 'Roboto', fontSize: 14, color: 'rgba(0, 0, 0, 0.5)'
     }
 }
+
+export default withAuth(PageRingkasanPembayaran)

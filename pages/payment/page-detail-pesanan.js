@@ -12,7 +12,8 @@ import Footer from "../../component/Footer";
 import Header from "../../component/Header";
 import { AppBar } from "../../component/AppBar";
 import Link from "next/link"
-export default function PageDetailPesanan() {
+import withAuth from "../../component/withAuth";
+function PageDetailPesanan() {
     return (
         <Contain>
             <Header>
@@ -74,3 +75,5 @@ export default function PageDetailPesanan() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailPesanan)

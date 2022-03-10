@@ -12,7 +12,9 @@ import WarningIcon from '@mui/icons-material/Warning';
 import SelectBooth from "../../../component/SelectBooth";
 import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from "next/router";
-export default function PageDropOffDetail() {
+import withAuth from "../../../component/withAuth";
+
+function PageDropOffDetail() {
     const [value, setValue] = useState("0")
     const route = useRouter()
     return (
@@ -51,3 +53,5 @@ export default function PageDropOffDetail() {
         </Contain>
     )
 }
+
+export default withAuth(PageDropOffDetail)

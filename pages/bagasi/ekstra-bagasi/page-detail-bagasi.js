@@ -9,7 +9,8 @@ import Header from '../../../component/Header';
 import Content from '../../../component/Content';
 import Footer from '../../../component/Footer';
 import Link from 'next/link'
-export default function PageDetailBagasi() {
+import withAuth from '../../../component/withAuth';
+function PageDetailBagasi() {
     const [panjang_value, number_input] = useInputNumber()
     const [deskripsi_value, deskripsi_input] = useTextArea()
     return (
@@ -91,3 +92,5 @@ export default function PageDetailBagasi() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailBagasi)

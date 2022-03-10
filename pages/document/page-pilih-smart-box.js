@@ -15,6 +15,7 @@ import { general_style } from "../../component/general_style";
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import CheckIcon from '@mui/icons-material/Check';
 import { useRouter } from 'next/router'
+import withAuth from "../../component/withAuth";
 const smartBoxArr = [
     {
         label: "Ukuran Kecil",
@@ -36,7 +37,7 @@ const smartBoxArr = [
     },
 ]
 
-export default function PagePilihSmartBox() {
+function PagePilihSmartBox() {
     const [smart_box_location_value, smart_box_location_input] = useInputSelect()
     const [smart_box_value, setSmartBox] = useState("");
 
@@ -131,3 +132,5 @@ const style = {
 
     }
 }
+
+export default withAuth(PagePilihSmartBox)

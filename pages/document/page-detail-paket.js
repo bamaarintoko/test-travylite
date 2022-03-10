@@ -9,8 +9,9 @@ import Header from "../../component/Header";
 import useInputNumber from "../../component/useInputNumber";
 import useTextArea from "../../component/useTextArea";
 import { useRouter } from 'next/router'
+import withAuth from "../../component/withAuth";
 
-export default function PagePilihSmartBox() {
+function PageDetailPaket() {
     const [berat_value, berat_input] = useInputNumber()
     const [jumlah_value, jumlah_input] = useInputNumber()
     const [deskripsi_value, deskripsi_input] = useTextArea()
@@ -46,3 +47,5 @@ export default function PagePilihSmartBox() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailPaket)

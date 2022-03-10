@@ -9,9 +9,10 @@ import Header from "../../component/Header";
 import useInput from "../../component/useInput";
 import useInputSelect from "../../component/useInputSelect";
 import useTextArea from "../../component/useTextArea";
+import withAuth from "../../component/withAuth";
 import { Divider, Label } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
 
-export default function PagePilihSmartBox() {
+function PageDetailPengirim() {
     const route = useRouter()
     const [gelar_value, gelar_select, setDataGelar] = useInputSelect()
     const [kelurahan_value, kelurahan_select] = useInputSelect()
@@ -52,3 +53,5 @@ export default function PagePilihSmartBox() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailPengirim)

@@ -9,7 +9,8 @@ import Content from "../../component/Content";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { AppBar } from "../../component/AppBar";
 import Link from "next/link"
-export default function PagePilihanPembayaran() {
+import withAuth from "../../component/withAuth";
+function PagePilihanPembayaran() {
     return (
         <Contain>
             <Header>
@@ -92,3 +93,5 @@ const paymentArr = [
         ]
     },
 ]
+
+export default withAuth(PagePilihanPembayaran)

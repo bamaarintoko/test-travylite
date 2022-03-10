@@ -11,7 +11,9 @@ import Header from "../../../component/Header";
 import useInputNumber from "../../../component/useInputNumber";
 import useTextArea from "../../../component/useTextArea";
 import AddIcon from '@mui/icons-material/Add';
-export default function PageDetailOlehOleh() {
+import withAuth from "../../../component/withAuth";
+
+function PageDetailOlehOleh() {
     const [berat_value, berat_input] = useInputNumber()
     const [jumlah_value, jumlah_input] = useInputNumber()
     const [deskripsi_value, deskripsi_input] = useTextArea()
@@ -49,3 +51,5 @@ export default function PageDetailOlehOleh() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailOlehOleh)

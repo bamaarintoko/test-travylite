@@ -12,6 +12,7 @@ import styles from '../../../styles/PageEkstraBagasi.module.css';
 import { LoadingButton } from "@mui/lab";
 import Link from "next/link";
 import { Stack } from "@mui/material";
+import withAuth from "../../../component/withAuth";
 const arr = [
     {
         value: "mr",
@@ -23,7 +24,7 @@ const arr = [
     }
 ]
 
-export default function PageDetailPengirim() {
+function PageDetailPengirim() {
     const [gelar_value, gelar_select, setDataGelar] = useInputSelect()
     const [kelurahan_value, kelurahan_select] = useInputSelect()
     const [full_name_value, full_name_input] = useInput()
@@ -76,3 +77,5 @@ export default function PageDetailPengirim() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailPengirim)

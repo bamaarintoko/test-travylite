@@ -9,9 +9,10 @@ import Header from "../../component/Header";
 import useInput from "../../component/useInput";
 import useInputSelect from "../../component/useInputSelect";
 import useTextArea from "../../component/useTextArea";
+import withAuth from "../../component/withAuth";
 import { Divider, Label } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
 
-export default function PagePilihSmartBox() {
+function PageDetailPenerima() {
     const [gelar_value, gelar_select, setDataGelar] = useInputSelect()
     const [kelurahan_value, kelurahan_select] = useInputSelect()
     const [full_name_value, full_name_input] = useInput()
@@ -47,3 +48,5 @@ export default function PagePilihSmartBox() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailPenerima)

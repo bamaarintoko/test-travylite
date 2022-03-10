@@ -6,20 +6,21 @@ import Contain from "../../component/Container";
 import Content from "../../component/Content";
 import Footer from "../../component/Footer";
 import Header from "../../component/Header";
+import withAuth from "../../component/withAuth";
 import { DESTROY_ACCESS_TOKEN } from "../../reducer/authReducer";
 import { DESTROY_USER } from "../../reducer/userReducer";
 
-export default function PageUser() {
+function PageUser() {
     const route = useRouter()
     const dispatch = useDispatch()
     function do_logout() {
         return () => {
             route.back()
             dispatch({
-                type:DESTROY_USER
+                type: DESTROY_USER
             })
             dispatch({
-                type:DESTROY_ACCESS_TOKEN
+                type: DESTROY_ACCESS_TOKEN
             })
         }
     }
@@ -37,3 +38,5 @@ export default function PageUser() {
         </Contain>
     )
 }
+
+export default withAuth(PageUser)

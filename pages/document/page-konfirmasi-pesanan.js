@@ -14,7 +14,8 @@ import { Box } from "@mui/system";
 import { general_style } from "../../component/general_style";
 import RowPesanan from "../../component/RowPesanan";
 import { useRouter } from "next/router";
-export default function PageKonfirmasiPesanan() {
+import withAuth from "../../component/withAuth";
+function PageKonfirmasiPesanan() {
     const route = useRouter()
     return (
         <Contain>
@@ -80,7 +81,7 @@ export default function PageKonfirmasiPesanan() {
                     </Box>
                     <Box sx={{ padding: '0 16px 0 16px' }}>
                         <span style={general_style.heading_dark_bold}>Apakah Anda membutuhkan Smart Box lagi?</span>
-                        <Stack direction={'row'} sx={{ display: 'flex',marginTop:'20px' }}>
+                        <Stack direction={'row'} sx={{ display: 'flex', marginTop: '20px' }}>
                             <Box sx={{ display: 'flex', alignItems: 'center', flex: 1 }}>
                                 <span style={general_style.heading_dark_bold}>Tambah Box ukuran lainnya</span>
                             </Box>
@@ -93,9 +94,11 @@ export default function PageKonfirmasiPesanan() {
 
             </Content>
             <Footer style={{ padding: 16, backgroundColor: '#FFF' }}>
-                <Button onClick={()=>route.push("/payment/page-detail-pesanan")} sx={{ borderRadius: '16px', backgroundColor: '#0065AF' }} fullWidth variant="contained">Konfirmasi</Button>
+                <Button onClick={() => route.push("/payment/page-detail-pesanan")} sx={{ borderRadius: '16px', backgroundColor: '#0065AF' }} fullWidth variant="contained">Konfirmasi</Button>
 
             </Footer>
         </Contain>
     )
 }
+
+export default withAuth(PageKonfirmasiPesanan)

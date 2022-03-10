@@ -8,8 +8,9 @@ import Header from "../../../component/Header";
 import { general_style } from "../../../component/general_style";
 import Ketentuan from "../../../component/Ketentuan";
 import { useRouter } from "next/router";
+import withAuth from "../../../component/withAuth";
 
-export default function PagePenitipanBagasi() {
+function PagePenitipanBagasi() {
     const route = useRouter()
     return (
         <Contain>
@@ -92,30 +93,4 @@ export default function PagePenitipanBagasi() {
     )
 }
 
-// const style = {
-//     label: {
-//         fontFamily: 'Roboto',
-//         fontWeight: 500,
-//         fontSize: 27,
-//         color: "#FEFEFE",
-//     },
-//     small_label: {
-//         fontFamily: 'Roboto',
-//         fontWeight: 'normal',
-//         fontSize: 14,
-//         color: "#FEFEFE",
-//         marginTop: 16
-//     },
-//     bottom_box: {
-//         display: 'flex', backgroundColor: '#FFF', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 16, flexDirection: 'column'
-//     },
-//     bottom_label: {
-//         fontFamily: 'Roboto', fontWeight: 500, fontSize: 14
-//     },
-//     bottom_label_wrapper: {
-//         display: 'flex', alignItems: 'center', flexDirection: 'column'
-//     },
-//     content_wrapper: {
-//         display: 'flex', flex: 1, flexDirection: 'column',
-//     }
-// }
+export default withAuth(PagePenitipanBagasi)

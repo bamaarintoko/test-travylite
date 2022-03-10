@@ -14,6 +14,7 @@ import Content from '../../../component/Content';
 import useTextArea from '../../../component/useTextArea';
 import Link from 'next/link'
 import { AppBar } from '../../../component/AppBar';
+import withAuth from "../../../component/withAuth";
 const arr = [
     {
         value: "mr",
@@ -24,7 +25,7 @@ const arr = [
         label: "Mrs"
     }
 ]
-export default function PageDetailPenerima() {
+function PageDetailPenerima() {
     const [gelar_value, gelar_select, setDataGelar] = useInputSelect()
     const [kelurahan_value, kelurahan_select] = useInputSelect()
     const [full_name_value, full_name_input] = useInput()
@@ -71,3 +72,5 @@ export default function PageDetailPenerima() {
         </Contain>
     )
 }
+
+export default withAuth(PageDetailPenerima)
