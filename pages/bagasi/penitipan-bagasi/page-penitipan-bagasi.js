@@ -93,4 +93,4 @@ function PagePenitipanBagasi() {
     )
 }
 
-export default withAuth(PagePenitipanBagasi)
+export default PagePenitipanBagasi

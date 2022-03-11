@@ -1,4 +1,4 @@
-import { Container, Grid, Input, Stack } from '@mui/material'
+import { Button, Container, Grid, Input, Stack } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Link from 'next/link'
@@ -13,6 +13,9 @@ import Content from '../../../component/Content';
 import Footer from '../../../component/Footer';
 import { AppBar } from '../../../component/AppBar';
 import withAuth from '../../../component/withAuth';
+import RegionShipper from '../../../component/RegionShipper';
+import { useRouter } from 'next/router';
+// import Region from '../../../component/RegionRecipient';
 const arr = [
     {
         value: "mr",
@@ -24,6 +27,7 @@ const arr = [
     }
 ]
 function PageDetailPengirim() {
+    const route = useRouter()
     const [gelar_value, gelar_select, setDataGelar] = useInputSelect()
     const [kelurahan_value, kelurahan_select] = useInputSelect()
     const [full_name_value, full_name_input] = useInput()
@@ -45,7 +49,7 @@ function PageDetailPengirim() {
                     <Stack direction="row" spacing={1}>
                         {gelar_select}
                         {full_name_input}
-                    </Stack>                    
+                    </Stack>
                     <Divider />
                     <Label title={"Email Pengirim"} />
                     {email_input}
@@ -56,26 +60,22 @@ function PageDetailPengirim() {
                     <Label title={"Alamat Lengkap Penerima"} />
                     {alamat_input}
                     <Divider />
-                    <Label title={"Kelurahan"} />
-                    {kelurahan_select}
+                    <RegionShipper />
                     <Divider />
                 </Stack>
 
             </Content>
             <Footer style={{ padding: 16 }}>
-                <Link href={'page-detail-bagasi'}>
-                    <LoadingButton
-                        fullWidth
-                        loadingPosition="start"
-                        variant="contained"
-                    >
-                        KONFIRMASI
-                    </LoadingButton>
-                </Link>
+                <Button
+                    sx={{ backgroundColor: "#0065AF", borderRadius: "16px" }}
+                    onClick={() => route.push("page-detail-bagasi")}
+                    fullWidth
+                    loadingPosition="start"
+                    variant="contained"
+                >
+                    KONFIRMASI
+                </Button>
             </Footer>
-            {/* <Grid className={styles.grid_content} container spacing={0}>
-
-            </Grid> */}
         </Contain>
     )
 }

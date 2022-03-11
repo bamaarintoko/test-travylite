@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Grid, Input, Stack } from '@mui/material'
+import { Button, Container, Grid, Input, Stack } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoadingButton from '@mui/lab/LoadingButton';
 
@@ -15,6 +15,8 @@ import useTextArea from '../../../component/useTextArea';
 import Link from 'next/link'
 import { AppBar } from '../../../component/AppBar';
 import withAuth from "../../../component/withAuth";
+import { useRouter } from 'next/router';
+import RegionRecipient from '../../../component/RegionRecipient';
 const arr = [
     {
         value: "mr",
@@ -32,7 +34,7 @@ function PageDetailPenerima() {
     const [email_value, email_input] = useInput()
     const [alamat_value, alamat_input] = useTextArea();
     const [email_konfirmasi_value, email_konfirmasi_input] = useInput()
-
+    const route = useRouter()
     useEffect(() => {
         setDataGelar(arr)
     }, [])
@@ -52,22 +54,20 @@ function PageDetailPenerima() {
                     <Label title={"Alamat Lengkap Penerima"} />
                     {alamat_input}
                     <Divider />
-                    <Label title={"Kelurahan"} />
-                    {kelurahan_select}
-                    <Divider />
+                    <RegionRecipient />
                 </Stack>
 
             </Content>
             <Footer style={{ padding: 16 }}>
-                <Link href={'page-detail-pengirim'}>
-                    <LoadingButton
-                        fullWidth
-                        loadingPosition="start"
-                        variant="contained"
-                    >
-                        KONFIRMASI
-                    </LoadingButton>
-                </Link>
+                <Button
+                    onClick={() => route.push("page-detail-pengirim")}
+                    sx={{ backgroundColor: '#0065AF', borderRadius: '16px' }}
+                    fullWidth
+                    loadingPosition="start"
+                    variant="contained"
+                >
+                    KONFIRMASI
+                </Button>
             </Footer>
         </Contain>
     )

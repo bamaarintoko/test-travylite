@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import Contain from "./Container"
 import LockIcon from '@mui/icons-material/Lock';
 import { general_style } from "./general_style"
+import PageLogin from "../pages/auth/page-login"
 const withAuth = WrappedComponent => props => {
     const { authReducer: { access_token } } = useSelector((s) => s)
     const route = useRouter()
@@ -19,14 +20,7 @@ const withAuth = WrappedComponent => props => {
         //     <WrappedComponent {...props} />
         //     <span>Access Granted</span>
         // </Box>
-        return <Contain sx={{ display: 'flex', flex: 1 }}>
-            <Stack sx={{ display: 'flex', background: 'linear-gradient(to bottom, #20aee0 10%, #0065af)', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <LockIcon sx={{ fontSize: 100, color: '#FFF' }} />
-                <span style={general_style.title_white_bold}>Access</span>
-                <span style={general_style.title_white_bold}>Forbidden</span>
-                <span style={general_style.title_white_bold}>Error Code 403</span>
-            </Stack>
-        </Contain>
+        return <PageLogin/>
     } else {
         return <Box>
             {/* <span>Access Granted</span> */}
