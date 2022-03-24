@@ -12,7 +12,7 @@ import Footer from "../../component/Footer";
 import Header from "../../component/Header";
 import LogoAuth from "../../component/LogoAuth";
 import Link from 'next/link'
-import { usePost } from "../../helper/request";
+import { usePost, usePostData } from "../../helper/request";
 import useSWR from "swr";
 import { fetcher } from "../../helper/meta";
 import { Alert, Backdrop, CircularProgress, Snackbar } from "@mui/material";
@@ -20,11 +20,15 @@ import { useDispatch } from "react-redux";
 import { UPDATE_ACCESS_TOKEN } from "../../reducer/authReducer";
 import { UPDATE_USER } from "../../reducer/userReducer";
 import { useRouter } from "next/router";
+import FlashMessage from "../../component/FlashMessage";
+import Loading from "../../component/Loading";
 
 export default function PageLogin() {
     const dispatch = useDispatch()
     const router = useRouter()
-    const [req_login, login_success_res, login_error_res, login_loading, login_success, login_failed, set_login_failed] = usePost()
+    // const [req_login, login_success_res, login_error_res, login_loading, login_success, login_failed, set_login_failed] = usePost()
+    const [func_login, res_login] = usePostData("login")
+
     const [email_input, email_value] = useInputAuth("Email")
     const [pass_input, password_value] = useInputPassword("Password")
 
@@ -35,27 +39,29 @@ export default function PageLogin() {
                 identity: email_value,
                 password: password_value
             }
-            req_login(par, "login")
+            func_login(par,)
         }
     }
 
     useEffect(() => {
-        if (login_success) {
-            console.log("login_success_res", login_success_res.data.data)
+        console.log("res_login", res_login)
+
+        if (res_login.success) {
+            // console.log("login_success_res", res_login.success_res.data)
             dispatch({
                 type: UPDATE_ACCESS_TOKEN,
-                access_token: login_success_res.data.data.access_token,
-                token_type: login_success_res.data.data.token_type
+                access_token: res_login.success_res.data.access_token,
+                token_type: res_login.success_res.data.token_type
             })
 
             dispatch({
                 type: UPDATE_USER,
-                user: login_success_res.data.data.user
+                user: res_login.success_res.data.user
             })
 
             router.back()
         }
-    }, [login_success])
+    }, [res_login.success])
     return (
         <Contain>
             <Header>
@@ -82,7 +88,9 @@ export default function PageLogin() {
             <Footer>
 
             </Footer>
-            <Snackbar
+            <FlashMessage arg={res_login} />
+            <Loading loading={res_login.loading} />
+            {/* <Snackbar
                 open={login_failed}
                 autoHideDuration={3000}
                 onClose={() => set_login_failed(false)}
@@ -97,7 +105,7 @@ export default function PageLogin() {
                 open={login_loading}
             >
                 <CircularProgress color="inherit" />
-            </Backdrop>
+            </Backdrop> */}
         </Contain>
     )
 }

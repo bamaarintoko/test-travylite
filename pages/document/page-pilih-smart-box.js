@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Stack, Box, Button } from "@mui/material";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,6 +16,10 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import CheckIcon from '@mui/icons-material/Check';
 import { useRouter } from 'next/router'
 import withAuth from "../../component/withAuth";
+import { useGet } from "../../helper/request";
+import { useDispatch, useSelector } from "react-redux";
+import { FILL_LOCATIONS, FILL_SMARTBOXS, SELECTED_LOCATION, SELECTED_SMART_BOX } from "../../reducer/smartboxReducer";
+import Loading from "../../component/Loading";
 const smartBoxArr = [
     {
         label: "Ukuran Kecil",
@@ -38,10 +42,81 @@ const smartBoxArr = [
 ]
 
 function PagePilihSmartBox() {
-    const [smart_box_location_value, smart_box_location_input] = useInputSelect()
+    const router = useRouter();
+    const dispatch = useDispatch()
+    const {
+        smartboxReducer: {
+            locations, selected_location, smartboxs, selected_smartbox
+        }
+    } = useSelector(s => s)
+    const [smart_box] = useInputSelect()
     const [smart_box_value, setSmartBox] = useState("");
 
-    const router = useRouter();
+    const [func_fetch_loc, res_fetch_loc] = useGet(); // location smart box
+    const [func_fetch_smartboxs, res_fetch_smartboxs] = useGet(); // list smartboxs
+
+    useEffect(() => {
+        func_fetch_loc({}, "smartbox/smartbox-location")
+        // func_fetch_smartboxs({}, "smartbox/smartbox-location")
+    }, [])
+
+    useEffect(() => {
+        if (res_fetch_loc.success) {
+            let locArr = []
+            res_fetch_loc.success_res.data.map((x, y) => {
+                locArr.push({
+                    id: x.id,
+                    name: x.location
+                })
+            })
+            dispatch({
+                type: FILL_LOCATIONS,
+                data: locArr
+            })
+            // console.log("locArr", locArr)
+        }
+    }, [res_fetch_loc.success])
+
+    useEffect(() => {
+        smart_box.setData(locations)
+    }, [locations])
+
+    useEffect(() => {
+        if (smart_box.value !== "") {
+            // console.log("smart_box", smart_box.value)
+            dispatch({
+                type: SELECTED_LOCATION,
+                value: smart_box.value
+            })
+            fetch_smartbox()
+        }
+        // smart_box.setValue(smart_box.value)
+    }, [smart_box.value])
+
+
+    function fetch_smartbox() {
+        func_fetch_smartboxs({}, `smartbox/${smart_box.value}`)
+        // console.log("smart_box.value", smart_box.value)
+    }
+
+    useEffect(() => {
+        if (res_fetch_smartboxs.success) {
+            console.log("==>", res_fetch_smartboxs.success_res.data)
+            dispatch({
+                type: FILL_SMARTBOXS,
+                data: res_fetch_smartboxs.success_res.data
+            })
+        }
+    }, [res_fetch_smartboxs.success])
+
+    function select_smartbox(args) {
+        return () => {
+            dispatch({
+                type: SELECTED_SMART_BOX,
+                value: args
+            })
+        }
+    }
     return (
         <Contain>
             <Header>
@@ -55,38 +130,46 @@ function PagePilihSmartBox() {
                     </Stack>
                     <Stack style={{ marginTop: 24 }} spacing={1}>
                         <span className={styles.text_normal_black}>Lokasi Smart Box</span>
-                        {smart_box_location_input}
+                        {smart_box.select}
                     </Stack>
+                    {
+                        selected_location === ""
+                        &&
+                        <Box sx={{ display: 'flex', height: "200px", alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={general_style.heading_dark_bold}>Pilih lokasi smart box terlebih dahulu</span>
+                        </Box>
+                    }
                     <Stack spacing={2} style={{ marginTop: 24 }}>
                         {
-                            smartBoxArr.map((x, y) => {
+                            smartboxs.map((x, y) => {
                                 return (
-                                    <SmartBox onClick={() => setSmartBox(x.value)} selected={smart_box_value} value={x.value} key={y} label={x.label} desc={x.desc} stok={x.stok} />
+                                    <SmartBox onClick={select_smartbox(x)} selected={selected_smartbox.id} key={y} data={x} />
                                 )
                             })
                         }
                     </Stack>
                 </Grid>
                 <div style={{ height: 100 }} />
+                <Loading loading={res_fetch_loc.loading || res_fetch_smartboxs.loading} />
             </Content>
             <Footer style={{ padding: 16, backgroundColor: "#FFF" }}>
-                <Button onClick={()=>router.push("page-detail-paket")} fullWidth variant="contained">Lanjutkan</Button>
+                <Button disabled={selected_smartbox.id === undefined} sx={{ backgroundColor: "#0065AF", borderRadius: "16px" }} onClick={() => router.push("page-detail-paket")} fullWidth variant="contained">Lanjutkan</Button>
             </Footer>
         </Contain>
     )
 }
 
-const SmartBox = ({ label = "", desc = "", stok = "", onClick = {}, value = "", selected = "" }) => {
+const SmartBox = ({ label = "", desc = "", stok = "", onClick = {}, value = "", selected = "", data }) => {
     return (
         <Box sx={{
-            boxShadow: 3,
+            boxShadow: ' 0px 16px 24px #F2F2F2',
             borderRadius: '16px'
 
         }}>
-            <div onClick={onClick} style={value === selected ? style.selected_box : style.smart_box}>
-                <div style={value === selected ? style.selected_circle : style.circle}>
+            <div onClick={onClick} style={data.id === selected ? style.selected_box : style.smart_box}>
+                <div style={data.id === selected ? style.selected_circle : style.circle}>
                     {
-                        value === selected
+                        data.id === selected
                             ?
                             <CheckIcon sx={{ color: "#20AEE0", fontSize: 40 }} />
                             :
@@ -95,9 +178,9 @@ const SmartBox = ({ label = "", desc = "", stok = "", onClick = {}, value = "", 
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', marginLeft: 16 }}>
                     <Stack spacing={0}>
-                        <span style={general_style.heading_dark_bold}>{label}</span>
-                        <span style={general_style.heading_light}>{desc}</span>
-                        <span style={general_style.heading_light}>Stok {stok}</span>
+                        <span style={general_style.heading_dark_bold}>{data.type}</span>
+                        <span style={general_style.heading_light}>-</span>
+                        <span style={general_style.heading_light}>Stok {data.stock}</span>
                     </Stack>
                 </div>
             </div>

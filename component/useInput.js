@@ -1,9 +1,23 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 
-export default function useInput () {
+export default function useInput() {
     const [value, setValue] = useState("")
-    const input = <TextField onChange={(e) => setValue("==>", e.target.value)} fullWidth id="standard-basic" variant="standard" />
+    const [error, setError] = useState(false)
+    const input = <TextField onBlur={() => {
+        if (value === "") {
+            setError(true)
+        }
+    }} error={error} value={value} onChange={(e) => {
+        setValue(e.target.value)
+        if (value !== "") {
+            setError(false)
+        }
+    }} fullWidth id="standard-basic" variant="standard" />
 
-    return [value, input]
+    const args = {
+        value, input, setValue, setError
+    }
+
+    return [args]
 }

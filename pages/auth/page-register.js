@@ -18,11 +18,13 @@ import Header from "../../component/Header";
 import LogoAuth from "../../component/LogoAuth";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { usePost } from "../../helper/request";
+import { usePost, usePostData } from "../../helper/request";
+import FlashMessage from "../../component/FlashMessage";
+import Loading from "../../component/Loading";
 export default function PageRegister() {
 
-    const [func_register, reg_success_res, reg_error_res, reg_loading, reg_success, reg_failed, set_reg_failed] = usePost()
-
+    // const [func_register, reg_success_res, reg_error_res, reg_loading, reg_success, reg_failed, set_reg_failed] = usePost()
+    const [func_register, res_register] = usePostData("register")
     const router = useRouter()
     const [open, setOpen] = useState(false);
     const [nama_input, nama_value, set_nama_error] = useInputAuth("Masukkan Nama")
@@ -31,8 +33,8 @@ export default function PageRegister() {
     const [confirmation_password_input, confirmation_password_value, set_confirmation_password_error] = useInputPassword("Konfirmasi Kata Sandi")
 
     useEffect(() => {
-        console.log("reg_error_res", reg_error_res)
-    }, [reg_error_res])
+        console.log("res_register", res_register)
+    }, [res_register.failed])
 
     useEffect(() => {
         console.log("open", open)
@@ -72,7 +74,7 @@ export default function PageRegister() {
                         password: password_value,
                         password_confirmation: confirmation_password_value
                     }
-                    func_register(par, "register")
+                    func_register(par)
                     console.log("par", par)
                     set_password_error(false)
                     set_confirmation_password_error(false)
@@ -115,7 +117,9 @@ export default function PageRegister() {
             <Footer>
 
             </Footer>
-            <Snackbar
+            <FlashMessage arg={res_register} />
+            <Loading loading={res_register.loading} />
+            {/* <Snackbar
                 open={reg_failed}
                 autoHideDuration={3000}
                 onClose={() => set_reg_failed(false)}
@@ -130,7 +134,7 @@ export default function PageRegister() {
                 open={reg_loading}
             >
                 <CircularProgress color="inherit" />
-            </Backdrop>
+            </Backdrop> */}
         </Contain>
     )
 }

@@ -11,8 +11,10 @@ import { Divider, Label } from "../ekstra-bagasi/page-detail-pengirim";
 import styles from '../../../styles/PageEkstraBagasi.module.css';
 import { LoadingButton } from "@mui/lab";
 import Link from "next/link";
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import withAuth from "../../../component/withAuth";
+import FormShipper from "../../../component/FormShipper";
+import RegionShipper from "../../../component/RegionShipper";
 const arr = [
     {
         value: "mr",
@@ -34,6 +36,9 @@ function PageDetailPengirim() {
     useEffect(() => {
         setDataGelar(arr)
     }, [])
+    function on_confirm() {
+
+    }
     return (
         <Contain>
             <Header>
@@ -41,13 +46,15 @@ function PageDetailPengirim() {
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>
-
-                    <Label title={"Gelar & Nama Lengkap Pengirim"} />
+                    <FormShipper status={false} />
+                    <Divider />
+                    <RegionShipper />
+                    <Divider />
+                    {/* <Label title={"Gelar & Nama Lengkap Pengirim"} />
                     <Stack direction="row" spacing={1}>
                         {gelar_select}
                         {full_name_input}
                     </Stack>
-                    <Divider />
                     <Label title={"Email Pengirim"} />
                     {email_input}
                     <Divider />
@@ -59,20 +66,21 @@ function PageDetailPengirim() {
                     <Divider />
                     <Label title={"Kelurahan"} />
                     {kelurahan_select}
-                    <Divider />
+                    <Divider /> */}
                 </Stack>
             </Content>
             <Footer style={{ padding: 16 }}>
-                <Link href={"page-pick-up"}>
-
-                    <LoadingButton
-                        fullWidth
-                        loadingPosition="start"
-                        variant="contained"
-                    >
-                        KONFIRMASI
-                    </LoadingButton>
-                </Link>
+                {/* page-pick-up */}
+                <Button
+                    sx={{ backgroundColor: "#0065AF", borderRadius: "16px" }}
+                    // onClick={() => route.push("page-detail-bagasi")}
+                    onClick={on_confirm()}
+                    fullWidth
+                    loadingPosition="start"
+                    variant="contained"
+                >
+                    KONFIRMASI
+                </Button>
             </Footer>
         </Contain>
     )

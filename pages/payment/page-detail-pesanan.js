@@ -13,7 +13,23 @@ import Header from "../../component/Header";
 import { AppBar } from "../../component/AppBar";
 import Link from "next/link"
 import withAuth from "../../component/withAuth";
+import { useSelector } from "react-redux";
 function PageDetailPesanan() {
+    const {
+        customerReducer: {
+            recipient: {
+                gender_receiver, name_receiver, phone_receiver, address_receiver
+            },
+            shipper: {
+                gender_shipper, name_shipper, phone_shipper, address_shipper
+            },
+            shipper_full_zone: {
+                province, city, district, name, postal_code
+            },
+            recipient_full_zone
+        }
+    } = useSelector(s => s)
+    // console.log("recipient", recipient)
     return (
         <Contain>
             <Header>
@@ -30,9 +46,10 @@ function PageDetailPesanan() {
                     </div>
                     <div className={styles.right_time_line}>
                         <span className={styles.text_label_detail_pesanan}>Pengirim</span>
-                        <span className={styles.text_label_detail_pesanan}>Mr. Smith</span>
-                        <span className={styles.text_desc}>0812 234 234</span>
-                        <span className={styles.text_desc}>Jl. Mawar No 4, Kab. Tanggerang</span>
+                        <span className={styles.text_label_detail_pesanan}>{gender_receiver.value}. {name_receiver.value}</span>
+                        <span className={styles.text_desc}>{phone_receiver.value}</span>
+                        <span className={styles.text_desc}>{address_receiver.value}</span>
+                        <span className={styles.text_desc}>{`${recipient_full_zone.province}, ${recipient_full_zone.city}, ${recipient_full_zone.district}, ${recipient_full_zone.name}, ${recipient_full_zone.postal_code}`}</span>
                     </div>
                 </div>
                 <div className={styles.parent_time_line}>
@@ -41,10 +58,11 @@ function PageDetailPesanan() {
                     </div>
                     <div className={styles.right_time_line}>
                         <span className={styles.text_label_detail_pesanan}>Penerima</span>
-                        <span className={styles.text_label_detail_pesanan}>Mr. Agung Nugroho</span>
+                        <span className={styles.text_label_detail_pesanan}>{gender_shipper.value}. {name_shipper.value}</span>
 
-                        <span className={styles.text_desc}>0812 1234 1234</span>
-                        <span className={styles.text_desc}>Dipowinatan 303, Keparakan, Mergangsan, 55152</span>
+                        <span className={styles.text_desc}>{phone_shipper.value}</span>
+                        <span className={styles.text_desc}>{address_shipper.value}</span>
+                        <span className={styles.text_desc}>{`${province}, ${city}, ${district}, ${name}, ${postal_code}`}</span>
                     </div>
                 </div>
                 <div className={styles.parent_time_line}>
@@ -53,7 +71,7 @@ function PageDetailPesanan() {
                     </div>
                     <div className={styles.right_time_line}>
                         <span className={styles.text_label_detail_pesanan}>Ekstra Bagasi</span>
-                        <span className={styles.text_label_detail_pesanan}>Mr. Agung Nugroho</span>
+                        <span className={styles.text_label_detail_pesanan}>{gender_shipper.value}. {name_shipper.value}</span>
 
                         <span className={styles.text_desc}>0812 1234 1234</span>
                         <span className={styles.text_desc}>Dipowinatan 303, Keparakan, Mergangsan, 55152</span>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Container, Grid, Input, Stack } from '@mui/material'
+import { Alert, Backdrop, Button, CircularProgress, Container, Grid, Input, Snackbar, Stack } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoadingButton from '@mui/lab/LoadingButton';
 
@@ -17,27 +17,59 @@ import { AppBar } from '../../../component/AppBar';
 import withAuth from "../../../component/withAuth";
 import { useRouter } from 'next/router';
 import RegionRecipient from '../../../component/RegionRecipient';
+import { Box } from '@mui/system';
+import { useDispatch, useSelector } from 'react-redux';
+import { FILL_ADDRESS_RECIPIENT, FILL_ERROR_RECIPIENT, FILL_GENDER_RECIPIENT, FILL_NAME_RECIPIENT, FILL_PHONE_RECIPIENT, SET_DATA_RECEIVER } from '../../../reducer/customerReducer';
+import { usePost } from "../../../helper/request"
+import FormRecipient from '../../../component/FormRecipient';
+import FlashMessage from '../../../component/FlashMessage';
 const arr = [
     {
-        value: "mr",
-        label: "Mr"
+        id: "mr",
+        name: "Mr"
     },
     {
-        value: "mrs",
-        label: "Mrs"
+        id: "mrs",
+        name: "Mrs"
     }
 ]
 function PageDetailPenerima() {
-    const [gelar_value, gelar_select, setDataGelar] = useInputSelect()
-    const [kelurahan_value, kelurahan_select] = useInputSelect()
-    const [full_name_value, full_name_input] = useInput()
-    const [email_value, email_input] = useInput()
-    const [alamat_value, alamat_input] = useTextArea();
-    const [email_konfirmasi_value, email_konfirmasi_input] = useInput()
+    const dispatch = useDispatch()
+    const { customerReducer: { recipient, recipient_zone: { province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver } }, zoneRecipient: { villages } } = useSelector(s => s)
+
+    const [func_validate, res_validate] = usePost()
     const route = useRouter()
+
     useEffect(() => {
-        setDataGelar(arr)
-    }, [])
+        if (res_validate.success) {
+            route.push("page-detail-pengirim")
+        }
+
+        if (res_validate.failed) {
+            dispatch({
+                type: FILL_ERROR_RECIPIENT,
+                errors: res_validate.error_res.data.errors
+            })
+        }
+    }, [res_validate.success, res_validate.failed])
+
+    function on_confirm() {
+        return () => {
+            // const code = villages.filter((dc) => dc.id === recipient_zone.subdistrict_recipient)
+            let par = {
+                gender_receiver: recipient.gender_receiver.value,
+                name_receiver: recipient.name_receiver.value,
+                phone_receiver: recipient.phone_receiver.value,
+                address_receiver: recipient.address_receiver.value,
+                province_receiver: province_receiver.value,
+                city_receiver: city_receiver.value,
+                district_receiver: district_receiver.value,
+                subdistrict_receiver: subdistrict_receiver.value,
+                district_code_receiver: district_code_receiver.value
+            }
+            func_validate(par, "extra-baggage/step-detail-receiver")
+        }
+    }
     return (
         <Contain>
             <Header>
@@ -45,14 +77,7 @@ function PageDetailPenerima() {
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>
-                    <Label title={"Gelar & Nama Lengkap Pengirim"} />
-                    <Stack direction="row" spacing={1}>
-                        {gelar_select}
-                        {full_name_input}
-                    </Stack>
-                    <Divider />
-                    <Label title={"Alamat Lengkap Penerima"} />
-                    {alamat_input}
+                    <FormRecipient status={res_validate.failed} />
                     <Divider />
                     <RegionRecipient />
                 </Stack>
@@ -60,7 +85,8 @@ function PageDetailPenerima() {
             </Content>
             <Footer style={{ padding: 16 }}>
                 <Button
-                    onClick={() => route.push("page-detail-pengirim")}
+                    // onClick={() => route.push("page-detail-pengirim")}
+                    onClick={on_confirm()}
                     sx={{ backgroundColor: '#0065AF', borderRadius: '16px' }}
                     fullWidth
                     loadingPosition="start"
@@ -69,6 +95,13 @@ function PageDetailPenerima() {
                     KONFIRMASI
                 </Button>
             </Footer>
+            <FlashMessage arg={res_validate} />
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={res_validate.loading}
+            >
+                <CircularProgress color={"inherit"} />
+            </Backdrop>
         </Contain>
     )
 }

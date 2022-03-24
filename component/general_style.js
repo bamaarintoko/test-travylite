@@ -23,7 +23,15 @@ export const general_style = {
         fontWeight: 500,
         fontSize: 14,
         lineHeight: '160%',
-        color: "#323232"
+        // color: "#323232"
+    },
+    heading_dark_bold_error: {
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        fontSize: 14,
+        lineHeight: '160%',
+        color: "#b71c1c"
     },
     heading_light_bold: {
         fontFamily: 'Roboto',
@@ -112,5 +120,13 @@ export const general_style = {
         fontSize: 11.2,
         lineHeight: '140%',
         color: "#FEFEFE"
+    },
+    error_message: {
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+        fontSize: 11.2,
+        lineHeight: '140%',
+        color: "#b71c1c"
     },
 }

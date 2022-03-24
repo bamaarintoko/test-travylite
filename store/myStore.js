@@ -6,6 +6,12 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 import { defaultReducer } from '../reducer/defaultReducer'
 import { authReducer } from '../reducer/authReducer'
 import { userReducer } from '../reducer/userReducer'
+import { customerReducer } from '../reducer/customerReducer'
+import { zoneRecipient, zoneShipper } from '../reducer/regionRecipientReducer'
+import { detailBagasiReducer } from "../reducer/detailBagasiRducer"
+import { courierReducer } from "../reducer/courierReducer"
+import { smartboxReducer } from "../reducer/smartboxReducer"
+import paketReducer from "../reducer/paketReducer"
 const middlewares = [];
 if (process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`);
@@ -14,14 +20,24 @@ if (process.env.NODE_ENV === `development`) {
 export const appReducer = combineReducers({
     defaultReducer,
     authReducer,
-    userReducer
+    userReducer,
+    customerReducer,
+    zoneRecipient,
+    zoneShipper,
+    detailBagasiReducer,
+    courierReducer,
+    smartboxReducer,
+    paketReducer
 })
 const persistConfig = {
     key: 'root',
     storage,
     whitelist: [
         'authReducer',
-        'userReducer'
+        'userReducer',
+        'customerReducer',
+        'zoneRecipient',
+        'detailBagasiReducer'
     ]
 
 }
