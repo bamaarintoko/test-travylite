@@ -129,4 +129,8 @@ export const general_style = {
         lineHeight: '140%',
         color: "#b71c1c"
     },
+    primary_button: {
+        backgroundColor: "#0065AF",
+        borderRadius: '16px'
+    }
 }

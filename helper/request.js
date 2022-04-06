@@ -58,7 +58,8 @@ export function useGet() {
         loading: loading,
         success: success,
         failed: failed,
-        setFailed: setFailed
+        setFailed: setFailed,
+        setSuccess: setSuccess
     }
     // console.log("feedback", feedback)
     // return [req, successRes, errorRes, loading, success, failed, setFailed, feedback]
@@ -103,6 +104,7 @@ export function usePostData(endpoint = "") {
             setLoading(false)
         }).catch((e) => {
             setErrorRes(e.response)
+            setSuccessRes({})
             setFailed(true)
             setSuccess(false)
             setLoading(false)

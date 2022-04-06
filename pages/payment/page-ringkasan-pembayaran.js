@@ -1,6 +1,6 @@
 
-import { Button } from "@mui/material";
-import React from "react";
+import { Button, Stack } from "@mui/material";
+import React, { useEffect } from "react";
 import { AppBar } from "../../component/AppBar";
 import Contain from "../../component/Container";
 import Content from "../../component/Content";
@@ -9,65 +9,147 @@ import Header from "../../component/Header";
 import styles from '../../styles/PageEkstraBagasi.module.css';
 import Link from "next/link"
 import withAuth from "../../component/withAuth";
+import { Box } from "@mui/system";
+import { general_style } from "../../component/general_style";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { useGet, usePostData } from "../../helper/request";
+import Loading from "../../component/Loading";
+import FlashMessage from "../../component/FlashMessage";
+import { FILL_VIRTUAL_ACCOUNT } from "../../reducer/virtualAccountReducer";
 function PageRingkasanPembayaran() {
+    const route = useRouter()
+    const dispatch = useDispatch()
+    const {
+        paymentSummaryReducer: { data },
+        paymentMethodReducer: { method }
+    } = useSelector(s => s)
+    //page-detail-invoice
+    const [func_create_payment, res_create_payment] = usePostData("extra-baggage/create-payment")
+    const [func_payment_detail, res_payment_detail] = useGet()
+    useEffect(() => {
+        // console.log(Object.keys(method).length)
+        if (res_create_payment.success) {
+            console.log("==> ", res_create_payment)
+            fetch_payment_detail()
+            res_create_payment.setSuccess(false)
+        }
+    }, [res_create_payment])
+
+    useEffect(() => {
+        if (res_payment_detail.success) {
+            console.log("res_payment_detail", res_payment_detail)
+            dispatch({
+                type: FILL_VIRTUAL_ACCOUNT,
+                value: res_payment_detail.success_res
+            })
+            route.push("page-virtual-account")
+            res_payment_detail.setSuccess(false)
+        }
+    }, [res_payment_detail])
+
+    function create_payment() {
+        return () => {
+            let par = {
+                orderId: data.order_id,
+                name: method.name,
+                code: method.code
+            }
+            func_create_payment(par)
+            console.log("par ", par)
+        }
+    }
+
+    function fetch_payment_detail() {
+        func_payment_detail({}, `payment/payment/${data.order_id}`)
+    }
+
     return (
         <Contain>
             <Header>
                 <AppBar title={"Ringkasan Pembayaran"} />
             </Header>
-            <Content style={{padding:16}}>
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: 137 }}>
-                    <span style={{ fontFamily: 'Roboto', fontSize: 14, fontWeight: 500, color: "#323232" }}>Total Harga</span>
-                    <span style={{ fontFamily: 'Roboto', fontSize: 34, fontWeight: 'bold', color: "#0065AF" }}>Rp 15.000</span>
-                </div>
-                <div className={styles.box_shadow_ringkasan} style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ padding: 16 }}>
-                        <span>OVO</span>
-                    </div>
-                    <div style={{ height: 1, background: 'rgba(0, 0, 0, 0.1)' }} />
-                    <div style={{ height: 112, flexDirection: 'column', display: 'flex', justifyContent: 'space-between', padding: 16 }}>
-                        <Menu />
-                        <Menu />
-                        <Menu />
-                    </div>
-                    <div style={{ height: 1, background: 'rgba(0, 0, 0, 0.1)' }} />
-                    <div style={{ padding: 16, display: 'flex', flexDirection: 'row' }}>
-                        <div style={{ flex: 2 }}>
-                            <span>Sisa Tagihan</span>
-                        </div>
-                        <div>
-                            <span>Rp</span>
+            <Content style={{ padding: 16 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 137 }}>
+                    <Stack sx={{ alignItems: 'center' }}>
+                        <span style={{ fontFamily: 'Roboto', fontSize: 14, fontWeight: 500, color: "#323232" }}>Total Harga</span>
+                        <span style={{ fontFamily: 'Roboto', fontSize: 34, fontWeight: 'bold', color: "#0065AF" }}>{data.total}</span>
+                    </Stack>
+                </Box>
+                <Box sx={{ boxShadow: "0px 16px 24px #F2F2F2", borderRadius: '16px' }}>
+                    <Stack>
+                        {
+                            Object.keys(method).length === 0
+                                ?
+                                <Box sx={{ padding: '16px' }} onClick={() => route.push("page-pilihan-pembayaran")}>
+                                    <Stack>
+                                        <span style={general_style.heading_dark_bold}>Metode Pembayaran</span>
+                                        <span style={general_style.heading_dark}>-- pilih methode pembayaran --</span>
+                                    </Stack>
+                                </Box>
+                                :
+                                <Box sx={{ padding: '16px' }}>
+                                    <Stack>
+                                        <span style={general_style.heading_dark_bold}>Metode Pembayaran</span>
 
-                        </div>
-                        <div style={{ flex: 1, display:'flex', justifyContent:'flex-end' }}>
-                            <span>14.000</span>
-                        </div>
-                    </div>
-                </div>
+                                        <Stack direction={'row'}>
+                                            <Box sx={{ flex: 1 }}>
+                                                <span style={general_style.heading_dark}>{method.name}</span>
+                                            </Box>
+                                            <Box onClick={() => route.push("page-pilihan-pembayaran")}>
+                                                <span style={general_style.heading_dark_bold}>Ganti</span>
+                                            </Box>
+                                        </Stack>
+                                    </Stack>
+
+                                </Box>
+                        }
+                        <Box sx={{ height: "1px", background: 'rgba(0, 0, 0, 0.1)' }} />
+                        <Box sx={{ padding: '16px' }}>
+                            <Stack spacing={2}>
+                                <Menu label={"Expense"} val={data.expense} />
+                                <Menu label={"Biaya Pengiriman"} val={data.shipping_costs} />
+                            </Stack>
+                        </Box>
+                        {/* <div style={{ height: 112, flexDirection: 'column', display: 'flex', justifyContent: 'space-between', padding: 16 }}>
+
+                        </div> */}
+                        <div style={{ height: 1, background: 'rgba(0, 0, 0, 0.1)' }} />
+                        <Box sx={{ padding: '16px' }}>
+                            <Stack direction={'row'}>
+                                <Box sx={{ flex: 1 }}>
+                                    <span style={general_style.heading_dark_bold}>Total</span>
+                                </Box>
+                                <Box>
+                                    <span style={general_style.heading_dark_bold}>{data.total}</span>
+                                </Box>
+                            </Stack>
+                        </Box>
+                    </Stack>
+                </Box>
             </Content>
+            <FlashMessage arg={res_create_payment} />
             <Footer>
-                <div style={{ padding: 16, display: 'flex', flex: 1 }}>
-                    <Link href={"page-detail-invoice"}>
-                    <Button fullWidth variant="contained">Bayar</Button>
-                    </Link>
-                </div>
-
+                <Box sx={{ padding: '16px', flex: 1 }}>
+                    <Button disabled={Object.keys(method).length === 0} onClick={create_payment()} sx={general_style.primary_button} fullWidth variant="contained">Bayar</Button>
+                </Box>
             </Footer>
+            <Loading loading={res_create_payment.loading} />
         </Contain>
     )
 }
 
-const Menu = () => {
+const Menu = ({ label = "label", val = "val" }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <div style={{ flex: 2 }}>
-                <span style={style.text}>Tagihan</span>
+                <span style={style.text}>{label}</span>
             </div>
-            <div>
+            {/* <div>
                 <span style={style.text}>Rp</span>
-            </div>
+            </div> */}
             <div style={{ display: 'flex', flex: 1, justifyContent: 'flex-end' }}>
-                <span style={style.text}>15.000</span>
+                <span style={style.text}>{val}</span>
             </div>
         </div>
     )

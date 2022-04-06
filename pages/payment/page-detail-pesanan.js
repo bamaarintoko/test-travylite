@@ -1,6 +1,6 @@
 
-import React from "react";
-import { Container, Grid } from "@mui/material";
+import React, { useEffect } from "react";
+import { Container, Grid, Stack } from "@mui/material";
 import Contain from "../../component/Container";
 import styles from '../../styles/PageEkstraBagasi.module.css';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -13,8 +13,18 @@ import Header from "../../component/Header";
 import { AppBar } from "../../component/AppBar";
 import Link from "next/link"
 import withAuth from "../../component/withAuth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useCreateExtraBaggage from "./HookOrder/useCreateExtraBaggage";
+import { EXTRA_BAGGAGE } from "../../helper/const";
+import Loading from "../../component/Loading";
+import FlashMessage from "../../component/FlashMessage";
+import { useRouter } from "next/router";
+import { useGet } from "../../helper/request";
+import { FILL_PAYMENT_SUMMARY } from "../../reducer/paymentSummaryReducer";
+import { general_style } from "../../component/general_style";
 function PageDetailPesanan() {
+    const route = useRouter()
+    const dispatch = useDispatch()
     const {
         customerReducer: {
             recipient: {
@@ -27,71 +37,137 @@ function PageDetailPesanan() {
                 province, city, district, name, postal_code
             },
             recipient_full_zone
+        },
+        deliveryReducer: {
+            type
+        },
+        courierReducer: {
+            selected_courier: {
+                data
+            }
         }
     } = useSelector(s => s)
+
+    const [extra_baggage] = useCreateExtraBaggage()
+    const [fetch_summary_payment, res_sumarry_payment] = useGet()
+    useEffect(() => {
+        if (extra_baggage.response.success) {
+            console.log("extra_baggage", extra_baggage)
+            fetch_payment_summary()
+            // route.push("page-ringkasan-pembayaran")
+        }
+    }, [extra_baggage.response.success])
+
+    useEffect(() => {
+        if (res_sumarry_payment.success) {
+            console.log("res_sumarry_payment", res_sumarry_payment)
+            dispatch({
+                type: FILL_PAYMENT_SUMMARY,
+                value: res_sumarry_payment.success_res.data
+            })
+            route.push("page-ringkasan-pembayaran")
+        }
+    }, [res_sumarry_payment.success])
+    function fetch_payment_summary() {
+        // console.log("extra_baggage", extra_baggage.response.success_res.data.order_id)
+        fetch_summary_payment({}, `extra-baggage/detail-order/${extra_baggage.response.success_res.data.order_id}`)
+    }
+
+    function create_order() {
+        return () => {
+            if (type === EXTRA_BAGGAGE) {
+                extra_baggage.create()
+            }
+        }
+    }
     // console.log("recipient", recipient)
+    // page-pilihan-pembayaran
+
+    // souvenir
+    // Item, Berat, Deskripsi, Pengiriman
+
+    // document delivery
+    // Smart Box, No. Smart Box, Item, Berat, Deskripsi, Pengiriman
+
+    // Extra Baggage
+    // Item, Berat, Deskripsi, Pengiriman
     return (
         <Contain>
             <Header>
                 <AppBar title={"Detail Pesanan"} />
             </Header>
             <Content style={{ padding: 16 }}>
-                <div className={styles.parent_time_line}>
-                    <div className={styles.left_time_line}>
-                        <LocationOnIcon sx={{ color: "#0065AF" }} />
-
-                        <div className={styles.line}>
-
-                        </div>
-                    </div>
-                    <div className={styles.right_time_line}>
-                        <span className={styles.text_label_detail_pesanan}>Pengirim</span>
-                        <span className={styles.text_label_detail_pesanan}>{gender_receiver.value}. {name_receiver.value}</span>
-                        <span className={styles.text_desc}>{phone_receiver.value}</span>
-                        <span className={styles.text_desc}>{address_receiver.value}</span>
-                        <span className={styles.text_desc}>{`${recipient_full_zone.province}, ${recipient_full_zone.city}, ${recipient_full_zone.district}, ${recipient_full_zone.name}, ${recipient_full_zone.postal_code}`}</span>
-                    </div>
-                </div>
-                <div className={styles.parent_time_line}>
-                    <div className={styles.left_time_line}>
+                <Stack direction={"row"}>
+                    <Box sx={{ display: 'flex' }}>
+                        <Stack>
+                            <LocationOnIcon sx={{ color: "#0065AF" }} />
+                            <Box sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
+                                <Box sx={{ width: '1px', borderRightWidth: '1px', borderRightStyle: 'dashed', borderRightColor: 'rgba(0, 0, 0, 0.2)' }} />
+                            </Box>
+                        </Stack>
+                    </Box>
+                    <Box sx={{ marginBottom: '40px', marginLeft: '29px' }}>
+                        <Stack>
+                            <span style={general_style.heading_dark_bold}>Pengirim</span>
+                            <span style={general_style.heading_dark_bold}>{gender_receiver.value}. {name_receiver.value}</span>
+                            <span style={general_style.heading_light}>{phone_receiver.value}</span>
+                            <span style={general_style.heading_light}>{address_receiver.value}</span>
+                            <span style={general_style.heading_light}>{`${recipient_full_zone.province}, ${recipient_full_zone.city}, ${recipient_full_zone.district}, ${recipient_full_zone.name}, ${recipient_full_zone.postal_code}`}</span>
+                        </Stack>
+                    </Box>
+                </Stack>
+                <Stack direction={'row'}>
+                    <Box>
                         <LocationOnIcon sx={{ color: "#E84A25" }} />
-                    </div>
-                    <div className={styles.right_time_line}>
-                        <span className={styles.text_label_detail_pesanan}>Penerima</span>
-                        <span className={styles.text_label_detail_pesanan}>{gender_shipper.value}. {name_shipper.value}</span>
+                    </Box>
+                    <Stack sx={{ marginBottom: '40px', marginLeft: '29px' }}>
+                        <span style={general_style.heading_dark_bold}>Penerima</span>
+                        <span style={general_style.heading_dark_bold}>{gender_shipper.value}. {name_shipper.value}</span>
 
-                        <span className={styles.text_desc}>{phone_shipper.value}</span>
-                        <span className={styles.text_desc}>{address_shipper.value}</span>
-                        <span className={styles.text_desc}>{`${province}, ${city}, ${district}, ${name}, ${postal_code}`}</span>
-                    </div>
-                </div>
-                <div className={styles.parent_time_line}>
-                    <div className={styles.left_time_line}>
+                        <span style={general_style.heading_light}>{phone_shipper.value}</span>
+                        <span style={general_style.heading_light}>{address_shipper.value}</span>
+                        <span style={general_style.heading_light}>{`${province}, ${city}, ${district}, ${name}, ${postal_code}`}</span>
+                    </Stack>
+                </Stack>
+                <Stack direction={'row'}>
+                    <Box>
                         <BusinessCenterTwoToneIcon sx={{ color: "#E84A25" }} />
-                    </div>
-                    <div className={styles.right_time_line}>
-                        <span className={styles.text_label_detail_pesanan}>Ekstra Bagasi</span>
+                    </Box>
+                    <Stack sx={{ marginLeft: '29px' }}>
+                        <span className={styles.text_label_detail_pesanan}>{type}</span>
                         <span className={styles.text_label_detail_pesanan}>{gender_shipper.value}. {name_shipper.value}</span>
 
                         <span className={styles.text_desc}>0812 1234 1234</span>
                         <span className={styles.text_desc}>Dipowinatan 303, Keparakan, Mergangsan, 55152</span>
-                    </div>
-                </div>
-
+                    </Stack>
+                </Stack>
             </Content>
             <Footer>
-                <div className={styles.left_footer}>
-                    <span className={styles.text_total_harga}>Total Harga</span>
-                    <span className={styles.text_nominal}>Rp 15.000</span>
-                </div>
-                <div className={styles.left_footer}>
-                    <Link href={"page-pilihan-pembayaran"}>
-                        <Button fullWidth variant="contained">Bayar</Button>
-                    </Link>
-                </div>
+                <Stack sx={{ flex: 1, padding: '16px' }} direction={'row'}>
+                    <Box sx={{ flex: 1 }}>
+                        <Stack>
+                            <span style={general_style.heading_dark_bold}>Total Harga</span>
+                            <span style={style.nominal}>Rp {data.rates}</span>
+                        </Stack>
+                    </Box>
+                    <Box sx={{ flex: 1, alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
+                        <Button sx={general_style.primary_button} onClick={create_order()} fullWidth variant="contained">Bayar</Button>
+                    </Box>
+                </Stack>
             </Footer>
+            <FlashMessage arg={extra_baggage.response} />
+            <Loading loading={extra_baggage.response.loading} />
         </Contain>
     )
 }
 
 export default withAuth(PageDetailPesanan)
+
+const style = {
+    nominal: {
+        fontFamily: 'Roboto',
+        fontWeight: 500,
+        fontSize: '17.5px',
+        color: "#0065AF"
+    }
+}

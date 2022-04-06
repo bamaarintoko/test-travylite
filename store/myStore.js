@@ -11,7 +11,11 @@ import { zoneRecipient, zoneShipper } from '../reducer/regionRecipientReducer'
 import { detailBagasiReducer } from "../reducer/detailBagasiRducer"
 import { courierReducer } from "../reducer/courierReducer"
 import { smartboxReducer } from "../reducer/smartboxReducer"
+import { paymentMethodReducer } from "../reducer/paymentMethodReducer"
+import { deliveryReducer } from "../reducer/deliveryReducer"
 import paketReducer from "../reducer/paketReducer"
+import paymentSummaryReducer from "../reducer/paymentSummaryReducer"
+import virtualAccountReducer from "../reducer/virtualAccountReducer"
 const middlewares = [];
 if (process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`);
@@ -27,7 +31,11 @@ export const appReducer = combineReducers({
     detailBagasiReducer,
     courierReducer,
     smartboxReducer,
-    paketReducer
+    paketReducer,
+    paymentMethodReducer,
+    deliveryReducer,
+    paymentSummaryReducer,
+    virtualAccountReducer
 })
 const persistConfig = {
     key: 'root',
@@ -37,7 +45,12 @@ const persistConfig = {
         'userReducer',
         'customerReducer',
         'zoneRecipient',
-        'detailBagasiReducer'
+        'zoneShipper',
+        'detailBagasiReducer',
+        'courierReducer',
+        'deliveryReducer',
+        'paymentSummaryReducer',
+        'virtualAccountReducer'
     ]
 
 }
