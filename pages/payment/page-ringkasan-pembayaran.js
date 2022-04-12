@@ -22,10 +22,10 @@ function PageRingkasanPembayaran() {
     const dispatch = useDispatch()
     const {
         paymentSummaryReducer: { data },
-        paymentMethodReducer: { method }
+        paymentMethodReducer: { method, group }
     } = useSelector(s => s)
     //page-detail-invoice
-    const [func_create_payment, res_create_payment] = usePostData("extra-baggage/create-payment")
+    const [func_create_payment, res_create_payment] = usePostData("payment/create-payment")
     const [func_payment_detail, res_payment_detail] = useGet()
     useEffect(() => {
         // console.log(Object.keys(method).length)
@@ -52,8 +52,11 @@ function PageRingkasanPembayaran() {
         return () => {
             let par = {
                 orderId: data.order_id,
-                name: method.name,
-                code: method.code
+                name: group,
+                code: method.code,
+                transaction_fee: method.payment.transaction_fee,
+                tax_amount: method.payment.tax_amount
+
             }
             func_create_payment(par)
             console.log("par ", par)
@@ -61,9 +64,8 @@ function PageRingkasanPembayaran() {
     }
 
     function fetch_payment_detail() {
-        func_payment_detail({}, `payment/payment/${data.order_id}`)
+        func_payment_detail({}, `payment/${data.order_id}`)
     }
-
     return (
         <Contain>
             <Header>
@@ -73,7 +75,14 @@ function PageRingkasanPembayaran() {
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 137 }}>
                     <Stack sx={{ alignItems: 'center' }}>
                         <span style={{ fontFamily: 'Roboto', fontSize: 14, fontWeight: 500, color: "#323232" }}>Total Harga</span>
-                        <span style={{ fontFamily: 'Roboto', fontSize: 34, fontWeight: 'bold', color: "#0065AF" }}>{data.total}</span>
+                        {
+                            Object.keys(method).length !== 0
+                                ?
+                                <span style={{ fontFamily: 'Roboto', fontSize: 34, fontWeight: 'bold', color: "#0065AF" }}>{method.payment.total_amount}</span>
+
+                                :
+                                <span style={{ fontFamily: 'Roboto', fontSize: 34, fontWeight: 'bold', color: "#0065AF" }}>{data.subtotal}</span>
+                        }
                     </Stack>
                 </Box>
                 <Box sx={{ boxShadow: "0px 16px 24px #F2F2F2", borderRadius: '16px' }}>
@@ -107,8 +116,23 @@ function PageRingkasanPembayaran() {
                         <Box sx={{ height: "1px", background: 'rgba(0, 0, 0, 0.1)' }} />
                         <Box sx={{ padding: '16px' }}>
                             <Stack spacing={2}>
-                                <Menu label={"Expense"} val={data.expense} />
-                                <Menu label={"Biaya Pengiriman"} val={data.shipping_costs} />
+                                {
+                                    data.courier_costs.map((x, y) => {
+                                        return (
+                                            <Menu key={y} label={x.text} val={x.value} />
+                                        )
+                                    })
+
+
+                                }
+                                {
+                                    Object.keys(method).length !== 0
+                                    &&
+                                    <>
+                                        <Menu label={"tax_amount"} val={method.payment.tax_amount} />
+                                        <Menu label={"transaction_fee"} val={method.payment.transaction_fee} />
+                                    </>
+                                }
                             </Stack>
                         </Box>
                         {/* <div style={{ height: 112, flexDirection: 'column', display: 'flex', justifyContent: 'space-between', padding: 16 }}>
@@ -121,7 +145,14 @@ function PageRingkasanPembayaran() {
                                     <span style={general_style.heading_dark_bold}>Total</span>
                                 </Box>
                                 <Box>
-                                    <span style={general_style.heading_dark_bold}>{data.total}</span>
+                                    {
+                                        Object.keys(method).length !== 0
+                                            ?
+                                            <span style={general_style.heading_dark_bold}>{method.payment.total_amount}</span>
+
+                                            :
+                                            <span style={general_style.heading_dark_bold}>{data.subtotal}</span>
+                                    }
                                 </Box>
                             </Stack>
                         </Box>

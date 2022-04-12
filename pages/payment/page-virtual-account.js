@@ -10,7 +10,7 @@ import withAuth from "../../component/withAuth";
 import { general_style } from "../../component/general_style";
 import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
 function PageVirtualAccount() {
-    const { virtualAccountReducer: { va } } = useSelector(s => s)
+    const { virtualAccountReducer: { va: { data } } } = useSelector(s => s)
     function copy_to_clipboard() {
         return () => {
             navigator.clipboard.writeText(va.account_number)
@@ -26,7 +26,7 @@ function PageVirtualAccount() {
                     <span style={{ fontFamily: 'Roboto', fontSize: 14, fontWeight: 500, color: "#323232" }}>Virtual Account</span>
                     <Stack direction={'row'} spacing={2}>
                         <Box>
-                            <span style={{ fontFamily: 'Roboto', fontSize: 24, fontWeight: 'bold', color: "#0065AF" }}>{va.account_number}</span>
+                            <span style={{ fontFamily: 'Roboto', fontSize: 24, fontWeight: 'bold', color: "#0065AF" }}>{data.account_number}</span>
 
                         </Box>
                         <Box onClick={copy_to_clipboard()}>
@@ -39,7 +39,7 @@ function PageVirtualAccount() {
                         <span style={general_style.heading_dark_bold}>Cara Pembayaran :</span>
                     </Box>
                     {
-                        va.payment_instructions.map((x, y) => {
+                        data.payment_instructions.map((x, y) => {
                             return (
                                 <Box key={y}>
                                     <span style={general_style.body_dark_bold}>{x.title}</span>

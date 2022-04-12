@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import useSWR from 'swr'
 
-let host = "http://159.223.68.70/api/"
+// let host = "https://159.223.68.70/api/"
+let host = "https://www.travylite.xyz/api/"
 
 export function useGet() {
     const { authReducer: { access_token } } = useSelector(s => s)

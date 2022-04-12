@@ -28,7 +28,7 @@ function PageDetailBagasi() {
     const [length_arg] = useInputNumber("cm")
     const [width_arg] = useInputNumber("cm")
     const [height_arg] = useInputNumber("cm")
-    const [weight_arg] = useInputNumber("kg")
+    const [weight_arg] = useInputNumber("gr")
     const [quantity_arg] = useInputNumber(" ")
     const [desc] = useTextArea()
 

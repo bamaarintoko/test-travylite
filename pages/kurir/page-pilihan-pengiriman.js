@@ -120,7 +120,7 @@ function PagePilihanPengiriman() {
         let origin = district_code_shipper?.value ?? 0
         let destinataion = district_code_receiver?.value ?? 0
         // let weight = weight.value
-        funt_fetch_courier({}, `extra-baggage/list-courier/${origin}/${destinataion}/${weight?.value ?? 0}`)
+        funt_fetch_courier({}, `courier/${origin}/${destinataion}/${weight?.value ?? 0}`)
     }, [])
     console.log("couriers", couriers.length)
     return (
@@ -129,6 +129,15 @@ function PagePilihanPengiriman() {
                 <AppBar title={"Pilihan Pengiriman"} />
             </Header>
             <Content>
+                {
+                    res_fetch_courier.loading
+                    &&
+                    <Box>
+                        <Stack spacing={2} sx={{ alignItems: 'center', justifyContent: 'center', height: '300px' }}>
+                            <span style={{ fontSize: '12px', fontFamily: 'Roboto' }}>Sedang mengambil data pengiriman.</span>
+                        </Stack>
+                    </Box>
+                }
                 {
                     res_fetch_courier.failed
                     &&
@@ -186,6 +195,7 @@ function PagePilihanPengiriman() {
             <Footer style={{ padding: 16 }}>
                 {/* <Button */}
                 <Button
+                    disabled={res_fetch_courier.failed || res_fetch_courier.loading}
                     onClick={on_validate()}
                     sx={{ backgroundColor: "#0065AF", borderRadius: "16px" }}
                     fullWidth

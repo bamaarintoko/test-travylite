@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function useInput() {
     const [value, setValue] = useState("")
     const [error, setError] = useState(false)
-    const input = <TextField onBlur={() => {
+    const input = <TextField autoComplete={"off"} onBlur={() => {
         if (value === "") {
             setError(true)
         }

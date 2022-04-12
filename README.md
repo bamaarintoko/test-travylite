@@ -32,3 +32,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### [0] kurir/page-pilihan-pengiriman
+    hit api `courier/${origin}/${destinataion}/${weight?.value ?? 0}`
+
+### [1] payment/page-detail-pesanan
+    create order by type :
+    ['EXTRA_BAGGAGE','LEFT_BAGGAGE','DOCUMENT_DELIVERY','SOUVENIR']
+
+    if success then hit api `extra-baggage/detail-order/${order_id}` 
+    to get a summary payment and redirect to page `payment/page-ringkasan- 
+    pembayaran`
+
+### [2] payment/page-ringkasan-pembayaran
+    display a list of fees to be paid
+
+### [3]

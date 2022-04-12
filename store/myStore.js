@@ -16,6 +16,7 @@ import { deliveryReducer } from "../reducer/deliveryReducer"
 import paketReducer from "../reducer/paketReducer"
 import paymentSummaryReducer from "../reducer/paymentSummaryReducer"
 import virtualAccountReducer from "../reducer/virtualAccountReducer"
+import bankFeeReducer from '../reducer/bankFeeReducer';
 const middlewares = [];
 if (process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`);
@@ -35,7 +36,8 @@ export const appReducer = combineReducers({
     paymentMethodReducer,
     deliveryReducer,
     paymentSummaryReducer,
-    virtualAccountReducer
+    virtualAccountReducer,
+    bankFeeReducer
 })
 const persistConfig = {
     key: 'root',
@@ -50,7 +52,8 @@ const persistConfig = {
         'courierReducer',
         'deliveryReducer',
         'paymentSummaryReducer',
-        'virtualAccountReducer'
+        'virtualAccountReducer',
+        'bankFeeReducer'
     ]
 
 }

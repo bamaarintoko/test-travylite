@@ -64,8 +64,8 @@ export default function useCreateExtraBaggage() {
         subdistrict_shipper: subdistrict_shipper.value,
         district_shipper: district_shipper.value,
         postalcode_shipper: shipper_full_zone.postal_code,
-        duration: data.etd,
-        shipping_costs: data.rates,
+        duration: data?.etd ?? '1-2 day',
+        shipping_costs: data?.rates ?? 20000,
         province_receiver: province_receiver.value,
         city_receiver: city_receiver.value,
         province_shipper: province_shipper.value,
@@ -73,8 +73,10 @@ export default function useCreateExtraBaggage() {
         district_code_shipper: district_code_shipper.value,
         district_code_receiver: district_code_receiver.value,
         // channel_code: method.code,
-        service_code: data.product_code,
-        service_name: data.product_name
+        service_code: data?.product_code ?? 'REG',
+        service_name: data?.product_name ?? 'Regular',
+        use_insurance: 'no',
+        declared_value: data?.rates ?? 1200000
     }
 
     function create() {

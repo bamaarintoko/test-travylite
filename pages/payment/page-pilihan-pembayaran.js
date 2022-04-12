@@ -13,7 +13,7 @@ import { AppBar } from "../../component/AppBar";
 import Link from "next/link"
 import withAuth from "../../component/withAuth";
 import { general_style } from "../../component/general_style";
-import { useGet } from "../../helper/request";
+import { useGet, usePostData } from "../../helper/request";
 import Loading from "../../component/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { FILL_PAYMENT_METHOD } from "../../reducer/paymentMethodReducer";
@@ -28,12 +28,16 @@ function PagePilihanPembayaran() {
         paymentMethodReducer: {
             method
         },
+        paymentSummaryReducer: {
+            data: { subtotal }
+        },
         deliveryReducer: {
             type
         }
     } = useSelector(s => s)
     const [payment_methods, setPaymentMethods] = useState([])
-    const [func_fetch_payment_method, res_payment_method] = useGet()
+    // const [func_fetch_payment_method, res_payment_method] = useGet()
+    const [func_fetch_payment_method, res_payment_method] = usePostData("payment/payment-method")
 
     const [extra_baggage] = useCreateExtraBaggage()
 
@@ -53,7 +57,7 @@ function PagePilihanPembayaran() {
     //     console.log("lng", lng)
     //     if (lng > 0) {
     //         // create_order()
-            
+
     //     }
     // }, [method])
 
@@ -64,13 +68,17 @@ function PagePilihanPembayaran() {
     // }, [extra_baggage.response])
 
     function fetch_payment_method() {
-        func_fetch_payment_method({}, "payment/payment-method")
+        let par = {
+            subtotal: subtotal
+        }
+        func_fetch_payment_method(par)
     }
-    function choose_pament(payment) {
+    function choose_pament(payment, group) {
         return () => {
             dispatch({
                 type: FILL_PAYMENT_METHOD,
-                value: payment
+                value: payment,
+                group: group
             })
             route.back()
         }
@@ -98,7 +106,7 @@ function PagePilihanPembayaran() {
                                 {
                                     x.methods.map((i, j) => {
                                         return (
-                                            <Box key={j} onClick={choose_pament(i)}>
+                                            <Box key={j} onClick={choose_pament(i, x.group)}>
                                                 <Stack direction={"row"} sx={{ height: '76px', alignItems: 'center', borderBottomWidth: 0.5, borderBottomStyle: 'solid', borderBottomColor: "#E0E0E0" }}>
                                                     <Box component="img" sx={{
                                                         width: '100%',
