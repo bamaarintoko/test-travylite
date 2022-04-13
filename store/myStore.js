@@ -4,7 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 // import logger from 'redux-logger';
 import { defaultReducer } from '../reducer/defaultReducer'
-import { authReducer } from '../reducer/authReducer'
+import { authReducer, formRegisterReducer } from '../reducer/authReducer'
 import { userReducer } from '../reducer/userReducer'
 import { customerReducer } from '../reducer/customerReducer'
 import { zoneRecipient, zoneShipper } from '../reducer/regionRecipientReducer'
@@ -17,6 +17,7 @@ import paketReducer from "../reducer/paketReducer"
 import paymentSummaryReducer from "../reducer/paymentSummaryReducer"
 import virtualAccountReducer from "../reducer/virtualAccountReducer"
 import bankFeeReducer from '../reducer/bankFeeReducer';
+
 const middlewares = [];
 if (process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`);
@@ -37,7 +38,8 @@ export const appReducer = combineReducers({
     deliveryReducer,
     paymentSummaryReducer,
     virtualAccountReducer,
-    bankFeeReducer
+    bankFeeReducer,
+    formRegisterReducer
 })
 const persistConfig = {
     key: 'root',

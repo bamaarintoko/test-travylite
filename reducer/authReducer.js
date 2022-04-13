@@ -22,3 +22,42 @@ export function authReducer(state = initialAuthReducer, action) {
             return state;
     }
 }
+const initialFormRegisterRed = {
+    email: {
+        value: "",
+        error: false,
+        error_message: ""
+    },
+    name: {
+        value: "",
+        error: false,
+        error_message: ""
+    },
+    password: {
+        value: "",
+        error: false,
+        error_message: ""
+    }
+}
+
+export const FILL_FORM_REGISTER = "FILL_FORM_REGISTER"
+
+export function formRegisterReducer(state = initialFormRegisterRed, action) {
+    switch (action.type) {
+        case FILL_FORM_REGISTER:
+            const obj = { ...state }
+            Object.keys(obj).map((key) => {
+                console.log("key : ", key)
+                if (key in action.data) {
+                    obj[key].error = true
+                    obj[key].error_message = action.data[key][0]
+                } else {
+                    obj[key].error = false
+                    obj[key].error_message = ""
+                }
+            })
+            return obj;
+        default:
+            return state;
+    }
+}
