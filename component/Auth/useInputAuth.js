@@ -9,12 +9,12 @@ export default function useInputAuth(label = "label", email = false, secure = fa
     const input = <Stack>
         <span style={{ fontFamily: 'Roboto', fontSize: 14, color: "rgba(0, 0, 0, 0.4)", marginBottom: 10 }}>{label}</span>
         <Box>
-            <TextField error={isError} onBlur={() => {
+            <TextField autoComplete={"off"} error={isError} onBlur={() => {
                 if (value !== "") {
                     setError(false)
                 }
             }} onChange={(e) => setValue(e.target.value)} size="small"
-                fullWidth id="outlined-basic" variant="outlined" />
+                fullWidth variant="outlined" />
             <span style={{ fontSize: 12, fontFamily: 'Roboto', color: "#e57373" }}>{error_message}</span>
         </Box>
     </Stack>

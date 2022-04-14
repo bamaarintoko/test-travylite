@@ -24,7 +24,7 @@ import Loading from "../../component/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { FILL_FORM_REGISTER } from "../../reducer/authReducer";
 export default function PageRegister() {
-    const { formRegisterReducer: { email, name, password } } = useSelector(s => s)
+    const { formRegisterReducer: { email, name, password, password_confirmation } } = useSelector(s => s)
     const dispatch = useDispatch()
     // const [func_register, reg_success_res, reg_error_res, reg_loading, reg_success, reg_failed, set_reg_failed] = usePost()
     const [func_register, res_register] = usePostData("register")
@@ -55,23 +55,9 @@ export default function PageRegister() {
         name_reg.setErrorMessage(name.error_message)
         pass_reg.setError(password.error)
         pass_reg.setErrorMessage(password.error_message)
-
-        // if (email.error) {
-        // } else {
-        // }
-        // if (name.error) {
-        // } else {
-        //     name_reg.setError(false)
-        //     name_reg.setErrorMessage("")
-        // }
-        // if (password.error) {
-        //     pass_reg.setError(true)
-        //     pass_reg.setErrorMessage(password.error_message)
-        // } else {
-        //     pass_reg.setError(false)
-        //     pass_reg.setErrorMessage(false)
-        // }
-    }, [email.error, name.error, password.error])
+        pass_confirm_reg.setError(password_confirmation.error)
+        pass_confirm_reg.setErrorMessage(password_confirmation.error_message)
+    }, [email.error, name.error, password.error, password_confirmation.error])
     useEffect(() => {
         console.log("open", open)
     }, [open])

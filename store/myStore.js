@@ -4,9 +4,9 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 // import logger from 'redux-logger';
 import { defaultReducer } from '../reducer/defaultReducer'
-import { authReducer, formRegisterReducer } from '../reducer/authReducer'
+import { authReducer, formRegisterReducer, formLoginReducer } from '../reducer/authReducer'
 import { userReducer } from '../reducer/userReducer'
-import { customerReducer } from '../reducer/customerReducer'
+import { customerReducer, dataShipper, dataReceiver } from '../reducer/customerReducer'
 import { zoneRecipient, zoneShipper } from '../reducer/regionRecipientReducer'
 import { detailBagasiReducer } from "../reducer/detailBagasiRducer"
 import { courierReducer } from "../reducer/courierReducer"
@@ -39,7 +39,10 @@ export const appReducer = combineReducers({
     paymentSummaryReducer,
     virtualAccountReducer,
     bankFeeReducer,
-    formRegisterReducer
+    formRegisterReducer,
+    formLoginReducer,
+    dataShipper,
+    dataReceiver
 })
 const persistConfig = {
     key: 'root',

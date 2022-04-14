@@ -21,51 +21,49 @@ const arr = [
 
 export default function FormRecipient({ status }) {
     const dispatch = useDispatch()
-    const { customerReducer: { recipient } } = useSelector(s => s)
+    const { customerReducer: { recipient }, dataReceiver: { gender_receiver, name_receiver, phone_receiver, address_receiver } } = useSelector(s => s)
     const [gelar] = useInputSelect()
     // const [gelar_value, gelar_select, setDataGelar, setGelarValue] = useInputSelect()
-    const [name] = useInput()
-    const [phone] = useInput()
-    const [address] = useTextArea();
+    const [name] = useInput("name_receiver", "RECEIVER")
+    const [phone] = useInput("phone_receiver", "RECEIVER")
+    const [address] = useTextArea("address_receiver", "RECEIVER");
 
     useEffect(() => {
         gelar.setData(arr)
 
-        gelar.setValue(recipient.gender_receiver.value)
-        name.setValue(recipient.name_receiver.value)
-        phone.setValue(recipient.phone_receiver.value)
-        address.setValue(recipient.address_receiver.value)
+        gelar.setValue(gender_receiver.value)
+        name.setValue(name_receiver.value)
+        phone.setValue(phone_receiver.value)
+        address.setValue(address_receiver.value)
     }, [])
 
-    useEffect(() => {
-        // console.log("gelar_value", gelar_value)
-        dispatch({
-            type: FILL_GENDER_RECIPIENT,
-            gender_recipient: gelar.value
-        })
-        dispatch({
-            type: FILL_NAME_RECIPIENT,
-            name_recipient: name.value
-        })
-        dispatch({
-            type: FILL_PHONE_RECIPIENT,
-            phone_recipient: phone.value,
-        })
-        dispatch({
-            type: FILL_ADDRESS_RECIPIENT,
-            address_recipient: address.value,
+    // useEffect(() => {
+    //     // console.log("gelar_value", gelar_value)
+    //     dispatch({
+    //         type: FILL_GENDER_RECIPIENT,
+    //         gender_recipient: gelar.value
+    //     })
+    //     dispatch({
+    //         type: FILL_NAME_RECIPIENT,
+    //         name_recipient: name.value
+    //     })
+    //     dispatch({
+    //         type: FILL_PHONE_RECIPIENT,
+    //         phone_recipient: phone.value,
+    //     })
+    //     dispatch({
+    //         type: FILL_ADDRESS_RECIPIENT,
+    //         address_recipient: address.value,
 
-        })
-    }, [gelar.value, name.value, address.value, phone.value])
+    //     })
+    // }, [gelar.value, name.value, address.value, phone.value])
 
     useEffect(() => {
-        console.log("recipient.name_receiver.error", recipient.name_receiver.error)
-        if (status) {
-            name.setError(recipient.name_receiver.error)
-            phone.setError(recipient.phone_receiver.error)
-            address.setError(recipient.address_receiver.error)
-        }
-    }, [status])
+        name.setError(name_receiver.error)
+        phone.setError(phone_receiver.error)
+        address.setError(address_receiver.error)
+
+    }, [name_receiver.error, phone_receiver.error, address_receiver.error])
     return (
         <Stack>
             <Label title={"Gelar & Nama Lengkap Pengirim"} />

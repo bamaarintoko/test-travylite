@@ -37,6 +37,11 @@ const initialFormRegisterRed = {
         value: "",
         error: false,
         error_message: ""
+    },
+    password_confirmation: {
+        value: "",
+        error: false,
+        error_message: ""
     }
 }
 
@@ -57,6 +62,39 @@ export function formRegisterReducer(state = initialFormRegisterRed, action) {
                 }
             })
             return obj;
+        default:
+            return state;
+    }
+}
+
+const initialFormLoginRed = {
+    email: {
+        value: "",
+        error: false,
+        error_message: ""
+    },
+    password: {
+        value: "",
+        error: false,
+        error_message: ""
+    }
+}
+
+export const FILL_FORM_LOGIN = "FILL_FORM_LOGIN"
+
+export function formLoginReducer(state = initialFormLoginRed, action) {
+    switch (action.type) {
+        case FILL_FORM_LOGIN:
+            const obj = { ...state }
+            Object.keys(obj).map((key) => {
+                if (key in action.data) {
+                    obj[key].error = true
+                    obj[key].error_message = action.data[key][0]
+                } else {
+                    obj[key].error = false
+                    obj[key].error_message = ""
+                }
+            })
         default:
             return state;
     }

@@ -1,36 +1,38 @@
+import { dev } from "./customerReducer"
+
 const initialDetailBagasiRed = {
     free_wrapping: {
-        value: '',
+        value: dev ? 'yes' : '',
         error: false,
         error_message: ""
     },
     length: {
-        value: '',
+        value: dev ? 50 : '',
         error: false,
         error_message: ""
     },
     width: {
-        value: '',
+        value: dev ? 50 : '',
         error: false,
         error_message: ""
     },
     height: {
-        value: '',
+        value: dev ? 50 : '',
         error: false,
         error_message: ""
     },
     weight: {
-        value: '',
+        value: dev ? 1000 : '',
         error: false,
         error_message: ""
     },
     quantity: {
-        value: '',
+        value: dev ? 1 : '',
         error: false,
         error_message: ""
     },
     description: {
-        value: '',
+        value: dev ? 'lorem ipsum dolor sit amet' : '',
         error: false,
         error_message: ""
     }

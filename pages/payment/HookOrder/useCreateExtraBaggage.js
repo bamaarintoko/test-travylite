@@ -3,7 +3,9 @@ import { usePostData } from "../../../helper/request"
 
 export default function useCreateExtraBaggage() {
     const {
-
+        dataShipper:{
+            gender_shipper, name_shipper, phone_shipper, email_shipper, email_confirimation_shipper, address_shipper
+        },
         paymentMethodReducer: {
             method
         },
@@ -20,9 +22,6 @@ export default function useCreateExtraBaggage() {
             shipper_full_zone,
             recipient: {
                 address_receiver, gender_receiver, name_receiver, phone_receiver
-            },
-            shipper: {
-                address_shipper, email_shipper, gender_shipper, name_shipper, phone_shipper
             },
             recipient_zone: {
                 province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver

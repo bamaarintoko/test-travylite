@@ -1,3 +1,4 @@
+export const dev = process.env.NODE_ENV === `development`;
 const initialCustomerReducer = {
     recipient_full_zone: {},
     recipient: {
@@ -7,48 +8,51 @@ const initialCustomerReducer = {
             error_message: ""
         },
         name_receiver: {
-            value: "",
+            // value: "",
+            value: dev ? "John Doe" : "",
             error: false,
             error_message: ""
         },
         phone_receiver: {
-            value: "",
+            // value: "",
+            value: dev ? "123123123123" : "",
             error: false,
             error_message: ""
         },
         address_receiver: {
-            value: "",
+            // value: "",
+            value: dev ? "lorem ipsum dolor sit amet" : "",
             error: false,
             error_message: ""
         },
     },
     recipient_zone: {
         province_receiver: {
-            value: "",
+            value: dev ? 33 : "",
             error: false,
             error_message: "",
             text: ""
         }, // province id
         city_receiver: {
-            value: "",
+            value: dev ? 481 : "",
             error: false,
             error_message: "",
             text: ""
         }, // district id
         district_receiver: {
-            value: "",
+            value: dev ? 7064 : "",
             error: false,
             error_message: "",
             text: ""
         }, // sub_district id
         subdistrict_receiver: {
-            value: "",
+            value: dev ? 82517 : "",
             error: false,
             error_message: "",
             text: ""
         }, // village id
         district_code_receiver: {
-            value: "",
+            value: dev ? '34.71.03' : "",
             error: false,
             error_message: ""
         }
@@ -66,27 +70,27 @@ const initialCustomerReducer = {
             error_message: ""
         },
         name_shipper: {
-            value: "",
+            value: dev ? "" : "",
             error: false,
             error_message: ""
         },
         email_shipper: {
-            value: "",
+            value: dev ? "" : "",
             error: false,
             error_message: ""
         },
         email_confirimation_shipper: {
-            value: "",
+            value: dev ? "jane@mail.com" : "",
             error: false,
             error_message: ""
         },
         phone_shipper: {
-            value: "",
+            value: dev ? "085645789090" : "",
             error: false,
             error_message: ""
         },
         address_shipper: {
-            value: "",
+            value: dev ? "lorem ipsum dolor sit amet" : "",
             error: false,
             error_message: ""
         }
@@ -99,27 +103,27 @@ const initialCustomerReducer = {
     },
     shipper_zone: {
         province_shipper: {
-            value: "",
+            value: dev ? 33 : "",
             error: false,
             error_message: "",
         }, // province id
         city_shipper: {
-            value: "",
+            value: dev ? 481 : "",
             error: false,
             error_message: "",
         }, // district id
         district_shipper: {
-            value: "",
+            value: dev ? 7064 : "",
             error: false,
             error_message: "",
         }, // sub_district id
         subdistrict_shipper: {
-            value: "",
+            value: dev ? 82516 : "",
             error: false,
             error_message: "",
         }, // village id
         district_code_shipper: {
-            value: "",
+            value: dev ? '34.71.03' : "",
             error: false,
             error_message: "",
         },
@@ -154,6 +158,162 @@ export const FILL_EMAIL_CONFIRM_SHIPPER = "FILL_EMAIL_CONFIRM_SHIPPER"
 export const FILL_PHONE_SHIPPER = "FILL_PHONE_SHIPPER"
 export const FILL_ADDRESS_SHIPPER = "FILL_ADDRESS_SHIPPER"
 
+// --------------------------------------------------------------------------- //
+export const UPDATE_VALUE_SHIPPER_ZONE = "UPDATE_VALUE_SHIPPER_ZONE"
+export const UPDATE_ERROR_SHIPPER_ZONE = "UPDATE_ERROR_SHIPPER_ZONE"
+
+export function dataShipperZone(state = initialDataShipperZone, action) {
+    switch (action.type) {
+
+        default:
+            return state;
+    }
+}
+
+const initialDataShipperZone = {
+    province_shipper: {
+        value: dev ? 33 : "",
+        error: false,
+        error_message: "",
+    }, // province id
+    city_shipper: {
+        value: dev ? 481 : "",
+        error: false,
+        error_message: "",
+    }, // district id
+    district_shipper: {
+        value: dev ? 7064 : "",
+        error: false,
+        error_message: "",
+    }, // sub_district id
+    subdistrict_shipper: {
+        value: dev ? 82516 : "",
+        error: false,
+        error_message: "",
+    }, // village id
+    district_code_shipper: {
+        value: dev ? '34.71.03' : "",
+        error: false,
+        error_message: "",
+    },
+}
+// --------------------------------------------------------------------------- //
+
+// --------------------------------------------------------------------------- //
+export const UPDATE_VALUE_SHIPPER = "UPDATE_VALUE_SHIPPER"
+export const UPDATE_ERROR_SHIPPER = "UPDATE_ERROR_SHIPPER"
+export function dataShipper(state = initialDataShipper, action) {
+    switch (action.type) {
+        case UPDATE_VALUE_SHIPPER:
+            return {
+                ...state,
+                [action.field]: {
+                    ...state[action.field],
+                    value: action.value
+                }
+            }
+        case UPDATE_ERROR_SHIPPER:
+            const obj = { ...state }
+
+            Object.keys(obj).map((key) => {
+                if (key in action.errors) {
+                    obj[key].error = true
+                    obj[key].error_message = action.errors[key][0]
+                }
+            })
+            return obj;
+        default:
+            return state
+    }
+}
+
+const initialDataShipper = {
+    gender_shipper: {
+        value: "mr",
+        error: false,
+        error_message: ""
+    },
+    name_shipper: {
+        value: dev ? "" : "",
+        error: false,
+        error_message: ""
+    },
+    email_shipper: {
+        value: dev ? "" : "",
+        error: false,
+        error_message: ""
+    },
+    email_confirimation_shipper: {
+        value: dev ? "jane@mail.com" : "",
+        error: false,
+        error_message: ""
+    },
+    phone_shipper: {
+        value: dev ? "085645789090" : "",
+        error: false,
+        error_message: ""
+    },
+    address_shipper: {
+        value: dev ? "lorem ipsum dolor sit amet" : "",
+        error: false,
+        error_message: ""
+    }
+
+}
+// --------------------------------------------------------------------------- //
+// --------------------------------------------------------------------------- //
+export const UPDATE_VALUE_RECEIVER = "UPDATE_VALUE_RECEIVER"
+export const UPDATE_ERROR_RECEIVER = "UPDATE_ERROR_RECEIVER"
+
+export function dataReceiver(state = initialDataReceiver, action) {
+    switch (action.type) {
+        case UPDATE_VALUE_RECEIVER:
+            return {
+                ...state,
+                [action.field]: {
+                    ...state[action.field],
+                    value: action.value
+                }
+            }
+        case UPDATE_ERROR_RECEIVER:
+            const obj = { ...state }
+            Object.keys(obj).map((key) => {
+                if (key in action.errors) {
+                    obj[key].error = true
+                    obj[key].error_message = action.errors[key][0]
+                }
+            })
+        default:
+            return state;
+    }
+}
+
+const initialDataReceiver = {
+    gender_receiver: {
+        value: "mr",
+        error: false,
+        error_message: ""
+    },
+    name_receiver: {
+        // value: "",
+        value: dev ? "John Doe" : "",
+        error: false,
+        error_message: ""
+    },
+    phone_receiver: {
+        // value: "",
+        value: dev ? "123123123123" : "",
+        error: false,
+        error_message: ""
+    },
+    address_receiver: {
+        // value: "",
+        value: dev ? "lorem ipsum dolor sit amet" : "",
+        error: false,
+        error_message: ""
+    },
+}
+// --------------------------------------------------------------------------- //
 export function customerReducer(state = initialCustomerReducer, action) {
     switch (action.type) {
         case FILL_GENDER_RECIPIENT:
@@ -208,6 +368,7 @@ export function customerReducer(state = initialCustomerReducer, action) {
                     }
                 }
             }
+        // ----------------------------------------------------------------
         case FILL_ERROR_SHIPPER:
             const err_shipper = { ...state }
             Object.keys(err_shipper.shipper_zone).map((key, index) => {
@@ -217,7 +378,7 @@ export function customerReducer(state = initialCustomerReducer, action) {
                 }
             })
             Object.keys(err_shipper.shipper).map((key, index) => {
-                console.log("key", key)
+                // ////console.log("key", key)
                 if (key in action.errors) {
                     err_shipper.shipper[key].error = true
                     err_shipper.shipper[key].error_message = action.errors[key][0]
@@ -227,7 +388,7 @@ export function customerReducer(state = initialCustomerReducer, action) {
         case FILL_ERROR_RECIPIENT:
             const err_recipient = { ...state }
             Object.keys(err_recipient.recipient_zone).map((key, index) => {
-                console.log("key", key)
+                //////console.log("key", key)
                 if (key in action.errors) {
                     err_recipient.recipient_zone[key].error = true
                     err_recipient.recipient_zone[key].error_message = action.errors[key][0]
@@ -235,14 +396,14 @@ export function customerReducer(state = initialCustomerReducer, action) {
                 }
             })
             Object.keys(err_recipient.recipient).map((key, index) => {
-                console.log("key", key)
+                ////console.log("key", key)
                 if (key in action.errors) {
                     err_recipient.recipient[key].error = true
                     err_recipient.recipient[key].error_message = action.errors[key][0]
 
                 }
             })
-            console.log("err_recipient", err_recipient)
+            ////console.log("err_recipient", err_recipient)
             return err_recipient;
         case FILL_RECIPIENT_FULL_ZONE:
             return {

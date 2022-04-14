@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import RegionRecipient from '../../../component/RegionRecipient';
 import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { FILL_ADDRESS_RECIPIENT, FILL_ERROR_RECIPIENT, FILL_GENDER_RECIPIENT, FILL_NAME_RECIPIENT, FILL_PHONE_RECIPIENT, SET_DATA_RECEIVER } from '../../../reducer/customerReducer';
+import { FILL_ADDRESS_RECIPIENT, FILL_ERROR_RECIPIENT, FILL_GENDER_RECIPIENT, FILL_NAME_RECIPIENT, FILL_PHONE_RECIPIENT, SET_DATA_RECEIVER, UPDATE_ERROR_RECEIVER } from '../../../reducer/customerReducer';
 import { usePost } from "../../../helper/request"
 import FormRecipient from '../../../component/FormRecipient';
 import FlashMessage from '../../../component/FlashMessage';
@@ -35,7 +35,19 @@ const arr = [
 ]
 function PageDetailPenerima() {
     const dispatch = useDispatch()
-    const { customerReducer: { recipient, recipient_zone: { province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver } }, zoneRecipient: { villages } } = useSelector(s => s)
+    const {
+        dataReceiver: {
+            gender_receiver, name_receiver, phone_receiver, address_receiver
+        },
+        customerReducer: {
+            recipient, recipient_zone: {
+                province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver
+            }
+        },
+        zoneRecipient: {
+            villages
+        }
+    } = useSelector(s => s)
 
     const [func_validate, res_validate] = usePost()
     const route = useRouter()
@@ -50,6 +62,11 @@ function PageDetailPenerima() {
                 type: FILL_ERROR_RECIPIENT,
                 errors: res_validate.error_res.data.errors
             })
+
+            dispatch({
+                type: UPDATE_ERROR_RECEIVER,
+                errors: res_validate.error_res.data.errors
+            })
         }
     }, [res_validate.success, res_validate.failed])
 
@@ -57,10 +74,10 @@ function PageDetailPenerima() {
         return () => {
             // const code = villages.filter((dc) => dc.id === recipient_zone.subdistrict_recipient)
             let par = {
-                gender_receiver: recipient.gender_receiver.value,
-                name_receiver: recipient.name_receiver.value,
-                phone_receiver: recipient.phone_receiver.value,
-                address_receiver: recipient.address_receiver.value,
+                gender_receiver: gender_receiver.value,
+                name_receiver: name_receiver.value,
+                phone_receiver: phone_receiver.value,
+                address_receiver: address_receiver.value,
                 province_receiver: province_receiver.value,
                 city_receiver: city_receiver.value,
                 district_receiver: district_receiver.value,

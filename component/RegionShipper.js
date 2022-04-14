@@ -20,10 +20,10 @@ export default function RegionShipper() {
     const [func_fetch_sub_district, fetch_sub_district_feedback] = useGet()
     const [func_fetch_village, fetch_village_feedback] = useGet()
 
-    const [province] = useInputSelect()
-    const [district] = useInputSelect()
-    const [subdistrict] = useInputSelect()
-    const [village] = useInputSelect()
+    const [province] = useInputSelect("province_shipper")
+    const [district] = useInputSelect("city_shipper")
+    const [subdistrict] = useInputSelect("district_shipper")
+    const [village] = useInputSelect("subdistrict_shipper")
 
     // const [province_value, province_select, set_provinces, set_province, set_province_error] = useInputSelect()
     // const [district_value, district_select, set_districts, set_district, set_district_error] = useInputSelect()

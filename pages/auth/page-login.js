@@ -16,28 +16,30 @@ import { usePost, usePostData } from "../../helper/request";
 import useSWR from "swr";
 import { fetcher } from "../../helper/meta";
 import { Alert, Backdrop, CircularProgress, Snackbar } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { UPDATE_ACCESS_TOKEN } from "../../reducer/authReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { FILL_FORM_LOGIN, UPDATE_ACCESS_TOKEN } from "../../reducer/authReducer";
 import { UPDATE_USER } from "../../reducer/userReducer";
 import { useRouter } from "next/router";
 import FlashMessage from "../../component/FlashMessage";
 import Loading from "../../component/Loading";
+import { Password } from "@mui/icons-material";
 
 export default function PageLogin() {
+    const { formLoginReducer: { email, password } } = useSelector(s => s)
     const dispatch = useDispatch()
     const router = useRouter()
     // const [req_login, login_success_res, login_error_res, login_loading, login_success, login_failed, set_login_failed] = usePost()
     const [func_login, res_login] = usePostData("login")
 
-    const [email_input, email_value] = useInputAuth("Email")
-    const [pass_input, password_value] = useInputPassword("Password")
+    const [email_log] = useInputAuth("Email")
+    const [password_log] = useInputPassword("Password")
 
 
     function do_login() {
         return () => {
             let par = {
-                identity: email_value,
-                password: password_value
+                identity: email_log.value,
+                password: password_log.value
             }
             func_login(par,)
         }
@@ -62,6 +64,21 @@ export default function PageLogin() {
             router.back()
         }
     }, [res_login.success])
+
+    useEffect(() => {
+        if (res_login.failed) {
+            console.log("res_login : ", res_login)
+            dispatch({
+                type: FILL_FORM_LOGIN,
+                data: res_login.error_res.data.errors
+            })
+        }
+    }, [res_login.failed])
+
+    useEffect(() => {
+        password_log.setError(password.error)
+        password_log.setErrorMessage(password.error_message)
+    }, [email.error, password.error])
     return (
         <Contain>
             <Header>
@@ -70,9 +87,9 @@ export default function PageLogin() {
             <Content>
                 <LogoAuth />
                 <BoxShadow style={{ padding: 16, margin: 16 }}>
-                    {email_input}
+                    {email_log.input}
                     <div style={{ height: 16 }} />
-                    {pass_input}
+                    {password_log.input}
                     <div style={{ height: 34 }} />
                     <ButtonGradient onClick={do_login()} title={"Masuk"} />
                     <LineSeparator />

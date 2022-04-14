@@ -17,7 +17,7 @@ import RegionShipper from '../../../component/RegionShipper';
 import { useRouter } from 'next/router';
 import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { FILL_ERROR_SHIPPER, SET_DATA_SHIPPER } from '../../../reducer/customerReducer';
+import { FILL_ERROR_SHIPPER, SET_DATA_SHIPPER, UPDATE_ERROR_SHIPPER } from '../../../reducer/customerReducer';
 import { usePost } from '../../../helper/request';
 import FormShipper from '../../../component/FormShipper';
 import FlashMessage from '../../../component/FlashMessage';
@@ -36,6 +36,9 @@ function PageDetailPengirim() {
     const route = useRouter()
     const dispatch = useDispatch()
     const {
+        dataShipper: {
+            gender_shipper, name_shipper, phone_shipper, email_shipper, email_confirmation_shipper, address_shipper
+        },
         customerReducer: {
             shipper,
             shipper_zone: {
@@ -59,6 +62,10 @@ function PageDetailPengirim() {
                 type: FILL_ERROR_SHIPPER,
                 errors: res_validate.error_res.data.errors
             })
+            dispatch({
+                type: UPDATE_ERROR_SHIPPER,
+                errors: res_validate.error_res.data.errors
+            })
         }
     }, [res_validate.success, res_validate.failed])
 
@@ -69,11 +76,11 @@ function PageDetailPengirim() {
             // const code = villages.filter((dc) => dc.id === shipper_zone.subdistrict_shipper)
             // console.log("code", code[0].district_code)
             let par = {
-                gender_shipper: shipper.gender_shipper.value,
-                name_shipper: shipper.name_shipper.value,
-                email_shipper: shipper.email_shipper.value,
-                phone_shipper: shipper.phone_shipper.value,
-                address_shipper: shipper.address_shipper.value,
+                gender_shipper: gender_shipper.value,
+                name_shipper: name_shipper.value,
+                email_shipper: email_shipper.value,
+                phone_shipper: phone_shipper.value,
+                address_shipper: address_shipper.value,
                 province_shipper: province_shipper.value,
                 city_shipper: city_shipper.value,
                 district_shipper: district_shipper.value,

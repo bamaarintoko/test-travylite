@@ -1,7 +1,12 @@
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { UPDATE_VALUE_RECEIVER, UPDATE_VALUE_SHIPPER } from "../reducer/customerReducer";
 
-export default function useInput() {
+export default function useInput(field = "", type = "") {
+    const dispatch = useDispatch()
+    let delay = useRef(null)
+    // console.log("field : ", field)
     const [value, setValue] = useState("")
     const [error, setError] = useState(false)
     const input = <TextField autoComplete={"off"} onBlur={() => {
@@ -18,6 +23,26 @@ export default function useInput() {
     const args = {
         value, input, setValue, setError
     }
-
+    useEffect(() => {
+        updateValueShipper()
+    }, [value])
+    function updateValueShipper() {
+        clearTimeout(delay.current)
+        delay.current = setTimeout(() => {
+            if (type === "RECEIVER") {
+                dispatch({
+                    type: UPDATE_VALUE_RECEIVER,
+                    field,
+                    value
+                })
+            } else {
+                dispatch({
+                    type: UPDATE_VALUE_SHIPPER,
+                    field,
+                    value
+                })
+            }
+        }, 1000)
+    }
     return [args]
 }
