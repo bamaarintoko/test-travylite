@@ -16,6 +16,8 @@ import { deliveryReducer } from "../reducer/deliveryReducer"
 import paketReducer from "../reducer/paketReducer"
 import paymentSummaryReducer from "../reducer/paymentSummaryReducer"
 import virtualAccountReducer from "../reducer/virtualAccountReducer"
+import payWithCreditCardReducer from "../reducer/creditCardReducer"
+import payWithRetailOutletReducer from "../reducer/payWithRetailOutlet"
 import bankFeeReducer from '../reducer/bankFeeReducer';
 
 const middlewares = [];
@@ -42,7 +44,9 @@ export const appReducer = combineReducers({
     formRegisterReducer,
     formLoginReducer,
     dataShipper,
-    dataReceiver
+    dataReceiver,
+    payWithCreditCardReducer,
+    payWithRetailOutletReducer
 })
 const persistConfig = {
     key: 'root',
@@ -58,7 +62,10 @@ const persistConfig = {
         'deliveryReducer',
         'paymentSummaryReducer',
         'virtualAccountReducer',
-        'bankFeeReducer'
+        'bankFeeReducer',
+        'payWithCreditCardReducer',
+        'paymentMethodReducer',
+        'payWithRetailOutletReducer'
     ]
 
 }

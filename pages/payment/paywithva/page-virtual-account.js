@@ -2,12 +2,12 @@
 import { Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
-import { AppBar } from "../../component/AppBar";
-import Contain from "../../component/Container";
-import Content from "../../component/Content";
-import Header from "../../component/Header";
-import withAuth from "../../component/withAuth";
-import { general_style } from "../../component/general_style";
+import { AppBar } from "../../../component/AppBar";
+import Contain from "../../../component/Container";
+import Content from "../../../component/Content";
+import Header from "../../../component/Header";
+import withAuth from "../../../component/withAuth";
+import { general_style } from "../../../component/general_style";
 import ContentCopyTwoToneIcon from '@mui/icons-material/ContentCopyTwoTone';
 function PageVirtualAccount() {
     const { virtualAccountReducer: { va: { data } } } = useSelector(s => s)

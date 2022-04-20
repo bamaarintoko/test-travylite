@@ -17,10 +17,14 @@ import { useGet, usePostData } from "../../helper/request";
 import Loading from "../../component/Loading";
 import FlashMessage from "../../component/FlashMessage";
 import { FILL_VIRTUAL_ACCOUNT } from "../../reducer/virtualAccountReducer";
+import { CREDIT_CARD, RETAIL_OUTLET, VIRTUAL_ACCOUNT } from "../../helper/const";
+import { FILL_CREDIT_CARD } from "../../reducer/creditCardReducer";
+import { FILL_RETAIL_OUTLET } from "../../reducer/payWithRetailOutlet"
 function PageRingkasanPembayaran() {
     const route = useRouter()
     const dispatch = useDispatch()
     const {
+        payWithCreditCardReducer: { value },
         paymentSummaryReducer: { data },
         paymentMethodReducer: { method, group }
     } = useSelector(s => s)
@@ -30,36 +34,56 @@ function PageRingkasanPembayaran() {
     useEffect(() => {
         // console.log(Object.keys(method).length)
         if (res_create_payment.success) {
-            console.log("==> ", res_create_payment)
-            fetch_payment_detail()
+            // console.log("==> ", res_create_payment)
+            if (group === VIRTUAL_ACCOUNT) {
+                fetch_payment_detail()
+            } else if (group === CREDIT_CARD) {
+                dispatch({
+                    type: FILL_CREDIT_CARD,
+                    value: res_create_payment.success_res
+                })
+                route.push("paywithcc/page-credit-card")
+            } else if (group === RETAIL_OUTLET) {
+                dispatch({
+                    type: FILL_RETAIL_OUTLET,
+                    value: res_create_payment.success_res.data
+                })
+                route.push("paywithretailoutlet/page-retail-outlet")
+            }
             res_create_payment.setSuccess(false)
         }
     }, [res_create_payment])
 
     useEffect(() => {
         if (res_payment_detail.success) {
-            console.log("res_payment_detail", res_payment_detail)
-            dispatch({
-                type: FILL_VIRTUAL_ACCOUNT,
-                value: res_payment_detail.success_res
-            })
-            route.push("page-virtual-account")
+            // console.log("res_payment_detail", res_payment_detail)
+            if (group === VIRTUAL_ACCOUNT) {
+                dispatch({
+                    type: FILL_VIRTUAL_ACCOUNT,
+                    value: res_payment_detail.success_res
+                })
+                route.push("paywithva/page-virtual-account")
+            }
             res_payment_detail.setSuccess(false)
         }
     }, [res_payment_detail])
 
     function create_payment() {
         return () => {
-            let par = {
-                orderId: data.order_id,
-                name: group,
-                code: method.code,
-                transaction_fee: method.payment.transaction_fee,
-                tax_amount: method.payment.tax_amount
+            if (method.code === "OVO") {
+                route.push("paywithewallet/page-phone-number")
+            } else {
+                let par = {
+                    orderId: data.order_id,
+                    name: group,
+                    code: method.code,
+                    transaction_fee: method.payment.transaction_fee,
+                    tax_amount: method.payment.tax_amount
 
+                }
+                func_create_payment(par)
+                console.log("par ", par)
             }
-            func_create_payment(par)
-            console.log("par ", par)
         }
     }
 
@@ -158,6 +182,9 @@ function PageRingkasanPembayaran() {
                         </Box>
                     </Stack>
                 </Box>
+
+                {/* <Box dangerouslySetInnerHTML={{ __html: value }} /> */}
+                {/* <div dangerouslySetInnerHTML={{ __HTML: 'First &middot; Second' }} /> */}
             </Content>
             <FlashMessage arg={res_create_payment} />
             <Footer>

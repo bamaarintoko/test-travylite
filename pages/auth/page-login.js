@@ -38,7 +38,7 @@ export default function PageLogin() {
     function do_login() {
         return () => {
             let par = {
-                identity: email_log.value,
+                email: email_log.value,
                 password: password_log.value
             }
             func_login(par,)
@@ -76,6 +76,8 @@ export default function PageLogin() {
     }, [res_login.failed])
 
     useEffect(() => {
+        email_log.setError(email.error)
+        email_log.setErrorMessage(email.error_message)
         password_log.setError(password.error)
         password_log.setErrorMessage(password.error_message)
     }, [email.error, password.error])
