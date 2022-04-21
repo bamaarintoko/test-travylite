@@ -1,9 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import ReCAPTCHA from "react-google-recaptcha";
 import { AppBar } from "../../component/AppBar";
 import ButtonGradient from "../../component/Auth/ButtonGradient";
 import ButtonLoginGoogle from "../../component/Auth/ButtonLoginGoogle";
@@ -23,6 +20,10 @@ import FlashMessage from "../../component/FlashMessage";
 import Loading from "../../component/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { FILL_FORM_REGISTER } from "../../reducer/authReducer";
+import { SITE_KEY } from "../../helper/const";
+
+const recaptchaRef = React.createRef();
+
 export default function PageRegister() {
     const { formRegisterReducer: { email, name, password, password_confirmation } } = useSelector(s => s)
     const dispatch = useDispatch()
@@ -96,7 +97,9 @@ export default function PageRegister() {
                 password: pass_reg.value,
                 password_confirmation: pass_confirm_reg.value
             }
-            func_register(par)
+            // func_register(par)
+            recaptchaRef.current.execute()
+
             // if (nama_value !== '' && email_value !== '' && password_value !== '' && confirmation_password_value != '') {
 
             //     if (confirmation_password_value === password_value) {
@@ -151,22 +154,12 @@ export default function PageRegister() {
             </Footer>
             <FlashMessage arg={res_register} />
             <Loading loading={res_register.loading} />
-            {/* <Snackbar
-                open={reg_failed}
-                autoHideDuration={3000}
-                onClose={() => set_reg_failed(false)}
-                message="Note archived"
-            >
-                <Alert onClose={() => set_reg_failed(false)} severity="error" sx={{ width: '100%' }}>
-                    This is a success message!
-                </Alert>
-            </Snackbar>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={reg_loading}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop> */}
+            <ReCAPTCHA
+                ref={recaptchaRef}
+                size="normal"
+                sitekey={SITE_KEY}
+                onChange={(e) => console.log("e : ", e)}
+            />
         </Contain>
     )
 }

@@ -9,3 +9,7 @@ export const RETAIL_OUTLET = "RETAIL_OUTLET"
 export const EWALLET = "EWALLET"
 export const CREDIT_CARD = "CREDIT_CARD"
 export const QRIS = "QRIS"
+
+// reCAPTCHA
+export const SITE_KEY = "6LfQQ4wfAAAAAHM9rnUcd9kHG6tkvBQ9jfXl2_si"
+export const SECRET_KEY = "6LfQQ4wfAAAAAEeFgvbquRR0MXiFLCRLREUpFSWn"
