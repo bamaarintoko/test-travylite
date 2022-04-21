@@ -15,12 +15,13 @@ import Header from "../../component/Header";
 import LogoAuth from "../../component/LogoAuth";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { usePost, usePostData } from "../../helper/request";
+import { usePost, usePostData, verifyCaptcha } from "../../helper/request";
 import FlashMessage from "../../component/FlashMessage";
 import Loading from "../../component/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { FILL_FORM_REGISTER } from "../../reducer/authReducer";
 import { SITE_KEY } from "../../helper/const";
+import { Box } from "@mui/system";
 
 const recaptchaRef = React.createRef();
 
@@ -29,6 +30,8 @@ export default function PageRegister() {
     const dispatch = useDispatch()
     // const [func_register, reg_success_res, reg_error_res, reg_loading, reg_success, reg_failed, set_reg_failed] = usePost()
     const [func_register, res_register] = usePostData("register")
+    const [_captcha] = verifyCaptcha()
+    const [] = usePostData("")
     const router = useRouter()
     const [open, setOpen] = useState(false);
     // const [nama_input, nama_value, set_nama_error] = useInputAuth("Masukkan Nama")
@@ -141,6 +144,16 @@ export default function PageRegister() {
                     <div style={{ height: 16 }} />
                     {pass_confirm_reg.input}
                     <div style={{ height: 16 }} />
+                    <Box sx={{ alignItems: 'center', justifyContent: "center", display: 'flex' }}>
+                        <ReCAPTCHA
+                            sitekey={SITE_KEY}
+                            onChange={(e) => {
+                                console.log("e : ", e)
+                                _captcha.setCaptcha(e)
+                            }}
+                        />
+                    </Box>
+                    <Box sx={{ height: '24px' }} />
                     <ButtonGradient onClick={do_register()} title={"Daftar Sekarang"} />
                     <LineSeparator />
                     <ButtonLoginGoogle onClick={() => setOpen(true)} title={"Daftar Dengan Google"} />
@@ -154,12 +167,7 @@ export default function PageRegister() {
             </Footer>
             <FlashMessage arg={res_register} />
             <Loading loading={res_register.loading} />
-            <ReCAPTCHA
-                ref={recaptchaRef}
-                size="invisible"
-                sitekey={SITE_KEY}
-                onChange={(e) => console.log("e : ", e)}
-            />
+
         </Contain>
     )
 }

@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useSWR from 'swr'
+import { SECRET_KEY } from "./const";
 
 // let host = "https://159.223.68.70/api/"
 let host = "https://www.travylite.xyz/api/"
@@ -178,4 +179,41 @@ export function usePost() {
         setSuccess: setSuccess
     }
     return [req, feedback]
+}
+
+export function verifyCaptcha() {
+    const [captcha, setCaptcha] = useState("")
+    const url = `https://www.google.com/recaptcha/api/siteverify`;
+
+    console.log("captcha : ", captcha)
+    function execute() {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer ' + access_token,
+
+            },
+            data: {
+                secret: SECRET_KEY,
+                response: captcha
+            },
+            url,
+        };
+        axios(options).then((res) => {
+            console.log("res : ", res)
+        }).catch((e) => {
+            console.log("e : ", e)
+        })
+    }
+
+    useEffect(() => {
+        if (captcha !== "") {
+            execute()
+        }
+    }, [captcha])
+    const args = {
+        captcha, setCaptcha
+    }
+    return [args]
 }
