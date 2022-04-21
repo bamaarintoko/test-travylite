@@ -183,7 +183,11 @@ export function usePost() {
 
 export function verifyCaptcha() {
     const [captcha, setCaptcha] = useState("")
-    const url = `https://www.google.com/recaptcha/api/siteverify`;
+    const [success, setSuccess] = useState(false)
+    const [failed, setFailed] = useState(false)
+    const [success_response, setSuccessResponse] = useState({})
+    const [failed_response, setFailedResponse] = useState({})
+    const url = `/api/verification`;
 
     console.log("captcha : ", captcha)
     function execute() {
@@ -191,18 +195,23 @@ export function verifyCaptcha() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer ' + access_token,
-
             },
-            data: {
-                secret: SECRET_KEY,
-                response: captcha
+            params: {
+                captcha: captcha
             },
             url,
         };
         axios(options).then((res) => {
+            setSuccess(true)
+            setFailed(false)
+            setSuccessResponse(res)
+            setFailedResponse({})
             console.log("res : ", res)
         }).catch((e) => {
+            setSuccess(false)
+            setFailed(true)
+            setSuccessResponse({})
+            setFailedResponse(e)
             console.log("e : ", e)
         })
     }
@@ -213,7 +222,7 @@ export function verifyCaptcha() {
         }
     }, [captcha])
     const args = {
-        captcha, setCaptcha
+        captcha, setCaptcha, success, success_response, failed, failed_response
     }
     return [args]
 }
