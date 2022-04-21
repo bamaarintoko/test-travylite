@@ -156,7 +156,7 @@ export default function PageRegister() {
             <Loading loading={res_register.loading} />
             <ReCAPTCHA
                 ref={recaptchaRef}
-                size="normal"
+                size="invisible"
                 sitekey={SITE_KEY}
                 onChange={(e) => console.log("e : ", e)}
             />
