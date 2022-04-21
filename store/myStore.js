@@ -19,7 +19,7 @@ import virtualAccountReducer from "../reducer/virtualAccountReducer"
 import payWithCreditCardReducer from "../reducer/creditCardReducer"
 import payWithRetailOutletReducer from "../reducer/payWithRetailOutlet"
 import bankFeeReducer from '../reducer/bankFeeReducer';
-
+import captchaReducer from '../reducer/captchaReducer'
 const middlewares = [];
 if (process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`);
@@ -46,7 +46,8 @@ export const appReducer = combineReducers({
     dataShipper,
     dataReceiver,
     payWithCreditCardReducer,
-    payWithRetailOutletReducer
+    payWithRetailOutletReducer,
+    captchaReducer
 })
 const persistConfig = {
     key: 'root',

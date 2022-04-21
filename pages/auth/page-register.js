@@ -22,35 +22,67 @@ import { useDispatch, useSelector } from "react-redux";
 import { FILL_FORM_REGISTER } from "../../reducer/authReducer";
 import { SITE_KEY } from "../../helper/const";
 import { Box } from "@mui/system";
+import { FILL_CAPTCHA } from "../../reducer/captchaReducer";
 
 const recaptchaRef = React.createRef();
 
 export default function PageRegister() {
-    const { formRegisterReducer: { email, name, password, password_confirmation } } = useSelector(s => s)
+    const { formRegisterReducer: { email, name, password, password_confirmation }, captchaReducer: { valid } } = useSelector(s => s)
+    const [showCaptcha, setShowCaptcha] = useState(false)
+    const router = useRouter()
     const dispatch = useDispatch()
-    // const [func_register, reg_success_res, reg_error_res, reg_loading, reg_success, reg_failed, set_reg_failed] = usePost()
+
     const [func_register, res_register] = usePostData("register")
     const [_captcha] = verifyCaptcha()
-    const [] = usePostData("")
-    const router = useRouter()
     const [open, setOpen] = useState(false);
-    // const [nama_input, nama_value, set_nama_error] = useInputAuth("Masukkan Nama")
     const [name_reg] = useInputAuth("Masukkan Nama")
     const [email_reg] = useInputAuth("Masukkan Email")
-    // const [password_input, password_value, set_password_error] = useInputPassword("Masukkan Kata Sandi")
     const [pass_reg] = useInputPassword("Masukkan Kata Sandi")
     const [pass_confirm_reg] = useInputPassword("Konfirmasi Kata Sandi")
 
     useEffect(() => {
         if (res_register.failed) {
             dispatch({
+                type: FILL_CAPTCHA,
+                value: false
+            })
+            recaptchaRef.current.reset()
+            dispatch({
                 type: FILL_FORM_REGISTER,
                 data: res_register.error_res.data.errors
             })
+            // setShowCaptcha(true)
             console.log("res_register : ", res_register.error_res.data.errors)
         }
-    }, [res_register.failed])
 
+        if (res_register.success) {
+            dispatch({
+                type: FILL_CAPTCHA,
+                value: false
+            })
+            recaptchaRef.current.reset()
+            // setShowCaptcha(false)
+        }
+
+    }, [res_register.failed, res_register.success])
+
+    useEffect(() => {
+        if (valid) {
+            execute_register()
+        }
+    }, [valid])
+
+    useEffect(() => {
+        if (_captcha.success) {
+            dispatch({
+                type: FILL_CAPTCHA,
+                value: true
+            })
+            // execute_register()
+            _captcha.setSuccess(false)
+        }
+        console.log("_captcha : ", _captcha)
+    }, [_captcha])
     useEffect(() => {
         console.log("email : ", email)
         email_reg.setError(email.error)
@@ -72,6 +104,22 @@ export default function PageRegister() {
 
         setOpen(false);
     };
+
+    function execute_register() {
+        dispatch({
+            type: FILL_FORM_REGISTER,
+            data: {}
+        })
+        let par = {
+            name: name_reg.value,
+            email: email_reg.value,
+            password: pass_reg.value,
+            password_confirmation: pass_confirm_reg.value
+        }
+        if (valid) {
+            func_register(par)
+        }
+    }
 
     function do_register() {
         return () => {
@@ -101,8 +149,11 @@ export default function PageRegister() {
                 password_confirmation: pass_confirm_reg.value
             }
             // func_register(par)
-            recaptchaRef.current.execute()
+            // recaptchaRef.current.execute()
 
+            if (name_reg.value !== '' && email_reg.value !== '' && pass_reg.value !== '' && pass_confirm_reg.value != '') {
+                setShowCaptcha(true)
+            }
             // if (nama_value !== '' && email_value !== '' && password_value !== '' && confirmation_password_value != '') {
 
             //     if (confirmation_password_value === password_value) {
@@ -146,6 +197,7 @@ export default function PageRegister() {
                     <div style={{ height: 16 }} />
                     <Box sx={{ alignItems: 'center', justifyContent: "center", display: 'flex' }}>
                         <ReCAPTCHA
+                            ref={recaptchaRef}
                             sitekey={SITE_KEY}
                             onChange={(e) => {
                                 console.log("e : ", e)

@@ -222,7 +222,7 @@ export function verifyCaptcha() {
         }
     }, [captcha])
     const args = {
-        captcha, setCaptcha, success, success_response, failed, failed_response
+        captcha, setCaptcha, success, success_response, failed, failed_response, setSuccess, setFailed
     }
     return [args]
 }
