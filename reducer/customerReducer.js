@@ -388,7 +388,7 @@ export function customerReducer(state = initialCustomerReducer, action) {
         case FILL_ERROR_RECIPIENT:
             const err_recipient = { ...state }
             Object.keys(err_recipient.recipient_zone).map((key, index) => {
-                //////console.log("key", key)
+                // console.log("key", key)
                 if (key in action.errors) {
                     err_recipient.recipient_zone[key].error = true
                     err_recipient.recipient_zone[key].error_message = action.errors[key][0]
