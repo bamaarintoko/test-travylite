@@ -14,13 +14,14 @@ import { general_style } from "../../../component/general_style";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import withAuth from "../../../component/withAuth";
+import useGeneralInput from "../../../custom_hook/useGeneralInput";
 
 function PageDetailPenitipanBagasi() {
     const { authReducer: { access_token } } = useSelector((state) => state)
     const route = useRouter()
-    const [berat_value, berat_input] = useInputNumber()
-    const [jumlah_value, jumlah_input] = useInputNumber()
-    const [deskripsi_value, deskripsi_input] = useTextArea()
+    const [weight] = useInputNumber()
+    const [quantity] = useInputNumber()
+    const [description] = useGeneralInput(true)
     return (
         <Contain>
             <Header>
@@ -32,23 +33,19 @@ function PageDetailPenitipanBagasi() {
                         <Stack direction="row" spacing={2}>
                             <Stack>
                                 <span style={general_style.heading_dark_bold}>Berat</span>
-                                {berat_input}
+                                {weight.input}
                             </Stack>
                             <Stack>
                                 <span style={general_style.heading_dark_bold}>Jumlah</span>
-                                {jumlah_input}
+                                {quantity.input}
                             </Stack>
                         </Stack>
                         <span style={general_style.heading_dark_bold}>Deskripsi Bagasi</span>
-                        {deskripsi_input}
+                        {description.input}
                     </Stack>
                 </Grid>
                 <div style={{ height: 16 }} />
                 <Grid item xs={12} md={12}>
-                    <div>
-                        <span className={styles.text_normal_black}>Deskripsi Bagasi</span>
-                        {deskripsi_input}
-                    </div>
                     <div style={{ height: 16 }} />
                     <div>
                         <span className={styles.text_normal_black}>Upload Foto Bagasi Anda</span>
@@ -59,7 +56,7 @@ function PageDetailPenitipanBagasi() {
                 </Grid>
             </Content>
             <Footer style={{ padding: 16 }}>
-                <Button onClick={() => {
+                <Button sx={general_style.primary_button} onClick={() => {
                     route.push('/kurir/page-pilihan-pengiriman')
                 }} fullWidth variant="contained">Konfirmasi</Button>
             </Footer>

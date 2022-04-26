@@ -132,5 +132,17 @@ export const general_style = {
     primary_button: {
         backgroundColor: "#0065AF",
         borderRadius: '16px'
+    },
+    bg_white: {
+        background: '#FEFEFE',
+        boxShadow: '0px 16px 24px #F2F2F2',
+    },
+    bg_gradient: {
+        background: 'linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)',
+        boxShadow: '0px 16px 24px #F2F2F2'
+    }
+    ,
+    bg_white_no_shadow:{
+        background: '#FEFEFE'
     }
 }

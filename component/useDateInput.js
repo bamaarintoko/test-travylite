@@ -16,5 +16,8 @@ export default function useDateInput() {
             renderInput={(params) => <TextField {...params} fullWidth id="standard-basic" variant="standard" />}
         />
     </LocalizationProvider>
-    return [value, input]
+    const args = {
+        value, input
+    }
+    return [args]
 }
