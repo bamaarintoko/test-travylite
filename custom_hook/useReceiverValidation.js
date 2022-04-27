@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePostData } from "../helper/request";
 import { FILL_ERROR_RECIPIENT, UPDATE_ERROR_RECEIVER } from "../reducer/customerReducer";
 
-export default function useReceiverValidation() {
+export default function useReceiverValidation(endpoint="extra-baggage/step-detail-receiver") {
     const dispatch = useDispatch()
     const {
         dataReceiver: {
@@ -23,7 +23,7 @@ export default function useReceiverValidation() {
         }
     } = useSelector(s => s)
 
-    const [receiver_validate, receiver_response] = usePostData("extra-baggage/step-detail-receiver")
+    const [receiver_validate, receiver_response] = usePostData(endpoint)
 
     useEffect(() => {
         if (receiver_response.failed) {

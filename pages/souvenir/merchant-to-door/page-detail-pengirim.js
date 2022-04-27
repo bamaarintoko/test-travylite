@@ -7,8 +7,10 @@ import { AppBar } from "../../../component/AppBar";
 import Contain from "../../../component/Container";
 import Content from "../../../component/Content";
 import Footer from "../../../component/Footer";
+import FormShipper from "../../../component/FormShipper";
 import { general_style } from "../../../component/general_style";
 import Header from "../../../component/Header";
+import RegionShipper from "../../../component/RegionShipper";
 import useInput from "../../../component/useInput";
 import useInputSelect from "../../../component/useInputSelect";
 import useTextArea from "../../../component/useTextArea";
@@ -34,25 +36,13 @@ function PageDetailPengirim() {
                         <span style={general_style.heading_dark_bold}>Merchant to Door</span>
                     </Box>
                 </Stack>
-                <Stack spacing={0} sx={{ padding: '16px' }}>
-                    <Label title={"Gelar & Nama Lengkap Pengirim"} />
-                    <Stack direction="row" spacing={1}>
-                        {gelar_select}
-                        {full_name_input}
-                    </Stack>
-                    <Divider />
-                    <Label title={"Email Pengirim"} />
-                    {email_input}
-                    <Divider />
-                    <Label title={"Konfirmasi Email Pengirim"} />
-                    {email_konfirmasi_input}
-                    <Divider />
-                    <Label title={"Alamat Lengkap Penerima"} />
-                    {alamat_input}
-                    <Divider />
-                    <Label title={"Kelurahan"} />
-                    {kelurahan_select}
-                    <Divider />
+                <Stack spacing={0} sx={{padding:'16px'}}>
+                    <FormShipper/>
+                    <Divider/>
+                    <RegionShipper/>
+                    <Divider/>
+                    <Divider/>
+                    <Divider/>
                 </Stack>
             </Content>
             <Footer style={{ padding: 16, backgroundColor: "#FFF" }}>

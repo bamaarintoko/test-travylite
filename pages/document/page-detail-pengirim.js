@@ -15,6 +15,8 @@ import useInput from "../../component/useInput";
 import useInputSelect from "../../component/useInputSelect";
 import useTextArea from "../../component/useTextArea";
 import withAuth from "../../component/withAuth";
+import useBeautyAlert from "../../custom_hook/useBeautyAlert";
+import useShipperValidation from "../../custom_hook/useShipperValidation";
 import { usePostData } from "../../helper/request";
 import { FILL_ERROR_SHIPPER } from "../../reducer/customerReducer";
 import { Divider, Label } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
@@ -22,46 +24,43 @@ import { Divider, Label } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
 function PageDetailPengirim() {
     const route = useRouter()
     const dispatch = useDispatch()
-    const {
-        customerReducer: {
-            shipper,
-            shipper_zone: {
-                province_shipper, city_shipper, district_shipper, subdistrict_shipper, district_code_shipper }
-        }
-    } = useSelector(s => s)
-
-    const [func_validate, res_validate] = usePostData("smartbox/step-detail-shipper")
-
+    const [msg] = useBeautyAlert()
+    const [shipper] = useShipperValidation("smartbox/step-detail-shipper")
+    
     useEffect(() => {
-        if (res_validate.success) {
-            route.push('page-konfirmasi-pesanan')
+        if (shipper.failed) {
+            msg.setSeverity("error")
+            msg.setOpen(true)
+            msg.setMessage(shipper.error_response.message)
         }
-        if (res_validate.failed) {
-            // dispatch({
-            //     type: FILL_ERROR_SHIPPER,
-            //     erros: res_validate.error_res.data.errors
-            // })
+
+        if (shipper.success) {
+            msg.setSeverity("success")
+            msg.setOpen(true)
+            msg.setMessage(shipper.success_response.message)
+            route.push("page-konfirmasi-pesanan")
         }
-    }, [res_validate.success, res_validate.failed])
+    }, [shipper.success, shipper.failed])
 
     // page-konfirmasi-pesanan
 
     function on_confirm() {
         return () => {
-            let par = {
-                gender_shipper: shipper.gender_shipper.value,
-                name_shipper: shipper.name_shipper.value,
-                email_shipper: shipper.email_shipper.value,
-                phone_shipper: shipper.phone_shipper.value,
-                address_shipper: shipper.address_shipper.value,
-                province_shipper: province_shipper.value,
-                city_shipper: city_shipper.value,
-                district_shipper: district_shipper.value,
-                subdistrict_shipper: subdistrict_shipper.value,
-                district_code_shipper: district_code_shipper.value
-            }
-            func_validate(par)
-            console.log(par)
+            shipper.on_validate()
+            // let par = {
+            //     gender_shipper: shipper.gender_shipper.value,
+            //     name_shipper: shipper.name_shipper.value,
+            //     email_shipper: shipper.email_shipper.value,
+            //     phone_shipper: shipper.phone_shipper.value,
+            //     address_shipper: shipper.address_shipper.value,
+            //     province_shipper: province_shipper.value,
+            //     city_shipper: city_shipper.value,
+            //     district_shipper: district_shipper.value,
+            //     subdistrict_shipper: subdistrict_shipper.value,
+            //     district_code_shipper: district_code_shipper.value
+            // }
+            // func_validate(par)
+            // console.log(par)
         }
     }
     return (
@@ -71,7 +70,7 @@ function PageDetailPengirim() {
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>
-                    <FormShipper status={false} />
+                    <FormShipper/>
                     <Divider />
                     <RegionShipper />
                     <Divider />
@@ -94,8 +93,9 @@ function PageDetailPengirim() {
                     <Divider /> */}
                 </Stack>
             </Content>
-            <FlashMessage arg={res_validate} />
-            <Loading loading={res_validate.loading} />
+            {msg.alert}
+            {/* <FlashMessage arg={res_validate} /> */}
+            <Loading loading={shipper.loading} />
             <Footer style={{ padding: 16, backgroundColor: "#FFF" }}>
                 <Button
                     sx={{ backgroundColor: "#0065AF", borderRadius: "16px" }}

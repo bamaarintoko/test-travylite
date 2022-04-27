@@ -18,7 +18,7 @@ function PageDetailPengirim() {
     const route = useRouter()
     const [msg] = useBeautyAlert()
 
-    const [shipper] = useShipperValidation()
+    const [shipper] = useShipperValidation("left-baggage/step-detail-shipper")
     useEffect(() => {
         if (shipper.failed) {
             msg.setSeverity("error")
@@ -46,7 +46,7 @@ function PageDetailPengirim() {
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>
-                    <FormShipper status={false} />
+                    <FormShipper />
                     <Divider />
                     <RegionShipper />
                     <Divider />

@@ -1,4 +1,4 @@
-
+// #1
 import React, { useEffect } from "react";
 import { Container, Grid, Stack } from "@mui/material";
 import Contain from "../../component/Container";
@@ -52,7 +52,7 @@ function PageDetailPesanan() {
     const [fetch_summary_payment, res_sumarry_payment] = useGet()
     useEffect(() => {
         if (extra_baggage.response.success) {
-            console.log("extra_baggage", extra_baggage)
+            // console.log("extra_baggage", extra_baggage)
             fetch_payment_summary()
             // route.push("page-ringkasan-pembayaran")
         }
@@ -60,7 +60,7 @@ function PageDetailPesanan() {
 
     useEffect(() => {
         if (res_sumarry_payment.success) {
-            console.log("res_sumarry_payment", res_sumarry_payment)
+            // console.log("res_sumarry_payment", res_sumarry_payment)
             dispatch({
                 type: FILL_PAYMENT_SUMMARY,
                 value: res_sumarry_payment.success_res.data

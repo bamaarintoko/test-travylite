@@ -6,8 +6,10 @@ import { AppBar } from "../../../component/AppBar";
 import Contain from "../../../component/Container";
 import Content from "../../../component/Content";
 import Footer from "../../../component/Footer";
+import FormRecipient from "../../../component/FormRecipient";
 import { general_style } from "../../../component/general_style";
 import Header from "../../../component/Header";
+import RegionRecipient from "../../../component/RegionRecipient";
 import useInput from "../../../component/useInput";
 import useInputSelect from "../../../component/useInputSelect";
 import useTextArea from "../../../component/useTextArea";
@@ -34,18 +36,10 @@ function PageDetailPenerima() {
                     </Box>
                 </Stack>
                 <Stack spacing={0} sx={{ padding: '16px' }}>
-                    <Label title={"Gelar & Nama Lengkap Pengirim"} />
-                    <Stack direction="row" spacing={1}>
-                        {gelar_select}
-                        {full_name_input}
-                    </Stack>
-                    <Divider />
-                    <Label title={"Alamat Lengkap Penerima"} />
-                    {alamat_input}
-                    <Divider />
-                    <Label title={"Kelurahan"} />
-                    {kelurahan_select}
-                    <Divider />
+                    <FormRecipient/>
+                    <Divider/>
+                    <RegionRecipient/>
+                    <Divider/>
                 </Stack>
             </Content>
             <Footer style={{ padding: 16, backgroundColor: "#FFF" }}>

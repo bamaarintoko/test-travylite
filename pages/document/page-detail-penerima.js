@@ -15,46 +15,34 @@ import useInput from "../../component/useInput";
 import useInputSelect from "../../component/useInputSelect";
 import useTextArea from "../../component/useTextArea";
 import withAuth from "../../component/withAuth";
+import useBeautyAlert from "../../custom_hook/useBeautyAlert";
+import useReceiverValidation from "../../custom_hook/useReceiverValidation";
 import { usePostData } from "../../helper/request";
 import { Divider, Label } from "../bagasi/ekstra-bagasi/page-detail-pengirim";
 
 function PageDetailPenerima() {
+    const [receiver] = useReceiverValidation("smartbox/step-detail-receiver")
+    const [msg] = useBeautyAlert()
     const route = useRouter();
-    const dispatch = useDispatch();
-    const {
-        customerReducer: {
-            recipient,
-            recipient_zone: {
-                province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver
-            }
-        },
-        zoneRecipient: {
-            villages
-        }
-    } = useSelector(s => s)
-    const [func_validate, res_validate] = usePostData("smartbox/step-detail-receiver")
 
     useEffect(() => {
-        if (res_validate.success) {
+        if (receiver.success) {
+            msg.setSeverity("success")
+            msg.setOpen(true)
+            msg.setMessage(receiver.success_response.message)
             route.push("page-detail-pengirim")
         }
-    }, [res_validate.success])
+
+        if (receiver.failed) {
+            msg.setSeverity("error")
+            msg.setOpen(true)
+            msg.setMessage(receiver.error_response.message)
+        }
+    }, [receiver.success, receiver.failed])
 
     function on_confirm() {
         return () => {
-            let par = {
-                gender_receiver: recipient.gender_receiver.value,
-                name_receiver: recipient.name_receiver.value,
-                phone_receiver: recipient.phone_receiver.value,
-                address_receiver: recipient.address_receiver.value,
-                province_receiver: province_receiver.value,
-                city_receiver: city_receiver.value,
-                district_receiver: district_receiver.value,
-                subdistrict_receiver: subdistrict_receiver.value,
-                district_code_receiver: district_code_receiver.value
-            }
-            func_validate(par)
-            console.log(par)
+            receiver.on_validate()
         }
     }
 
@@ -65,25 +53,13 @@ function PageDetailPenerima() {
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>
-                    <FormRecipient status={false} />
+                    <FormRecipient />
                     <Divider />
                     <RegionRecipient />
-                    {/* <Label title={"Gelar & Nama Lengkap Pengirim"} />
-                    <Stack direction="row" spacing={1}>
-                        {gelar_select}
-                        {full_name_input}
-                    </Stack>
-                    <Label title={"Alamat Lengkap Penerima"} />
-                    {alamat_input}
-                    <Divider />
-                    <Label title={"Kelurahan"} />
-                    {kelurahan_select}
-                    <Divider /> */}
                 </Stack>
             </Content>
-            <FlashMessage arg={res_validate} />
-            <Loading loading={res_validate.loading} />
-            {/* page-detail-pengirim */}
+            {msg.alert}
+            <Loading loading={receiver.loading} />
             <Footer style={{ padding: 16, backgroundColor: "#FFF" }}>
                 <Button
                     sx={{ backgroundColor: '#0065AF', borderRadius: '16px' }}

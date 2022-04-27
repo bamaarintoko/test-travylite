@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePostData } from "../helper/request";
 import { FILL_ERROR_SHIPPER, UPDATE_ERROR_SHIPPER } from "../reducer/customerReducer";
 
-export default function useShipperValidation() {
+export default function useShipperValidation(endpoint="") {
     const dispatch = useDispatch()
     const {
         dataShipper: {
@@ -15,7 +15,7 @@ export default function useShipperValidation() {
         },
     } = useSelector(s => s)
 
-    const [shipper_validate, shipper_response] = usePostData("left-baggage/step-detail-shipper")
+    const [shipper_validate, shipper_response] = usePostData(endpoint)
 
     useEffect(() => {
         if (shipper_response.failed) {

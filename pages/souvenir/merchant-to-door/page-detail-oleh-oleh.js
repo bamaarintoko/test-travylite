@@ -12,6 +12,7 @@ import useInputNumber from "../../../component/useInputNumber";
 import useTextArea from "../../../component/useTextArea";
 import AddIcon from '@mui/icons-material/Add';
 import withAuth from "../../../component/withAuth";
+import DetailPaket from "../../../component/DetailPaket";
 
 function PageDetailOlehOleh() {
     const [berat_value, berat_input] = useInputNumber()
@@ -30,8 +31,9 @@ function PageDetailOlehOleh() {
                         <span style={general_style.heading_dark_bold}>Merchant to Door</span>
                     </Box>
                 </Stack>
-                <Stack spacing={2} sx={{padding:'16px'}}>
-                    <Stack direction="row" spacing={2}>
+                <Stack spacing={2} sx={{ padding: '16px' }}>
+                    <DetailPaket status={false} />
+                    {/* <Stack direction="row" spacing={2}>
                         <Stack sx={{ display: 'flex', flex: 1 }}>
                             <span style={general_style.heading_dark_bold}>Berat</span>
                             {berat_input}
@@ -42,7 +44,7 @@ function PageDetailOlehOleh() {
                         </Stack>
                     </Stack>
                     <span style={general_style.heading_dark_bold}>Deskripsi Bagasi</span>
-                    {deskripsi_input}
+                    {deskripsi_input} */}
                 </Stack>
             </Content>
             <Footer style={{ padding: 16, backgroundColor: "#FFF" }}>

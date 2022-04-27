@@ -1,3 +1,4 @@
+// #1
 import { Button, Grid, Stack } from "@mui/material";
 import React from "react";
 import { AppBar } from "../../component/AppBar";
@@ -11,11 +12,15 @@ import { general_style } from "../../component/general_style";
 import Ketentuan from "../../component/Ketentuan";
 import { useRouter } from "next/router";
 import withAuth from "../../component/withAuth";
+import { useDispatch } from "react-redux";
+import { DOCUMENT_DELIVERY } from "../../helper/const";
+import { FILL_DELIVERY_TYPE } from "../../reducer/deliveryReducer";
 
 // import { Ketentuan } from "../ekstra-bagasi/page-ketentuan";
 
 function PagePengirimanDokumen() {
     const route = useRouter()
+    const dispatch = useDispatch()
     return (
         <Contain>
             <Header>
@@ -83,7 +88,13 @@ function PagePengirimanDokumen() {
                                     marginBottom: '24px'
                                 }} />
                                 <Box sx={{ paddingBottom: '16px' }}>
-                                    <Button onClick={() => route.push("page-pilih-smart-box")} sx={{
+                                    <Button onClick={() => {
+                                        dispatch({
+                                            type:FILL_DELIVERY_TYPE,
+                                            value:DOCUMENT_DELIVERY
+                                        })
+                                        route.push("page-pilih-smart-box")
+                                    }} sx={{
                                         backgroundColor: '#0065AF',
                                         borderRadius: '16px'
                                     }} fullWidth variant="contained">Lanjutkan</Button>

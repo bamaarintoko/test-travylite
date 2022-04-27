@@ -15,7 +15,7 @@ import useShipperValidation from '../../../custom_hook/useShipperValidation';
 import useBeautyAlert from '../../../custom_hook/useBeautyAlert';
 import Loading from '../../../component/Loading';
 function PageDetailPengirim() {
-    const [shipper] = useShipperValidation()
+    const [shipper] = useShipperValidation("extra-baggage/step-detail-shipper")
     const [msg] = useBeautyAlert()
     const route = useRouter()
 

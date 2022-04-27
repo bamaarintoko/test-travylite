@@ -1,7 +1,9 @@
+// #1
 import { Button, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { AppBar } from "../../component/AppBar";
 import Contain from "../../component/Container";
 import Content from "../../component/Content";
@@ -9,9 +11,12 @@ import Footer from "../../component/Footer";
 import { general_style } from "../../component/general_style";
 import Header from "../../component/Header";
 import Ketentuan from "../../component/Ketentuan";
+import { SOUVENIR } from "../../helper/const";
+import { FILL_DELIVERY_TYPE } from "../../reducer/deliveryReducer";
 
 export default function PageSouvenir() {
     const route = useRouter()
+    const dispatch = useDispatch()
     return (
         <Contain>
             <Header>
@@ -80,7 +85,13 @@ export default function PageSouvenir() {
                                     marginBottom: '24px'
                                 }} />
                                 <Box sx={{ paddingBottom: '16px' }}>
-                                    <Button onClick={() => route.push("page-pick-up")} sx={{
+                                    <Button onClick={() => {
+                                        dispatch({
+                                            type: FILL_DELIVERY_TYPE,
+                                            value: SOUVENIR
+                                        })
+                                        route.push("page-pick-up")
+                                    }} sx={{
                                         backgroundColor: '#0065AF',
                                         borderRadius: '16px'
                                     }} fullWidth variant="contained">Lanjutkan</Button>

@@ -14,7 +14,7 @@ import useReceiverValidation from '../../../custom_hook/useReceiverValidation';
 import useBeautyAlert from '../../../custom_hook/useBeautyAlert';
 import Loading from '../../../component/Loading';
 function PageDetailPenerima() {
-    const [receiver] = useReceiverValidation()
+    const [receiver] = useReceiverValidation("extra-baggage/step-detail-receiver")
     const [msg] = useBeautyAlert()
     const route = useRouter()
 

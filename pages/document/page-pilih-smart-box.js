@@ -1,3 +1,4 @@
+// #2
 import React, { useEffect, useState } from "react";
 import { Grid, Stack, Box, Button } from "@mui/material";
 import Select from '@mui/material/Select';
@@ -20,26 +21,6 @@ import { useGet } from "../../helper/request";
 import { useDispatch, useSelector } from "react-redux";
 import { FILL_LOCATIONS, FILL_SMARTBOXS, SELECTED_LOCATION, SELECTED_SMART_BOX } from "../../reducer/smartboxReducer";
 import Loading from "../../component/Loading";
-const smartBoxArr = [
-    {
-        label: "Ukuran Kecil",
-        desc: "350 mm x 95 mm x 450 mm",
-        stok: 10,
-        value: "small"
-    },
-    {
-        label: "Ukuran Sedang",
-        desc: "350 mm x 206 mm x 450 mm",
-        stok: 15,
-        value: "medium"
-    },
-    {
-        label: "Ukuran Besar",
-        desc: "350 mm x 317 mm x 450 mm",
-        stok: 7,
-        value: "large"
-    },
-]
 
 function PagePilihSmartBox() {
     const router = useRouter();

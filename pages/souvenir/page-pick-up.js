@@ -1,3 +1,4 @@
+// #2
 import { Button, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -16,15 +17,17 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import { useRouter } from 'next/router'
 import withAuth from "../../component/withAuth";
+import useGeneralDateInput from "../../custom_hook/useGeneralDateInput";
+import useGeneralInput from "../../custom_hook/useGeneralInput";
 
 function PagePickUp() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [toko_value, toko_select, setToko] = useInputSelect()
-    const [alamat_value, alamat_input] = useTextArea();
-    const [date_value, date_input] = useDateInput()
+    const [_store] = useInputSelect()
+    const [_address] = useGeneralInput(true);
+    const [_date] = useDateInput()
 
     const route = useRouter()
 
@@ -39,19 +42,19 @@ function PagePickUp() {
                     <Box>
                         <Stack>
                             <Label title={"Nama Toko"} />
-                            {toko_select}
+                            {_store.select}
                         </Stack>
                     </Box>
                     <Box>
                         <Stack>
                             <Label title={"Alamat Toko"} />
-                            {alamat_input}
+                            {_address.input}
                         </Stack>
                     </Box>
                     <Box>
                         <Stack>
                             <Label title={"Hari dan Tanggal Pick Up"} />
-                            {date_input}
+                            {_date.input}
                         </Stack>
                     </Box>
                 </Stack>
