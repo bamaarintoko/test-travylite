@@ -1,7 +1,8 @@
 import { Button, Stack } from "@mui/material";
 import { Box } from "@mui/system";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppBar } from "../../../component/AppBar";
 import Contain from "../../../component/Container";
 import Content from "../../../component/Content";
@@ -13,8 +14,11 @@ import Loading from "../../../component/Loading";
 import useInputNumber from "../../../component/useInputNumber";
 import withAuth from "../../../component/withAuth";
 import { usePostData } from "../../../helper/request";
+import { FILL_E_WALLET } from "../../../reducer/payWithEwalletReducer";
 
 function PagePhoneNumber() {
+    const dispatch = useDispatch()
+    const route = useRouter()
     const {
         paymentSummaryReducer: { data },
         paymentMethodReducer: { method, group }
@@ -26,6 +30,13 @@ function PagePhoneNumber() {
     useEffect(() => {
         if (res_create_payment.failed) {
             console.log("res_create_payment : ", res_create_payment)
+        }
+        if (res_create_payment.success) {
+            dispatch({
+                type: FILL_E_WALLET,
+                value: res_create_payment.success_res.data
+            })
+            route.push("paywithewallet/page-ewallet")
         }
     }, [res_create_payment.failed, res_create_payment.success])
 

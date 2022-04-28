@@ -18,6 +18,7 @@ import paymentSummaryReducer from "../reducer/paymentSummaryReducer"
 import virtualAccountReducer from "../reducer/virtualAccountReducer"
 import payWithCreditCardReducer from "../reducer/creditCardReducer"
 import payWithRetailOutletReducer from "../reducer/payWithRetailOutlet"
+import payWithEwalletReducer from "../reducer/payWithEwalletReducer"
 import bankFeeReducer from '../reducer/bankFeeReducer';
 import captchaReducer from '../reducer/captchaReducer'
 import boothTravyliteReducer from "../reducer/boothTravyliteReducer"
@@ -49,7 +50,8 @@ export const appReducer = combineReducers({
     payWithCreditCardReducer,
     payWithRetailOutletReducer,
     captchaReducer,
-    boothTravyliteReducer
+    boothTravyliteReducer,
+    payWithEwalletReducer
 })
 const persistConfig = {
     key: 'root',
@@ -68,7 +70,8 @@ const persistConfig = {
         'bankFeeReducer',
         'payWithCreditCardReducer',
         'paymentMethodReducer',
-        'payWithRetailOutletReducer'
+        'payWithRetailOutletReducer',
+        'payWithEwalletReducer'
     ]
 
 }

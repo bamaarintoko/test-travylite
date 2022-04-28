@@ -17,9 +17,10 @@ import { useGet, usePostData } from "../../helper/request";
 import Loading from "../../component/Loading";
 import FlashMessage from "../../component/FlashMessage";
 import { FILL_VIRTUAL_ACCOUNT } from "../../reducer/virtualAccountReducer";
-import { CREDIT_CARD, RETAIL_OUTLET, VIRTUAL_ACCOUNT } from "../../helper/const";
+import { CREDIT_CARD, DANA, EWALLET, LINKAJA, RETAIL_OUTLET, VIRTUAL_ACCOUNT } from "../../helper/const";
 import { FILL_CREDIT_CARD } from "../../reducer/creditCardReducer";
 import { FILL_RETAIL_OUTLET } from "../../reducer/payWithRetailOutlet"
+import { FILL_E_WALLET } from "../../reducer/payWithEwalletReducer";
 function PageRingkasanPembayaran() {
     const route = useRouter()
     const dispatch = useDispatch()
@@ -49,6 +50,14 @@ function PageRingkasanPembayaran() {
                     value: res_create_payment.success_res.data
                 })
                 route.push("paywithretailoutlet/page-retail-outlet")
+            } else if (group === EWALLET) {
+                if (method.code === LINKAJA || method.code === DANA) {
+                    dispatch({
+                        type: FILL_E_WALLET,
+                        value: res_create_payment.success_res.data
+                    })
+                    route.push("paywithewallet/page-ewallet")
+                }
             }
             res_create_payment.setSuccess(false)
         }

@@ -13,3 +13,6 @@ export const QRIS = "QRIS"
 // reCAPTCHA
 export const SITE_KEY = "6LeEUIwfAAAAAKtTU83IxHKcqCflF1NFDh46-XbH"
 export const SECRET_KEY = "6LeEUIwfAAAAANwYaRl5RPkYqPVCm-KBkDCy4jNe"
+
+export const DANA = "DANA"
+export const LINKAJA = "LINKAJA"
