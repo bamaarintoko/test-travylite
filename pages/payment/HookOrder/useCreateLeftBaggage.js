@@ -1,22 +1,42 @@
 export default function useCreateLeftBaggage() {
-
+    const {
+        dataShipper: {
+            gender_shipper,
+            name_shipper,
+            phone_shipper,
+            email_shipper,
+            email_confirimation_shipper,
+            address_shipper
+        },
+        formLeftBaggageDetailLuggage: {
+            weight, quantity, description
+        },
+        courierReducer: {
+            selected_courier: {
+                data
+            }
+        },
+        boothTravyliteReducer: {
+            selected_booth
+        }
+    } = useSelector(s => s)
     let par = {
-        gender_shipper: "",
-        name_shipper: "",
-        email_shipper: "",
-        phone_shipper: "",
-        address_shipper: "",
+        gender_shipper: gender_shipper.value,
+        name_shipper: name_shipper.value,
+        email_shipper: email_shipper.value,
+        phone_shipper: phone_shipper.value,
+        address_shipper: address_shipper.value,
         free_wrapping: "",
         length: "",
         width: "",
-        weight: "",
-        weight_unit: "",
+        weight: weight.value,
+        weight_unit: "Kg",
         height: "",
-        quantity: "",
-        description: "",
+        quantity: quantity.value,
+        description: description.value,
         type: "",
-        duration: "",
-        shipping_costs: "",
+        duration: data?.etd ?? '',
+        shipping_costs: data?.rates ??'',
         port_id: "",
         subdistrict_shipper: "",
         district_shipper: "",

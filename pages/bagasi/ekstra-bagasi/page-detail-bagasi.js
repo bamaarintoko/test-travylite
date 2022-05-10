@@ -12,16 +12,17 @@ import Link from 'next/link'
 import withAuth from '../../../component/withAuth';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FILL_DESCRIPTION, FILL_ERROR, FILL_FREE_WRAPPING, FILL_HEIGHT, FILL_LENGTH, FILL_QUANTITY, FILL_WEIGHT, FILL_WIDTH } from '../../../reducer/detailBagasiRducer';
+import { FILL_DESCRIPTION, FILL_ERROR, FILL_FREE_WRAPPING, FILL_HEIGHT, FILL_LENGTH, FILL_QUANTITY, FILL_WEIGHT, FILL_WIDTH } from '../../../reducer/formExtraBaggageDetailLuggage';
 import { usePost } from '../../../helper/request';
 import FlashMassage from '../../../component/FlashMessage';
 import { useRouter } from 'next/router';
 import { Box } from '@mui/system';
 import { general_style } from '../../../component/general_style';
+import { FILL_GENERAL_PACKAGE } from '../../../reducer/generalPackage';
 function PageDetailBagasi() {
     const route = useRouter()
     const dispatch = useDispatch()
-    const { detailBagasiReducer: { free_wrapping, length, width, height, weight, quantity, description } } = useSelector(s => s)
+    const { formExtraBaggageDetailLuggage: { free_wrapping, length, width, height, weight, quantity, description } } = useSelector(s => s)
 
     const [func_validate, res_validate] = usePost()
     const [free_wrap, set_free_wrap] = useState("")
@@ -88,6 +89,21 @@ function PageDetailBagasi() {
     useEffect(() => {
         console.log("res_validate", res_validate)
         if (res_validate.success) {
+            dispatch({
+                type: FILL_GENERAL_PACKAGE,
+                name: "weight",
+                value: weight.value
+            })
+            dispatch({
+                type: FILL_GENERAL_PACKAGE,
+                name: "quantity",
+                value: quantity.value
+            })
+            dispatch({
+                type: FILL_GENERAL_PACKAGE,
+                name: "desc",
+                value: description.value
+            })
             route.push("/kurir/page-pilihan-pengiriman")
         }
     }, [res_validate.success])

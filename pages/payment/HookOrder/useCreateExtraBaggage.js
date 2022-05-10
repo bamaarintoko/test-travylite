@@ -30,7 +30,7 @@ export default function useCreateExtraBaggage() {
                 province_shipper, city_shipper, district_shipper, subdistrict_shipper, district_code_shipper
             }
         },
-        detailBagasiReducer: {
+        formExtraBaggageDetailLuggage: {
             description, free_wrapping, height, length, quantity, weight, width
         }
 

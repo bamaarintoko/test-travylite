@@ -17,7 +17,7 @@ export default function useDateInput() {
         />
     </LocalizationProvider>
     const args = {
-        value, input
+        value, input, setValue
     }
     return [args]
 }

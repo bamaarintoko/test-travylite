@@ -13,16 +13,17 @@ import withAuth from "../../component/withAuth";
 import DetailPaket from "../../component/DetailPaket";
 import { useDispatch, useSelector } from "react-redux";
 import { usePostData } from "../../helper/request";
-import { FILL_ERRORS_PAKET } from "../../reducer/paketReducer";
+import { FILL_ERRORS_PAKET } from "../../reducer/formDocumentDetailPackage";
 import FlashMessage from "../../component/FlashMessage";
 import Loading from "../../component/Loading";
+import { FILL_GENERAL_PACKAGE } from "../../reducer/generalPackage";
 
 function PageDetailPaket() {
     const route = useRouter();
     const dispatch = useDispatch();
 
     const {
-        paketReducer: {
+        formDocumentDetailPackage: {
             weight, quantity, description
         }
     } = useSelector(s => s)
@@ -41,7 +42,23 @@ function PageDetailPaket() {
 
     useEffect(() => {
         if (validate_res.success) {
+            dispatch({
+                type: FILL_GENERAL_PACKAGE,
+                name: 'weight',
+                value: weight.value * 1000
+            })
+            dispatch({
+                type: FILL_GENERAL_PACKAGE,
+                name: 'quantity',
+                value: quantity.value
+            })
+            dispatch({
+                type: FILL_GENERAL_PACKAGE,
+                name: 'desc',
+                value: description.value
+            })
             route.push("page-detail-penerima")
+
         }
     }, [validate_res.success])
 

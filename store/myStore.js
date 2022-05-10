@@ -8,12 +8,12 @@ import { authReducer, formRegisterReducer, formLoginReducer } from '../reducer/a
 import { userReducer } from '../reducer/userReducer'
 import { customerReducer, dataShipper, dataReceiver } from '../reducer/customerReducer'
 import { zoneRecipient, zoneShipper } from '../reducer/regionRecipientReducer'
-import { detailBagasiReducer } from "../reducer/detailBagasiRducer"
+import formExtraBaggageDetailLuggage from "../reducer/formExtraBaggageDetailLuggage"
 import { courierReducer } from "../reducer/courierReducer"
 import { smartboxReducer } from "../reducer/smartboxReducer"
 import { paymentMethodReducer } from "../reducer/paymentMethodReducer"
 import { deliveryReducer } from "../reducer/deliveryReducer"
-import paketReducer from "../reducer/paketReducer"
+import formDocumentDetailPackage from "../reducer/formDocumentDetailPackage"
 import paymentSummaryReducer from "../reducer/paymentSummaryReducer"
 import virtualAccountReducer from "../reducer/virtualAccountReducer"
 import payWithCreditCardReducer from "../reducer/creditCardReducer"
@@ -22,6 +22,12 @@ import payWithEwalletReducer from "../reducer/payWithEwalletReducer"
 import bankFeeReducer from '../reducer/bankFeeReducer';
 import captchaReducer from '../reducer/captchaReducer'
 import boothTravyliteReducer from "../reducer/boothTravyliteReducer"
+import formLeftBaggagePickUp from "../reducer/formLeftBaggagePickUp"
+import formLeftBaggageDetailLuggage from "../reducer/formLeftBaggageDetailLuggage"
+import generalPackage from "../reducer/generalPackage"
+import itemOrderExtraBaggage from "../reducer/itemOrderExtraBaggage"
+import itemOrderDocument from "../reducer/itemOrderDocument"
+import itemOrderLeftBaggage from "../reducer/itemOrderLeftBaggage"
 const middlewares = [];
 if (process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`);
@@ -34,10 +40,10 @@ export const appReducer = combineReducers({
     customerReducer,
     zoneRecipient,
     zoneShipper,
-    detailBagasiReducer,
+    formExtraBaggageDetailLuggage,
     courierReducer,
     smartboxReducer,
-    paketReducer,
+    formDocumentDetailPackage,
     paymentMethodReducer,
     deliveryReducer,
     paymentSummaryReducer,
@@ -51,7 +57,13 @@ export const appReducer = combineReducers({
     payWithRetailOutletReducer,
     captchaReducer,
     boothTravyliteReducer,
-    payWithEwalletReducer
+    payWithEwalletReducer,
+    formLeftBaggagePickUp,
+    formLeftBaggageDetailLuggage,
+    itemOrderExtraBaggage,
+    itemOrderLeftBaggage,
+    itemOrderDocument,
+    generalPackage
 })
 const persistConfig = {
     key: 'root',
@@ -62,7 +74,7 @@ const persistConfig = {
         'customerReducer',
         'zoneRecipient',
         'zoneShipper',
-        'detailBagasiReducer',
+        'formExtraBaggageDetailLuggage',
         'courierReducer',
         'deliveryReducer',
         'paymentSummaryReducer',
@@ -71,7 +83,15 @@ const persistConfig = {
         'payWithCreditCardReducer',
         'paymentMethodReducer',
         'payWithRetailOutletReducer',
-        'payWithEwalletReducer'
+        'payWithEwalletReducer',
+        'formLeftBaggagePickUp',
+        'smartboxReducer',
+        'formDocumentDetailPackage',
+        'itemOrderExtraBaggage',
+        'itemOrderLeftBaggage',
+        'itemOrderDocument',
+        'generalPackage'
+        // 'formLeftBaggageDetailLuggage'
     ]
 
 }

@@ -48,7 +48,7 @@ export const FILL_DESCRIPTION = "FILL_DESCRIPTION"
 
 export const FILL_ERROR = "FILL_ERROR"
 export const REMOVE_ERROR = "REMOVE_ERROR"
-export function detailBagasiReducer(state = initialDetailBagasiRed, action) {
+export default function formExtraBaggageDetailLuggage(state = initialDetailBagasiRed, action) {
     switch (action.type) {
         case FILL_ERROR:
             const form = { ...state }

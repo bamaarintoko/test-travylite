@@ -21,6 +21,9 @@ import { useRouter } from "next/router";
 import FlashMassage from "../../component/FlashMessage";
 import Loading from "../../component/Loading";
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import { EXTRA_BAGGAGE, LEFT_BAGGAGE } from "../../helper/const";
+import { FILL_ITEM_ORDER_EXTRA_BAGGAGE } from "../../reducer/itemOrderExtraBaggage";
+import { FILL_ITEM_ORDER_LEFT_BAGGAGE } from "../../reducer/itemOrderLeftBaggage";
 let kurirArr = [
     {
         label: "Kurir 1",
@@ -63,7 +66,10 @@ function PagePilihanPengiriman() {
             recipient_zone: { district_code_receiver },
             shipper_zone: { district_code_shipper }
         },
-        detailBagasiReducer: { weight }
+        formExtraBaggageDetailLuggage: { weight: eb_weight, description: eb_desc, quantity: eb_qty },
+        formLeftBaggageDetailLuggage: { weight: lb_weight, quantity: lb_qty, description: lb_desc },
+        deliveryReducer: dr,
+        generalPackage: gp
     } = useSelector(s => s)
 
     const [func_validate, res_validate] = usePost()
@@ -96,8 +102,59 @@ function PagePilihanPengiriman() {
         }
     }
 
+    function fill_item_order_extra_baggage() {
+        dispatch({
+            type: FILL_ITEM_ORDER_EXTRA_BAGGAGE,
+            name: 'delivery',
+            value: selected_courier.data.product_name
+        })
+        dispatch({
+            type: FILL_ITEM_ORDER_EXTRA_BAGGAGE,
+            name: 'weight',
+            value: eb_weight.value
+        })
+        dispatch({
+            type: FILL_ITEM_ORDER_EXTRA_BAGGAGE,
+            name: 'description',
+            value: eb_desc.value
+        })
+        dispatch({
+            type: FILL_ITEM_ORDER_EXTRA_BAGGAGE,
+            name: 'item',
+            value: eb_qty.value
+        })
+    }
+
+    function fill_item_order_left_baggage() {
+        dispatch({
+            type: FILL_ITEM_ORDER_LEFT_BAGGAGE,
+            name: 'delivery',
+            value: selected_courier.data.product_name
+        })
+        dispatch({
+            type: FILL_ITEM_ORDER_LEFT_BAGGAGE,
+            name: 'weight',
+            value: lb_weight.value
+        })
+        dispatch({
+            type: FILL_ITEM_ORDER_LEFT_BAGGAGE,
+            name: 'description',
+            value: lb_desc.value
+        })
+        dispatch({
+            type: FILL_ITEM_ORDER_LEFT_BAGGAGE,
+            name: 'item',
+            value: lb_qty.value
+        })
+    }
+
     useEffect(() => {
         if (res_validate.success) {
+            if (dr.type === EXTRA_BAGGAGE) {
+                fill_item_order_extra_baggage()
+            } else if (dr.type === LEFT_BAGGAGE) {
+                fill_item_order_left_baggage()
+            }
             route.push("/payment/page-detail-pesanan")
         }
     }, [res_validate.success])
@@ -120,7 +177,7 @@ function PagePilihanPengiriman() {
         let origin = district_code_shipper?.value ?? 0
         let destinataion = district_code_receiver?.value ?? 0
         // let weight = weight.value
-        funt_fetch_courier({}, `courier/${origin}/${destinataion}/${weight?.value ?? 0}`)
+        funt_fetch_courier({}, `courier/${origin}/${destinataion}/${gp.weight}`)
     }, [])
     console.log("couriers", couriers.length)
     return (

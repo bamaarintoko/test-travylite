@@ -24,7 +24,7 @@ export const FILL_DESCRIPTION_PAKET = "FILL_DESCRIPTION_PAKET";
 
 export const FILL_ERRORS_PAKET = "FILL_ERRORS_PAKET"
 
-export default function paketReducer(state = initialPaketReducer, action) {
+export default function formDocumentDetailPackage(state = initialPaketReducer, action) {
     switch (action.type) {
         case FILL_ERRORS_PAKET:
             const err_paket = { ...state }

@@ -13,7 +13,6 @@ export default function useGeneralInput(multiline = false) {
         }}
         fullWidth
         multiline={multiline}
-        maxRows={4}
         rows={4}
         variant="standard"
         autoComplete={"off"}

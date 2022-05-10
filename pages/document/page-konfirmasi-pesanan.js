@@ -1,5 +1,5 @@
 import { Button, Stack } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AppBar } from "../../component/AppBar";
 import Contain from "../../component/Container";
 import Content from "../../component/Content";
@@ -15,8 +15,65 @@ import { general_style } from "../../component/general_style";
 import RowPesanan from "../../component/RowPesanan";
 import { useRouter } from "next/router";
 import withAuth from "../../component/withAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { FILL_ITEM_ORDER_DOCUMENT } from "../../reducer/itemOrderDocument";
 function PageKonfirmasiPesanan() {
+    const {
+        smartboxReducer: {
+            locations,
+            selected_location: sl,
+            selected_smartbox: ssb,
+            smartboxs
+        },
+        formDocumentDetailPackage: {
+            quantity,
+            description,
+            weight
+        }
+    } = useSelector(s => s)
     const route = useRouter()
+    const dispatch = useDispatch()
+    const [locationSmartBox, setLocationSmartBox] = useState({})
+
+    useEffect(() => {
+        const sb = locations.filter(item => item.id === sl)
+        console.log("sb", sb)
+        setLocationSmartBox(sb[0])
+    }, [])
+    useEffect(() => {
+        console.log("locationSmartBox : ", locationSmartBox)
+    }, [locationSmartBox])
+
+    function go_to_page_detail() {
+        return () => {
+            dispatch({
+                type: FILL_ITEM_ORDER_DOCUMENT,
+                name: 'smartbox',
+                value: ssb.type
+            })
+            dispatch({
+                type: FILL_ITEM_ORDER_DOCUMENT,
+                name: 'smartboxnumber',
+                value: ssb.number
+            })
+            dispatch({
+                type: FILL_ITEM_ORDER_DOCUMENT,
+                name: 'item',
+                value: quantity.value
+            })
+            dispatch({
+                type: FILL_ITEM_ORDER_DOCUMENT,
+                name: 'weight',
+                value: weight.value
+            })
+            dispatch({
+                type: FILL_ITEM_ORDER_DOCUMENT,
+                name: 'description',
+                value: description.value
+            })
+            route.push("/payment/page-detail-pesanan")
+        }
+    }
     return (
         <Contain>
             <Header>
@@ -30,7 +87,7 @@ function PageKonfirmasiPesanan() {
                                 <LocationOnIcon sx={{ color: "#E84A25" }} />
                             </Box>
                             <Box>
-                                <span style={general_style.heading_dark_bold}>Smart Box Gedung 628</span>
+                                <span style={general_style.heading_dark_bold}>{locationSmartBox.name}</span>
                             </Box>
                         </Stack>
                     </Box>
@@ -42,8 +99,8 @@ function PageKonfirmasiPesanan() {
                             </Box>
                             <Box>
                                 <Stack>
-                                    <span style={general_style.heading_dark_bold}>Ukuran Kecil</span>
-                                    <span style={general_style.heading_light}>350 mm x 95 mm x 450 mm</span>
+                                    <span style={general_style.heading_dark_bold}>{ssb.type}</span>
+                                    <span style={general_style.heading_light}>{ssb.dimensions}</span>
                                 </Stack>
                             </Box>
                         </Stack>
@@ -58,11 +115,11 @@ function PageKonfirmasiPesanan() {
                                 <Stack sx={{ display: 'flex', flex: 1 }}>
                                     <span style={general_style.heading_dark_bold}>Detail Pesanan</span>
                                     <Box>
-                                        <RowPesanan label={"Smart Box"} value={"2 Small"} />
-                                        <RowPesanan label={"No. Smart Box"} value={"1 Kg"} />
-                                        <RowPesanan label={"Item"} value={"1 Dokumen"} />
-                                        <RowPesanan label={"Berat"} value={"1 Kg"} />
-                                        <RowPesanan label={"Deskripsi"} value={"Map warna coklat"} />
+                                        <RowPesanan label={"Smart Box"} value={ssb.type} />
+                                        <RowPesanan label={"No. Smart Box"} value={ssb.number} />
+                                        <RowPesanan label={"Item"} value={`${quantity.value} Dokumen`} />
+                                        <RowPesanan label={"Berat"} value={`${weight.value} Kg`} />
+                                        <RowPesanan label={"Deskripsi"} value={description.value} />
                                         <RowPesanan label={"Pengiriman"} value={"Same Day"} />
                                     </Box>
                                 </Stack>
@@ -94,7 +151,7 @@ function PageKonfirmasiPesanan() {
 
             </Content>
             <Footer style={{ padding: 16, backgroundColor: '#FFF' }}>
-                <Button onClick={() => route.push("/payment/page-detail-pesanan")} sx={{ borderRadius: '16px', backgroundColor: '#0065AF' }} fullWidth variant="contained">Konfirmasi</Button>
+                <Button onClick={go_to_page_detail()} sx={{ borderRadius: '16px', backgroundColor: '#0065AF' }} fullWidth variant="contained">Konfirmasi</Button>
 
             </Footer>
         </Contain>

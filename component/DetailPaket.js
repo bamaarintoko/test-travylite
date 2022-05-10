@@ -2,7 +2,7 @@ import { Button, Grid, Stack, Box } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FILL_DESCRIPTION_PAKET, FILL_QUANTITY_PAKET, FILL_WEIGHT_PAKET } from "../reducer/paketReducer";
+import { FILL_DESCRIPTION_PAKET, FILL_QUANTITY_PAKET, FILL_WEIGHT_PAKET } from "../reducer/formDocumentDetailPackage";
 import { general_style } from "./general_style";
 import useInputNumber from "./useInputNumber"
 import useTextArea from "./useTextArea"
@@ -12,7 +12,7 @@ export default function DetailPaket({ status = false }) {
     const dispatch = useDispatch()
 
     const {
-        paketReducer: {
+        formDocumentDetailPackage: {
             weight, quantity, description
         }
     } = useSelector(s => s)

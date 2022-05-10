@@ -15,24 +15,19 @@ import Link from "next/link"
 import withAuth from "../../component/withAuth";
 import { useDispatch, useSelector } from "react-redux";
 import useCreateExtraBaggage from "./HookOrder/useCreateExtraBaggage";
-import { EXTRA_BAGGAGE } from "../../helper/const";
+import { DOCUMENT_DELIVERY, EXTRA_BAGGAGE, LEFT_BAGGAGE } from "../../helper/const";
 import Loading from "../../component/Loading";
 import FlashMessage from "../../component/FlashMessage";
 import { useRouter } from "next/router";
 import { useGet } from "../../helper/request";
 import { FILL_PAYMENT_SUMMARY } from "../../reducer/paymentSummaryReducer";
 import { general_style } from "../../component/general_style";
+import itemOrderLeftBaggage from "../../reducer/itemOrderLeftBaggage";
 function PageDetailPesanan() {
     const route = useRouter()
     const dispatch = useDispatch()
     const {
         customerReducer: {
-            recipient: {
-                gender_receiver, name_receiver, phone_receiver, address_receiver
-            },
-            shipper: {
-                gender_shipper, name_shipper, phone_shipper, address_shipper
-            },
             shipper_full_zone: {
                 province, city, district, name, postal_code
             },
@@ -45,7 +40,14 @@ function PageDetailPesanan() {
             selected_courier: {
                 data
             }
-        }
+        },
+        dataReceiver: {
+            gender_receiver, name_receiver, phone_receiver, address_receiver
+        },
+        dataShipper: {
+            gender_shipper, name_shipper, phone_shipper, address_shipper
+        },
+        itemOrderDocument
     } = useSelector(s => s)
 
     const [extra_baggage] = useCreateExtraBaggage()
@@ -89,8 +91,12 @@ function PageDetailPesanan() {
     // document delivery
     // Smart Box, No. Smart Box, Item, Berat, Deskripsi, Pengiriman
 
-    // Extra Baggage
+    // Extra Baggage & left baggage
     // Item, Berat, Deskripsi, Pengiriman
+
+    function render_comp() {
+        return (<span>a</span>)
+    }
     return (
         <Contain>
             <Header>
@@ -109,10 +115,10 @@ function PageDetailPesanan() {
                     <Box sx={{ marginBottom: '40px', marginLeft: '29px' }}>
                         <Stack>
                             <span style={general_style.heading_dark_bold}>Pengirim</span>
-                            <span style={general_style.heading_dark_bold}>{gender_receiver.value}. {name_receiver.value}</span>
-                            <span style={general_style.heading_light}>{phone_receiver.value}</span>
-                            <span style={general_style.heading_light}>{address_receiver.value}</span>
-                            <span style={general_style.heading_light}>{`${recipient_full_zone.province}, ${recipient_full_zone.city}, ${recipient_full_zone.district}, ${recipient_full_zone.name}, ${recipient_full_zone.postal_code}`}</span>
+                            <span style={general_style.heading_dark_bold}>{gender_shipper.value}. {name_shipper.value}</span>
+                            <span style={general_style.heading_light}>{phone_shipper.value}</span>
+                            <span style={general_style.heading_light}>{address_shipper.value}</span>
+                            <span style={general_style.heading_light}>{`${province}, ${city}, ${district}, ${name}, ${postal_code}`}</span>
                         </Stack>
                     </Box>
                 </Stack>
@@ -122,11 +128,11 @@ function PageDetailPesanan() {
                     </Box>
                     <Stack sx={{ marginBottom: '40px', marginLeft: '29px' }}>
                         <span style={general_style.heading_dark_bold}>Penerima</span>
-                        <span style={general_style.heading_dark_bold}>{gender_shipper.value}. {name_shipper.value}</span>
+                        <span style={general_style.heading_dark_bold}>{gender_receiver.value}. {name_receiver.value}</span>
 
-                        <span style={general_style.heading_light}>{phone_shipper.value}</span>
-                        <span style={general_style.heading_light}>{address_shipper.value}</span>
-                        <span style={general_style.heading_light}>{`${province}, ${city}, ${district}, ${name}, ${postal_code}`}</span>
+                        <span style={general_style.heading_light}>{phone_receiver.value}</span>
+                        <span style={general_style.heading_light}>{address_receiver.value}</span>
+                        <span style={general_style.heading_light}>{`${recipient_full_zone.province}, ${recipient_full_zone.city}, ${recipient_full_zone.istrict}, ${recipient_full_zone.name}, ${recipient_full_zone.postal_code}`}</span>
                     </Stack>
                 </Stack>
                 <Stack direction={'row'}>
@@ -136,9 +142,24 @@ function PageDetailPesanan() {
                     <Stack sx={{ marginLeft: '29px' }}>
                         <span className={styles.text_label_detail_pesanan}>{type}</span>
                         <span className={styles.text_label_detail_pesanan}>{gender_shipper.value}. {name_shipper.value}</span>
-
-                        <span className={styles.text_desc}>0812 1234 1234</span>
-                        <span className={styles.text_desc}>Dipowinatan 303, Keparakan, Mergangsan, 55152</span>
+                        {/* {render_comp} */}
+                        {
+                            type === EXTRA_BAGGAGE
+                            &&
+                            <ItemOrderExtraBaggage />
+                        }
+                        {
+                            type === LEFT_BAGGAGE
+                            &&
+                            <ItemOrderLeftBaggage />
+                        }
+                        {
+                            type === DOCUMENT_DELIVERY
+                            &&
+                            <ItemOrderDocument />
+                        }
+                        {/* <span className={styles.text_desc}>0812 1234 1234</span>
+                        <span className={styles.text_desc}>Dipowinatan 303, Keparakan, Mergangsan, 55152</span> */}
                     </Stack>
                 </Stack>
             </Content>
@@ -158,6 +179,86 @@ function PageDetailPesanan() {
             <FlashMessage arg={extra_baggage.response} />
             <Loading loading={extra_baggage.response.loading} />
         </Contain>
+    )
+}
+function ItemOrderLeftBaggage() {
+    const { itemOrderLeftBaggage: item } = useSelector(s => s)
+    return (
+        <Stack>
+            {
+                Object.keys(item).map((key) => {
+                    console.log("===> ", item[key])
+                    return (
+                        <Stack direction={'row'}>
+                            <Box sx={{ width: 110 }}>
+                                <span style={general_style.heading_light}>{item[key].label}</span>
+                            </Box>
+                            <Box sx={{ width: 10 }}>
+                                <span style={general_style.heading_light}>: </span>
+                            </Box>
+                            <Box>
+                                <span style={general_style.heading_light}>{item[key].value}</span>
+                            </Box>
+                        </Stack>
+
+                    )
+                })
+            }
+        </Stack>
+    )
+
+}
+function ItemOrderExtraBaggage() {
+    const { itemOrderExtraBaggage: item } = useSelector(s => s)
+    return (
+        <Stack>
+            {
+                Object.keys(item).map((key) => {
+                    console.log("===> ", item[key])
+                    return (
+                        <Stack direction={'row'}>
+                            <Box sx={{ width: 110 }}>
+                                <span style={general_style.heading_light}>{item[key].label}</span>
+                            </Box>
+                            <Box sx={{ width: 10 }}>
+                                <span style={general_style.heading_light}>: </span>
+                            </Box>
+                            <Box>
+                                <span style={general_style.heading_light}>{item[key].value}</span>
+                            </Box>
+                        </Stack>
+
+                    )
+                })
+            }
+        </Stack>
+    )
+
+}
+function ItemOrderDocument() {
+    const { itemOrderDocument: item } = useSelector(s => s)
+    return (
+        <Stack>
+            {
+                Object.keys(item).map((key) => {
+                    console.log("===> ", item[key])
+                    return (
+                        <Stack direction={'row'}>
+                            <Box sx={{ width: 110 }}>
+                                <span style={general_style.heading_light}>{item[key].label}</span>
+                            </Box>
+                            <Box sx={{ width: 10 }}>
+                                <span style={general_style.heading_light}>: </span>
+                            </Box>
+                            <Box>
+                                <span style={general_style.heading_light}>{item[key].value}</span>
+                            </Box>
+                        </Stack>
+
+                    )
+                })
+            }
+        </Stack>
     )
 }
 
