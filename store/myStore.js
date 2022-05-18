@@ -90,8 +90,11 @@ const persistConfig = {
         'itemOrderExtraBaggage',
         'itemOrderLeftBaggage',
         'itemOrderDocument',
-        'generalPackage'
-        // 'formLeftBaggageDetailLuggage'
+        'generalPackage',
+        'formLeftBaggageDetailLuggage',
+        'boothTravyliteReducer',
+        'dataReceiver',
+        'dataShipper'
     ]
 
 }

@@ -7,6 +7,7 @@ import MobileDatePicker from '@mui/lab/MobileDatePicker';
 
 export default function useDateInput() {
     const [value, setValue] = useState(null);
+    const [error, setError] = useState(null);
     const input = <LocalizationProvider dateAdapter={DateAdapter}>
         <DatePicker
             value={value}
@@ -17,7 +18,7 @@ export default function useDateInput() {
         />
     </LocalizationProvider>
     const args = {
-        value, input, setValue
+        value, input, setValue, error, setError
     }
     return [args]
 }

@@ -17,7 +17,7 @@ import useGeneralDateInput from "../../../custom_hook/useGeneralDateInput";
 import useDateInput from "../../../component/useDateInput";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { ADDRESS_PICKUP, FILL_, FILL_FORM } from "../../../reducer/formLeftBaggagePickUp";
+import { FILL_ERROR_FORM_LEFT_BAGGAGE_PICKUP, FILL_FORM } from "../../../reducer/formLeftBaggagePickUp";
 import moment from "moment";
 import { usePostData } from "../../../helper/request";
 import Loading from "../../../component/Loading";
@@ -53,6 +53,7 @@ function PagePickUp() {
         _phone_pickup.setValue(phone_pickup.value)
         _date_pickup.setValue(date_pickup.value)
     }, [])
+
     useEffect(() => {
         dispatch({
             type: FILL_FORM,
@@ -83,18 +84,29 @@ function PagePickUp() {
     }, [_address_pickup.value, _location_pickup.value, _name_pickup.value, _phone_pickup.value, _date_pickup.value])
 
     useEffect(() => {
+        _address_pickup.setError(address_pickup.error)
+        _location_pickup.setError(location_pickup.error)
+        _name_pickup.setError(name_pickup.error)
+        _phone_pickup.setError(phone_pickup.error)
+        _date_pickup.setError(date_pickup.error)
+    }, [address_pickup.error, name_pickup.error, phone_pickup.error, date_pickup.error, location_pickup.error])
+    useEffect(() => {
         if (validate_res.failed) {
             msg.setSeverity("error")
             msg.setOpen(true)
-            // msg.setMessage(validate_res.success_res.message)
+            msg.setMessage(validate_res.error_res.data.message)
+            dispatch({
+                type: FILL_ERROR_FORM_LEFT_BAGGAGE_PICKUP,
+                errors: validate_res.error_res.data.errors
+            })
         }
         if (validate_res.success) {
             msg.setSeverity("success")
             msg.setOpen(true)
             msg.setMessage(validate_res.success_res.message)
-            console.log("validate_res : ", validate_res)
             route.push("page-drop-off")
         }
+        console.log("validate_res : ", validate_res)
     }, [validate_res.success, validate_res.failed])
 
     function on_validate() {

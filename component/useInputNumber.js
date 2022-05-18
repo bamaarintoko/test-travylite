@@ -1,10 +1,13 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, Stack, TextField } from "@mui/material";
+import { Box } from "@mui/system";
 import { useState } from "react";
+import { general_style } from "./general_style";
 
 export default function useInputNumber(text = "kg") {
     const [value, setValue] = useState("")
     const [error, setError] = useState(false)
-    const input = <TextField
+    const [errorMessage, setErrorMessage] = useState("")
+    const input = <Stack> <TextField
         onBlur={() => {
             if (value !== "") {
                 setError(false)
@@ -25,8 +28,10 @@ export default function useInputNumber(text = "kg") {
         }}
 
     />
+        <span style={general_style.error_message}>{errorMessage}</span>
+    </Stack>
     const args = {
-        value, input, setValue, setError, error
+        value, input, setValue, setError, error, setErrorMessage
     }
     return [args]
 }

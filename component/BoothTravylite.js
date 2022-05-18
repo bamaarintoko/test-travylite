@@ -38,7 +38,7 @@ export default function BoothTravylite() {
                             </Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', paddingLeft: '16px' }}>
                                 <Stack>
-                                    <span style={general_style.heading_dark_bold}>{x.name}</span>
+                                    <span style={general_style.heading_dark_bold}>{x.port_name}</span>
                                     <span style={general_style.heading_dark}>{x.description}</span>
                                 </Stack>
                             </Box>

@@ -69,7 +69,8 @@ function PagePilihanPengiriman() {
         formExtraBaggageDetailLuggage: { weight: eb_weight, description: eb_desc, quantity: eb_qty },
         formLeftBaggageDetailLuggage: { weight: lb_weight, quantity: lb_qty, description: lb_desc },
         deliveryReducer: dr,
-        generalPackage: gp
+        generalPackage: gp,
+        boothTravyliteReducer: { selected_booth: { district_code_port } }
     } = useSelector(s => s)
 
     const [func_validate, res_validate] = usePost()
@@ -92,6 +93,7 @@ function PagePilihanPengiriman() {
     };
 
     function on_validate() {
+        // function to validate courier
         return () => {
             let par = {
                 duration: selected_courier.data.etd,
@@ -103,6 +105,7 @@ function PagePilihanPengiriman() {
     }
 
     function fill_item_order_extra_baggage() {
+        // function to fill in item details which is useful for displaying data on order details page
         dispatch({
             type: FILL_ITEM_ORDER_EXTRA_BAGGAGE,
             name: 'delivery',
@@ -126,6 +129,7 @@ function PagePilihanPengiriman() {
     }
 
     function fill_item_order_left_baggage() {
+        // function to fill in item details which is useful for displaying data on order details page
         dispatch({
             type: FILL_ITEM_ORDER_LEFT_BAGGAGE,
             name: 'delivery',
@@ -164,7 +168,7 @@ function PagePilihanPengiriman() {
             console.log("res_fetch_courier", res_fetch_courier)
             dispatch({
                 type: FILL_COURIERS,
-                couriers: res_fetch_courier.success_res.data.services
+                couriers: res_fetch_courier?.success_res?.data?.services ?? []
             })
         }
     }, [res_fetch_courier.success])
@@ -174,10 +178,20 @@ function PagePilihanPengiriman() {
     }, [res_fetch_courier.failed])
 
     useEffect(() => {
-        let origin = district_code_shipper?.value ?? 0
-        let destinataion = district_code_receiver?.value ?? 0
+        let origin = '0';
+        let destination = '0';
+
+        // conditions to check what services are being used
+
+        if (dr.type === EXTRA_BAGGAGE) {
+            origin = district_code_shipper?.value ?? 0
+            destination = district_code_receiver?.value ?? 0
+        } else if (dr.type === LEFT_BAGGAGE) {
+            origin = district_code_shipper?.value ?? 0;
+            destination = district_code_port;
+        }
         // let weight = weight.value
-        funt_fetch_courier({}, `courier/${origin}/${destinataion}/${gp.weight}`)
+        funt_fetch_courier({}, `courier/${origin}/${destination}/${gp.weight}`)
     }, [])
     console.log("couriers", couriers.length)
     return (
@@ -211,7 +225,7 @@ function PagePilihanPengiriman() {
                     &&
                     <Stack sx={{ padding: '16px' }}>
                         {
-                            couriers.length > 0
+                            couriers?.length > 0 ?? 0
                                 ?
                                 couriers.map((x, y) => {
                                     return (
