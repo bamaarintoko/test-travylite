@@ -81,7 +81,7 @@ function PageDetailPesanan() {
         return () => {
             if (type === EXTRA_BAGGAGE) {
                 extra_baggage.create()
-            } else if(type ===LEFT_BAGGAGE){
+            } else if (type === LEFT_BAGGAGE) {
                 left_baggage.create()
                 console.log("aa")
             }
@@ -218,10 +218,10 @@ function ItemOrderExtraBaggage() {
     return (
         <Stack>
             {
-                Object.keys(item).map((key) => {
+                Object.keys(item).map((key, index) => {
                     console.log("===> ", item[key])
                     return (
-                        <Stack direction={'row'}>
+                        <Stack key={index} direction={'row'}>
                             <Box sx={{ width: 110 }}>
                                 <span style={general_style.heading_light}>{item[key].label}</span>
                             </Box>
