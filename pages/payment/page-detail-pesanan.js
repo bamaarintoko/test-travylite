@@ -245,10 +245,10 @@ function ItemOrderDocument() {
     return (
         <Stack>
             {
-                Object.keys(item).map((key) => {
+                Object.keys(item).map((key, index) => {
                     console.log("===> ", item[key])
                     return (
-                        <Stack direction={'row'}>
+                        <Stack key={index} direction={'row'}>
                             <Box sx={{ width: 110 }}>
                                 <span style={general_style.heading_light}>{item[key].label}</span>
                             </Box>
