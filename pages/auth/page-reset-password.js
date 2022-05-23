@@ -10,7 +10,7 @@ import Header from "../../component/Header";
 import LogoAuth from "../../component/LogoAuth";
 
 export default function PageResetPassword() {
-    const [email_input, email_value] = useInputAuth("Masukkan Email")
+    const [_email] = useInputAuth("Masukkan Email")
     return (
         <Contain>
             <Header>
@@ -19,7 +19,7 @@ export default function PageResetPassword() {
             <Content>
                 <LogoAuth />
                 <BoxShadow style={{ padding: 16, margin: 16 }}>
-                {email_input}
+                {_email.input}
                     <div style={{ height: 16 }} />
                     <ButtonGradient title={"Reset Kata Sandi"}/>
                 </BoxShadow>

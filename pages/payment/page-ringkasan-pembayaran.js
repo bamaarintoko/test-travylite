@@ -32,6 +32,19 @@ function PageRingkasanPembayaran() {
     //page-detail-invoice
     const [func_create_payment, res_create_payment] = usePostData("payment/create-payment")
     const [func_payment_detail, res_payment_detail] = useGet()
+
+    useEffect(() => {
+        let par = {
+            orderId: data.order_id,
+            name: group,
+            code: method.code,
+            transaction_fee: method.payment.transaction_fee,
+            tax_amount: method.payment.tax_amount
+
+        }
+        console.log("par : ", par)
+    }, [])
+
     useEffect(() => {
         // console.log(Object.keys(method).length)
         if (res_create_payment.success) {

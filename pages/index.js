@@ -24,18 +24,19 @@ const menuArr = [
 	{
 		text: "Pengiriman Airport Bagasi",
 		image: <BusinessCenterIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
-		url: 'bagasi/page-bagasi'
+		// url: 'bagasi/page-bagasi'
+		url: 'bagasi/ekstra-bagasi/page-ketentuan'
 	},
-	{
-		text: "Pengiriman Dokumen",
-		image: <SummarizeIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
-		url: 'document/page-pengiriman-dokumen'
-	},
-	{
-		text: 'Pengambilan dan Go Oleh-Oleh',
-		image: <Inventory2Icon fontSize="large" sx={{ color: "#FCCF2F" }} />,
-		url: 'souvenir/page-souvenir'
-	}
+	// {
+	// 	text: "Pengiriman Dokumen",
+	// 	image: <SummarizeIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
+	// 	url: 'document/page-pengiriman-dokumen'
+	// },
+	// {
+	// 	text: 'Pengambilan dan Go Oleh-Oleh',
+	// 	image: <Inventory2Icon fontSize="large" sx={{ color: "#FCCF2F" }} />,
+	// 	url: 'souvenir/page-souvenir'
+	// }
 ]
 
 let image_width = 456;

@@ -15,6 +15,7 @@ import Link from "next/link"
 import withAuth from "../../component/withAuth";
 import { useDispatch, useSelector } from "react-redux";
 import useCreateExtraBaggage from "./HookOrder/useCreateExtraBaggage";
+import useCreateLeftBaggage from "./HookOrder/useCreateLeftBaggage";
 import { DOCUMENT_DELIVERY, EXTRA_BAGGAGE, LEFT_BAGGAGE } from "../../helper/const";
 import Loading from "../../component/Loading";
 import FlashMessage from "../../component/FlashMessage";
@@ -51,6 +52,7 @@ function PageDetailPesanan() {
     } = useSelector(s => s)
 
     const [extra_baggage] = useCreateExtraBaggage()
+    const [left_baggage] = useCreateLeftBaggage()
     const [fetch_summary_payment, res_sumarry_payment] = useGet()
     useEffect(() => {
         if (extra_baggage.response.success) {
@@ -79,6 +81,9 @@ function PageDetailPesanan() {
         return () => {
             if (type === EXTRA_BAGGAGE) {
                 extra_baggage.create()
+            } else if(type ===LEFT_BAGGAGE){
+                left_baggage.create()
+                console.log("aa")
             }
         }
     }
