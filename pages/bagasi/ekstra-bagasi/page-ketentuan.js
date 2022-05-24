@@ -12,12 +12,12 @@ import { Box } from '@mui/system'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 export default function PagesKetentuan() {
-    const { authReducer: { access_token } } = useSelector((state) => state)
+    const { authReducer: { access_token }, multilingual: { words } } = useSelector((state) => state)
     const route = useRouter()
     return (
         <Contain>
             <Header>
-                <AppBar title={"Ketentuan"} />
+                <AppBar title={words.provision} />
             </Header>
             <Content>
                 <Box style={{ display: 'flex', flex: 1, background: "linear-gradient(135deg, #20AEE0 0%, #0065AF 100%)" }}>
@@ -37,7 +37,7 @@ export default function PagesKetentuan() {
                                     fontSize: 27,
                                     // lineHeight: '160%',
                                     color: "#FEFEFE"
-                                }}>Bagasi /</span>
+                                }}>{words.baggage} /</span>
                                 <span style={{
                                     fontFamily: 'Roboto',
                                     fontStyle: 'normal',
@@ -45,7 +45,7 @@ export default function PagesKetentuan() {
                                     fontSize: 27,
                                     // lineHeight: '160%',
                                     color: "#FEFEFE"
-                                }}>Ekstra Bagasi</span>
+                                }}>{words.extra_baggage}</span>
                                 <Box sx={{ height: '16px' }} />
                                 <span style={general_style.body_white}>Port to Port & Port to Door</span>
                             </Stack>
@@ -60,7 +60,7 @@ export default function PagesKetentuan() {
                                     lineHeight: '160%',
                                     color: "#323232",
                                     textAlign: 'center'
-                                }}>Pengiriman bagasi atau kelebihan bagasi ke bandara tujuan atau kirim langsung ke alamat tujuanmu</span>
+                                }}>{words.delivery_of_baggage_or_excess_baggage}</span>
                                 <Box sx={{
                                     height: '1px',
                                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -68,10 +68,10 @@ export default function PagesKetentuan() {
                                     marginBottom: '24px'
                                 }} />
                                 <Stack spacing={2}>
-                                    <Ketentuan number={1} label={"Isi data pengirim"} />
-                                    <Ketentuan number={2} label={"Isi data penerima"} />
-                                    <Ketentuan number={3} label={"Isi detail bagasi"} />
-                                    <Ketentuan number={4} label={"Pilih durasi pengiriman"} />
+                                    <Ketentuan number={1} label={words.fill_in_the_senders_data} />
+                                    <Ketentuan number={2} label={words.fill_in_recipient_data} />
+                                    <Ketentuan number={3} label={words.fill_in_baggage_detail} />
+                                    <Ketentuan number={4} label={words.select_delivery_duration} />
 
                                 </Stack>
                                 <Box sx={{
@@ -86,7 +86,7 @@ export default function PagesKetentuan() {
                                     }} sx={{
                                         backgroundColor: '#0065AF',
                                         borderRadius: '16px'
-                                    }} fullWidth variant="contained">Lanjutkan</Button>
+                                    }} fullWidth variant="contained">{words.continue}</Button>
 
                                 </Box>
                             </Stack>

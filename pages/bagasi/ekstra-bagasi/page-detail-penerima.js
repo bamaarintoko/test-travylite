@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button, Stack } from '@mui/material'
+import { useDispatch, useSelector } from "react-redux";
 import { Divider } from './page-detail-pengirim';
 import Contain from '../../../component/Container';
 import Header from '../../../component/Header';
@@ -14,6 +15,7 @@ import useReceiverValidation from '../../../custom_hook/useReceiverValidation';
 import useBeautyAlert from '../../../custom_hook/useBeautyAlert';
 import Loading from '../../../component/Loading';
 function PageDetailPenerima() {
+    const { multilingual: { words } } = useSelector(s => s)
     const [receiver] = useReceiverValidation("extra-baggage/step-detail-receiver")
     const [msg] = useBeautyAlert()
     const route = useRouter()
@@ -41,7 +43,7 @@ function PageDetailPenerima() {
     return (
         <Contain>
             <Header>
-                <AppBar title={"Detail Penerima"} />
+                <AppBar title={words.recipient_details} />
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>
@@ -60,7 +62,7 @@ function PageDetailPenerima() {
                     loadingPosition="start"
                     variant="contained"
                 >
-                    KONFIRMASI
+                    {words.confirmation}
                 </Button>
             </Footer>
             {msg.alert}

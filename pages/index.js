@@ -20,6 +20,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import { general_style } from '../component/general_style';
 import { useRouter } from 'next/router';
+import Multilingual from '../component/Multilingual';
 const menuArr = [
 	{
 		text: "Pengiriman Airport Bagasi",
@@ -48,8 +49,26 @@ let view_height = 50;
 let new_image_height = image_height * view_width / image_width;
 export default function Home() {
 	const route = useRouter()
-	const { authReducer } = useSelector((state) => state)
+	const { authReducer, multilingual: { words } } = useSelector((state) => state)
 	const dispatch = useDispatch()
+	const menuArr = [
+		{
+			text: words.airport_baggage_delivery,
+			image: <BusinessCenterIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
+			// url: 'bagasi/page-bagasi'
+			url: 'bagasi/ekstra-bagasi/page-ketentuan'
+		},
+		// {
+		// 	text: "Pengiriman Dokumen",
+		// 	image: <SummarizeIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
+		// 	url: 'document/page-pengiriman-dokumen'
+		// },
+		// {
+		// 	text: 'Pengambilan dan Go Oleh-Oleh',
+		// 	image: <Inventory2Icon fontSize="large" sx={{ color: "#FCCF2F" }} />,
+		// 	url: 'souvenir/page-souvenir'
+		// }
+	]
 	useEffect(() => {
 		console.log("authReducer", authReducer)
 		dispatch({
@@ -64,18 +83,34 @@ export default function Home() {
 						{/* <Item>xs=6 md=8</Item> */}
 						<Stack spacing={3} sx={{ display: 'flex', padding: '16px', flex: 1 }}>
 							<Box sx={{ position: 'relative', top: 0 }}>
-								{
+								<Stack spacing={1} direction={'row'} sx={{ position: 'absolute', right: 0, alignItems: 'center' }}>
+									<Multilingual />
+									{
+										authReducer.access_token != null
+											?
+											<Box>
+												<AccountCircleTwoToneIcon onClick={() => route.push("/user/page-user")} fontSize="large" sx={{ color: '#FFF' }} />
+											</Box>
+											:
+											<Box onClick={() => route.push("/auth/page-login")}>
+
+												<LoginIcon fontSize="large" sx={{ color: '#FFF' }} />
+											</Box>
+									}
+								</Stack>
+								{/* {
 									authReducer.access_token != null
 										?
 										<Box sx={{ position: 'absolute', right: 0 }}>
-											<AccountCircleTwoToneIcon onClick={()=>route.push("/user/page-user")} fontSize="large" sx={{ color: '#FFF' }} />
+											<AccountCircleTwoToneIcon onClick={() => route.push("/user/page-user")} fontSize="large" sx={{ color: '#FFF' }} />
 										</Box>
 										:
 										<Box onClick={() => route.push("/auth/page-login")} sx={{ position: 'absolute', right: 0 }}>
 
 											<LoginIcon fontSize="large" sx={{ color: '#FFF' }} />
 										</Box>
-								}
+								} */}
+
 							</Box>
 							<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '43px' }}>
 
@@ -87,12 +122,12 @@ export default function Home() {
 								</div>
 							</Box>
 							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-								<span style={general_style.title_white_bold}>Cek posisi paketmu!</span>
+								<span style={general_style.title_white_bold}>{words.check_the_position_of_your_package}</span>
 							</Box>
 							<Box sx={{ display: "flex", height: 48, backgroundColor: "#FFF", borderRadius: '16px' }}>
 								<InputBase size="small"
 									fullWidth
-									placeholder="Masukkan nomer AWB kamu"
+									placeholder={words.enter_your_awb_number}
 									sx={{ borderRadius: '16px', height: 48, paddingLeft: '16px' }}
 									id="input-with-sx" />
 								<Box onClick={() => alert("a")} sx={{ display: 'flex', height: 48, width: 48, borderTopRightRadius: 16, borderBottomRightRadius: 16 }}>
@@ -108,7 +143,7 @@ export default function Home() {
 						<Stack spacing={2} sx={{ display: 'flex', flex: 1 }}>
 							<Box sx={{ marginTop: '24px' }}>
 
-								<span style={general_style.title_dark_bold}>Apa yang ingin kamu kirim?</span>
+								<span style={general_style.title_dark_bold}>{words.what_do_you_want_to_send}</span>
 							</Box>
 							<Stack direction="row" spacing={2} sx={{ display: 'flex', }}>
 								{

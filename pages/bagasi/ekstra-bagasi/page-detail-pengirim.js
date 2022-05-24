@@ -14,7 +14,9 @@ import FormShipper from '../../../component/FormShipper';
 import useShipperValidation from '../../../custom_hook/useShipperValidation';
 import useBeautyAlert from '../../../custom_hook/useBeautyAlert';
 import Loading from '../../../component/Loading';
+import { useSelector } from 'react-redux';
 function PageDetailPengirim() {
+    const { multilingual: { words } } = useSelector(s => s)
     const [shipper] = useShipperValidation("extra-baggage/step-detail-shipper")
     const [msg] = useBeautyAlert()
     const route = useRouter()
@@ -43,7 +45,7 @@ function PageDetailPengirim() {
     return (
         <Contain>
             <Header>
-                <AppBar title={"Detail Pengirim"} />
+                <AppBar title={words.sender_details} />
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>
@@ -63,7 +65,7 @@ function PageDetailPengirim() {
                     loadingPosition="start"
                     variant="contained"
                 >
-                    KONFIRMASI
+                    {words.confirmation}
                 </Button>
             </Footer>
             {msg.alert}

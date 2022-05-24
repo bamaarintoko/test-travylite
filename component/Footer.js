@@ -11,6 +11,7 @@ export default function Footer({ children, style = {} }) {
             bottom: 0,
             right: 0,
             boxShadow: "1px 18px 36px -8px rgba(0,0,0,0.76)",
+            backgroundColor:'#FFF',
             ...style
         }}>
             <Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0, backgroundColor: '#FFF' }}>

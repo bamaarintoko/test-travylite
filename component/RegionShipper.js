@@ -11,6 +11,7 @@ import useInputSelect from "./useInputSelect";
 export default function RegionShipper() {
     const dispatch = useDispatch()
     const {
+        multilingual: { words },
         zoneShipper: { provinces, districts, subdistricts, villages },
         customerReducer: { shipper_zone: { province_shipper, city_shipper, district_shipper, subdistrict_shipper } }
     } = useSelector(s => s)
@@ -247,16 +248,16 @@ export default function RegionShipper() {
 
     return (
         <Stack>
-            <Label title={"Provinsi"} />
+            <Label title={words.province} />
             {province.select}
             <Divider />
-            <Label title={"Kabupaten / Kota"} />
+            <Label title={words.district_or_city} />
             {district.select}
             <Divider />
-            <Label title={"Kecamatan"} />
+            <Label title={words.sub_district} />
             {subdistrict.select}
             <Divider />
-            <Label title={"Kelurahan"} />
+            <Label title={words.village} />
             {village.select}
             <Divider />
         </Stack>

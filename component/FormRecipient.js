@@ -21,7 +21,18 @@ const arr = [
 
 export default function FormRecipient({ status }) {
     const dispatch = useDispatch()
-    const { customerReducer: { recipient }, dataReceiver: { gender_receiver, name_receiver, phone_receiver, address_receiver } } = useSelector(s => s)
+    const {
+        customerReducer: {
+            recipient
+        },
+        dataReceiver: {
+            gender_receiver,
+            name_receiver,
+            phone_receiver,
+            address_receiver
+        },
+        multilingual: { words }
+    } = useSelector(s => s)
     const [gelar] = useInputSelect()
     // const [gelar_value, gelar_select, setDataGelar, setGelarValue] = useInputSelect()
     const [name] = useInput("name_receiver", "RECEIVER")
@@ -66,7 +77,7 @@ export default function FormRecipient({ status }) {
     }, [name_receiver.error, phone_receiver.error, address_receiver.error])
     return (
         <Stack>
-            <Label title={"Gelar & Nama Lengkap Pengirim"} />
+            <Label title={words.recipients_full_name_and_title} />
             <Stack direction="row" spacing={1}>
                 <Box sx={{ width: '72px' }}>
                     {gelar.select}
@@ -74,10 +85,10 @@ export default function FormRecipient({ status }) {
                 {name.input}
             </Stack>
             <Divider />
-            <Label title={"Nomor Telepon Penerima"} />
+            <Label title={words.recipients_phone_number} />
             {phone.input}
             <Divider />
-            <Label title={"Alamat Lengkap Penerima"} />
+            <Label title={words.recipients_full_address} />
             {address.input}
         </Stack>
     )

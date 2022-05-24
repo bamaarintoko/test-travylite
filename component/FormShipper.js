@@ -22,12 +22,23 @@ const arr = [
 export default function FormShipper({ status }) {
     const dispatch = useDispatch()
     const {
-        dataShipper: { gender_shipper, name_shipper, phone_shipper, email_shipper, email_confirimation_shipper, address_shipper },
+        dataShipper: {
+            gender_shipper,
+            name_shipper,
+            phone_shipper,
+            email_shipper,
+            email_confirimation_shipper,
+            address_shipper
+        },
         customerReducer: {
             shipper, shipper_zone
         }, zoneShipper: {
             villages
-        } } = useSelector(s => s)
+        },
+        multilingual: {
+            words
+        }
+    } = useSelector(s => s)
 
     const [gelar] = useInputSelect()
     const [name] = useInput("name_shipper", "SHIPPER")
@@ -65,7 +76,7 @@ export default function FormShipper({ status }) {
 
     return (
         <Stack>
-            <Label title={"Gelar & Nama Lengkap Pengirim"} />
+            <Label title={words.title_and_full_name_of_the_sender} />
             <Stack direction="row" spacing={1}>
                 <Box sx={{ width: '72px' }}>
                     {gelar.select}
@@ -73,16 +84,16 @@ export default function FormShipper({ status }) {
                 {name.input}
             </Stack>
             <Divider />
-            <Label title={"Nomor Telepon Pengirim"} />
+            <Label title={words.sender_phone_number} />
             {phone.input}
             <Divider />
-            <Label title={"Email Pengirim"} />
+            <Label title={words.sender_email} />
             {email.input}
             <Divider />
-            <Label title={"Konfirmasi Email Pengirim"} />
+            <Label title={words.sender_email_confirmation} />
             {email_confirm.input}
             <Divider />
-            <Label title={"Alamat Lengkap Penerima"} />
+            <Label title={words.senders_full_address} />
             {address.input}
         </Stack>
     )

@@ -28,6 +28,7 @@ import generalPackage from "../reducer/generalPackage"
 import itemOrderExtraBaggage from "../reducer/itemOrderExtraBaggage"
 import itemOrderDocument from "../reducer/itemOrderDocument"
 import itemOrderLeftBaggage from "../reducer/itemOrderLeftBaggage"
+import multilingual from "../reducer/multilingualReducer"
 const middlewares = [];
 if (process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`);
@@ -63,7 +64,8 @@ export const appReducer = combineReducers({
     itemOrderExtraBaggage,
     itemOrderLeftBaggage,
     itemOrderDocument,
-    generalPackage
+    generalPackage,
+    multilingual
 })
 const persistConfig = {
     key: 'root',
@@ -94,7 +96,8 @@ const persistConfig = {
         'formLeftBaggageDetailLuggage',
         'boothTravyliteReducer',
         'dataReceiver',
-        'dataShipper'
+        'dataShipper',
+        'multilingual'
     ]
 
 }
