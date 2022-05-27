@@ -1,5 +1,5 @@
 const initialAuthReducer = {
-    access_token: null,
+    access_token: '41|BjpBAOB3VlWwTrClZiHveMarBHlABE8tUPpBZUEV',
     token_type: null
 }
 

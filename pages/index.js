@@ -85,7 +85,7 @@ export default function Home() {
 							<Box sx={{ position: 'relative', top: 0 }}>
 								<Stack spacing={1} direction={'row'} sx={{ position: 'absolute', right: 0, alignItems: 'center' }}>
 									<Multilingual />
-									{
+									{/* {
 										authReducer.access_token != null
 											?
 											<Box>
@@ -96,7 +96,7 @@ export default function Home() {
 
 												<LoginIcon fontSize="large" sx={{ color: '#FFF' }} />
 											</Box>
-									}
+									} */}
 								</Stack>
 								{/* {
 									authReducer.access_token != null
