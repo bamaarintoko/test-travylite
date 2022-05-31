@@ -3,8 +3,11 @@ import { usePostData } from "../../../helper/request"
 
 export default function useCreateExtraBaggage() {
     const {
-        dataShipper:{
-            gender_shipper, name_shipper, phone_shipper, email_shipper, email_confirimation_shipper, address_shipper
+        dataShipper: {
+            gender_shipper, name_shipper, phone_shipper, email_shipper, email_confirimation_shipper, address_shipper, province_shipper, city_shipper, district_shipper, subdistrict_shipper, district_code_shipper, postalcode_shipper
+        },
+        dataReceiver: {
+            address_receiver, gender_receiver, name_receiver, phone_receiver, province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver, postalcode_receiver
         },
         paymentMethodReducer: {
             method
@@ -20,15 +23,15 @@ export default function useCreateExtraBaggage() {
         customerReducer: {
             recipient_full_zone,
             shipper_full_zone,
-            recipient: {
-                address_receiver, gender_receiver, name_receiver, phone_receiver
-            },
-            recipient_zone: {
-                province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver
-            },
-            shipper_zone: {
-                province_shipper, city_shipper, district_shipper, subdistrict_shipper, district_code_shipper
-            }
+            // recipient: {
+            //     address_receiver, gender_receiver, name_receiver, phone_receiver
+            // },
+            // recipient_zone: {
+            //     province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver
+            // },
+            // shipper_zone: {
+            //     province_shipper, city_shipper, district_shipper, subdistrict_shipper, district_code_shipper
+            // }
         },
         formExtraBaggageDetailLuggage: {
             description, free_wrapping, height, length, quantity, weight, width

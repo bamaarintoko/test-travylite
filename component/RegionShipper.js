@@ -4,8 +4,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGet } from "../helper/request";
 import { Divider, Label } from "../pages/bagasi/ekstra-bagasi/page-detail-pengirim";
-import { FILL_SHIPPER_FULL_ZONE, SET_ZONE_SHIPPER } from "../reducer/customerReducer";
-import { SHIPPER_DISTRICTS, SHIPPER_PROVINCES, SHIPPER_SUBDISTRICTS, SHIPPER_VILLAGES, SHIPPER_ZONE } from "../reducer/regionRecipientReducer";
+import { FILL_SHIPPER_FULL_ZONE, SET_ZONE_SHIPPER, UPDATE_VALUE_SHIPPER } from "../reducer/customerReducer";
+// import { FILL_SHIPPER_ZONE, SHIPPER_DISTRICTS, SHIPPER_PROVINCES, SHIPPER_SUBDISTRICTS, SHIPPER_VILLAGES, SHIPPER_ZONE } from "../reducer/regionRecipientReducer";
+import { CLEAR_SHIPPER_ZONE, FILL_SHIPPER_ZONE } from "../reducer/zoneShipper";
 import useInputSelect from "./useInputSelect";
 
 export default function RegionShipper() {
@@ -13,7 +14,9 @@ export default function RegionShipper() {
     const {
         multilingual: { words },
         zoneShipper: { provinces, districts, subdistricts, villages },
-        customerReducer: { shipper_zone: { province_shipper, city_shipper, district_shipper, subdistrict_shipper } }
+        dataShipper: {
+            province_shipper, city_shipper, district_shipper, subdistrict_shipper
+        }
     } = useSelector(s => s)
 
     const [func_fetch_province, fetch_province_feedback] = useGet()
@@ -25,11 +28,6 @@ export default function RegionShipper() {
     const [district] = useInputSelect("city_shipper")
     const [subdistrict] = useInputSelect("district_shipper")
     const [village] = useInputSelect("subdistrict_shipper")
-
-    // const [province_value, province_select, set_provinces, set_province, set_province_error] = useInputSelect()
-    // const [district_value, district_select, set_districts, set_district, set_district_error] = useInputSelect()
-    // const [sub_district_value, sub_district_select, set_sub_districts, set_subdistrict, set_subdistrict_error] = useInputSelect()
-    // const [village_value, village_select, set_villages, set_village, set_village_error] = useInputSelect()
 
     useEffect(() => {
         console.log("province_shipper", province_shipper)
@@ -48,19 +46,13 @@ export default function RegionShipper() {
 
     }, [province_shipper.error, city_shipper.error, district_shipper.error, subdistrict_shipper.error])
     useEffect(() => {
-        // #1
+        // #1 FILL ARRAY PROVINCES
         if (fetch_province_feedback.success) {
-            // dispatch({
-            //     type: `SET_${SHIPPER_ZONE}`,
-            //     provinces: fetch_province_feedback.success_res.data,
-            //     districts: [],
-            //     subdistricts: [],
-            //     villages: []
-            // })
 
             dispatch({
-                type: SHIPPER_PROVINCES,
-                provinces: fetch_province_feedback.success_res.data
+                type: FILL_SHIPPER_ZONE,
+                field: 'provinces',
+                value: fetch_province_feedback.success_res.data
             })
         }
     }, [fetch_province_feedback.success])
@@ -71,39 +63,29 @@ export default function RegionShipper() {
             // console.log("fuck")
             fetch_district(province.value)
             dispatch({
-                type: SET_ZONE_SHIPPER,
-                province_shipper: province.value,
-                city_shipper: "",
-                district_shipper: "",
-                subdistrict_shipper: "",
-                district_code_shipper: ""
+                type: UPDATE_VALUE_SHIPPER,
+                field: 'province_shipper',
+                value: province.value
             })
-
             dispatch({
-                type: `SET_${SHIPPER_ZONE}`,
-                provinces: provinces,
-                districts: [],
-                subdistricts: [],
-                villages: []
+                type: CLEAR_SHIPPER_ZONE,
+                clear: {
+                    districts: true,
+                    subdistricts: true,
+                    villages: true
+                }
             })
         }
     }, [province.value])
 
     useEffect(() => {
-        // #2
+        // #2 FILL ARRAY DISTRICT / CITY (KABUPATEN/KOTA)
         if (fetch_district_feedback.success) {
             dispatch({
-                type: SHIPPER_DISTRICTS,
-                districts: fetch_district_feedback.success_res.data
+                type: FILL_SHIPPER_ZONE,
+                field: 'districts',
+                value: fetch_district_feedback.success_res.data
             })
-            // dispatch({
-            //     type: `SET_${SHIPPER_ZONE}`,
-            //     provinces: fetch_province_feedback.success_res.data,
-            //     districts: fetch_district_feedback.success_res.data,
-            //     subdistricts: [],
-            //     villages: []
-            // })
-            // set_district(districts)
         }
     }, [fetch_district_feedback.success])
 
@@ -112,39 +94,29 @@ export default function RegionShipper() {
         // fetch function district after select province
         if (district.value !== "") {
             dispatch({
-                type: SET_ZONE_SHIPPER,
-                province_shipper: province.value,
-                city_shipper: district.value,
-                district_shipper: "",
-                subdistrict_shipper: "",
-                district_code_shipper: ""
+                type: UPDATE_VALUE_SHIPPER,
+                field: 'city_shipper',
+                value: district.value
             })
             dispatch({
-                type: `SET_${SHIPPER_ZONE}`,
-                provinces: provinces,
-                districts: districts,
-                subdistricts: [],
-                villages: []
+                type: CLEAR_SHIPPER_ZONE,
+                clear: {
+                    subdistricts: true,
+                    villages: true
+                }
             })
             fetch_sub_district(district.value)
         }
     }, [district.value])
 
     useEffect(() => {
-        // #3
+        // #3 FILL ARRAY SUB DISTRICT (KECAMATAN)
         if (fetch_sub_district_feedback.success) {
             dispatch({
-                type: SHIPPER_SUBDISTRICTS,
-                subdistricts: fetch_sub_district_feedback.success_res.data
+                type: FILL_SHIPPER_ZONE,
+                field: 'subdistricts',
+                value: fetch_sub_district_feedback.success_res.data
             })
-            // dispatch({
-            //     type: `SET_${SHIPPER_ZONE}`,
-            //     provinces: fetch_province_feedback.success_res.data,
-            //     districts: fetch_district_feedback.success_res.data,
-            //     subdistricts: fetch_sub_district_feedback.success_res.data,
-            //     villages: []
-            // })
-            // set_sub_district(subdistricts)
         }
     }, [fetch_sub_district_feedback.success])
 
@@ -152,39 +124,28 @@ export default function RegionShipper() {
         // ##3
         if (subdistrict.value !== "") {
             dispatch({
-                type: SET_ZONE_SHIPPER,
-                province_shipper: province.value,
-                city_shipper: district.value,
-                district_shipper: subdistrict.value,
-                subdistrict_shipper: "",
-                district_code_shipper: ""
+                type: UPDATE_VALUE_SHIPPER,
+                field: 'district_shipper',
+                value: subdistrict.value
             })
             dispatch({
-                type: `SET_${SHIPPER_ZONE}`,
-                provinces: provinces,
-                districts: districts,
-                subdistricts: subdistricts,
-                villages: []
+                type: CLEAR_SHIPPER_ZONE,
+                clear: {
+                    villages: true
+                }
             })
             fetch_village(subdistrict.value)
         }
     }, [subdistrict.value])
 
     useEffect(() => {
-        // #4
+        // #4 FILL ARRAY VILLAGES  (KELURAHAN)
         if (fetch_village_feedback.success) {
             dispatch({
-                type: SHIPPER_VILLAGES,
-                villages: fetch_village_feedback.success_res.data
+                type: FILL_SHIPPER_ZONE,
+                field: 'villages',
+                value: fetch_village_feedback.success_res.data
             })
-            // dispatch({
-            //     type: `SET_${SHIPPER_ZONE}`,
-            //     provinces: fetch_province_feedback.success_res.data,
-            //     districts: fetch_district_feedback.success_res.data,
-            //     subdistricts: fetch_sub_district_feedback.success_res.data,
-            //     villages: fetch_village_feedback.success_res.data
-            // })
-            // set_village(villages)
         }
         // console.log("fetch_village_feedback", fetch_village_feedback)
     }, [fetch_village_feedback.success])
@@ -193,17 +154,21 @@ export default function RegionShipper() {
         // ##4
         if (village.value !== "") {
             const code = villages.filter((dc) => dc.id === village.value)
+            console.log("code : ", code)
             dispatch({
-                type: FILL_SHIPPER_FULL_ZONE,
-                value: code[0]
+                type: UPDATE_VALUE_SHIPPER,
+                field: 'subdistrict_shipper',
+                value: village.value
             })
             dispatch({
-                type: SET_ZONE_SHIPPER,
-                province_shipper: province.value,
-                city_shipper: district.value,
-                district_shipper: subdistrict.value,
-                subdistrict_shipper: village.value,
-                district_code_shipper: code[0]?.district_code ?? ""
+                type: UPDATE_VALUE_SHIPPER,
+                field: 'district_code_shipper',
+                value: code[0].district_code
+            })
+            dispatch({
+                type: UPDATE_VALUE_SHIPPER,
+                field: 'postalcode_shipper',
+                value: code[0].postal_code
             })
         }
     }, [village.value])

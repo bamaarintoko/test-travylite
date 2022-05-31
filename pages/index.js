@@ -21,6 +21,8 @@ import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import { general_style } from '../component/general_style';
 import { useRouter } from 'next/router';
 import Multilingual from '../component/Multilingual';
+import { EXTRA_BAGGAGE } from '../helper/const';
+import { FILL_DELIVERY_TYPE } from '../reducer/deliveryReducer';
 const menuArr = [
 	{
 		text: "Pengiriman Airport Bagasi",
@@ -56,7 +58,8 @@ export default function Home() {
 			text: words.airport_baggage_delivery,
 			image: <BusinessCenterIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
 			// url: 'bagasi/page-bagasi'
-			url: 'bagasi/ekstra-bagasi/page-ketentuan'
+			url: 'bagasi/ekstra-bagasi/page-ketentuan',
+			val: EXTRA_BAGGAGE
 		},
 		// {
 		// 	text: "Pengiriman Dokumen",
@@ -149,7 +152,13 @@ export default function Home() {
 								{
 									menuArr.map((x, y) => {
 										return (
-											<Box key={y} onClick={() => route.push(x.url)} sx={{ display: 'flex', flex: 1, height: 146, boxShadow: "0px 16px 24px #F2F2F2", borderRadius: "16px", backgroundColor: "#FFF" }}>
+											<Box key={y} onClick={() => {
+												route.push(x.url)
+												dispatch({
+													type: FILL_DELIVERY_TYPE,
+													value: x.val
+												})
+											}} sx={{ display: 'flex', flex: 1, height: 146, boxShadow: "0px 16px 24px #F2F2F2", borderRadius: "16px", backgroundColor: "#FFF" }}>
 												<Stack sx={{ display: 'flex', flex: 1 }}>
 													<Box sx={{ display: 'flex', height: 90, justifyContent: 'center', alignItems: 'center' }}>
 

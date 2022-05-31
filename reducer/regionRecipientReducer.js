@@ -1,47 +1,31 @@
 
 const initialZoneRecipient = {
-    provinces: [],
-    districts: [],
-    subdistricts: [],
-    villages: []
+    provinces: [], // array propinsi
+    districts: [], // array kabupaten / kota
+    subdistricts: [], // array kecamatan
+    villages: [] // array kelurahan
 }
 
-export const RECIPIENT_ZONE = "RECIPIENT_ZONE"
-export const RECIPIENT_PROVINCES = "RECIPIENT_PROVINCES";
-export const RECIPIENT_DISTRICTS = "RECIPIENT_DISTRICTS";
-export const RECIPIENT_SUBDISTRICTS = "RECIPIENT_SUB_DISTRICTS";
-export const RECIPIENT_VILLAGES = "RECIPIENT_VILLAGES";
+export const FILL_RECIPIENT_ZONE = "FILL_RECIPIENT_ZONE"
+export const CLEAR_RECIPIENT_ZONE = "CLEAR_RECIPIENT_ZONE"
 
 export function zoneRecipient(state = initialZoneRecipient, action) {
     switch (action.type) {
-        case `SET_${RECIPIENT_ZONE}`:
+        case FILL_RECIPIENT_ZONE:
             return {
                 ...state,
-                provinces: action.provinces,
-                districts: action.districts,
-                subdistricts: action.subdistricts,
-                villages: action.villages
+                [action.field]: action.value
             }
-        case RECIPIENT_PROVINCES:
-            return {
-                ...state,
-                provinces: action.provinces
-            }
-        case RECIPIENT_DISTRICTS:
-            return {
-                ...state,
-                districts: action.districts
-            }
-        case RECIPIENT_SUBDISTRICTS:
-            return {
-                ...state,
-                subdistricts: action.subdistricts
-            }
-        case RECIPIENT_VILLAGES:
-            return {
-                ...state,
-                villages: action.villages
-            }
+        case CLEAR_RECIPIENT_ZONE:
+            const obj = { ...state }
+            Object.keys(obj).map((key) => {
+                // console.log('action.clear : ', action.clear)
+                if (key in action.clear) {
+                    // console.log("key : ", key)
+                    obj[key] = []
+                }
+            })
+            return obj
         default:
             return state;
     }
@@ -59,6 +43,9 @@ export const SHIPPER_PROVINCES = "SHIPPER_PROVINCES"
 export const SHIPPER_DISTRICTS = "SHIPPER_DISTRICTS"
 export const SHIPPER_SUBDISTRICTS = "SHIPPER_SUBDISTRICTS"
 export const SHIPPER_VILLAGES = "SHIPPER_VILLAGES"
+
+export const FILL_SHIPPER_ZONE = "FILL_SHIPPER_ZONE"
+export const CLEAR_SHIPPER_ZONE = "CLEAR_SHIPPER_ZONE"
 
 export function zoneShipper(state = initialZoneShipper, action) {
     switch (action.type) {

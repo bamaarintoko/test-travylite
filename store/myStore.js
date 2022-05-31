@@ -6,8 +6,13 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 import { defaultReducer } from '../reducer/defaultReducer'
 import { authReducer, formRegisterReducer, formLoginReducer } from '../reducer/authReducer'
 import { userReducer } from '../reducer/userReducer'
-import { customerReducer, dataShipper, dataReceiver } from '../reducer/customerReducer'
-import { zoneRecipient, zoneShipper } from '../reducer/regionRecipientReducer'
+import { customerReducer } from '../reducer/customerReducer'
+// import { dataReceiver } from '../reducer/customerReducer';
+import dataReceiver from '../reducer/dataReceiver';
+import dataShipper from '../reducer/dataShipper';
+// import { zoneShipper } from '../reducer/regionRecipientReducer'
+import zoneRecipient from '../reducer/zoneRecipient';
+import zoneShipper from '../reducer/zoneShipper';
 import formExtraBaggageDetailLuggage from "../reducer/formExtraBaggageDetailLuggage"
 import { courierReducer } from "../reducer/courierReducer"
 import { smartboxReducer } from "../reducer/smartboxReducer"
@@ -74,8 +79,8 @@ const persistConfig = {
         'authReducer',
         'userReducer',
         'customerReducer',
-        'zoneRecipient',
-        'zoneShipper',
+        // 'zoneRecipient',
+        // 'zoneShipper',
         'formExtraBaggageDetailLuggage',
         'courierReducer',
         'deliveryReducer',
@@ -95,8 +100,8 @@ const persistConfig = {
         'generalPackage',
         'formLeftBaggageDetailLuggage',
         'boothTravyliteReducer',
-        'dataReceiver',
-        'dataShipper',
+        // 'dataReceiver',
+        // 'dataShipper',
         'multilingual'
     ]
 

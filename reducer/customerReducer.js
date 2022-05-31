@@ -262,72 +262,83 @@ const initialDataShipper = {
 }
 // --------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------- //
-export const UPDATE_VALUE_RECEIVER = "UPDATE_VALUE_RECEIVER"
-export const UPDATE_ERROR_RECEIVER = "UPDATE_ERROR_RECEIVER"
+// DEPRECATED
+// export const UPDATE_VALUE_RECEIVER = "UPDATE_VALUE_RECEIVER"
+// export const UPDATE_ERROR_RECEIVER = "UPDATE_ERROR_RECEIVER"
 
-export function dataReceiver(state = initialDataReceiver, action) {
-    switch (action.type) {
-        case UPDATE_VALUE_RECEIVER:
-            return {
-                ...state,
-                [action.field]: {
-                    ...state[action.field],
-                    value: action.value
-                }
-            }
-        case UPDATE_ERROR_RECEIVER:
-            const obj = { ...state }
-            Object.keys(obj).map((key) => {
-                if (key in action.errors) {
-                    obj[key].error = true
-                    obj[key].error_message = action.errors[key][0]
-                }
-            })
-        default:
-            return state;
-    }
-}
+// export function dataReceiver(state = initialDataReceiver, action) {
+//     switch (action.type) {
+//         case UPDATE_VALUE_RECEIVER:
+//             return {
+//                 ...state,
+//                 [action.field]: {
+//                     ...state[action.field],
+//                     value: action.value
+//                 }
+//             }
+//         case UPDATE_ERROR_RECEIVER:
+//             const obj = { ...state }
+//             Object.keys(obj).map((key) => {
+//                 if (key in action.errors) {
+//                     obj[key].error = true
+//                     obj[key].error_message = action.errors[key][0]
+//                 }
+//             })
+//         default:
+//             return state;
+//     }
+// }
 
-const initialDataReceiver = {
-    gender_receiver: {
-        value: "mr",
-        error: false,
-        error_message: ""
-    },
-    name_receiver: {
-        // value: "",
-        value: dev ? "John Doe" : "",
-        error: false,
-        error_message: ""
-    },
-    phone_receiver: {
-        // value: "",
-        value: dev ? "123123123123" : "",
-        error: false,
-        error_message: ""
-    },
-    address_receiver: {
-        // value: "",
-        value: dev ? "lorem ipsum dolor sit amet" : "",
-        error: false,
-        error_message: ""
-    },
-    province_receiver: {
-
-    },
-    city_receiver: {
-
-    },
-    district_receiver: {
-
-    },
-    subdistrict_receiver: {
-
-    },
-    district_code_receiver: {
-
-    }
-}
+// const initialDataReceiver = {
+//     gender_receiver: {
+//         value: "mr",
+//         error: false,
+//         error_message: ""
+//     },
+//     name_receiver: {
+//         // value: "",
+//         value: dev ? "John Doe" : "",
+//         error: false,
+//         error_message: ""
+//     },
+//     phone_receiver: {
+//         // value: "",
+//         value: dev ? "123123123123" : "",
+//         error: false,
+//         error_message: ""
+//     },
+//     address_receiver: {
+//         // value: "",
+//         value: dev ? "lorem ipsum dolor sit amet" : "",
+//         error: false,
+//         error_message: ""
+//     },
+//     province_receiver: { // propinsi id
+//         value: "",
+//         error: false,
+//         error_message: ""
+//     },
+//     city_receiver: { // kabupaten / kota id
+//         value: "",
+//         error: false,
+//         error_message: ""
+//     },
+//     district_receiver: { // kecamatan id
+//         value: "",
+//         error: false,
+//         error_message: ""
+//     },
+//     subdistrict_receiver: { // kelurahan id
+//         value: "",
+//         error: false,
+//         error_message: ""
+//     },
+//     district_code_receiver: {
+//         value: "",
+//         error: false,
+//         error_message: ""
+//     }
+// }
 // --------------------------------------------------------------------------- //
 export function customerReducer(state = initialCustomerReducer, action) {
     switch (action.type) {
