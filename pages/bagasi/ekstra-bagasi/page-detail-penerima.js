@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Stack } from '@mui/material'
+import { Button, Stack, Box } from '@mui/material'
 import { useDispatch, useSelector } from "react-redux";
 import { Divider } from './page-detail-pengirim';
 import Contain from '../../../component/Container';
@@ -14,6 +14,7 @@ import FormRecipient from '../../../component/FormRecipient';
 import useReceiverValidation from '../../../custom_hook/useReceiverValidation';
 import useBeautyAlert from '../../../custom_hook/useBeautyAlert';
 import Loading from '../../../component/Loading';
+import { general_style } from '../../../component/general_style';
 function PageDetailPenerima() {
     const { multilingual: { words } } = useSelector(s => s)
     const [receiver] = useReceiverValidation("extra-baggage/step-detail-receiver")
@@ -43,15 +44,26 @@ function PageDetailPenerima() {
     return (
         <Contain>
             <Header>
-                <AppBar title={words.recipient_details} />
+                <AppBar title={''} />
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>
+                    <Box sx={{
+                        display: 'flex',
+
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        // background:'red',
+                        height:'40px',
+                        marginBottom:'16px'
+                    }}>
+                        <span style={general_style.title_dark_bold}>{words.recipient_details}</span>
+                    </Box>
                     <FormRecipient />
                     <Divider />
                     <RegionRecipient />
                 </Stack>
-
+                <Box sx={{ height: '100px' }} />
             </Content>
             <Footer style={{ padding: 16 }}>
                 <Button

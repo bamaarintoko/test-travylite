@@ -312,6 +312,21 @@ const initialDataReceiver = {
         error: false,
         error_message: ""
     },
+    province_receiver: {
+
+    },
+    city_receiver: {
+
+    },
+    district_receiver: {
+
+    },
+    subdistrict_receiver: {
+
+    },
+    district_code_receiver: {
+
+    }
 }
 // --------------------------------------------------------------------------- //
 export function customerReducer(state = initialCustomerReducer, action) {
