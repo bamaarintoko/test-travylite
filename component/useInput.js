@@ -1,9 +1,11 @@
 import { TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { UPDATE_VALUE_RECEIVER, UPDATE_VALUE_SHIPPER } from "../reducer/customerReducer";
+// import { UPDATE_VALUE_SHIPPER } from "../reducer/customerReducer";
+import { UPDATE_VALUE_RECEIVER } from "../reducer/dataReceiver";
+import { UPDATE_VALUE_SHIPPER } from "../reducer/dataShipper";
 
-export default function useInput(field = "", type = "") {
+export default function useInput(field = "", _type = "") {
     const dispatch = useDispatch()
     let delay = useRef(null)
     // console.log("field : ", field)
@@ -29,7 +31,7 @@ export default function useInput(field = "", type = "") {
     function updateValueShipper() {
         clearTimeout(delay.current)
         delay.current = setTimeout(() => {
-            if (type === "RECEIVER") {
+            if (_type === "RECEIVER") {
                 dispatch({
                     type: UPDATE_VALUE_RECEIVER,
                     field,

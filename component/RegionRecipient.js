@@ -5,14 +5,16 @@ import useInputSelect from "./useInputSelect";
 import { useGet } from "../helper/request";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FILL_RECIPIENT_PROVINCE_TEXT, FILL_RECIPIENT_CITY_TEXT, SET_LOCATION_RECIPIENT, SET_ZONE_RECIPIENT, FILL_RECIPIENT_FULL_ZONE } from "../reducer/customerReducer";
-import { DISTRICTS_RECIPIENT, PROVINCES_RECIPIENT, RECIPIENT_DISTRICTS, RECIPIENT_PROVINCES, RECIPIENT_SUBDISTRICTS, RECIPIENT_VILLAGES, RECIPIENT_ZONE, SUB_DISTRICTS_RECIPIENT, VILLAGES_RECIPIENT } from "../reducer/regionRecipientReducer";
+import { UPDATE_VALUE_RECEIVER } from "../reducer/dataReceiver";
+import { CLEAR_RECIPIENT_ZONE, FILL_RECIPIENT_ZONE, } from "../reducer/zoneRecipient";
 export default function RegionRecipient() {
     const dispatch = useDispatch()
     const {
         multilingual: { words },
         zoneRecipient: { provinces, districts, subdistricts, villages },
-        customerReducer: { recipient_zone: { province_receiver, city_receiver, district_receiver, subdistrict_receiver } }
+        dataReceiver: {
+            province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver
+        }
     } = useSelector(s => s)
     const [func_fetch_province, fetch_province_feedback] = useGet()
     const [func_fetch_district, fetch_district_feedback] = useGet()
@@ -23,11 +25,6 @@ export default function RegionRecipient() {
     const [district] = useInputSelect()
     const [subdistrict] = useInputSelect()
     const [village] = useInputSelect()
-
-    // const [province_value, province_select, province.setData, set_province, set_province_error] = useInputSelect()
-    // const [district_value, district_select, set_districts, set_district, set_district_error] = useInputSelect()
-    // const [sub_district_value, sub_district_select, set_sub_districts, set_subdistrict, set_subdistrict_error] = useInputSelect()
-    // const [village_value, village_select, set_villages, set_village, set_village_error] = useInputSelect()
 
     useEffect(() => {
         fetch_province()
@@ -46,14 +43,14 @@ export default function RegionRecipient() {
     }, [province_receiver.error, city_receiver.error, district_receiver.error, subdistrict_receiver.error])
     // -------------------------------------------------------------------------------------------------------
 
-    // #1
+    // #1 FILL ARRAY PROVINCES
     useEffect(() => {
         // set data province after success hit api province
-        // console.log("fetch_province_feedback", fetch_province_feedback)
         if (fetch_province_feedback.success) {
             dispatch({
-                type: RECIPIENT_PROVINCES,
-                provinces: fetch_province_feedback.success_res.data
+                type: FILL_RECIPIENT_ZONE,
+                field: 'provinces',
+                value: fetch_province_feedback.success_res.data
             })
         }
     }, [fetch_province_feedback.success])
@@ -68,24 +65,20 @@ export default function RegionRecipient() {
             const province_text = provinces.filter(data => data.id === province.value)
             // console.log("triggered ===> ", province.value)
             console.log("province_text", province_text)
-
+            dispatch({
+                type: UPDATE_VALUE_RECEIVER,
+                field: 'province_receiver',
+                value: province.value
+            })
+            dispatch({
+                type: CLEAR_RECIPIENT_ZONE,
+                clear: {
+                    districts: true,
+                    subdistricts: true,
+                    villages: true
+                }
+            })
             fetch_district(province.value)
-            // set id province
-            dispatch({
-                type: SET_ZONE_RECIPIENT,
-                province_recipient: province.value,
-                city_recipient: "",
-                district_recipient: "",
-                subdistrict_recipient: "",
-                district_code_recipient: ""
-            })
-            dispatch({
-                type: `SET_${RECIPIENT_ZONE}`,
-                provinces: provinces,
-                districts: [],
-                subdistricts: [],
-                villages: []
-            })
         }
     }, [province.value])
 
@@ -96,19 +89,16 @@ export default function RegionRecipient() {
             const city_text = districts.filter(data => data.id === district.value)
             console.log("city_text", city_text)
             dispatch({
-                type: SET_ZONE_RECIPIENT,
-                province_recipient: province.value,
-                city_recipient: district.value,
-                district_recipient: "",
-                subdistrict_recipient: "",
-                district_code_recipient: ""
+                type: UPDATE_VALUE_RECEIVER,
+                field: 'city_receiver',
+                value: district.value
             })
             dispatch({
-                type: `SET_${RECIPIENT_ZONE}`,
-                provinces: provinces,
-                districts: districts,
-                subdistricts: [],
-                villages: []
+                type: CLEAR_RECIPIENT_ZONE,
+                clear: {
+                    subdistricts: true,
+                    villages: true
+                }
             })
             fetch_sub_district(district.value)
         }
@@ -118,19 +108,15 @@ export default function RegionRecipient() {
         // ##3
         if (subdistrict.value !== "") {
             dispatch({
-                type: SET_ZONE_RECIPIENT,
-                province_recipient: province.value,
-                city_recipient: district.value,
-                district_recipient: subdistrict.value,
-                subdistrict_recipient: "",
-                district_code_recipient: ""
+                type: UPDATE_VALUE_RECEIVER,
+                field: 'district_receiver',
+                value: subdistrict.value
             })
             dispatch({
-                type: `SET_${RECIPIENT_ZONE}`,
-                provinces: provinces,
-                districts: districts,
-                subdistricts: subdistricts,
-                villages: []
+                type: CLEAR_RECIPIENT_ZONE,
+                clear: {
+                    villages: true
+                }
             })
             fetch_village(subdistrict.value)
         }
@@ -143,54 +129,60 @@ export default function RegionRecipient() {
             console.log("villages ", code)
             // console.log("code ", code[0].district_code)
             dispatch({
-                type: FILL_RECIPIENT_FULL_ZONE,
-                value: code[0]
+                type: UPDATE_VALUE_RECEIVER,
+                field: 'subdistrict_receiver',
+                value: village.value
             })
             dispatch({
-                type: SET_ZONE_RECIPIENT,
-                province_recipient: province.value,
-                city_recipient: district.value,
-                district_recipient: subdistrict.value,
-                subdistrict_recipient: village.value,
-                district_code_recipient: code[0]?.district_code ?? ""
+                type: UPDATE_VALUE_RECEIVER,
+                field: 'district_code_receiver',
+                value: code[0].district_code
             })
+            dispatch({
+                type: UPDATE_VALUE_RECEIVER,
+                field: 'postalcode_receiver',
+                value: code[0].postal_code
+            })
+
+            // dispatch({
+            //     type: FILL_RECIPIENT_FULL_ZONE,
+            //     value: code[0]
+            // })
         }
     }, [village.value])
 
     useEffect(() => {
-        // #2
+        // #2 FILL ARRAY DISTRICT / CITY (KABUPATEN / KOTA)
         if (fetch_district_feedback.success) {
             dispatch({
-                type: RECIPIENT_DISTRICTS,
-                districts: fetch_district_feedback.success_res.data
+                type: FILL_RECIPIENT_ZONE,
+                field: 'districts',
+                value: fetch_district_feedback.success_res.data
             })
-            // set_district(districts)
         }
     }, [fetch_district_feedback.success])
 
-    // #3
+    // #3 FILL ARRAY SUB DISTRICT (KECAMATAN)
     useEffect(() => {
         if (fetch_sub_district_feedback.success) {
-
             dispatch({
-                type: RECIPIENT_SUBDISTRICTS,
-                subdistricts: fetch_sub_district_feedback.success_res.data
+                type: FILL_RECIPIENT_ZONE,
+                field: 'subdistricts',
+                value: fetch_sub_district_feedback.success_res.data,
+
             })
-            // set_sub_district(subdistricts)
         }
     }, [fetch_sub_district_feedback.success])
 
-    // #4
+    // #4 FILL ARRAY VILLAGES (KELURAHAN)
     useEffect(() => {
         if (fetch_village_feedback.success) {
-
             dispatch({
-                type: RECIPIENT_VILLAGES,
-                villages: fetch_village_feedback.success_res.data
+                type: FILL_RECIPIENT_ZONE,
+                field: 'villages',
+                value: fetch_village_feedback.success_res.data
             })
-            // set_village(villages)
         }
-        // console.log("fetch_village_feedback", fetch_village_feedback)
     }, [fetch_village_feedback.success])
     // -------------------------------------------------------------------------------------------------------
 

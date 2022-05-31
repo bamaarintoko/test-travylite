@@ -62,9 +62,15 @@ function PagePilihanPengiriman() {
     const route = useRouter()
     const { courierReducer: { couriers, selected_courier } } = useSelector(s => s)
     const {
-        customerReducer: {
-            recipient_zone: { district_code_receiver },
-            shipper_zone: { district_code_shipper }
+        // customerReducer: {
+        //     recipient_zone: { district_code_receiver },
+        //     shipper_zone: { district_code_shipper }
+        // },
+        dataShipper: {
+            district_code_shipper
+        },
+        dataReceiver: {
+            district_code_receiver
         },
         formExtraBaggageDetailLuggage: { weight: eb_weight, description: eb_desc, quantity: eb_qty },
         formLeftBaggageDetailLuggage: { weight: lb_weight, quantity: lb_qty, description: lb_desc },

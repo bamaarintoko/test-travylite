@@ -15,6 +15,8 @@ import useReceiverValidation from '../../../custom_hook/useReceiverValidation';
 import useBeautyAlert from '../../../custom_hook/useBeautyAlert';
 import Loading from '../../../component/Loading';
 import { general_style } from '../../../component/general_style';
+import FormShipper from '../../../component/FormShipper';
+import RegionShipper from '../../../component/RegionShipper';
 function PageDetailPenerima() {
     const { multilingual: { words } } = useSelector(s => s)
     const [receiver] = useReceiverValidation("extra-baggage/step-detail-receiver")
@@ -54,14 +56,28 @@ function PageDetailPenerima() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         // background:'red',
-                        height:'40px',
-                        marginBottom:'16px'
+                        height: '40px',
+                        marginBottom: '16px'
                     }}>
                         <span style={general_style.title_dark_bold}>{words.recipient_details}</span>
                     </Box>
                     <FormRecipient />
                     <Divider />
                     <RegionRecipient />
+                    {/* <Box sx={{
+                        display: 'flex',
+
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        // background:'red',
+                        height: '40px',
+                        marginBottom: '16px'
+                    }}>
+                        <span style={general_style.title_dark_bold}>{words.sender_details}</span>
+                    </Box>
+                    <FormShipper />
+                    <Divider />
+                    <RegionShipper /> */}
                 </Stack>
                 <Box sx={{ height: '100px' }} />
             </Content>

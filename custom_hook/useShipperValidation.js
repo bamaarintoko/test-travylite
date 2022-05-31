@@ -1,17 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePostData } from "../helper/request";
-import { FILL_ERROR_SHIPPER, UPDATE_ERROR_SHIPPER } from "../reducer/customerReducer";
+import { UPDATE_ERROR_SHIPPER } from "../reducer/dataShipper";
 
 export default function useShipperValidation(endpoint="") {
     const dispatch = useDispatch()
     const {
         dataShipper: {
-            gender_shipper, name_shipper, phone_shipper, email_shipper, email_confirmation_shipper, address_shipper
-        },
-        customerReducer: {
-            shipper_zone: {
-                province_shipper, city_shipper, district_shipper, subdistrict_shipper, district_code_shipper }
+            gender_shipper, name_shipper, phone_shipper, email_shipper, email_confirmation_shipper, address_shipper,province_shipper, city_shipper, district_shipper, subdistrict_shipper,district_code_shipper
         },
     } = useSelector(s => s)
 
@@ -19,10 +15,6 @@ export default function useShipperValidation(endpoint="") {
 
     useEffect(() => {
         if (shipper_response.failed) {
-            dispatch({
-                type: FILL_ERROR_SHIPPER,
-                errors: shipper_response.error_res.data.errors
-            })
             dispatch({
                 type: UPDATE_ERROR_SHIPPER,
                 errors: shipper_response.error_res.data.errors
