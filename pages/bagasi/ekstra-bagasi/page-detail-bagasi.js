@@ -22,7 +22,14 @@ import { FILL_GENERAL_PACKAGE } from '../../../reducer/generalPackage';
 function PageDetailBagasi() {
     const route = useRouter()
     const dispatch = useDispatch()
-    const { formExtraBaggageDetailLuggage: { free_wrapping, length, width, height, weight, quantity, description } } = useSelector(s => s)
+    const {
+        formExtraBaggageDetailLuggage: {
+            free_wrapping, length, width, height, weight, quantity, description
+        },
+        multilingual: {
+            words
+        }
+    } = useSelector(s => s)
 
     const [func_validate, res_validate] = usePost()
     const [free_wrap, set_free_wrap] = useState("")
@@ -143,10 +150,10 @@ function PageDetailBagasi() {
     return (
         <Contain>
             <Header>
-                <AppBar title={"Detail Bagasi"} />
+                <AppBar title={words.baggage_details} />
             </Header>
             <Content style={{ padding: 16 }}>
-                <span style={general_style.heading_dark_bold}>Apakah Anda membutuhkan FREE Warapping?</span>
+                <span style={general_style.heading_dark_bold}>{words.do_you_need_free_wrapping}</span>
                 {
                     free_wrapping.error && <span style={general_style.error_message}>{free_wrapping.error_message}</span>
                 }
@@ -162,7 +169,7 @@ function PageDetailBagasi() {
                         />
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={general_style.heading_light}>Ya, Saya membutuhkan FREE Wrapping</span>
+                        <span style={general_style.heading_light}>{words.yes_i_need_free_wrapping}</span>
                     </Box>
                 </Stack>
                 <Stack direction={'row'}>
@@ -176,42 +183,42 @@ function PageDetailBagasi() {
                         />
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={general_style.heading_light}>Tidak, Saya tidak membutuhkan FREE Wrapping</span>
+                        <span style={general_style.heading_light}>{words.no_i_dont_need_free_wrapping}</span>
                     </Box>
                 </Stack>
 
                 <Box sx={{ height: '24px' }} />
-                <span style={general_style.heading_dark_bold}>Ukuran Bagasi / Box Anda</span>
-                <span style={general_style.heading_light}>Maksimal dimensi ukuran bagasi atau box yang dapat dikirim, Panjang x Lebar x Tinggi: 50 cm x 50 cm x 50 cm</span>
+                <span style={general_style.heading_dark_bold}>{words.your_luggage_or_box_size}</span>
+                <span style={general_style.heading_light}>{words.maximum_dimensions_of_luggage_or_box}</span>
                 <Box sx={{ height: '24px' }} />
-                <span style={general_style.heading_dark_bold}>Masukkan dimensi ukuran dari Bagasi atau Box Anda</span>
+                <span style={general_style.heading_dark_bold}>{words.enter_the_dimensions_of_your_luggage_or_box}</span>
                 <Stack direction={'row'} spacing={2} sx={{ marginTop: '24px' }}>
                     <Box sx={{ flex: 1 }}>
-                        <span style={length_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>Panjang</span>
+                        <span style={length_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>{words.length}</span>
                         {length_arg.input}
                         {/* <span style={general_style.error_message}>required</span> */}
                     </Box>
                     <Box sx={{ flex: 1 }}>
-                        <span style={width_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>Lebar</span>
+                        <span style={width_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>{words.width}</span>
                         {width_arg.input}
                     </Box>
                     <Box sx={{ flex: 1 }}>
-                        <span style={height_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>Tinggi</span>
+                        <span style={height_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>{words.height}</span>
                         {height_arg.input}
                     </Box>
                 </Stack>
                 <Stack direction={'row'} spacing={2} sx={{ marginTop: '24px' }}>
                     <Box sx={{ flex: 1 }}>
-                        <span style={weight_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>Berat</span>
+                        <span style={weight_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>{words.weight}</span>
                         {weight_arg.input}
                     </Box>
                     <Box sx={{ flex: 1 }}>
-                        <span style={quantity_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>Jumlah</span>
+                        <span style={quantity_arg.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>{words.amount}</span>
                         {quantity_arg.input}
                     </Box>
                 </Stack>
                 <Box sx={{ height: 24 }} />
-                <span style={desc.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>Deskripsi Bagasi / Boxs</span>
+                <span style={desc.error ? general_style.heading_dark_bold_error : general_style.heading_dark_bold}>{words.luggage_or_box_description}</span>
                 {desc.input}
                 <Box sx={{ height: 24 }} />
             </Content>
@@ -223,7 +230,7 @@ function PageDetailBagasi() {
                     fullWidth
                     variant="contained"
                 >
-                    TAMBAHKAN
+                    {words.add}
                 </Button>
             </Footer>
             <FlashMassage arg={res_validate} />

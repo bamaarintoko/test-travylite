@@ -48,7 +48,16 @@ function PageDetailPesanan() {
         dataShipper: {
             gender_shipper, name_shipper, phone_shipper, address_shipper
         },
-        itemOrderDocument
+        itemOrderDocument,
+        multilingual: {
+            words
+        },
+        zoneShipper: {
+            full_zone_shipper: fzs
+        },
+        zoneRecipient: {
+            full_zone_recipient: fzr
+        }
     } = useSelector(s => s)
 
     const [extra_baggage] = useCreateExtraBaggage()
@@ -105,7 +114,7 @@ function PageDetailPesanan() {
     return (
         <Contain>
             <Header>
-                <AppBar title={"Detail Pesanan"} />
+                <AppBar title={words.order_details} />
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack direction={"row"}>
@@ -119,11 +128,11 @@ function PageDetailPesanan() {
                     </Box>
                     <Box sx={{ marginBottom: '40px', marginLeft: '29px' }}>
                         <Stack>
-                            <span style={general_style.heading_dark_bold}>Pengirim</span>
+                            <span style={general_style.heading_dark_bold}>{words.shipper}</span>
                             <span style={general_style.heading_dark_bold}>{gender_shipper.value}. {name_shipper.value}</span>
                             <span style={general_style.heading_light}>{phone_shipper.value}</span>
                             <span style={general_style.heading_light}>{address_shipper.value}</span>
-                            <span style={general_style.heading_light}>{`${province}, ${city}, ${district}, ${name}, ${postal_code}`}</span>
+                            <span style={general_style.heading_light}>{`${fzs.province}, ${fzs.city}, ${fzs.district}, ${fzs.name}, ${fzs.postal_code}`}</span>
                         </Stack>
                     </Box>
                 </Stack>
@@ -132,12 +141,12 @@ function PageDetailPesanan() {
                         <LocationOnIcon sx={{ color: "#E84A25" }} />
                     </Box>
                     <Stack sx={{ marginBottom: '40px', marginLeft: '29px' }}>
-                        <span style={general_style.heading_dark_bold}>Penerima</span>
+                        <span style={general_style.heading_dark_bold}>{words.recipient}</span>
                         <span style={general_style.heading_dark_bold}>{gender_receiver.value}. {name_receiver.value}</span>
 
                         <span style={general_style.heading_light}>{phone_receiver.value}</span>
                         <span style={general_style.heading_light}>{address_receiver.value}</span>
-                        <span style={general_style.heading_light}>{`${recipient_full_zone.province}, ${recipient_full_zone.city}, ${recipient_full_zone.istrict}, ${recipient_full_zone.name}, ${recipient_full_zone.postal_code}`}</span>
+                        <span style={general_style.heading_light}>{`${fzr.province}, ${fzr.city}, ${fzr.district}, ${fzr.name}, ${fzr.postal_code}`}</span>
                     </Stack>
                 </Stack>
                 <Stack direction={'row'}>
@@ -172,12 +181,12 @@ function PageDetailPesanan() {
                 <Stack sx={{ flex: 1, padding: '16px' }} direction={'row'}>
                     <Box sx={{ flex: 1 }}>
                         <Stack>
-                            <span style={general_style.heading_dark_bold}>Total Harga</span>
+                            <span style={general_style.heading_dark_bold}>{words.total_price}</span>
                             <span style={style.nominal}>Rp {data.rates}</span>
                         </Stack>
                     </Box>
                     <Box sx={{ flex: 1, alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
-                        <Button sx={general_style.primary_button} onClick={create_order()} fullWidth variant="contained">Bayar</Button>
+                        <Button sx={general_style.primary_button} onClick={create_order()} fullWidth variant="contained">{words.pay}</Button>
                     </Box>
                 </Stack>
             </Footer>

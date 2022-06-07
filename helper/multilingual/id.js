@@ -14,6 +14,7 @@ export const WORDS_ID = {
     fill_in_recipient_data: "Isi data penerima",
     fill_in_baggage_detail: "Isi detail bagasi",
     select_delivery_duration: "Pilih durasi pengiriman",
+    serve_the_delivery_of_baggage_or_excess_baggage: "Melayani pengiriman bagasi atau kelebihan bagasi dari bandara langsung ke alamat tujuan anda.",
     // </Extra Baggage>
     // -:===============================================================================================================================:-
     // <Form Recipient>
@@ -37,13 +38,41 @@ export const WORDS_ID = {
     village: "Kelurahan",
     // </Region>
     // -:===============================================================================================================================:-
+    // <Extra Baggage - Detail Baggage>
+    do_you_need_free_wrapping: "Apakah Anda membutuhkan free wrapping?",
+    yes_i_need_free_wrapping: "Ya, Saya membutuhkan free wrapping",
+    no_i_dont_need_free_wrapping: "Tidak, Saya tidak membutuhkan free wrapping",
+    maximum_dimensions_of_luggage_or_box: "Maksimal dimensi ukuran bagasi atau box yang dapat dikirim, Panjang x Lebar x Tinggi: 50cm x 50cm x 50cm",
+    enter_the_dimensions_of_your_luggage_or_box: "Masukkan dimensi ukuran dari bagasi atau box anda",
+    // </Extra Baggage - Detail Baggage>
+    // -:===============================================================================================================================:-
     // <General>
     continue: 'Lanjutkan',
+    add: "Tambahkan",
     provision: "Ketentuan",
     recipient_details: "Detail Penerima",
     sender_details: "Detail Pengirim",
+    baggage_details: "Detail Bagasi",
     confirmation: "Konfirmasi",
+    length: 'Panjang',
+    width: 'Lebar',
+    height: "Tinggi",
+    weight: "Berat",
+    amount: "Jumlah",
+    luggage_or_box_description: "Deskripsi Bagasi / Box",
+    your_luggage_or_box_size: "Ukuran Bagasi / Box Anda",
+    shipper: "Pengirim",
+    recipient: "Penerima",
+    pay: "Bayar",
+    total_price: "Total Harga",
+    order_details: "Detail Pesanan",
     // </General>
+    // -:===============================================================================================================================:-
+    // <Shipping>
+    shipping_options: "Pilihan Pengiriman",
+    failed_to_retrieve_delivery_data: "Gagal mengambil data pengiriman",
+    in_the_process_of_retrieving_delivery_data: "Proses mengambil data pengiriman"
+    // </Shipping>
     // -:===============================================================================================================================:-
 
 }

@@ -4,9 +4,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGet } from "../helper/request";
 import { Divider, Label } from "../pages/bagasi/ekstra-bagasi/page-detail-pengirim";
-import { FILL_SHIPPER_FULL_ZONE, SET_ZONE_SHIPPER, UPDATE_VALUE_SHIPPER } from "../reducer/customerReducer";
-// import { FILL_SHIPPER_ZONE, SHIPPER_DISTRICTS, SHIPPER_PROVINCES, SHIPPER_SUBDISTRICTS, SHIPPER_VILLAGES, SHIPPER_ZONE } from "../reducer/regionRecipientReducer";
-import { CLEAR_SHIPPER_ZONE, FILL_SHIPPER_ZONE } from "../reducer/zoneShipper";
+import { UPDATE_VALUE_SHIPPER } from "../reducer/dataShipper";
+import { CLEAR_SHIPPER_ZONE, FILL_SHIPPER_FULL_ZONE, FILL_SHIPPER_ZONE } from "../reducer/zoneShipper";
 import useInputSelect from "./useInputSelect";
 
 export default function RegionShipper() {
@@ -169,6 +168,10 @@ export default function RegionShipper() {
                 type: UPDATE_VALUE_SHIPPER,
                 field: 'postalcode_shipper',
                 value: code[0].postal_code
+            })
+            dispatch({
+                type: FILL_SHIPPER_FULL_ZONE,
+                value: code[0]
             })
         }
     }, [village.value])

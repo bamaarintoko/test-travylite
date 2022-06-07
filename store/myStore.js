@@ -102,7 +102,7 @@ const persistConfig = {
         'boothTravyliteReducer',
         // 'dataReceiver',
         // 'dataShipper',
-        'multilingual'
+        // 'multilingual'
     ]
 
 }

@@ -138,10 +138,10 @@ const initialCustomerReducer = {
     shipper_ready: false
 }
 export const SET_ZONE_RECIPIENT = "SET_ZONE_RECIPIENT"
-export const FILL_RECIPIENT_FULL_ZONE = "FILL_RECIPIENT_FULL_ZONE";
+// export const FILL_RECIPIENT_FULL_ZONE = "FILL_RECIPIENT_FULL_ZONE";
 export const SET_DATA_SHIPPER = "SET_DATA_SHIPPER"
 export const SET_ZONE_SHIPPER = "SET_ZONE_SHIPPER"
-export const FILL_SHIPPER_FULL_ZONE = "FILL_SHIPPER_FULL_ZONE"
+// export const FILL_SHIPPER_FULL_ZONE = "FILL_SHIPPER_FULL_ZONE"
 export const FILL_ERROR_RECIPIENT = "FILL_ERROR_RECIPIENT"
 
 export const FILL_GENDER_RECIPIENT = "FILL_GENDER_RECIPIENT"
@@ -431,16 +431,16 @@ export function customerReducer(state = initialCustomerReducer, action) {
             })
             ////console.log("err_recipient", err_recipient)
             return err_recipient;
-        case FILL_RECIPIENT_FULL_ZONE:
-            return {
-                ...state,
-                recipient_full_zone: action.value
-            }
-        case FILL_SHIPPER_FULL_ZONE:
-            return {
-                ...state,
-                shipper_full_zone: action.value
-            }
+        // case FILL_RECIPIENT_FULL_ZONE:
+        //     return {
+        //         ...state,
+        //         recipient_full_zone: action.value
+        //     }
+        // case FILL_SHIPPER_FULL_ZONE:
+        //     return {
+        //         ...state,
+        //         shipper_full_zone: action.value
+            // }
         case SET_ZONE_RECIPIENT:
             return {
                 ...state,

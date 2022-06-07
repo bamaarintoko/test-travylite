@@ -76,7 +76,10 @@ function PagePilihanPengiriman() {
         formLeftBaggageDetailLuggage: { weight: lb_weight, quantity: lb_qty, description: lb_desc },
         deliveryReducer: dr,
         generalPackage: gp,
-        boothTravyliteReducer: { selected_booth: { district_code_port } }
+        boothTravyliteReducer: { selected_booth: { district_code_port } },
+        multilingual: {
+            words
+        }
     } = useSelector(s => s)
 
     const [func_validate, res_validate] = usePost()
@@ -203,7 +206,7 @@ function PagePilihanPengiriman() {
     return (
         <Contain>
             <Header>
-                <AppBar title={"Pilihan Pengiriman"} />
+                <AppBar title={words.shipping_options} />
             </Header>
             <Content>
                 {
@@ -211,7 +214,7 @@ function PagePilihanPengiriman() {
                     &&
                     <Box>
                         <Stack spacing={2} sx={{ alignItems: 'center', justifyContent: 'center', height: '300px' }}>
-                            <span style={{ fontSize: '12px', fontFamily: 'Roboto' }}>Sedang mengambil data pengiriman.</span>
+                            <span style={{ fontSize: '12px', fontFamily: 'Roboto' }}>{words.in_the_process_of_retrieving_delivery_data}</span>
                         </Stack>
                     </Box>
                 }
@@ -222,7 +225,7 @@ function PagePilihanPengiriman() {
                         <Stack spacing={2} sx={{ alignItems: 'center', justifyContent: 'center', height: '300px' }}>
                             <WarningRoundedIcon sx={{ color: "#bf360c", fontSize: "64px" }} />
                             <span style={{ fontSize: '16px', fontFamily: 'Roboto', fontWeight: 'bold', color: "#bf360c" }}>Network Error!</span>
-                            <span style={{ fontSize: '12px', fontFamily: 'Roboto' }}>Gagal mengambil data pengiriman</span>
+                            <span style={{ fontSize: '12px', fontFamily: 'Roboto' }}>{words.failed_to_retrieve_delivery_data}</span>
                         </Stack>
                     </Box>
                 }
@@ -276,7 +279,7 @@ function PagePilihanPengiriman() {
                     onClick={on_validate()}
                     sx={{ backgroundColor: "#0065AF", borderRadius: "16px" }}
                     fullWidth
-                    variant="contained">Tambahkan</Button>
+                    variant="contained">{words.add}</Button>
                 {/* <Link href={"/payment/page-detail-pesanan"}>
                     <Button fullWidth variant="contained">Tambahkan</Button>
                 </Link> */}

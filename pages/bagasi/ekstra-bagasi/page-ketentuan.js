@@ -47,39 +47,43 @@ export default function PagesKetentuan() {
                                     color: "#FEFEFE"
                                 }}>{words.extra_baggage}</span>
                                 <Box sx={{ height: '16px' }} />
-                                <span style={general_style.body_white}>Port to Port & Port to Door</span>
+                                {/* <span style={general_style.body_white}>Port to Port & Port to Door</span> */}
+                                <span style={general_style.body_white}>Port to Door</span>
                             </Stack>
                         </Box>
-                        <Box sx={{ backgroundColor: '#FFF', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', paddingLeft: '16px', paddingRight: '16px', paddingTop: '32px' }}>
+                        <Box sx={{ backgroundColor: '#FFF', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', paddingLeft: '16px', paddingRight: '16px', paddingTop: '32px', flex: 1, display: 'flex' }}>
                             <Stack>
-                                <span style={{
-                                    fontFamily: 'Roboto',
-                                    fontStyle: 'normal',
-                                    fontWeight: 500,
-                                    fontSize: 14,
-                                    lineHeight: '160%',
-                                    color: "#323232",
-                                    textAlign: 'center'
-                                }}>{words.delivery_of_baggage_or_excess_baggage}</span>
-                                <Box sx={{
+                                <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+
+                                    <span style={{
+                                        fontFamily: 'Roboto',
+                                        fontStyle: 'normal',
+                                        fontWeight: 500,
+                                        fontSize: 16,
+                                        lineHeight: '160%',
+                                        color: "#323232",
+                                        textAlign: 'center'
+                                    }}>{words.serve_the_delivery_of_baggage_or_excess_baggage}</span>
+                                </Box>
+                                {/* <Box sx={{
                                     height: '1px',
                                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
                                     marginTop: '24px',
                                     marginBottom: '24px'
-                                }} />
-                                <Stack spacing={2}>
+                                }} /> */}
+                                {/* <Stack spacing={2}>
                                     <Ketentuan number={1} label={words.fill_in_the_senders_data} />
                                     <Ketentuan number={2} label={words.fill_in_recipient_data} />
                                     <Ketentuan number={3} label={words.fill_in_baggage_detail} />
                                     <Ketentuan number={4} label={words.select_delivery_duration} />
 
-                                </Stack>
-                                <Box sx={{
+                                </Stack> */}
+                                {/* <Box sx={{
                                     height: '1px',
                                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
                                     marginTop: '24px',
                                     marginBottom: '24px'
-                                }} />
+                                }} /> */}
                                 <Box sx={{ paddingBottom: '16px' }}>
                                     <Button onClick={() => {
                                         route.push('page-detail-penerima')

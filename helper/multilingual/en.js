@@ -14,6 +14,7 @@ export const WORDS_EN = {
     fill_in_recipient_data: "Fill in recipient data",
     fill_in_baggage_detail: "Fill in baggage details",
     select_delivery_duration: "Select delivery duration",
+    serve_the_delivery_of_baggage_or_excess_baggage: "Serve the delivery of baggage or excess baggage from the airport directly to your destination address.",
     // </Extra Baggage>
     // -:===============================================================================================================================:-
     // <Form Recipient>
@@ -37,13 +38,41 @@ export const WORDS_EN = {
     village: "Village",
     // </Region>
     // -:===============================================================================================================================:-
+    // <Extra Baggage - Detail Baggage>
+    do_you_need_free_wrapping: "Do you need free wrapping?",
+    yes_i_need_free_wrapping: "Yes, I need free wrapping",
+    no_i_dont_need_free_wrapping: "No, I don't need free wrapping",
+    maximum_dimensions_of_luggage_or_box: "Maximum dimensions of luggage or box sizes that can be sent, Length x Width x Height: 50cm x 50cm x 50cm",
+    enter_the_dimensions_of_your_luggage_or_box: "Enter the dimensions of your luggage or box",
+    // </Extra Baggage - Detail Baggage>
+    // -:===============================================================================================================================:-
     // <General>
     continue: 'Continue',
+    add: "Add",
     provision: "Provision",
     recipient_details: "Recipient Details",
     sender_details: "Sender Details",
-    confirmation: "Cofirmation",
+    baggage_details: "Baggage Details",
+    confirmation: "Confirmation",
+    length: 'Length',
+    width: 'Width',
+    height: "Height",
+    weight: "Weight",
+    amount: "Amount",
+    luggage_or_box_description: "Luggage / Box Description",
+    your_luggage_or_box_size: "Your Luggage / Box Size",
+    shipper: "Shipper",
+    recipient: "Recipient",
+    pay: "Pay",
+    total_price: "Total Price",
+    order_details:"Order Details",
     // </General>
+    // -:===============================================================================================================================:-
+    // <Shipping>
+    shipping_options: "Shipping Options",
+    failed_to_retrieve_delivery_data: "Failed to retrieve delivery data",
+    in_the_process_of_retrieving_delivery_data: "In the process of retrieving delivery data"
+    // </Shipping>
     // -:===============================================================================================================================:-
 
 }

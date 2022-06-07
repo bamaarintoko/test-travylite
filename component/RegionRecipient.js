@@ -6,7 +6,7 @@ import { useGet } from "../helper/request";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UPDATE_VALUE_RECEIVER } from "../reducer/dataReceiver";
-import { CLEAR_RECIPIENT_ZONE, FILL_RECIPIENT_ZONE, } from "../reducer/zoneRecipient";
+import { CLEAR_RECIPIENT_ZONE, FILL_RECIPIENT_FULL_ZONE, FILL_RECIPIENT_ZONE, } from "../reducer/zoneRecipient";
 export default function RegionRecipient() {
     const dispatch = useDispatch()
     const {
@@ -126,7 +126,7 @@ export default function RegionRecipient() {
         // ##4
         if (village.value !== "") {
             const code = villages.filter((dc) => dc.id === village.value)
-            console.log("villages ", code)
+            console.log("village : ", code)
             // console.log("code ", code[0].district_code)
             dispatch({
                 type: UPDATE_VALUE_RECEIVER,
@@ -144,10 +144,10 @@ export default function RegionRecipient() {
                 value: code[0].postal_code
             })
 
-            // dispatch({
-            //     type: FILL_RECIPIENT_FULL_ZONE,
-            //     value: code[0]
-            // })
+            dispatch({
+                type: FILL_RECIPIENT_FULL_ZONE,
+                value: code[0]
+            })
         }
     }, [village.value])
 
