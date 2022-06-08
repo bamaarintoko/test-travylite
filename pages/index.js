@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Grid, Input, Stack, TextField } from '@mui/material'
 
@@ -49,16 +49,22 @@ let view_width = 192;
 let view_height = 50;
 
 let new_image_height = image_height * view_width / image_width;
+
+// const windowUrl = global.window.location.search;
+// const params = new URLSearchParams(windowUrl);
+
 export default function Home() {
 	const route = useRouter()
+	const { travelin_token } = route.query
 	const { authReducer, multilingual: { words } } = useSelector((state) => state)
+	const [token, setToken] = useState("")
 	const dispatch = useDispatch()
 	const menuArr = [
 		{
 			text: words.airport_baggage_delivery,
 			image: <BusinessCenterIcon fontSize="large" sx={{ color: "#FCCF2F" }} />,
 			// url: 'bagasi/page-bagasi'
-			url: 'bagasi/ekstra-bagasi/page-ketentuan',
+			url: 'bagasi/ekstra-bagasi/page-ketentuan?foo=bar',
 			val: EXTRA_BAGGAGE
 		},
 		// {
@@ -72,12 +78,25 @@ export default function Home() {
 		// 	url: 'souvenir/page-souvenir'
 		// }
 	]
+	// Home.getInitialProps = async ({ query }) => {
+	// 	console.log("query : ", query)
+	// 	const { travelin_token } = query
+	// 	return { travelin_token }
+	// }
 	useEffect(() => {
-		console.log("authReducer", authReducer)
+		// console.log("authReducer", authReducer)
+		// console.log("params dm : ", route)
 		dispatch({
 			type: "TEST"
 		})
 	}, [])
+
+	useEffect(() => {
+		if (route.isReady) {
+			setToken(route.query.travelin_token)
+			console.log("travelin_token : ", route.query.travelin_token)
+		}
+	}, [route.isReady])
 	return (
 		<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
 			<Grid container spacing={0}>
@@ -124,6 +143,7 @@ export default function Home() {
 									/>
 								</div>
 							</Box>
+							<span>{token}</span>
 							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 								<span style={general_style.title_white_bold}>{words.check_the_position_of_your_package}</span>
 							</Box>

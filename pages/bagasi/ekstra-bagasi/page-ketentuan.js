@@ -11,9 +11,14 @@ import { general_style } from '../../../component/general_style'
 import { Box } from '@mui/system'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 export default function PagesKetentuan() {
     const { authReducer: { access_token }, multilingual: { words } } = useSelector((state) => state)
     const route = useRouter()
+    useEffect(() => {
+        console.log("====> ", route)
+    }, [])
+
     return (
         <Contain>
             <Header>
