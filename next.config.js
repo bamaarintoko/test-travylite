@@ -3,8 +3,11 @@ const runtimeCaching = require("next-pwa/cache");
 module.exports = withPWA({
   pwa: {
     dest: "public",
-    buildExcludes: [/middleware-manifest.json$/]
-    ,
+    register:true,
+    skipWaiting:true,
+    buildExcludes: [/middleware-manifest.json$/],
+    disable: process.env.NODE_ENV === 'development',
+
   },
   webpack(config) {
     config.module.rules.push({
