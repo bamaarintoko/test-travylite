@@ -6,6 +6,11 @@ const initialDetailBagasiRed = {
         error: false,
         error_message: ""
     },
+    insurance: {
+        value: dev ? 'yes' : '',
+        error: false,
+        error_message: ''
+    },
     length: {
         value: dev ? 50 : '',
         error: false,

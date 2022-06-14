@@ -89,9 +89,9 @@ export default function FormShipper({ status }) {
             <Divider />
             <Label title={words.sender_email} />
             {email.input}
-            <Divider />
+            {/* <Divider />
             <Label title={words.sender_email_confirmation} />
-            {email_confirm.input}
+            {email_confirm.input} */}
             <Divider />
             <Label title={words.senders_full_address} />
             {address.input}

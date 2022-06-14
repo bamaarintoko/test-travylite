@@ -125,9 +125,9 @@ export const general_style = {
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'normal',
-        fontSize: 11.2,
+        fontSize: 14,
         lineHeight: '140%',
-        color: "#b71c1c"
+        color: "#d32f2f"
     },
     primary_button: {
         backgroundColor: "#0065AF",

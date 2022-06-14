@@ -1,3 +1,6 @@
+// ================================================= //
+// DEPRECATED - MOVE TO 'page-input-customer.js'     //
+// ================================================= //
 import { Button, Stack } from '@mui/material'
 import styles from '../../../styles/PageEkstraBagasi.module.css';
 import { useEffect } from 'react';

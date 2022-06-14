@@ -1,3 +1,7 @@
+
+// ================================================= //
+// DEPRECATED - MOVE TO 'page-input-customer.js'     //
+// ================================================= //
 import React, { useEffect } from 'react';
 import { Button, Stack, Box } from '@mui/material'
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +50,7 @@ function PageDetailPenerima() {
     return (
         <Contain>
             <Header>
-                <AppBar title={''} />
+                <AppBar title={'Data Customer'} />
             </Header>
             <Content style={{ padding: 16 }}>
                 <Stack spacing={0}>

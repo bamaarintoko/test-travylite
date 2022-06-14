@@ -91,7 +91,7 @@ export default function PagesKetentuan() {
                                 }} /> */}
                                 <Box sx={{ paddingBottom: '16px' }}>
                                     <Button onClick={() => {
-                                        route.push('page-detail-penerima')
+                                        route.push('page-input-customer')
                                     }} sx={{
                                         backgroundColor: '#0065AF',
                                         borderRadius: '16px'

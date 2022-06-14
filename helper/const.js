@@ -18,3 +18,8 @@ export const DANA = "DANA"
 export const LINKAJA = "LINKAJA"
 
 export const is_dev = process.env.NODE_ENV === `development`;
+
+// APP_USED
+
+export const IS_TRAVELIN = "IS_TRAVELIN"
+export const IS_WEB = "IS_WEB"

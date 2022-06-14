@@ -23,6 +23,8 @@ import { useRouter } from 'next/router';
 import Multilingual from '../component/Multilingual';
 import { EXTRA_BAGGAGE } from '../helper/const';
 import { FILL_DELIVERY_TYPE } from '../reducer/deliveryReducer';
+import { usePostData } from '../helper/request';
+import embedAuthorization from '../component/HOC/embedAuthorization';
 const menuArr = [
 	{
 		text: "Pengiriman Airport Bagasi",
@@ -42,10 +44,10 @@ const menuArr = [
 	// }
 ]
 
-let image_width = 456;
-let image_height = 135;
+let image_width = 620;
+let image_height = 268;
 
-let view_width = 192;
+let view_width = 155;
 let view_height = 50;
 
 let new_image_height = image_height * view_width / image_width;
@@ -53,11 +55,12 @@ let new_image_height = image_height * view_width / image_width;
 // const windowUrl = global.window.location.search;
 // const params = new URLSearchParams(windowUrl);
 
-export default function Home() {
+function Home() {
 	const route = useRouter()
-	const { travelin_token } = route.query
+	// const { travelin_token } = route.query
 	const { authReducer, multilingual: { words } } = useSelector((state) => state)
 	const [token, setToken] = useState("")
+	const [func_travelin_auth, res_travelin_auth] = usePostData("autologin")
 	const dispatch = useDispatch()
 	const menuArr = [
 		{
@@ -91,17 +94,35 @@ export default function Home() {
 		})
 	}, [])
 
-	useEffect(() => {
-		if (route.isReady) {
-			setToken(route.query.travelin_token)
-			console.log("travelin_token : ", route.query.travelin_token)
-		}
-	}, [route.isReady])
+	// useEffect(() => {
+	// 	// const { query } = route
+	// 	if (route.isReady) {
+	// 		// setToken(route.query.travelin_token)
+	// 		if (route.query.travelin_token) {
+	// 			// console.log("param : ", route.query.travelin_token)
+	// 			travelin_authorization(route.query.travelin_token)
+	// 		} else {
+	// 			console.log("web")
+	// 		}
+	// 	}
+	// }, [route.isReady])
+
+	// useEffect(() => {
+	// 	console.log("res_travelin_auth : ", res_travelin_auth)
+	// }, [res_travelin_auth])
+
+	// function travelin_authorization(foo) {
+	// 	let params = {
+	// 		token: foo
+	// 	}
+	// 	func_travelin_auth(params)
+	// 	// console.log("par : ", par)
+	// }
 	return (
 		<Container maxWidth="md" style={{ paddingLeft: 0, paddingRight: 0 }}>
 			<Grid container spacing={0}>
 				<Stack sx={{ display: 'flex', flex: 1 }}>
-					<Box style={{ display: 'flex', height: 304, background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
+					<Box style={{ display: 'flex', background: "linear-gradient(to bottom, #20aee0 50%, #0065af)" }}>
 						{/* <Item>xs=6 md=8</Item> */}
 						<Stack spacing={3} sx={{ display: 'flex', padding: '16px', flex: 1 }}>
 							<Box sx={{ position: 'relative', top: 0 }}>
@@ -134,8 +155,8 @@ export default function Home() {
 								} */}
 
 							</Box>
-							<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '43px' }}>
-
+							<Box sx={{ height: '2px' }} />
+							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 								<div style={{ width: view_width, height: new_image_height }}>
 									<Image
 										src={logo}
@@ -143,7 +164,7 @@ export default function Home() {
 									/>
 								</div>
 							</Box>
-							<span>{token}</span>
+							{/* <span>{token}</span> */}
 							<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 								<span style={general_style.title_white_bold}>{words.check_the_position_of_your_package}</span>
 							</Box>
@@ -340,3 +361,5 @@ export default function Home() {
 		</Container>
 	)
 }
+
+export default embedAuthorization(Home)

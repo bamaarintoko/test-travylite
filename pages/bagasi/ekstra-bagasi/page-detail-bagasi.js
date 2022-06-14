@@ -1,4 +1,4 @@
-import { Backdrop, Button, CircularProgress, Grid, Input, Radio, Stack, TextField } from '@mui/material'
+import { Backdrop, Button, Checkbox, CircularProgress, FormControlLabel, FormGroup, Grid, Input, Radio, Stack, TextField } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton';
 import Contain from '../../../component/Container'
 import styles from '../../../styles/PageEkstraBagasi.module.css';
@@ -24,7 +24,7 @@ function PageDetailBagasi() {
     const dispatch = useDispatch()
     const {
         formExtraBaggageDetailLuggage: {
-            free_wrapping, length, width, height, weight, quantity, description
+            free_wrapping, insurance, length, width, height, weight, quantity, description
         },
         multilingual: {
             words
@@ -33,6 +33,7 @@ function PageDetailBagasi() {
 
     const [func_validate, res_validate] = usePost()
     const [free_wrap, set_free_wrap] = useState("")
+    const [is_insurance, set_insurance] = useState("")
     const [length_arg] = useInputNumber("cm")
     const [width_arg] = useInputNumber("cm")
     const [height_arg] = useInputNumber("cm")
@@ -184,6 +185,15 @@ function PageDetailBagasi() {
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <span style={general_style.heading_light}>{words.no_i_dont_need_free_wrapping}</span>
+                    </Box>
+                </Stack>
+
+                <Box sx={{ height: '24px' }} />
+                <span style={general_style.heading_dark_bold}>Asuransi</span>
+                <Stack direction={'row'}>
+                    <Checkbox name={'insurance'} onChange={(e) => console.log(e.target.name, "e : ", e.target.checked)} />
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <span style={general_style.heading_light}>Asuransikan bagasi saya</span>
                     </Box>
                 </Stack>
 
