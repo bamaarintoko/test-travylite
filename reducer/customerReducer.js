@@ -200,66 +200,66 @@ const initialDataShipperZone = {
 // --------------------------------------------------------------------------- //
 
 // --------------------------------------------------------------------------- //
-export const UPDATE_VALUE_SHIPPER = "UPDATE_VALUE_SHIPPER"
-export const UPDATE_ERROR_SHIPPER = "UPDATE_ERROR_SHIPPER"
-export function dataShipper(state = initialDataShipper, action) {
-    switch (action.type) {
-        case UPDATE_VALUE_SHIPPER:
-            return {
-                ...state,
-                [action.field]: {
-                    ...state[action.field],
-                    value: action.value
-                }
-            }
-        case UPDATE_ERROR_SHIPPER:
-            const obj = { ...state }
+// export const UPDATE_VALUE_SHIPPER = "UPDATE_VALUE_SHIPPER"
+// export const UPDATE_ERROR_SHIPPER = "UPDATE_ERROR_SHIPPER"
+// export function dataShipper(state = initialDataShipper, action) {
+//     switch (action.type) {
+//         case UPDATE_VALUE_SHIPPER:
+//             return {
+//                 ...state,
+//                 [action.field]: {
+//                     ...state[action.field],
+//                     value: action.value
+//                 }
+//             }
+//         case UPDATE_ERROR_SHIPPER:
+//             const obj = { ...state }
 
-            Object.keys(obj).map((key) => {
-                if (key in action.errors) {
-                    obj[key].error = true
-                    obj[key].error_message = action.errors[key][0]
-                }
-            })
-            return obj;
-        default:
-            return state
-    }
-}
+//             Object.keys(obj).map((key) => {
+//                 if (key in action.errors) {
+//                     obj[key].error = true
+//                     obj[key].error_message = action.errors[key][0]
+//                 }
+//             })
+//             return obj;
+//         default:
+//             return state
+//     }
+// }
 
-const initialDataShipper = {
-    gender_shipper: {
-        value: "mr",
-        error: false,
-        error_message: ""
-    },
-    name_shipper: {
-        value: dev ? "" : "",
-        error: false,
-        error_message: ""
-    },
-    email_shipper: {
-        value: dev ? "" : "",
-        error: false,
-        error_message: ""
-    },
-    email_confirimation_shipper: {
-        value: dev ? "jane@mail.com" : "",
-        error: false,
-        error_message: ""
-    },
-    phone_shipper: {
-        value: dev ? "085645789090" : "",
-        error: false,
-        error_message: ""
-    },
-    address_shipper: {
-        value: dev ? "lorem ipsum dolor sit amet" : "",
-        error: false,
-        error_message: ""
-    }
+// const initialDataShipper = {
+//     gender_shipper: {
+//         value: "mr",
+//         error: false,
+//         error_message: ""
+//     },
+//     name_shipper: {
+//         value: dev ? "" : "",
+//         error: false,
+//         error_message: ""
+//     },
+//     email_shipper: {
+//         value: dev ? "" : "",
+//         error: false,
+//         error_message: ""
+//     },
+//     email_confirimation_shipper: {
+//         value: dev ? "jane@mail.com" : "",
+//         error: false,
+//         error_message: ""
+//     },
+//     phone_shipper: {
+//         value: dev ? "085645789090" : "",
+//         error: false,
+//         error_message: ""
+//     },
+//     address_shipper: {
+//         value: dev ? "lorem ipsum dolor sit amet" : "",
+//         error: false,
+//         error_message: ""
+//     }
 
-}
+// }
 // --------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------- //
 // DEPRECATED

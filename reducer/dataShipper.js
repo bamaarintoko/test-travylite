@@ -58,6 +58,11 @@ const initialDataShipper = {
         error: false,
         error_message: ""
     },
+    port_id: {
+        value: "",
+        error: false,
+        error_message: ""
+    },
     province_shipper: {
         value: '',
         error: false,

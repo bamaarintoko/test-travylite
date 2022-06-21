@@ -4,7 +4,7 @@ import { usePostData } from "../../../helper/request"
 export default function useCreateExtraBaggage() {
     const {
         dataShipper: {
-            gender_shipper, name_shipper, phone_shipper, email_shipper, email_confirimation_shipper, address_shipper, province_shipper, city_shipper, district_shipper, subdistrict_shipper, district_code_shipper, postalcode_shipper
+            gender_shipper, name_shipper, phone_shipper, email_shipper,  city_shipper,port_id,
         },
         dataReceiver: {
             address_receiver, gender_receiver, name_receiver, phone_receiver, province_receiver, city_receiver, district_receiver, subdistrict_receiver, district_code_receiver, postalcode_receiver
@@ -34,7 +34,7 @@ export default function useCreateExtraBaggage() {
             // }
         },
         formExtraBaggageDetailLuggage: {
-            description, free_wrapping, height, length, quantity, weight, width
+            description, free_wrapping, height, length, quantity, weight, width,declared_value, use_insurance
         }
 
     } = useSelector(s => s)
@@ -50,11 +50,12 @@ export default function useCreateExtraBaggage() {
         name_shipper: name_shipper.value,
         email_shipper: email_shipper.value,
         phone_shipper: phone_shipper.value,
-        address_shipper: address_shipper.value,
+        port_id:port_id.value,
+        // address_shipper: address_shipper.value,
         free_wrapping: free_wrapping.value,
         length: length.value,
         width: width.value,
-        weight: weight.value,
+        weight: weight.value * quantity.value,
         weight_unit: "G",
         height: height.value,
         quantity: quantity.value,
@@ -63,22 +64,22 @@ export default function useCreateExtraBaggage() {
         subdistrict_receiver: subdistrict_receiver.value,
         district_receiver: district_receiver.value,
         postalcode_receiver: postalcode_receiver.value,
-        subdistrict_shipper: subdistrict_shipper.value,
-        district_shipper: district_shipper.value,
-        postalcode_shipper: postalcode_shipper.value,
+        // subdistrict_shipper: subdistrict_shipper.value,
+        // district_shipper: district_shipper.value,
+        // postalcode_shipper: postalcode_shipper.value,
         duration: data?.etd ?? '1-2 day',
         shipping_costs: data?.rates ?? 20000,
         province_receiver: province_receiver.value,
         city_receiver: city_receiver.value,
-        province_shipper: province_shipper.value,
-        city_shipper: city_shipper.value,
-        district_code_shipper: district_code_shipper.value,
+        // province_shipper: province_shipper.value,
+        // city_shipper: city_shipper.value,
+        // district_code_shipper: district_code_shipper.value,
         district_code_receiver: district_code_receiver.value,
         // channel_code: method.code,
         service_code: data?.product_code ?? 'REG',
         service_name: data?.product_name ?? 'Regular',
-        use_insurance: 'no',
-        declared_value: data?.rates ?? 1200000
+        use_insurance: use_insurance.value,
+        declared_value: declared_value.value
     }
 
     function create() {

@@ -12,19 +12,21 @@ import Link from 'next/link'
 import withAuth from '../../../component/withAuth';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FILL_DESCRIPTION, FILL_ERROR, FILL_FREE_WRAPPING, FILL_HEIGHT, FILL_LENGTH, FILL_QUANTITY, FILL_WEIGHT, FILL_WIDTH } from '../../../reducer/formExtraBaggageDetailLuggage';
+import { FILL_DESCRIPTION, FILL_ERROR, FILL_FREE_WRAPPING, FILL_HEIGHT, FILL_LENGTH, FILL_QUANTITY, FILL_WEIGHT, FILL_WIDTH, UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE } from '../../../reducer/formExtraBaggageDetailLuggage';
 import { usePost } from '../../../helper/request';
 import FlashMassage from '../../../component/FlashMessage';
 import { useRouter } from 'next/router';
 import { Box } from '@mui/system';
 import { general_style } from '../../../component/general_style';
 import { FILL_GENERAL_PACKAGE } from '../../../reducer/generalPackage';
+import useInputCurrency from '../../../custom_hook/useInputCurrency';
+import useGeneralTextArea from '../../../custom_hook/useGeneralTextArea';
 function PageDetailBagasi() {
     const route = useRouter()
     const dispatch = useDispatch()
     const {
         formExtraBaggageDetailLuggage: {
-            free_wrapping, insurance, length, width, height, weight, quantity, description
+            free_wrapping, use_insurance, length, width, height, weight, quantity, description, declared_value
         },
         multilingual: {
             words
@@ -39,7 +41,8 @@ function PageDetailBagasi() {
     const [height_arg] = useInputNumber("cm")
     const [weight_arg] = useInputNumber("gr")
     const [quantity_arg] = useInputNumber(" ")
-    const [desc] = useTextArea()
+    const [declared_value_arg] = useInputCurrency("Rp")
+    const [desc] = useGeneralTextArea()
 
     useEffect(() => {
         set_free_wrap(free_wrapping.value)
@@ -65,34 +68,74 @@ function PageDetailBagasi() {
     // }, [res_validate.failed])
     useEffect(() => {
         dispatch({
-            type: FILL_FREE_WRAPPING,
-            free_wrapping: free_wrap
+            type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+            field: 'declared_value',
+            value: declared_value_arg.value
         })
+    }, [declared_value_arg.value])
+
+    useEffect(() => {
         dispatch({
-            type: FILL_LENGTH,
-            length: length_arg.value
+            type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+            field: 'description',
+            value: desc.value
         })
+    }, [desc.value])
+
+    useEffect(() => {
         dispatch({
-            type: FILL_WIDTH,
-            width: width_arg.value
+            type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+            field: 'free_wrapping',
+            value: free_wrap
         })
+    }, [free_wrap])
+    useEffect(() => {
         dispatch({
-            type: FILL_HEIGHT,
-            height: height_arg.value
+            type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+            field: 'length',
+            value: length_arg.value
         })
+    }, [length_arg.value])
+    useEffect(() => {
         dispatch({
-            type: FILL_WEIGHT,
-            weight: weight_arg.value
+            type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+            field: 'width',
+            value: width_arg.value
         })
+    }, [width_arg.value])
+    useEffect(() => {
         dispatch({
-            type: FILL_QUANTITY,
-            quantity: quantity_arg.value
+            type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+            field: 'height',
+            value: height_arg.value
         })
+    }, [height_arg.value])
+    useEffect(() => {
         dispatch({
-            type: FILL_DESCRIPTION,
-            description: desc.value
+            type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+            field: 'weight',
+            value: weight_arg.value
         })
-    }, [length_arg.value, width_arg.value, height_arg.value, weight_arg.value, quantity_arg.value, desc.value, free_wrap])
+    }, [weight_arg.value])
+    useEffect(() => {
+        dispatch({
+            type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+            field: 'quantity',
+            value: quantity_arg.value
+        })
+    }, [quantity_arg.value])
+    // useEffect(() => {   
+
+
+
+
+
+    //     // dispatch({
+    //     //     type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+    //     //     field: 'description',
+    //     //     value: desc.value
+    //     // })
+    // }, [length_arg.value, width_arg.value, height_arg.value, weight_arg.value, quantity_arg.value, free_wrap])
 
     useEffect(() => {
         console.log("res_validate", res_validate)
@@ -100,7 +143,7 @@ function PageDetailBagasi() {
             dispatch({
                 type: FILL_GENERAL_PACKAGE,
                 name: "weight",
-                value: weight.value
+                value: weight.value * quantity.value
             })
             dispatch({
                 type: FILL_GENERAL_PACKAGE,
@@ -128,13 +171,16 @@ function PageDetailBagasi() {
             height_arg.setError(height.error)
             weight_arg.setError(weight.error)
             quantity_arg.setError(quantity.error)
+            declared_value_arg.setError(declared_value.error)
             desc.setError(description.error)
             console.log("useEffect free_wrapping.value", description.error)
 
         }
     }, [res_validate.failed])
+
     function on_confirm() {
         return () => {
+            // console.log("asu")
             let par = {
                 free_wrapping: free_wrapping.value,
                 length: length.value,
@@ -142,10 +188,12 @@ function PageDetailBagasi() {
                 height: height.value,
                 weight: weight.value,
                 quantity: quantity.value,
-                description: description.value
+                description: description.value,
+                use_insurance: use_insurance.value,
+                declared_value: declared_value.value
             }
             func_validate(par, "extra-baggage/step-detail-baggage")
-            console.log("par", par)
+            console.table(par)
         }
     }
     return (
@@ -189,15 +237,41 @@ function PageDetailBagasi() {
                 </Stack>
 
                 <Box sx={{ height: '24px' }} />
+                {/* <INSURANCE> */}
                 <span style={general_style.heading_dark_bold}>Asuransi</span>
                 <Stack direction={'row'}>
-                    <Checkbox name={'insurance'} onChange={(e) => console.log(e.target.name, "e : ", e.target.checked)} />
+                    <Checkbox checked={use_insurance.value === 'yes' ? true : false} name={'insurance'}
+                        onChange={(e) => {
+                            dispatch({
+                                type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+                                field: 'use_insurance',
+                                value: e.target.checked ? 'yes' : 'no'
+                            })
+
+                            dispatch({
+                                type: UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE,
+                                field: 'declared_value',
+                                value: ''
+                            })
+                            declared_value_arg.setValue('')
+
+                            // set_insurance(e.target.checked)
+                        }} />
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <span style={general_style.heading_light}>Asuransikan bagasi saya</span>
                     </Box>
                 </Stack>
-
+                {/* </INSURANCE> */}
                 <Box sx={{ height: '24px' }} />
+
+                {/* <DECLARED VALUE> */}
+                <Box>
+                    <span style={general_style.heading_dark_bold}>Estimasi Harga Barang</span>
+                    {declared_value_arg.input}
+                    <Box sx={{ height: '24px' }} />
+                </Box>
+                {/* </DECLARED> */}
+
                 <span style={general_style.heading_dark_bold}>{words.your_luggage_or_box_size}</span>
                 <span style={general_style.heading_light}>{words.maximum_dimensions_of_luggage_or_box}</span>
                 <Box sx={{ height: '24px' }} />

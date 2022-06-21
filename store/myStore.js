@@ -82,7 +82,7 @@ const persistConfig = {
         // 'zoneRecipient',
         // 'zoneShipper',
         'formExtraBaggageDetailLuggage',
-        'courierReducer',
+        // 'courierReducer',
         'deliveryReducer',
         'paymentSummaryReducer',
         'virtualAccountReducer',
@@ -99,7 +99,7 @@ const persistConfig = {
         'itemOrderDocument',
         'generalPackage',
         'formLeftBaggageDetailLuggage',
-        'boothTravyliteReducer',
+        // 'boothTravyliteReducer',
         // 'dataReceiver',
         // 'dataShipper',
         // 'multilingual'

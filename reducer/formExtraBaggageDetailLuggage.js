@@ -6,8 +6,13 @@ const initialDetailBagasiRed = {
         error: false,
         error_message: ""
     },
-    insurance: {
+    use_insurance: {
         value: dev ? 'yes' : '',
+        error: false,
+        error_message: ''
+    },
+    declared_value: {
+        value: '',
         error: false,
         error_message: ''
     },
@@ -53,6 +58,9 @@ export const FILL_DESCRIPTION = "FILL_DESCRIPTION"
 
 export const FILL_ERROR = "FILL_ERROR"
 export const REMOVE_ERROR = "REMOVE_ERROR"
+
+export const UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE = "UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE"
+export const UPDATE_ERROR_EXTRA_BAGGAGE_DETAIL_LUGGAGE = "UPDATE_ERROR_EXTRA_BAGGAGE_DETAIL_LUGGAGE"
 export default function formExtraBaggageDetailLuggage(state = initialDetailBagasiRed, action) {
     switch (action.type) {
         case FILL_ERROR:
@@ -69,6 +77,14 @@ export default function formExtraBaggageDetailLuggage(state = initialDetailBagas
                 }
             })
             return form
+        case UPDATE_VALUE_EXTRA_BAGGAGE_DETAIL_LUGGAGE:
+            return {
+                ...state,
+                [action.field]: {
+                    ...state[action.field],
+                    value: action.value
+                }
+            }
         case FILL_FREE_WRAPPING:
             return {
                 ...state,

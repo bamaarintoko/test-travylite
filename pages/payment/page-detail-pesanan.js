@@ -34,6 +34,7 @@ function PageDetailPesanan() {
             },
             recipient_full_zone
         },
+        boothTravyliteReducer: { selected_booth },
         deliveryReducer: {
             type
         },
@@ -70,6 +71,10 @@ function PageDetailPesanan() {
             // route.push("page-ringkasan-pembayaran")
         }
     }, [extra_baggage.response.success])
+
+    useEffect(() => {
+        console.log("extra_baggage : ", extra_baggage)
+    }, [extra_baggage.response.failed])
 
     useEffect(() => {
         if (res_sumarry_payment.success) {
@@ -127,13 +132,25 @@ function PageDetailPesanan() {
                         </Stack>
                     </Box>
                     <Box sx={{ marginBottom: '40px', marginLeft: '29px' }}>
-                        <Stack>
+                        {
+                            type === EXTRA_BAGGAGE
+                            &&
+                            <Stack>
+                                <span style={general_style.heading_dark_bold}>{words.shipper}</span>
+                                <span style={general_style.heading_dark_bold}>{gender_shipper.value}. {name_shipper.value}</span>
+                                <span style={general_style.heading_light}>{phone_shipper.value}</span>
+                                <span style={general_style.heading_dark_bold}>{selected_booth.port_name}</span>
+                                <span style={general_style.heading_light}>{selected_booth.description}</span>
+                                <span style={general_style.heading_light}>{selected_booth.address}</span>
+                            </Stack>
+                        }
+                        {/* <Stack>
                             <span style={general_style.heading_dark_bold}>{words.shipper}</span>
                             <span style={general_style.heading_dark_bold}>{gender_shipper.value}. {name_shipper.value}</span>
                             <span style={general_style.heading_light}>{phone_shipper.value}</span>
                             <span style={general_style.heading_light}>{address_shipper.value}</span>
                             <span style={general_style.heading_light}>{`${fzs.province}, ${fzs.city}, ${fzs.district}, ${fzs.name}, ${fzs.postal_code}`}</span>
-                        </Stack>
+                        </Stack> */}
                     </Box>
                 </Stack>
                 <Stack direction={'row'}>

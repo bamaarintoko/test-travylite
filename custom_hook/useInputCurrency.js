@@ -1,13 +1,12 @@
 import { InputAdornment, Stack, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import { general_style } from "./general_style";
+import { general_style } from "../component/general_style";
 
-export default function useInputNumber(text = "kg", field = "") {
+export default function useInputCurrency(text = "Rp") {
     const [value, setValue] = useState("")
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
-    // const dispatch(})
     const input = <Stack> <TextField
         onBlur={() => {
             if (value !== "") {
@@ -25,7 +24,7 @@ export default function useInputNumber(text = "kg", field = "") {
         InputProps={{
             inputMode: 'numeric',
             pattern: '[0-9]*',
-            endAdornment: <InputAdornment position="end">{text}</InputAdornment>
+            startAdornment: <InputAdornment position="start">{text}</InputAdornment>
         }}
 
     />

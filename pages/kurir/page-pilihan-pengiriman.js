@@ -24,38 +24,7 @@ import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import { EXTRA_BAGGAGE, LEFT_BAGGAGE } from "../../helper/const";
 import { FILL_ITEM_ORDER_EXTRA_BAGGAGE } from "../../reducer/itemOrderExtraBaggage";
 import { FILL_ITEM_ORDER_LEFT_BAGGAGE } from "../../reducer/itemOrderLeftBaggage";
-let kurirArr = [
-    {
-        label: "Kurir 1",
-        data: [
-            {
-                label: "Same Day",
-                desc: "Solusi pengiriman paling cepat. Kirim dan terima dalam 8 jam",
-                price: 15000
-            },
-            {
-                label: "Next Day",
-                desc: "Layanan cepat barang sampai sehari setelah di Pick-Up",
-                price: 13000
-            },
-            {
-                label: "Regular",
-                desc: "Layanan cepat barang sampai sehari setelah di Pick-Up",
-                price: 10000
-            }
-        ],
 
-    },
-    {
-        label: "Kurir 2",
-        data: []
-
-    },
-    {
-        label: "Kurir 3",
-        data: []
-    }
-]
 
 function PagePilihanPengiriman() {
     const dispatch = useDispatch()
@@ -193,7 +162,7 @@ function PagePilihanPengiriman() {
         // conditions to check what services are being used
 
         if (dr.type === EXTRA_BAGGAGE) {
-            origin = district_code_shipper?.value ?? 0
+            origin = district_code_port ?? 0
             destination = district_code_receiver?.value ?? 0
         } else if (dr.type === LEFT_BAGGAGE) {
             origin = district_code_shipper?.value ?? 0;
